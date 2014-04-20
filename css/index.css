@@ -242,7 +242,7 @@ h1 {
     -webkit-margin-after: 0.3em;
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
-    text-align: center;
+    /*text-align: center;*/
 }
 
 .crew_table{
@@ -546,7 +546,7 @@ span.header {
   border: solid 0px #A7A7A7;
   box-shadow: 0px 0px 0px 0px #A7A7A7;
   margin-bottom: 10px;
-  color: black;
+  color: white;
   width: 100%;
   top: 70%;
   overflow: auto;
@@ -712,4 +712,16 @@ input::-webkit-inner-spin-button {
 input::-webkit-calendar-picker-indicator,
 #picker {
   -webkit-appearance: none;
+}
+
+#show_training_details,
+#allotment_details,
+#show_flight_details,
+#openpositions_content,
+#doa_content,
+#correspondance_content,
+#update_profile{
+  background-color: black;
+  color: white;
+  height: 100%;
 }
