@@ -540,13 +540,13 @@ span.header {
 
 
 .footer {
-  position: fixed;
+  /*position: fixed;*/
   bottom: 0;
   border-radius: 10px;
   border: solid 0px #A7A7A7;
   box-shadow: 0px 0px 0px 0px #A7A7A7;
   margin-bottom: 10px;
-  color: white;
+  /*color: white;*/
   width: 100%;
   top: 70%;
   overflow: auto;
@@ -574,7 +574,7 @@ span.header {
 }
 
 body{
-  background-color: black
+  background-color: #B767F5;
 }
 
 #container, #index_content, #show_plan_details{
@@ -589,13 +589,13 @@ body{
   font-size: 14px;
 }
 
-#plan_details_header_white{
+.header_white{
   background-color: white;
   opacity: .5;
   height: 50px;
 }
 
-#plan_details_header_text{
+.header_text{
   font-size: 20px;
   position: relative;
   top: -40px;
@@ -624,7 +624,7 @@ body{
   top: 6px;
   font-size: 25px;
   right: 15px;
-  background-color: black;
+  background-color: rgb(60, 36, 102);
   color: white;
   -webkit-border-radius: 20px 20px 20px 20px;
   border-radius: 20px 20px 20px 20px;
@@ -649,7 +649,7 @@ body{
   /* top: 6px; */
   font-size: 15px;
   /* right: 15px; */
-  background-color: black;
+  background-color: rgb(60, 36, 102);
   color: white;
   -webkit-border-radius: 20px 20px 20px 20px;
   border-radius: 20px 20px 20px 20px;
@@ -714,14 +714,25 @@ input::-webkit-calendar-picker-indicator,
   -webkit-appearance: none;
 }
 
-#show_training_details,
+/*#,*/
+#openpositions_content {
+    padding-left: 25px;
+}
+
+#show_training_details {
+    padding-left: 8px;
+}
+
 #allotment_details,
 #show_flight_details,
-#openpositions_content,
 #doa_content,
 #correspondance_content,
 #update_profile{
   background-color: black;
   color: white;
   height: 100%;
+}
+
+.head_common {
+  height :50px;
 }

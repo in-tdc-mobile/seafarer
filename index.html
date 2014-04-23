@@ -45,7 +45,7 @@
   <script src="kendo-js/kendo.all.min.js"></script>
   <script type='application/javascript' src='js/fastclick.min.js'></script>
 
-
+  <link rel="stylesheet" type="text/css" href="css/swipe_styles.css">
   <!-- Extra Codiqa features -->
   <script src="js/codiqa.ext.js"></script>
 
@@ -93,25 +93,43 @@
         <button class="topcoat-button" type="submit">Sign In</button>
       </form>
     </div>
-    <div id="index_content" class= style="display: block;">
-      <div id="show_plan_details"></div>
-    </div>
-    <div id="show_training_details"></div>
-    <div id="correspondance_content" style="display: block;"></div>
-    <div id="show_flight_details"></div>
-    <div id="update_profile"></div>
-    <div id="allotment_details"></div>
-    <div id="openpositions_content"></div>
-    <div id="doa_content"></div>
-    <div id='view_title'></div>
-    <div class='spinner_index'>
-      <img src="img/spinner.gif" width="20px" height="20px" style="display:block;margin:auto;"/>
-    </div>
+    <div class="frame">
+
+        <div id="pageWrapper" style="overflow: hidden;">
+            <div id="pageScroller" style="-webkit-transition: -webkit-transform 0ms; transition: -webkit-transform 0ms; -webkit-transform-origin: 0px 0px; -webkit-transform: translate3d(-3672px, 0px, 0px) scale(1); width: 4896px;">
+                <div class="page" style="width: 1184px;">
+                    <div id="show_plan_details"></div>
+                </div>
+
+                <div class="page" style="width: 1184px;">
+                    <div id="show_training_details"></div>
+                </div>
+                <div class="page" style="width: 1184px;">
+                    <div id="openpositions_content"></div>
+                </div>
+            </div>
+        </div>
+
+</div>
 </div>
 <script type="text/javascript" src="js/index.js"></script>
 <script src="js/jstorage.js"></script>
 <script type="text/javascript">
   app.initialize();
 </script>
+<script type="text/javascript">
+  jQuery(function($){
+var windowWidth = $(window).width();
+
+$(window).resize(function() {
+    if(windowWidth != $(window).width()){
+    location.reload();
+    return;
+    }
+});
+});
+</script>
+<script src="js/scroll/iscroll.js"></script>
+<script src="js/scroll/scroll.js"></script>
 </body>
 </html>

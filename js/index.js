@@ -236,7 +236,8 @@ function login_success() {
     $(".login").hide();
     $('#index_content').show();
     show_plan_details();
-    // show_training_details();
+    show_training_details();
+    openpositions();
     // show_flight_details();
     // allotment_details();
     // correspondance();
@@ -339,12 +340,15 @@ function show_plan_details() {
                     port = data['port'];
                 }
 
-                flickercall(flickerplace, $('#bg'));
+                //flickercall(flickerplace, $('#bg'));
                 cscemail = data['csc_email'];
-                results_array.push('<div id="plan_details_header">');
-                results_array.push('<div id="plan_details_header_white"></div>');
-                results_array.push('<span id="plan_details_header_text" class="header"><span class="icon-boat"></span> ' + data['vessel_name'] + '(' + data['flag_name'] + ')</span>');
+                results_array.push('<div id="plan_details_header"  class="head_common">');
+                results_array.push('<div class="header_white"></div>');
+                results_array.push('<span class="header_text" class="header"><span class="icon-boat"></span> ' + data['vessel_name'] + '(' + data['flag_name'] + ')</span>');
                 // results_array.push('<div id="plan_details_header_menu"><span id="hamburger-btn" class="hamburger icon-list"></span></div>')
+                results_array.push('</div>');
+                results_array.push('<div>');
+                results_array.push("<img src='img/container_ship_demo.jpg' style='width:100%; height:150px;'>");
                 results_array.push('</div>');
                 results_array.push('<div class="footer">');
                 // results_array.push("<span> Vessel : "+data['vessel_name']+"</span><br/>");
@@ -397,10 +401,11 @@ function show_training_details() {
     success : function(data) { d=data;
         var d = new Date();
         $('#show_training_details').show();
-
-        // results_array.push('<div class="dashboard_tiles">');
-        results_array.push('<span class="header">Training Details</span><br/>');
-        // results_array.push('</div>');
+        
+        results_array.push('<div class="head_common">');
+        results_array.push('<div class="header_white"></div>');
+        results_array.push('<span class="header_text" class="header">Training Details</span>');
+        results_array.push('</div>');
         results_array.push('<div class="footer-training">');
         results_array.push('<div class="footer-training-spacing"></div>');
         results_array.push('<div class="footer-training-content-scroller">');
@@ -421,6 +426,7 @@ function show_training_details() {
             results_array.push("</div>");
             hide_spinner();
         }
+        results_array.push('</div>');
         results_array.push('</div>');
         $('#show_training_details').html(results_array.join(""));
 
@@ -527,8 +533,8 @@ function correspondance(){
 }
 
 function openpositions(){
-    $("#index_content").hide();
-    $('#tile_icons').hide();
+    /*$("#index_content").hide();
+    $('#tile_icons').hide();*/
     $('#openpositions_content').show(); 
     var url = prefilurl+"get_sf_open_positions.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
@@ -544,23 +550,24 @@ function openpositions(){
         var d = new Date();
         $('#openpositions_content').show();
 
-        // results_array.push('<div class="dashboard_tiles">');
-        results_array.push('<span class="header">Open Positions</span><br/>');
-        // results_array.push('</div>');
+        results_array.push('<div class="head_common">');
+        results_array.push('<div class="header_white"></div>');
+        results_array.push('<span class="header_text" class="header">Open Positions</span>');
+        results_array.push('</div>');
         results_array.push('<div class="footer-training">');
         results_array.push('<div class="footer-training-spacing"></div>');
         results_array.push('<div class="footer-training-content-scroller">');
         //commented due to error
-        // for (var i = 0; i < data.length; i++) {
-        //     results_array.push("<span> Vessel : "+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span><br/>");
-        //     results_array.push("<span> Vessel : Commented due to err()</span><br/>");            
-        //     results_array.push("<span> Vessel Type : "+data[i]['vessel_type']+"</span><br/>");
-        //     results_array.push("<span> Date : "+new String(data[i]['from_date']).split("T")[0]+"</span><br/>");
-        //     results_array.push("<span> Rank : "+data[i]['rank_name']+"</span><br/>");
-        //     results_array.push("<span> Manager : "+data[i]['sdc']+"</span><br/>");
-        //     results_array.push("<hr>");
-        //     results_array.push("</div>");
-        // }
+        for (var i = 0; i < data.length; i++) {
+            results_array.push("<span> Vessel : "+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span><br/>");
+            results_array.push("<span> Vessel : Commented due to err()</span><br/>");            
+            results_array.push("<span> Vessel Type : "+data[i]['vessel_type']+"</span><br/>");
+            results_array.push("<span> Date : "+new String(data[i]['from_date']).split("T")[0]+"</span><br/>");
+            results_array.push("<span> Rank : "+data[i]['rank_name']+"</span><br/>");
+            results_array.push("<span> Manager : "+data[i]['sdc']+"</span><br/>");
+            results_array.push("<hr>");
+            results_array.push("</div>");
+        }
         hide_spinner();
         results_array.push('</div>');
         $('#openpositions_content').html(results_array.join(""));
@@ -814,13 +821,13 @@ function hide_all() {
     $('#correspondance_content').hide();
     $('#ajax_error').hide();
     $('#view_title').hide();
-    $('#show_plan_details').hide();
-    $('#show_training_details').hide();   
+    //$('#show_plan_details').hide();
+    //$('#show_training_details').hide();   
     $('#show_flight_details').hide();
     $('#update_profile').hide();
     $('#tile_icons').hide();
     $('#allotment_details').hide();
-    $('#openpositions_content').hide();
+    // $('#openpositions_content').hide();
     $('#doa_content').hide();
     $('body').scrollTop(0);
 }
