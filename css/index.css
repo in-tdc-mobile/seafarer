@@ -649,13 +649,12 @@ body{
   /* top: 6px; */
   font-size: 15px;
   /* right: 15px; */
-  background-color: rgb(60, 36, 102);
-  color: white;
+  background-color: white;
+  color: rgb(60, 36, 102);
   -webkit-border-radius: 20px 20px 20px 20px;
   border-radius: 20px 20px 20px 20px;
   border: 1px solid;
   display: inline-block;
-  margin-left: 40px;
 }
 
 .button-icon{

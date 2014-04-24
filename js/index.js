@@ -241,7 +241,7 @@ function login_success() {
     // show_flight_details();
     // allotment_details();
     // correspondance();
-    $('#tile_icons').show();
+    
 }
 
 function showSidemenu () {
@@ -311,6 +311,7 @@ function show_plan_details() {
     hide_all();
     var cscemail=null;
     $('#index_content').show();
+    $('#tile_icons').show();
     var url = prefilurl+"get_sf_plan_details.php?empid="+$.jStorage.get("empid");
     console.log(url);
     var req = $.ajax({
@@ -360,7 +361,6 @@ function show_plan_details() {
                 results_array.push("<span> Exp. Join Port : "+port+"</span><br/>");
                 results_array.push('</div>')                
                 bottm_buttons(results_array);
-
                 results_array.push('</div>');
                 //data['phone1'];
                 //data['phone2'];
@@ -384,10 +384,9 @@ function show_plan_details() {
     });
 }
 
+var data_traing_temp;
+var training_res_array = new Array(); 
 function show_training_details() {
-   $("#index_content").hide();
-   $('#tile_icons').hide();
-   $('#show_training_details').show(); 
    var url = prefilurl+"get_sf_training_details.php?empid="+$.jStorage.get("empid");
    var results_array = new Array(); 
    console.log(url);
@@ -398,50 +397,150 @@ function show_training_details() {
         show_spinner();
     },
 
-    success : function(data) { d=data;
+    success : function(data) { 
+        data_traing_temp=data;
         var d = new Date();
-        $('#show_training_details').show();
-        
-        results_array.push('<div class="head_common">');
-        results_array.push('<div class="header_white"></div>');
-        results_array.push('<span class="header_text" class="header">Training Details</span>');
-        results_array.push('</div>');
-        results_array.push('<div>');
-        results_array.push("<img src='img/container_ship_demo.jpg' style='width:100%; height:150px;'>");
-        results_array.push('</div>');
-        results_array.push('<div class="footer-training">');
-        results_array.push('<div class="footer-training-spacing"></div>');
-        results_array.push('<div class="footer-training-content-scroller">');
-        for (var i = 0; i < data.length; i++) {
-            var venue =data[i]['institution'];
-            // flickercall(venue, $('#content'));
-            results_array.push('<div class="footer-training-content">');
-            if(i>0) {
-            results_array.push("<hr>");
-            }
-
-            results_array.push("<span> Course : "+data[i]['course']+"</span><br/>");
-            results_array.push("<span> Status : "+data[i]['status']+"</span><br/>");
-            results_array.push("<span> Duration Date From: "+new String(data[i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data[i]['to_date']).split("T")[0]+"</span><br/>");
-            results_array.push("<span> Venue : "+venue+"</span><br/>");
-            results_array.push("<span> Prerequisites : </span><br/>");
-            results_array.push("<span> Remark : </span><br/>");
-            results_array.push("</div>");
-            hide_spinner();
+        for (var i = 0; i < 1; i++) {
+            var training_array = new Array(); 
+            nextTr_i=0;
+            training_array.push("<span> Course : "+data[i]['course']+"</span><br/>");
+            training_array.push("<span> Status : "+data[i]['status']+"</span><br/>");
+            training_array.push("<span> Duration Date From: "+new String(data[i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data[i]['to_date']).split("T")[0]+"</span><br/>");
+            training_array.push("<span> Venue : "+data[i]['institution']+"</span><br/>");
         }
-        results_array.push('</div>');
-        results_array.push('</div>');
-        $('#show_training_details').html(results_array.join(""));
+        training_res_array.push(training_array);
+        hide_spinner();
+        $('#foot_training').html(training_res_array.join(""));
 
     },
     error: function (request, status, error) {
-        results_array.push("<span> No data to display </span><br/>");
-        $('#show_training_details').html(results_array.join(""));
+        training_res_array.push("<span> No data to display </span><br/>");
+        $('#show_training_details').html(training_res_array.join(""));
         hide_spinner();
     }
 
     });
 }
+var nextTr_i;
+function nextTraining() {
+    if(nextTr_i<data_traing_temp.length-1) {
+        nextTr_i = nextTr_i+1;
+        var training_array = new Array(); 
+        training_array.push("<span> Course : "+data_traing_temp[nextTr_i]['course']+"</span><br/>");
+        training_array.push("<span> Status : "+data_traing_temp[nextTr_i]['status']+"</span><br/>");
+        training_array.push("<span> Duration Date From: "+new String(data_traing_temp[nextTr_i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data_traing_temp[nextTr_i]['to_date']).split("T")[0]+"</span><br/>");
+        training_array.push("<span> Venue : "+data_traing_temp[nextTr_i]['institution']+"</span><br/>");
+        var training_res_array = new Array(); 
+        training_res_array.push(training_array);
+        $('#foot_training').html(training_res_array.join(""));
+    }
+   
+    
+}
+
+function prevTraining() {
+    if(nextTr_i>=1) {
+        nextTr_i = nextTr_i-1;
+        var training_array = new Array(); 
+        training_array.push("<span> Course : "+data_traing_temp[nextTr_i]['course']+"</span><br/>");
+        training_array.push("<span> Status : "+data_traing_temp[nextTr_i]['status']+"</span><br/>");
+        training_array.push("<span> Duration Date From: "+new String(data_traing_temp[nextTr_i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data_traing_temp[nextTr_i]['to_date']).split("T")[0]+"</span><br/>");
+        training_array.push("<span> Venue : "+data_traing_temp[nextTr_i]['institution']+"</span><br/>");
+        var training_res_array = new Array(); 
+        training_res_array.push(training_array);
+        $('#foot_training').html(training_res_array.join(""));
+    }
+}
+
+var data_opening_temp;
+var opening_res_array = new Array(); 
+function openpositions(){
+    var url = prefilurl+"get_sf_open_positions.php?empid="+$.jStorage.get("empid");
+    
+    console.log(url);
+    var req = $.ajax({
+    url: url,
+    datatype: 'text',
+    beforeSend: function() {
+        show_spinner();
+    },
+
+    success : function(data) { 
+        data_opening_temp = data;
+        var d = new Date();
+        for (var i = 0; i < 1; i++) {
+            nextOpn_i=0;
+            var results_array = new Array(); 
+            if(data[i]['vessel_name']!=null)
+                results_array.push("<span> Vessel : "+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span><br/>");
+            if(data[i]['vessel_type']!=null)
+                results_array.push("<span> Vessel Type : "+data[i]['vessel_type']+"</span><br/>");
+            if(data[i]['from_date']!=null)
+                results_array.push("<span> Date : "+new String(data[i]['from_date']).split("T")[0]+"</span><br/>");
+            if(data[i]['rank_name']!=null)
+                results_array.push("<span> Rank : "+data[i]['rank_name']+"</span><br/>");
+            if(data[i]['sdc']!=null)
+                results_array.push("<span> Manager : "+data[i]['sdc']+"</span><br/>");
+        }
+        opening_res_array.push(results_array);
+        hide_spinner();
+        $('#foot_opening').html(opening_res_array.join(""));
+
+    },
+    error: function (request, status, error) {
+        opening_res_array.push("<span> No data to display </span><br/>");
+        $('#foot_opening').html(opening_res_array.join(""));
+        hide_spinner();
+    }
+
+    });
+}
+
+var nextOpn_i;
+function nextOpnining() {
+    if(nextOpn_i<data_opening_temp.length-1) {
+        var data = data_opening_temp;
+        nextOpn_i = nextOpn_i+1;
+        var opening_array = new Array(); 
+        if(data[nextOpn_i]['vessel_name']!=null)
+            opening_array.push("<span> Vessel : "+data[nextOpn_i]['vessel_name']+"("+data[nextOpn_i]['flag_name']+")</span><br/>");
+        if(data[nextOpn_i]['vessel_type']!=null)
+            opening_array.push("<span> Vessel Type : "+data[nextOpn_i]['vessel_type']+"</span><br/>");
+        if(data[nextOpn_i]['from_date']!=null)
+            opening_array.push("<span> Date : "+new String(data[nextOpn_i]['from_date']).split("T")[0]+"</span><br/>");
+        if(data[nextOpn_i]['rank_name']!=null)
+            opening_array.push("<span> Rank : "+data[nextOpn_i]['rank_name']+"</span><br/>");
+        if(data[nextOpn_i]['sdc']!=null)
+            opening_array.push("<span> Manager : "+data[nextOpn_i]['sdc']+"</span><br/>");
+        var opening_res_array = new Array(); 
+        opening_res_array.push(opening_array);
+        $('#foot_opening').html(opening_res_array.join(""));
+    }
+   
+    
+}
+
+function prevOpnining() {
+    if(nextOpn_i>=1) {
+        var data = data_opening_temp;
+        nextOpn_i = nextOpn_i-1;
+        var opening_array = new Array(); 
+        if(data[nextOpn_i]['vessel_name']!=null)
+            opening_array.push("<span> Vessel : "+data[nextOpn_i]['vessel_name']+"("+data[nextOpn_i]['flag_name']+")</span><br/>");
+        if(data[nextOpn_i]['vessel_type']!=null)
+            opening_array.push("<span> Vessel Type : "+data[nextOpn_i]['vessel_type']+"</span><br/>");
+        if(data[nextOpn_i]['from_date']!=null)
+            opening_array.push("<span> Date : "+new String(data[nextOpn_i]['from_date']).split("T")[0]+"</span><br/>");
+        if(data[nextOpn_i]['rank_name']!=null)
+            opening_array.push("<span> Rank : "+data[nextOpn_i]['rank_name']+"</span><br/>");
+        if(data[nextOpn_i]['sdc']!=null)
+            opening_array.push("<span> Manager : "+data[nextOpn_i]['sdc']+"</span><br/>");
+        var opening_res_array = new Array(); 
+        opening_res_array.push(opening_array);
+        $('#foot_opening').html(opening_res_array.join(""));
+    }
+}
+
 
 function show_flight_details() {
     $("#index_content").hide();
@@ -533,64 +632,6 @@ function correspondance(){
     results_array.push('<textarea class="topcoat-text-input--large" id="message"></textarea></br>');
     results_array.push('<input type="submit" value="Send" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
     $('#correspondance_content').html(results_array.join(""));
-}
-
-function openpositions(){ alert("");
-    /*$("#index_content").hide();
-    $('#tile_icons').hide();*/
-    $('#openpositions_content').show(); 
-    var url = prefilurl+"get_sf_open_positions.php?empid="+$.jStorage.get("empid");
-    var results_array = new Array(); 
-    console.log(url);
-    var req = $.ajax({
-    url: url,
-    datatype: 'text',
-    beforeSend: function() {
-        show_spinner();
-    },
-
-    success : function(data) { 
-        var d = new Date();
-        $('#openpositions_content').show();
-
-        results_array.push('<div class="head_common">');
-        results_array.push('<div class="header_white"></div>');
-        results_array.push('<span class="header_text" class="header">Open Positions</span>');
-        results_array.push('</div>');
-        results_array.push('<div>');
-        results_array.push("<img src='img/container_ship_demo.jpg' style='width:100%; height:150px;'>");
-        results_array.push('</div>');
-        results_array.push('<div class="footer-training">');
-        results_array.push('<div class="footer-training-spacing"></div>');
-        results_array.push('<div class="footer-training-content-scroller">');
-        //commented due to error
-        for (var i = 0; i < data.length; i++) {
-            /*if(data[i]['vessel_name']!=null)
-                results_array.push("<span> Vessel : "+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span><br/>");
-            if(data[i]['vessel_type']!=null)
-                results_array.push("<span> Vessel Type : "+data[i]['vessel_type']+"</span><br/>");
-            if(data[i]['from_date']!=null)
-                results_array.push("<span> Date : "+new String(data[i]['from_date']).split("T")[0]+"</span><br/>");
-            if(data[i]['rank_name']!=null)
-                results_array.push("<span> Rank : "+data[i]['rank_name']+"</span><br/>");
-            if(data[i]['sdc']!=null)
-                results_array.push("<span> Manager : "+data[i]['sdc']+"</span><br/>");*/
-            results_array.push("hiii");
-            results_array.push("<hr>");
-            results_array.push("</div>");
-        }
-        hide_spinner();
-        results_array.push('</div>');
-        $('#openpositions_content').html(results_array.join(""));
-
-    },
-    error: function (request, status, error) {
-        results_array.push("<span> No data to display </span><br/>");
-        $('#openpositions_content').html(results_array.join(""));
-        hide_spinner();
-    }
-
-    });
 }
 
 function doadetails(){
@@ -791,8 +832,8 @@ function flickercall(tagparam, bgshow) {
 
 }
 function bottm_buttons(results_array) {
-
     // <span class="icon-boat"></span>
+    $('#tile_icons').show();
     results_array.push('<hr>');
     results_array.push('<div id="tile_icons">');
     results_array.push('<div class="footer-button" onclick="show_flight_details()">');
@@ -836,7 +877,7 @@ function hide_all() {
     //$('#show_training_details').hide();   
     $('#show_flight_details').hide();
     $('#update_profile').hide();
-    $('#tile_icons').hide();
+    /*$('#tile_icons').hide();*/
     //$('#allotment_details').hide();
     // $('#openpositions_content').hide();
     $('#doa_content').hide();

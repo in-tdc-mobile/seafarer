@@ -95,27 +95,68 @@
       </form>
     </div>
 
-
-<div id="wrapper">
-  <ul id="deck">
-    <li class="card">
-      <div>
-        <div id="show_plan_details"></div>
+    <div id="index_content">
+      <div id="wrapper">
+        <ul id="deck">
+          <li class="card">
+            <div>
+              <div id="show_plan_details"></div>
+            </div>
+          </li>
+          <li class="card">
+            <div id="openpositions_content">
+              <div class="head_common">
+                <div class="header_white"></div>
+                <span class="header_text" class="header">Training Details</span>
+              </div>
+              <div>
+                <img src='img/container_ship_demo.jpg' style='width:100%; height:150px;'>
+              </div>
+              <div class="footer-training">
+                <div class="footer-training-spacing"></div>
+                <div class="footer-training-content-s croller">
+                  <button onclick='prevTraining()'>Prev</button>
+                  <button onclick='nextTraining()'>Next</button>
+                  <div id="foot_training" class="footer-training-content">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="card">
+            <div id="show_training_details">
+              <div class="head_common">
+                <div class="header_white"></div>
+                <span class="header_text" class="header">Open Positions</span>
+              </div>
+              <div>
+                <img src='img/container_ship_demo.jpg' style='width:100%; height:150px;'>
+              </div>
+              <div class="footer-training">
+                <div class="footer-training-spacing"></div>
+                <div class="footer-training-content-s croller">
+                  <button onclick='prevOpnining()'>Prev</button>
+                  <button onclick='nextOpnining()'>Next</button>
+                  <div id="foot_opening" class="footer-training-content">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
-    </li>
-    <li class="card">
-      <div>
-        <div id="openpositions_content"></div>
-      </div>
-    </li>
-    <li class="card">
-      <div>
-        <div id="show_training_details"></div>
-      </div>
-    </li>
-  </ul>
-</div>
-
+    </div>
+    <div id="show_training_details"></div>
+    <div id="correspondance_content" style="display: block;"></div>
+    <div id="show_flight_details"></div>
+    <div id="update_profile"></div>
+    <div id="allotment_details"></div>
+    <div id="openpositions_content"></div>
+    <div id="doa_content"></div>
+    <div id='view_title'></div>
+    <div class='spinner_index'>
+      <img src="img/spinner.gif" width="20px" height="20px" style="display:block;margin:auto;"/>
+    </div>
 </div>
 <script type="text/javascript" src="js/index.js"></script>
 <script src="js/jstorage.js"></script>
