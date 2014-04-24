@@ -112,9 +112,9 @@ function route(event) {
     var page,
         hash = window.location.hash.split('/')[0];
 
-    $('#bg').css('background-image', 'none');
+   /* $('#bg').css('background-image', 'none');
     $('#bg').css('background', 'black');
-
+*/
     if (hash === "#plan") {
         show_plan_details();
     } else if (hash === "#training") {
@@ -373,7 +373,6 @@ function show_plan_details() {
             hide_spinner();
 
             menuBtn = document.querySelector('#hamburger-btn');
-
             container = document.querySelector('#container');
             slidemenu = document.querySelector('#sidemenu');
             content = document.querySelector('#content');

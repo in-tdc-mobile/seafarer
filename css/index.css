@@ -574,10 +574,10 @@ span.header {
 }
 
 body{
-  background-color: #B767F5;
+  background-color: #FFF;
 }
 
-#container, #index_content, #show_plan_details{
+#container, #index_content, #show_plan_details, #openpositions_content, #show_training_details{
   position: absolute;
   top:0px;
   bottom:0px;
@@ -609,8 +609,8 @@ body{
   top: 6px;
   font-size: 25px;
   right: 15px;
-  background-color: black;
-  color: white;
+/*  background-color: black;
+  color: white;*/
   -webkit-border-radius: 20px 20px 20px 20px;
   border-radius: 20px 20px 20px 20px;
   border: 1px solid;
@@ -727,8 +727,8 @@ input::-webkit-calendar-picker-indicator,
 #doa_content,
 #correspondance_content,
 #update_profile{
-  background-color: black;
-  color: white;
+  /*background-color: black;
+  color: white;*/
   height: 100%;
 }
 

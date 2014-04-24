@@ -18,7 +18,7 @@ body, ul, li, h1, h2, h3, img, p {
 body {
     /* On modern browsers, prevent the whole page to bounce */
     overflow: hidden;
-    background-color: #aaa;
+    /*background-color: #aaa;*/
     font-size: 12px;
 }
 
