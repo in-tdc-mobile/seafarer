@@ -37,6 +37,7 @@
   <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true&libraries=weather"></script>-->
   <script src="js/jquery-1.9.0.min.js"></script>
   <script src="js/jquery.autocomplete.min.js"></script>
+  <script type="text/javascript" src="js/cardview.js"></script>
   <!-- <script src="js/jquery.mobile-1.3.1.min.js"></script> -->
   <!-- // <script src="js/jquery-ui-1.10/jquery-ui-1.10.4.custom.js"></script> -->
   <!-- // <script src="js/hamburger.js"></script> -->
@@ -93,43 +94,41 @@
         <button class="topcoat-button" type="submit">Sign In</button>
       </form>
     </div>
-    <div class="frame">
 
-        <div id="pageWrapper" style="overflow: hidden;">
-            <div id="pageScroller" style="-webkit-transition: -webkit-transform 0ms; transition: -webkit-transform 0ms; -webkit-transform-origin: 0px 0px; -webkit-transform: translate3d(-3672px, 0px, 0px) scale(1); width: 4896px;">
-                <div class="page" style="width: 1184px;">
-                    <div id="show_plan_details"></div>
-                </div>
 
-                <div class="page" style="width: 1184px;">
-                    <div id="show_training_details"></div>
-                </div>
-                <div class="page" style="width: 1184px;">
-                    <div id="openpositions_content"></div>
-                </div>
-            </div>
-        </div>
-
+<div id="wrapper">
+  <ul id="deck">
+    <li class="card"><div><div id="show_plan_details"></div>
+    </div></li>
+    <li class="card"><div><div id="show_training_details"></div>
+    </div></li>
+    <li class="card"><div>hello
+    </div></li>
+  </ul>
 </div>
+
 </div>
 <script type="text/javascript" src="js/index.js"></script>
 <script src="js/jstorage.js"></script>
 <script type="text/javascript">
   app.initialize();
 </script>
-<script type="text/javascript">
-  jQuery(function($){
-var windowWidth = $(window).width();
 
-$(window).resize(function() {
-    if(windowWidth != $(window).width()){
-    location.reload();
-    return;
+<script type="text/javascript">
+
+var deck;
+
+
+  deck = new CardView('#wrapper', {
+    direction: 'h',
+    onUpdateContent: function (el, data) {
+      el.querySelector('div').src = 'hi';
     }
-});
-});
+  });
+
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
 </script>
-<script src="js/scroll/iscroll.js"></script>
-<script src="js/scroll/scroll.js"></script>
+
 </body>
 </html>

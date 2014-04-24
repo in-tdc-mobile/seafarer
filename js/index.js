@@ -532,7 +532,7 @@ function correspondance(){
     $('#correspondance_content').html(results_array.join(""));
 }
 
-function openpositions(){
+function openpositions(){ alert("ope")
     /*$("#index_content").hide();
     $('#tile_icons').hide();*/
     $('#openpositions_content').show(); 
