@@ -98,12 +98,21 @@
 
 <div id="wrapper">
   <ul id="deck">
-    <li class="card"><div><div id="show_plan_details"></div>
-    </div></li>
-    <li class="card"><div><div id="show_training_details"></div>
-    </div></li>
-    <li class="card"><div>hello
-    </div></li>
+    <li class="card">
+      <div>
+        <div id="show_plan_details"></div>
+      </div>
+    </li>
+    <li class="card">
+      <div>
+        <div id="openpositions_content"></div>
+      </div>
+    </li>
+    <li class="card">
+      <div>
+        <div id="show_training_details"></div>
+      </div>
+    </li>
   </ul>
 </div>
 
@@ -120,10 +129,11 @@ var deck;
 
 
   deck = new CardView('#wrapper', {
-    direction: 'h',
-    onUpdateContent: function (el, data) {
-      el.querySelector('div').src = 'hi';
-    }
+    effect: 'slide',
+   direction: 'h',
+   onUpdateContent: function (el, data) {
+      // Code to update the card content
+   }
   });
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);

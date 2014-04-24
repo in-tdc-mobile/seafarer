@@ -406,6 +406,9 @@ function show_training_details() {
         results_array.push('<div class="header_white"></div>');
         results_array.push('<span class="header_text" class="header">Training Details</span>');
         results_array.push('</div>');
+        results_array.push('<div>');
+        results_array.push("<img src='img/container_ship_demo.jpg' style='width:100%; height:150px;'>");
+        results_array.push('</div>');
         results_array.push('<div class="footer-training">');
         results_array.push('<div class="footer-training-spacing"></div>');
         results_array.push('<div class="footer-training-content-scroller">');
@@ -532,7 +535,7 @@ function correspondance(){
     $('#correspondance_content').html(results_array.join(""));
 }
 
-function openpositions(){ alert("ope")
+function openpositions(){ alert("");
     /*$("#index_content").hide();
     $('#tile_icons').hide();*/
     $('#openpositions_content').show(); 
@@ -554,17 +557,25 @@ function openpositions(){ alert("ope")
         results_array.push('<div class="header_white"></div>');
         results_array.push('<span class="header_text" class="header">Open Positions</span>');
         results_array.push('</div>');
+        results_array.push('<div>');
+        results_array.push("<img src='img/container_ship_demo.jpg' style='width:100%; height:150px;'>");
+        results_array.push('</div>');
         results_array.push('<div class="footer-training">');
         results_array.push('<div class="footer-training-spacing"></div>');
         results_array.push('<div class="footer-training-content-scroller">');
         //commented due to error
         for (var i = 0; i < data.length; i++) {
-            results_array.push("<span> Vessel : "+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span><br/>");
-            results_array.push("<span> Vessel : Commented due to err()</span><br/>");            
-            results_array.push("<span> Vessel Type : "+data[i]['vessel_type']+"</span><br/>");
-            results_array.push("<span> Date : "+new String(data[i]['from_date']).split("T")[0]+"</span><br/>");
-            results_array.push("<span> Rank : "+data[i]['rank_name']+"</span><br/>");
-            results_array.push("<span> Manager : "+data[i]['sdc']+"</span><br/>");
+            /*if(data[i]['vessel_name']!=null)
+                results_array.push("<span> Vessel : "+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span><br/>");
+            if(data[i]['vessel_type']!=null)
+                results_array.push("<span> Vessel Type : "+data[i]['vessel_type']+"</span><br/>");
+            if(data[i]['from_date']!=null)
+                results_array.push("<span> Date : "+new String(data[i]['from_date']).split("T")[0]+"</span><br/>");
+            if(data[i]['rank_name']!=null)
+                results_array.push("<span> Rank : "+data[i]['rank_name']+"</span><br/>");
+            if(data[i]['sdc']!=null)
+                results_array.push("<span> Manager : "+data[i]['sdc']+"</span><br/>");*/
+            results_array.push("hiii");
             results_array.push("<hr>");
             results_array.push("</div>");
         }
@@ -826,8 +837,13 @@ function hide_all() {
     $('#show_flight_details').hide();
     $('#update_profile').hide();
     $('#tile_icons').hide();
-    $('#allotment_details').hide();
+    //$('#allotment_details').hide();
     // $('#openpositions_content').hide();
     $('#doa_content').hide();
     $('body').scrollTop(0);
+}
+
+window.onerror = function(msg, url, linenumber) {
+    alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
+    return true;
 }

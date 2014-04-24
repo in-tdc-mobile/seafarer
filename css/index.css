@@ -714,14 +714,15 @@ input::-webkit-calendar-picker-indicator,
   -webkit-appearance: none;
 }
 
+/*#,*/
 /*#openpositions_content {
     padding-left: 25px;
 }
 
 #show_training_details {
     padding-left: 8px;
-}
-*/
+}*/
+
 #allotment_details,
 #show_flight_details,
 #doa_content,
