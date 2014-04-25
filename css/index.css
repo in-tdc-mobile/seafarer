@@ -655,6 +655,7 @@ body{
   border-radius: 20px 20px 20px 20px;
   border: 1px solid;
   display: inline-block;
+  margin: 10px;
 }
 
 .button-icon{
@@ -734,4 +735,34 @@ input::-webkit-calendar-picker-indicator,
 
 .head_common {
   height :50px;
+}
+
+.arrow_div{
+  top: 262px;
+  position: absolute;
+  width: 99%;
+  background: none !important; 
+  opacity: 0.8;
+}
+
+.footer-training-content {
+  padding: 45px;
+}
+
+#foot_training {
+  background-color: aquamarine;
+  margin-top: 153px;
+  border: 2px solid;
+  border-radius: 25px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#foot_opening {
+  background-color: aquamarine;
+  margin-top: 153px;
+  border: 2px solid;
+  border-radius: 25px;
+  margin-left: 5px;
+  margin-right: 5px;
 }

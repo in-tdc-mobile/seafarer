@@ -101,7 +101,7 @@
             </div>
           </li>
           <li class="card">
-            <div id="openpositions_content">
+            <div id="show_training_details">
               <div class="head_common">
                 <div class="header_white"></div>
                 <span class="header_text" class="header">Training Details</span>
@@ -109,11 +109,17 @@
               <div>
                 <img src='img/container_ship_demo.jpg' style='width:100%; height:150px;'>
               </div>
+              <div class="arrow_div">
+                <button onclick='prevTraining()' style="background:none;border:none;">
+                  <span style="background:url('img/arrow-left.png') no-repeat; display: block;height:35px;width:35px;"></span>
+                </button>
+                <button onclick='nextTraining()' style="float:right; background:none;border:none;">
+                  <span style="background:url('img/arrow-right.png') no-repeat; display: block;height:35px;width:35px;"></span>
+                </button>
+              </div>
               <div class="footer-training">
                 <div class="footer-training-spacing"></div>
                 <div class="footer-training-content-s croller">
-                  <button onclick='prevTraining()'>Prev</button>
-                  <button onclick='nextTraining()'>Next</button>
                   <div id="foot_training" class="footer-training-content">
                   </div>
                 </div>
@@ -121,7 +127,7 @@
             </div>
           </li>
           <li class="card">
-            <div id="show_training_details">
+            <div id="openpositions_content">
               <div class="head_common">
                 <div class="header_white"></div>
                 <span class="header_text" class="header">Open Positions</span>
@@ -129,11 +135,18 @@
               <div>
                 <img src='img/container_ship_demo.jpg' style='width:100%; height:150px;'>
               </div>
+              <div class="arrow_div">
+                <button onclick='prevOpnining()' style="background:none;border:none;">
+                  <span style="background:url('img/arrow-left.png') no-repeat; display: block;height:35px;width:35px;"></span>
+                </button>
+                <button onclick='nextOpnining()' style="float:right; background:none;border:none;">
+                  <span style="background:url('img/arrow-right.png') no-repeat; display: block;height:35px;width:35px;"></span>
+                </button>
+              </div>
               <div class="footer-training">
                 <div class="footer-training-spacing"></div>
                 <div class="footer-training-content-s croller">
-                  <button onclick='prevOpnining()'>Prev</button>
-                  <button onclick='nextOpnining()'>Next</button>
+                  
                   <div id="foot_opening" class="footer-training-content">
                   </div>
                 </div>
@@ -144,10 +157,10 @@
       </div>
     </div>
     <div id="correspondance_content" style="display: block;"></div>
+    <div id="doa_content"></div>
     <div id="show_flight_details"></div>
     <div id="update_profile"></div>
     <div id="allotment_details"></div>
-    <div id="doa_content"></div>
     <div id='view_title'></div>
     <div class='spinner_index'>
       <img src="img/spinner.gif" width="20px" height="20px" style="display:block;margin:auto;"/>
@@ -166,7 +179,7 @@ var deck;
 
   deck = new CardView('#wrapper', {
     effect: 'slide',
-   direction: 'h',
+    direction : 'h',
    onUpdateContent: function (el, data) {
       // Code to update the card content
    }

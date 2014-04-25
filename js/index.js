@@ -402,10 +402,10 @@ function show_training_details() {
         for (var i = 0; i < 1; i++) {
             var training_array = new Array(); 
             nextTr_i=0;
-            training_array.push("<span> Course : "+data[i]['course']+"</span><br/>");
-            training_array.push("<span> Status : "+data[i]['status']+"</span><br/>");
-            training_array.push("<span> Duration Date From: "+new String(data[i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data[i]['to_date']).split("T")[0]+"</span><br/>");
-            training_array.push("<span> Venue : "+data[i]['institution']+"</span><br/>");
+            training_array.push("<span> Course : "+data[i]['course']+"</span>");
+            training_array.push("<br/><span> Status : "+data[i]['status']+"</span>");
+            training_array.push("<br/><span> Duration Date From: "+new String(data[i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data[i]['to_date']).split("T")[0]+"</span>");
+            training_array.push("<br/><span> Venue : "+data[i]['institution']+"</span>");
         }
         training_res_array.push(training_array);
         hide_spinner();
@@ -425,10 +425,10 @@ function nextTraining() {
     if(nextTr_i<data_traing_temp.length-1) {
         nextTr_i = nextTr_i+1;
         var training_array = new Array(); 
-        training_array.push("<span> Course : "+data_traing_temp[nextTr_i]['course']+"</span><br/>");
-        training_array.push("<span> Status : "+data_traing_temp[nextTr_i]['status']+"</span><br/>");
-        training_array.push("<span> Duration Date From: "+new String(data_traing_temp[nextTr_i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data_traing_temp[nextTr_i]['to_date']).split("T")[0]+"</span><br/>");
-        training_array.push("<span> Venue : "+data_traing_temp[nextTr_i]['institution']+"</span><br/>");
+        training_array.push("<span> Course : "+data_traing_temp[nextTr_i]['course']+"</span>");
+        training_array.push("<br/><span> Status : "+data_traing_temp[nextTr_i]['status']+"</span>");
+        training_array.push("<br/><span> Duration Date From: "+new String(data_traing_temp[nextTr_i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data_traing_temp[nextTr_i]['to_date']).split("T")[0]+"</span>");
+        training_array.push("<br/><span> Venue : "+data_traing_temp[nextTr_i]['institution']+"</span><br/>");
         var training_res_array = new Array(); 
         training_res_array.push(training_array);
         $('#foot_training').html(training_res_array.join(""));
@@ -441,10 +441,10 @@ function prevTraining() {
     if(nextTr_i>=1) {
         nextTr_i = nextTr_i-1;
         var training_array = new Array(); 
-        training_array.push("<span> Course : "+data_traing_temp[nextTr_i]['course']+"</span><br/>");
-        training_array.push("<span> Status : "+data_traing_temp[nextTr_i]['status']+"</span><br/>");
-        training_array.push("<span> Duration Date From: "+new String(data_traing_temp[nextTr_i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data_traing_temp[nextTr_i]['to_date']).split("T")[0]+"</span><br/>");
-        training_array.push("<span> Venue : "+data_traing_temp[nextTr_i]['institution']+"</span><br/>");
+        training_array.push("<span> Course : "+data_traing_temp[nextTr_i]['course']+"</span>");
+        training_array.push("<br/><span> Status : "+data_traing_temp[nextTr_i]['status']+"</span>");
+        training_array.push("<br/><span> Duration Date From: "+new String(data_traing_temp[nextTr_i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data_traing_temp[nextTr_i]['to_date']).split("T")[0]+"</span>");
+        training_array.push("<br/><span> Venue : "+data_traing_temp[nextTr_i]['institution']+"</span><br/>");
         var training_res_array = new Array(); 
         training_res_array.push(training_array);
         $('#foot_training').html(training_res_array.join(""));
@@ -471,15 +471,15 @@ function openpositions(){
             nextOpn_i=0;
             var results_array = new Array(); 
             if(data[i]['vessel_name']!=null)
-                results_array.push("<span> Vessel : "+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span><br/>");
+                results_array.push("<span> Vessel : "+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span>");
             if(data[i]['vessel_type']!=null)
-                results_array.push("<span> Vessel Type : "+data[i]['vessel_type']+"</span><br/>");
+                results_array.push("<br/><span> Vessel Type : "+data[i]['vessel_type']+"</span>");
             if(data[i]['from_date']!=null)
-                results_array.push("<span> Date : "+new String(data[i]['from_date']).split("T")[0]+"</span><br/>");
+                results_array.push("<br/> <span> Date : "+new String(data[i]['from_date']).split("T")[0]+"</span>");
             if(data[i]['rank_name']!=null)
-                results_array.push("<span> Rank : "+data[i]['rank_name']+"</span><br/>");
+                results_array.push("<br/><span> Rank : "+data[i]['rank_name']+"</span>");
             if(data[i]['sdc']!=null)
-                results_array.push("<span> Manager : "+data[i]['sdc']+"</span><br/>");
+                results_array.push("<br/><span> Manager : "+data[i]['sdc']+"</span><br/>");
         }
         opening_res_array.push(results_array);
         hide_spinner();
@@ -502,15 +502,15 @@ function nextOpnining() {
         nextOpn_i = nextOpn_i+1;
         var opening_array = new Array(); 
         if(data[nextOpn_i]['vessel_name']!=null)
-            opening_array.push("<span> Vessel : "+data[nextOpn_i]['vessel_name']+"("+data[nextOpn_i]['flag_name']+")</span><br/>");
+            opening_array.push("<span> Vessel : "+data[nextOpn_i]['vessel_name']+"("+data[nextOpn_i]['flag_name']+")</span>");
         if(data[nextOpn_i]['vessel_type']!=null)
-            opening_array.push("<span> Vessel Type : "+data[nextOpn_i]['vessel_type']+"</span><br/>");
+            opening_array.push("<br/><span> Vessel Type : "+data[nextOpn_i]['vessel_type']+"</span>");
         if(data[nextOpn_i]['from_date']!=null)
-            opening_array.push("<span> Date : "+new String(data[nextOpn_i]['from_date']).split("T")[0]+"</span><br/>");
+            opening_array.push("<br/><span> Date : "+new String(data[nextOpn_i]['from_date']).split("T")[0]+"</span>");
         if(data[nextOpn_i]['rank_name']!=null)
-            opening_array.push("<span> Rank : "+data[nextOpn_i]['rank_name']+"</span><br/>");
+            opening_array.push("<br/><span> Rank : "+data[nextOpn_i]['rank_name']+"</span>");
         if(data[nextOpn_i]['sdc']!=null)
-            opening_array.push("<span> Manager : "+data[nextOpn_i]['sdc']+"</span><br/>");
+            opening_array.push("<br/><span> Manager : "+data[nextOpn_i]['sdc']+"</span>");
         var opening_res_array = new Array(); 
         opening_res_array.push(opening_array);
         $('#foot_opening').html(opening_res_array.join(""));
@@ -525,15 +525,15 @@ function prevOpnining() {
         nextOpn_i = nextOpn_i-1;
         var opening_array = new Array(); 
         if(data[nextOpn_i]['vessel_name']!=null)
-            opening_array.push("<span> Vessel : "+data[nextOpn_i]['vessel_name']+"("+data[nextOpn_i]['flag_name']+")</span><br/>");
+            opening_array.push("<br/><span> Vessel : "+data[nextOpn_i]['vessel_name']+"("+data[nextOpn_i]['flag_name']+")</span>");
         if(data[nextOpn_i]['vessel_type']!=null)
-            opening_array.push("<span> Vessel Type : "+data[nextOpn_i]['vessel_type']+"</span><br/>");
+            opening_array.push("<br/><span> Vessel Type : "+data[nextOpn_i]['vessel_type']+"</span>");
         if(data[nextOpn_i]['from_date']!=null)
-            opening_array.push("<span> Date : "+new String(data[nextOpn_i]['from_date']).split("T")[0]+"</span><br/>");
+            opening_array.push("<br/><span> Date : "+new String(data[nextOpn_i]['from_date']).split("T")[0]+"</span>");
         if(data[nextOpn_i]['rank_name']!=null)
-            opening_array.push("<span> Rank : "+data[nextOpn_i]['rank_name']+"</span><br/>");
+            opening_array.push("<br/><span> Rank : "+data[nextOpn_i]['rank_name']+"</span>");
         if(data[nextOpn_i]['sdc']!=null)
-            opening_array.push("<span> Manager : "+data[nextOpn_i]['sdc']+"</span><br/>");
+            opening_array.push("<br/><span> Manager : "+data[nextOpn_i]['sdc']+"</span>");
         var opening_res_array = new Array(); 
         opening_res_array.push(opening_array);
         $('#foot_opening').html(opening_res_array.join(""));
