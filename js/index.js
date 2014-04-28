@@ -238,9 +238,8 @@ function login_success() {
     show_plan_details();
     show_training_details();
     openpositions();
-    show_flight_details();
-    allotment_details();
-    doadetails();
+    // show_flight_details();
+    // allotment_details();
     // correspondance();
     
 }
@@ -526,7 +525,7 @@ function prevOpnining() {
         nextOpn_i = nextOpn_i-1;
         var opening_array = new Array(); 
         if(data[nextOpn_i]['vessel_name']!=null)
-            opening_array.push("<span> Vessel : "+data[nextOpn_i]['vessel_name']+"("+data[nextOpn_i]['flag_name']+")</span>");
+            opening_array.push("<br/><span> Vessel : "+data[nextOpn_i]['vessel_name']+"("+data[nextOpn_i]['flag_name']+")</span>");
         if(data[nextOpn_i]['vessel_type']!=null)
             opening_array.push("<br/><span> Vessel Type : "+data[nextOpn_i]['vessel_type']+"</span>");
         if(data[nextOpn_i]['from_date']!=null)
@@ -543,6 +542,9 @@ function prevOpnining() {
 
 
 function show_flight_details() {
+    $("#index_content").hide();
+    $('#tile_icons').hide();
+    $('#show_flight_details').show(); 
     var url = prefilurl+"get_sf_flight_details.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
     results_array.push("<h3>Flight Details</h3><br/>");
@@ -557,6 +559,8 @@ function show_flight_details() {
         success : function(data) {
             if (data != null && data != "") {    
                 var d = new Date();
+                $('#show_flight_details').show();                
+                
                 for (var i = 0; i < data.length; i++) {
                     results_array.push("<span> Departure : "+data[i]['departure']+"</span><br/>");
                     results_array.push("<span> Departure Date :  "+new String(data[i]['departure_date']).split("T")[0]+"</span><br/>");
@@ -569,6 +573,7 @@ function show_flight_details() {
                 }
 
             } else {
+                $('#show_flight_details').show();
                 results_array.push("<span> No data avilable. </span><br/>");
                 $('#show_flight_details').html(results_array.join(""));
                 hide_spinner();
@@ -580,10 +585,14 @@ function show_flight_details() {
             $('#show_flight_details').html(results_array.join(""));
             hide_spinner();
         }
+
     });
 }
 
 function allotment_details() {
+    $("#index_content").hide();
+    $('#tile_icons').hide();
+    $('#allotment_details').show(); 
     var url = prefilurl+"get_sf_allotment_details.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
     console.log(url);
@@ -625,6 +634,8 @@ function correspondance(){
 }
 
 function doadetails(){
+    $("#index_content").hide();
+    $('#tile_icons').hide();
     $('#adddoa').hide();
     $('#doa_content').show(); 
     var url = prefilurl+"get_sf_doa_details.php?empid="+$.jStorage.get("empid");
@@ -863,12 +874,12 @@ function hide_all() {
     $('#view_title').hide();
     //$('#show_plan_details').hide();
     //$('#show_training_details').hide();   
-    //$('#show_flight_details').hide();
+    $('#show_flight_details').hide();
     $('#update_profile').hide();
     /*$('#tile_icons').hide();*/
     //$('#allotment_details').hide();
     // $('#openpositions_content').hide();
-    //$('#doa_content').hide();
+    $('#doa_content').hide();
     $('body').scrollTop(0);
 }
 

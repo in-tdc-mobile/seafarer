@@ -750,19 +750,19 @@ input::-webkit-calendar-picker-indicator,
 }
 
 #foot_training {
-  background-color: rgb(232, 233, 235);
-  /*margin-top: 153px;*/
-  border: 1px solid #928B8B;
-  border-radius: 4px;
+  background-color: aquamarine;
+  margin-top: 153px;
+  border: 2px solid;
+  border-radius: 25px;
   margin-left: 5px;
   margin-right: 5px;
 }
 
 #foot_opening {
-  background-color: rgb(232, 233, 235);
-  /*margin-top: 153px;*/
-  border: 1px solid #928B8B;
-  border-radius: 4px;
+  background-color: aquamarine;
+  margin-top: 153px;
+  border: 2px solid;
+  border-radius: 25px;
   margin-left: 5px;
   margin-right: 5px;
 }

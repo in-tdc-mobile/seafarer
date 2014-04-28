@@ -94,9 +94,9 @@ body {
 }
 
 .card img {
-    /*float: left;
+    float: left;
     margin: 0 10px 10px 0;
-    border: 1px solid #000;*/
+    border: 1px solid #000;
 }
 
 .card h3 {
