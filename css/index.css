@@ -777,3 +777,13 @@ input::-webkit-calendar-picker-indicator,
   margin-right: 5px;
   border-style: outset;
 }
+.hambrgrdetails {
+  margin: 3px;
+  padding: 5px;
+  /* width: 100px; */
+  /* height: 100px; */
+  -webkit-box-shadow: 0 1px 5px #CDCFD1, inset 0 10px 20px #919292;
+  -moz-box-shadow: 0 1px 5px #0061aa, inset 0 10px 20px #b6f9ff;
+  box-shadow: 0 1px 5px #4E4E4E, inset 0 10px 20px #D5D5D5;
+  background: #E4E4E4;
+}
