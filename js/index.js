@@ -400,15 +400,23 @@ function show_training_details() {
     },
 
     success : function(data) { 
-        data_traing_temp=data;
+        
         var d = new Date();
         for (var i = 0; i < 1; i++) {
-            var training_array = new Array(); 
-            nextTr_i=0;
-            training_array.push("<span> Course : "+data[i]['course']+"</span>");
-            training_array.push("<br/><span> Status : "+data[i]['status']+"</span>");
-            training_array.push("<br/><span> Duration Date From: "+new String(data[i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data[i]['to_date']).split("T")[0]+"</span>");
-            training_array.push("<br/><span> Venue : "+data[i]['institution']+"</span>");
+            if(data[i] != null) {
+                data_traing_temp=data;
+                var training_array = new Array(); 
+                nextTr_i=0;
+                training_array.push("<span> Course : "+data[i]['course']+"</span>");
+                training_array.push("<br/><span> Status : "+data[i]['status']+"</span>");
+                training_array.push("<br/><span> Duration Date From: "+new String(data[i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data[i]['to_date']).split("T")[0]+"</span>");
+                training_array.push("<br/><span> Venue : "+data[i]['institution']+"</span>");
+                $(".arrow_div_training").show();
+            } else {
+                $(".arrow_div_training").hide();
+                training_res_array.push("<span> No data training details updated </span><br/>");
+                hide_spinner();
+            }
         }
         training_res_array.push(training_array);
         hide_spinner();
@@ -468,21 +476,22 @@ function openpositions(){
     },
 
     success : function(data) { 
-        data_opening_temp = data;
         var d = new Date();
-        for (var i = 0; i < 1; i++) {
+        if(data[0]['vessel_name'] != null) {
+            data_opening_temp = data;
             nextOpn_i=0;
             var results_array = new Array(); 
-            if(data[i]['vessel_name']!=null)
-                results_array.push("<span> Vessel : "+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span>");
-            if(data[i]['vessel_type']!=null)
-                results_array.push("<br/><span> Vessel Type : "+data[i]['vessel_type']+"</span>");
-            if(data[i]['from_date']!=null)
-                results_array.push("<br/> <span> Date : "+new String(data[i]['from_date']).split("T")[0]+"</span>");
-            if(data[i]['rank_name']!=null)
-                results_array.push("<br/><span> Rank : "+data[i]['rank_name']+"</span>");
-            if(data[i]['sdc']!=null)
-                results_array.push("<br/><span> Manager : "+data[i]['sdc']+"</span><br/>");
+            results_array.push("<span> Vessel : "+data[0]['vessel_name']+"("+data[0]['flag_name']+")</span>");
+            if(data[0]['vessel_type']!=null)
+                results_array.push("<br/><span> Vessel Type : "+data[0]['vessel_type']+"</span>");
+            if(data[0]['from_date']!=null)
+                results_array.push("<br/> <span> Date : "+new String(data[0]['from_date']).split("T")[0]+"</span>");
+            if(data[0]['rank_name']!=null)
+                results_array.push("<br/><span> Rank : "+data[0]['rank_name']+"</span>");
+            if(data[0]['sdc']!=null)
+                results_array.push("<br/><span> Manager : "+data[0]['sdc']+"</span><br/>");
+        } else {
+            opening_res_array.push("<span> No Open positions available </span><br/>");
         }
         opening_res_array.push(results_array);
         hide_spinner();

@@ -737,7 +737,16 @@ input::-webkit-calendar-picker-indicator,
   height :50px;
 }
 
-.arrow_div{
+.arrow_div_training{
+  top: 262px;
+  position: absolute;
+  width: 99%;
+  background: none !important; 
+  opacity: 0.8;
+}
+
+
+.arrow_div_opening{
   top: 262px;
   position: absolute;
   width: 99%;
