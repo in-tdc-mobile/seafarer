@@ -86,7 +86,7 @@ body {
     border: 2px solid #aaa;
     padding: 20px;
     border-radius: 10px;*/
-    background: #fff;
+    background: #E2E2E2;
     /*background-position: 50% 50%;
     background-size: 95% 95%;
     background-repeat: no-repeat;
@@ -96,7 +96,7 @@ body {
 .card img {
     float: left;
     margin: 0 10px 10px 0;
-    border: 1px solid #000;
+    border: 0px solid #000;
 }
 
 .card h3 {

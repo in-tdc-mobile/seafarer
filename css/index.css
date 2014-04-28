@@ -574,7 +574,7 @@ span.header {
 }
 
 body{
-  background-color: #FFF;
+  background-color: #E2E2E2;
 }
 
 #container, #index_content, #show_plan_details, #openpositions_content, #show_training_details{
@@ -750,19 +750,21 @@ input::-webkit-calendar-picker-indicator,
 }
 
 #foot_training {
-  background-color: aquamarine;
+  background-color: rgb(216, 218, 217);
   margin-top: 153px;
-  border: 2px solid;
-  border-radius: 25px;
+  border: 1px solid;
+  border-radius: 3px;
   margin-left: 5px;
   margin-right: 5px;
+  border-style: outset;
 }
 
 #foot_opening {
-  background-color: aquamarine;
+  background-color: rgb(216, 218, 217);
   margin-top: 153px;
-  border: 2px solid;
-  border-radius: 25px;
+  border: 1px solid;
+  border-radius: 3px;
   margin-left: 5px;
   margin-right: 5px;
+  border-style: outset;
 }

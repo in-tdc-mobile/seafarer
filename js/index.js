@@ -266,7 +266,10 @@ function update_profile_page() {
     $('#tile_icons').hide();
     $('#update_profile').show(); 
     var results_array = new Array(); 
-    results_array.push("&nbsp; Please update Email & Phone Number<br/>");
+    results_array.push('<div id="plan_details_header"  class="head_common">');
+    results_array.push('<div class="header_white"></div>');
+    results_array.push('<span class="header_text" class="header">Please update Email & Phone Number</span>');
+    results_array.push('</div>');
     results_array.push('<form onsubmit="return update_profile()" ><input type="text" placeholder="Email" id="prof_email" class="biginput topcoat-text-input">');
     results_array.push('<input type="text" id="prof_phone" placeholder="Phone" class="biginput topcoat-text-input">');
     results_array.push('<input type="submit" value="Update" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
@@ -547,7 +550,10 @@ function show_flight_details() {
     $('#show_flight_details').show(); 
     var url = prefilurl+"get_sf_flight_details.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
-    results_array.push("<h3>Flight Details</h3><br/>");
+    results_array.push('<div id="plan_details_header"  class="head_common">');
+    results_array.push('<div class="header_white"></div>');
+    results_array.push('<span class="header_text" class="header">Flight Details</span>');
+    results_array.push('</div>');
     console.log(url);
     var req = $.ajax({
         url: url,
@@ -605,7 +611,11 @@ function allotment_details() {
 
         success : function(data) {
            var d = new Date();
-           results_array.push("<h3>Allotment Details</h3><br/>");
+           results_array.push('<div id="plan_details_header"  class="head_common">');
+           results_array.push('<div class="header_white"></div>');
+           results_array.push('<span class="header_text" class="header">Allotment Details</span>');
+           results_array.push('</div>');
+           results_array.push('<div>');
            results_array.push("<span> Last Processed : "+new String(data[0]['processed_on']).split("T")[0]+"</span><br/>");
            for (var i = 0; i < data.length; i++) {
             results_array.push("<span>"+data[i]['name']+" : "+data[i]['bf_bal_sf_cur']+"</span><br/>");
@@ -626,7 +636,10 @@ function correspondance(){
     $("#index_content").hide();
     $('#correspondance_content').show(); 
     var results_array = new Array(); 
-    results_array.push("<h3>Correspondance</h3>");
+    results_array.push('<div id="plan_details_header"  class="head_common">');
+    results_array.push('<div class="header_white"></div>');
+    results_array.push('<span class="header_text" class="header">Correspondance</span>');
+    results_array.push('</div>');
     results_array.push('<form onsubmit="return correspondancesend()" >');
     results_array.push('<textarea class="topcoat-text-input--large" id="message"></textarea></br>');
     results_array.push('<input type="submit" value="Send" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
@@ -653,14 +666,17 @@ function doadetails(){
         $('#doa_content').show();
 
         // results_array.push('<div class="dashboard_tiles">');
-        results_array.push('<span class="header">DOA Details</span><br/>');
+        results_array.push('<div id="plan_details_header"  class="head_common">');
+        results_array.push('<div class="header_white"></div>');
+        results_array.push('<span class="header_text" class="header">DoA Details</span>');
+        results_array.push('</div>');
         // results_array.push('</div>');
         for (var i = 0; i < data.length; i++) {
             results_array.push("<span> DOA : "+new String(data[i]['doa']).split("T")[0]+"</span><br/>");
             if(data[i]['remarks'] != null)
                 results_array.push("<span> Remark : "+data[i]['remarks']+"</span><br/>");
             results_array.push("</div>");
-            results_array.push("<button onclick='doaAdd()' style='color:#00303f;font:bold 12px verdana; padding:5px;'>Add DOA</button>");
+            results_array.push("<button onclick='doaAdd()' style='color:#00303f;font:bold 12px verdana; padding:5px;'>Add DoA</button>");
             hide_spinner();
         }
         results_array.push('</div>');
@@ -682,9 +698,13 @@ function doaAdd() {
     $('#adddoa').show();
 
     doa_array.push('<div class="adddoa">');
+    doa_array.push('<div id="plan_details_header"  class="head_common">');
+    doa_array.push('<div class="header_white"></div>');
+    doa_array.push('<span class="header_text" class="header">DoA Details</span>');
+    doa_array.push('</div>');
     doa_array.push('<form onsubmit="savedoa(); return false;" >');
-    doa_array.push('<input class="topcoat-date-picker" type="date" id="doadate">');
-    doa_array.push('<textarea class="topcoat-text-input--large" id="coaremark"></textarea></br>');
+    doa_array.push('<span>Date:</span><br><input class="topcoat-date-picker" type="date" id="doadate">');
+    doa_array.push('<br><span>Remark:</span><br><textarea class="topcoat-text-input--large" id="coaremark"></textarea></br>');
     doa_array.push('<input type="submit" value="Save DOA" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
     doa_array.push('</form>');
     doa_array.push('</div>');
