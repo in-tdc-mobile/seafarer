@@ -49,17 +49,20 @@
   <!-- Extra Codiqa features -->
   <script src="js/codiqa.ext.js"></script>
 
-  <link href="touchswipe/css/main.css" type="text/css" rel="stylesheet" />
         
   <script type="text/javascript" src="touchswipe/jquery.touchSwipe.min.js"></script>
   <script type="text/javascript" src="touchswipe/main.js"></script>
   <script id='code_1'>
     $(function() {      
-      $("#test").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"auto"} );
+      $("#test").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
 
       //Swipe handlers.
       function swipe1(event, direction) {
-        $(this).text( "You have swiped " + direction );
+        if (direction == 'left') {
+          $(this).addClass('active');
+        } else if (direction == 'right') {
+          $(this).addClass('after');
+        }
       }
     
       function swipe2(event, phase, direction, distance) {
@@ -108,7 +111,7 @@
         <button class="topcoat-button" type="submit">Sign In</button>
       </form>
     </div>
-<div id="test" class="box" style="height:500px;">Swipe me</div>
+<section id="test" class="scene one" style="height:500px;">Swipe me</div>
     
     <div id="correspondance_content" style="display: block;"></div>
     <div id="doa_content"></div>

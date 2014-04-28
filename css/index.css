@@ -787,3 +787,63 @@ input::-webkit-calendar-picker-indicator,
   box-shadow: 0 1px 5px #4E4E4E, inset 0 10px 20px #D5D5D5;
   background: #E4E4E4;
 }
+
+
+
+
+section.scene {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 0px 20px;
+  -webkit-transition: all .35s ease-out;
+  -moz-transition: all .35s ease-out;
+  transition: all .35s ease-out;
+  background: brown;
+}
+/* line 93, ../sass/screen.scss */
+section.scene.one {
+  background: #1abc9c;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+/* line 98, ../sass/screen.scss */
+section.scene.one.active {
+  background: yellow;
+    height: 300px;    
+    position: absolute; 
+    top: 0;
+    left: -500px;    
+    width: 500px;
+    opacity: 1;    
+    -webkit-transition: all 0.7s ease-out;
+       -moz-transition: all 0.7s ease-out;
+        -ms-transition: all 0.7s ease-out;
+         -o-transition: all 0.7s ease-out;
+            transition: all 0.7s ease-out;
+}
+.box{
+    position: relative;
+    overflow: hidden;
+}
+
+.section.scene.one:hover .hidden{
+
+    left: 0px;
+}
+section.scene.one.after {
+  background: red;
+    height: 300px;    
+    position: absolute; 
+    top: 0;
+    right: -500px;    
+    width: 500px;
+    opacity: 1;    
+    -webkit-transition: all 0.7s ease-out;
+       -moz-transition: all 0.7s ease-out;
+        -ms-transition: all 0.7s ease-out;
+         -o-transition: all 0.7s ease-out;
+            transition: all 0.7s ease-out;
+}
+
