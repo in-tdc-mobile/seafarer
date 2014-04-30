@@ -182,6 +182,7 @@ window.addEventListener('load', function () {
 $(document).ready(function() {
     
     hide_all();
+    $('#hamburger-btn').hide();
     try{
         var login_empid = $.jStorage.get("empid");
         // $.jStorage.set("pal_user_email", '');
@@ -234,6 +235,7 @@ $('#login_form').submit(function(){
 
 function login_success() {
     $(".login").hide();
+    $('#hamburger-btn').show();
     $('#index_content').show();
     show_plan_details();
     show_training_details();
@@ -268,7 +270,7 @@ function update_profile_page() {
     var results_array = new Array(); 
     results_array.push('<div id="plan_details_header"  class="head_common">');
     results_array.push('<div class="header_white"></div>');
-    results_array.push('<span class="header_text" class="header">Please update Email & Phone Number</span>');
+    results_array.push('<span class="header_text" class="header">Update Contact Details</span>');
     results_array.push('</div>');
     results_array.push('<div class = "hambrgrdetails">');
     results_array.push('<form onsubmit="return update_profile()" ><input type="text" placeholder="Email" id="prof_email" class="biginput topcoat-text-input">');
@@ -314,9 +316,11 @@ function update_profile() {
 
 function show_plan_details() {
     hide_all();
+    var src = 'img/container_ship_demo.jpg';
     var cscemail=null;
     $('#index_content').show();
     $('#tile_icons').show();
+    var results_array = new Array(); 
     var url = prefilurl+"get_sf_plan_details.php?empid="+$.jStorage.get("empid");
     console.log(url);
     var req = $.ajax({
@@ -328,10 +332,11 @@ function show_plan_details() {
 
         success : function(data) {
             $('#show_plan_details').show();
-            var results_array = new Array(); 
+            
             if(data != null) {
                 var flickerplace="";
                 var port="";
+                var vessel_type = data['vessel_type'];
                 if(data['port'] == null) {
                     if(data['flag_name'] == null) {
                         flickerplace = data['vessel_type']+',ship,vessel,sea';
@@ -345,16 +350,18 @@ function show_plan_details() {
                     flickerplace = data['port'];
                     port = data['port'];
                 }
-
-                //flickercall(flickerplace, $('#bg'));
+                if(vessel_type.toUpperCase().indexOf('OIL') > -1) {
+                    src = 'img/oil_tanker_demo.jpg';
+                }
                 cscemail = data['csc_email'];
                 results_array.push('<div id="plan_details_header"  class="head_common">');
                 results_array.push('<div class="header_white"></div>');
                 results_array.push('<span class="header_text" class="header"><span class="icon-boat"></span> ' + data['vessel_name'] + '(' + data['flag_name'] + ')</span>');
                 // results_array.push('<div id="plan_details_header_menu"><span id="hamburger-btn" class="hamburger icon-list"></span></div>')
                 results_array.push('</div>');
-                results_array.push('<div>');
-                results_array.push("<img src='img/container_ship_demo.jpg' style='width:100%; height:150px;'>");
+                results_array.push('<div class="ship_image">');
+
+                results_array.push("<img src="+src+" style='width:100%; height:150px;'>");
                 results_array.push('</div>');
                 results_array.push('<div class="footer">');
                 // results_array.push("<span> Vessel : "+data['vessel_name']+"</span><br/>");
@@ -370,6 +377,8 @@ function show_plan_details() {
                 //data['phone1'];
                 //data['phone2'];
 
+            } else {
+                results_array.push('<div style="margin-top: 100px;font-size: large;">No Plan Available for You.. Please Swipe screen for more details</div>')
             }
             $('#show_plan_details').html(results_array.join(""));
             if(cscemail != null) {
@@ -416,7 +425,7 @@ function show_training_details() {
                 $(".arrow_div_training").show();
             } else {
                 $(".arrow_div_training").hide();
-                training_res_array.push("<span> No data training details updated </span><br/>");
+                training_res_array.push("<span> No training details updated </span><br/>");
                 hide_spinner();
             }
         }
@@ -464,11 +473,10 @@ function prevTraining() {
     }
 }
 var temp;
-var data_opening_temp;
-var opening_res_array = new Array(); 
+
 function openpositions(){
     var url = prefilurl+"get_sf_open_positions.php?empid="+$.jStorage.get("empid");
-    
+    var opening_res_array = new Array(); 
     console.log(url);
     var req = $.ajax({
     url: url,
@@ -477,25 +485,28 @@ function openpositions(){
         show_spinner();
     },
 
-    success : function(data) { 
+    success : function(data) { temp = data;;
         var d = new Date();
         if(data[0] != null) {
-            data_opening_temp = data;
-            nextOpn_i=0;
-            var results_array = new Array(); 
-            results_array.push("<span> Vessel : "+data[0]['vessel_name']+"("+data[0]['flag_name']+")</span>");
-            if(data[0]['vessel_type']!=null)
-                results_array.push("<br/><span> Vessel Type : "+data[0]['vessel_type']+"</span>");
-            if(data[0]['from_date']!=null)
-                results_array.push("<br/> <span> Date : "+new String(data[0]['from_date']).split("T")[0]+"</span>");
-            if(data[0]['rank_name']!=null)
-                results_array.push("<br/><span> Rank : "+data[0]['rank_name']+"</span>");
-            if(data[0]['sdc']!=null)
-                results_array.push("<br/><span> Manager : "+data[0]['sdc']+"</span><br/>");
+            for(var i=0; i<data.length; i++) {
+                if(i>0)  {
+                    opening_res_array.push("<hr>");
+                }
+
+                opening_res_array.push("<span> Vessel : "+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span>");
+                if(data[i]['vessel_type']!=null)
+                    opening_res_array.push("<br/><span> Vessel Type : "+data[i]['vessel_type']+"</span>");
+                if(data[i]['from_date']!=null)
+                    opening_res_array.push("<br/> <span> Date : "+new String(data[i]['from_date']).split("T")[i]+"</span>");
+                if(data[i]['rank_name']!=null)
+                    opening_res_array.push("<br/><span> Rank : "+data[i]['rank_name']+"</span>");
+                if(data[i]['sdc']!=null)
+                    opening_res_array.push("<br/><span> Manager : "+data[i]['sdc']+"</span><br/>");
+
+            }
         } else {
             opening_res_array.push("<span> No Open positions available </span><br/>");
         }
-        opening_res_array.push(results_array);
         hide_spinner();
         $('#foot_opening').html(opening_res_array.join(""));
 
@@ -509,50 +520,6 @@ function openpositions(){
     });
 }
 
-var nextOpn_i;
-function nextOpnining() {
-    if(nextOpn_i<data_opening_temp.length-1) {
-        var data = data_opening_temp;
-        nextOpn_i = nextOpn_i+1;
-        var opening_array = new Array(); 
-        if(data[nextOpn_i]['vessel_name']!=null)
-            opening_array.push("<span> Vessel : "+data[nextOpn_i]['vessel_name']+"("+data[nextOpn_i]['flag_name']+")</span>");
-        if(data[nextOpn_i]['vessel_type']!=null)
-            opening_array.push("<br/><span> Vessel Type : "+data[nextOpn_i]['vessel_type']+"</span>");
-        if(data[nextOpn_i]['from_date']!=null)
-            opening_array.push("<br/><span> Date : "+new String(data[nextOpn_i]['from_date']).split("T")[0]+"</span>");
-        if(data[nextOpn_i]['rank_name']!=null)
-            opening_array.push("<br/><span> Rank : "+data[nextOpn_i]['rank_name']+"</span>");
-        if(data[nextOpn_i]['sdc']!=null)
-            opening_array.push("<br/><span> Manager : "+data[nextOpn_i]['sdc']+"</span>");
-        var opening_res_array = new Array(); 
-        opening_res_array.push(opening_array);
-        $('#foot_opening').html(opening_res_array.join(""));
-    }
-   
-    
-}
-
-function prevOpnining() {
-    if(nextOpn_i>=1) {
-        var data = data_opening_temp;
-        nextOpn_i = nextOpn_i-1;
-        var opening_array = new Array(); 
-        if(data[nextOpn_i]['vessel_name']!=null)
-            opening_array.push("<span> Vessel : "+data[nextOpn_i]['vessel_name']+"("+data[nextOpn_i]['flag_name']+")</span>");
-        if(data[nextOpn_i]['vessel_type']!=null)
-            opening_array.push("<br/><span> Vessel Type : "+data[nextOpn_i]['vessel_type']+"</span>");
-        if(data[nextOpn_i]['from_date']!=null)
-            opening_array.push("<br/><span> Date : "+new String(data[nextOpn_i]['from_date']).split("T")[0]+"</span>");
-        if(data[nextOpn_i]['rank_name']!=null)
-            opening_array.push("<br/><span> Rank : "+data[nextOpn_i]['rank_name']+"</span>");
-        if(data[nextOpn_i]['sdc']!=null)
-            opening_array.push("<br/><span> Manager : "+data[nextOpn_i]['sdc']+"</span>");
-        var opening_res_array = new Array(); 
-        opening_res_array.push(opening_array);
-        $('#foot_opening').html(opening_res_array.join(""));
-    }
-}
 
 
 function show_flight_details() {
@@ -581,9 +548,9 @@ function show_flight_details() {
                 
                 for (var i = 0; i < data.length; i++) {
                     results_array.push("<span> Departure : "+data[i]['departure']+"</span><br/>");
-                    results_array.push("<span> Departure Date :  "+new String(data[i]['departure_date']).split("T")[0]+"</span><br/>");
+                    results_array.push("<span> Departure Date :  "+new String(data[i]['departure_date']).split("T")[i]+"</span><br/>");
                     results_array.push("<span> Arrival : "+data[i]['arrival']+"</span><br/>");
-                    results_array.push("<span> Arrival Date : "+new String(data[i]['arrival_date']).split("T")[0]+"</span><br/>");
+                    results_array.push("<span> Arrival Date : "+new String(data[i]['arrival_date']).split("T")[i]+"</span><br/>");
                     results_array.push("<span> Travel Route : "+data[i]['travel_route']+"</span><br/>");
                     results_array.push("<span> Remarks : "+data[i]['remarks']+"</span><br/>");
                     hide_spinner();
@@ -624,26 +591,69 @@ function allotment_details() {
         },
 
         success : function(data) {
-           var d = new Date();
-           results_array.push('<div id="plan_details_header"  class="head_common">');
-           results_array.push('<div class="header_white"></div>');
-           results_array.push('<span class="header_text" class="header">Allotment Details</span>');
-           results_array.push('</div>');
-           results_array.push('<div class = "hambrgrdetails">');
-           results_array.push("<span> Last Processed : "+new String(data[0]['processed_on']).split("T")[0]+"</span><br/>");
-           for (var i = 0; i < data.length; i++) {
-            results_array.push("<span>"+data[i]['name']+" : "+data[i]['bf_bal_sf_cur']+"</span><br/>");
-            hide_spinner();
-        }
-        results_array.push('</div>');
-        $('#allotment_details').html(results_array.join(""));
-    },
-    error: function (request, status, error) {
-       results_array.push("<span> No data to display </span><br/>");
-       $('#allotment_details').html(results_array.join(""));
-       hide_spinner();
-   }
+            var d = new Date();
+            var period=0;
+            results_array.push('<div id="plan_details_header"  class="head_common">');
+            results_array.push('<div class="header_white"></div>');
+            results_array.push('<span class="header_text" class="header">Allotment Details</span>');
+            results_array.push('</div>');
+            results_array.push('<div class = "hambrgrdetails">');
+            if(data[0] != null) {
+                results_array.push("<span> Last Processed : "+new String(data[0]['processed_on']).split("T")[0]+"</span><br/>");
+                results_array.push("<br><b>Balance Amount:</b><br>");
+                if(data[0] != null) {
+                    for (var i = 0; i < data.length; i++) {
+                        results_array.push("&nbsp;&nbsp;<span>"+data[i]['name']+" : "+data[i]['bf_bal_sf_cur']+"</span><br/>");
+                        period = data[i]['max_period'];
+                        hide_spinner();
+                    }
+                }
+            }
+            allotted_details(period, results_array);
+            
+        },
+        error: function (request, status, error) {
+           results_array.push("<span> No data to display </span><br/>");
+           $('#allotment_details').html(results_array.join(""));
+           hide_spinner();
+       }
 
+    });
+}
+
+function allotted_details(period, results_array) {
+    var empid = $.jStorage.get("empid");
+    /*var empid = 614946;
+    period = 201307;*/
+    var url = prefilurl+"get_sf_allotted_details.php?empid="+empid+"&period="+period;
+    console.log(url);
+    var req = $.ajax({
+        url: url,
+        datatype: 'text',
+        beforeSend: function() {
+            show_spinner();
+        },
+
+        success : function(data) {
+            var d = new Date();
+            if(data[0] != null) {
+                for (var i = 0; i < data.length; i++) {
+                    if(i == 0){
+                        results_array.push("<br><b>Allotted to:</b><br>");
+                    }
+                    results_array.push("&nbsp;&nbsp;"+data[i]['beneficiary_name']+": "+data[i]['amount']+"("+data[i]['currency']+")");
+                }
+            } else {
+                results_array.push("<br>No Allotments for you.")
+            }
+            hide_spinner();
+            $('#allotment_details').html(results_array.join(""));
+            results_array.push('</div>');
+        },
+        error: function (request, status, error) {
+            $('#allotment_details').html(results_array.join(""));
+            results_array.push('</div>');
+        }
     });
 }
 
@@ -657,7 +667,7 @@ function correspondance(){
     results_array.push('</div>');
     results_array.push('<div class = "hambrgrdetails">');
     results_array.push('<form onsubmit="return correspondancesend()" >');
-    results_array.push('<textarea class="topcoat-text-input--large" id="message"></textarea></br>');
+    results_array.push('<textarea class="topcoat-text-input--large" id="message" style="height: 250px;line-height: 1.5rem;"></textarea></br>');
     results_array.push('<input type="submit" value="Send" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
     results_array.push('</div>');
     $('#correspondance_content').html(results_array.join(""));
@@ -688,13 +698,20 @@ function doadetails(){
         results_array.push('<span class="header_text" class="header">DoA Details</span>');
         results_array.push('</div>');
         results_array.push('<div class = "hambrgrdetails">');
-        for (var i = 0; i < data.length; i++) {
-            results_array.push("<span> DOA : "+new String(data[i]['doa']).split("T")[0]+"</span><br/>");
-            if(data[i]['remarks'] != null)
-                results_array.push("<span> Remark : "+data[i]['remarks']+"</span><br/>");
-            results_array.push("<button onclick='doaAdd()' style='color:#00303f;font:bold 12px verdana; padding:5px;'>Add DoA</button>");
-            hide_spinner();
+        if(data[0] != null) {
+            for (var i = 0; i < data.length; i++) {
+                results_array.push("<span> DoA : "+new String(data[i]['doa']).split("T")[0]+"</span><br/>");
+                if(data[i]['remarks'] != null)
+                    results_array.push("<span> Remark : "+data[i]['remarks']+"</span><br/>");
+                
+                
+            }
+        
+        } else {
+            results_array.push('<span>No DoA Available, please Add DoA</span><br>');
         }
+        hide_spinner();
+        results_array.push("<button onclick='doaAdd()' style='color:#00303f;font:bold 12px verdana; padding:5px;'>Add DoA</button>");
         results_array.push('</div>');
         $('#doa_content').html(results_array.join(""));
     },
@@ -879,9 +896,9 @@ function bottm_buttons(results_array) {
     results_array.push('<div class="footer-button" onclick="correspondance()">');
     results_array.push('<span class="icon-chat button-icon"></span>');
     results_array.push('</div>');
-    results_array.push('<div class="footer-button">');
-    results_array.push('<a id="cscemail" href="http://www.bs-shipmanagement.com"><span class="icon-email2 button-icon"></span></a>');
-    results_array.push('</div>');
+    results_array.push('<a id="cscemail" href="http://www.bs-shipmanagement.com">');
+    results_array.push('<div class="footer-button"><span class="icon-email2 button-icon"></span></div>');
+    results_array.push('</a>');
     results_array.push('<div class="footer-button">');
     results_array.push('<span class="icon-phone button-icon"></span>');
     results_array.push('</div>');
@@ -919,6 +936,7 @@ function hide_all() {
     // $('#openpositions_content').hide();
     $('#doa_content').hide();
     $('body').scrollTop(0);
+
 }
 
 window.onerror = function(msg, url, linenumber) {

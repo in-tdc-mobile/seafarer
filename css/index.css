@@ -638,7 +638,7 @@ body{
   right: -7px;*/
   position: relative;
   top: 6px;
-  right: -7px;
+  right: -6px;
   z-index: 1000;
 }
 
@@ -770,7 +770,7 @@ input::-webkit-calendar-picker-indicator,
 
 #foot_opening {
   background-color: rgb(216, 218, 217);
-  margin-top: 153px;
+  /*margin-top: 153px;*/
   border: 1px solid;
   border-radius: 3px;
   margin-left: 5px;
