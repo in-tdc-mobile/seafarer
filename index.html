@@ -143,15 +143,66 @@
         <button class="topcoat-button" type="submit">Sign In</button>
       </form>
     </div>
-    <section id="test1" class="scene one active" style="height:500px;">
-
-    </section>
-    <section id="test2" class="scene one" style="height:500px;">
-
-    </section>
-    <section id="test3" class="scene one" style="height:500px;">
     
-    </section>
+    <div id="index_content">
+      <section id="test1" class="scene one active" style="height:500px;">
+        <div>
+          <div id="show_plan_details"></div>
+        </div>
+      </section>
+      <section id="test2" class="scene one" style="height:500px;">
+        <div id="show_training_details">
+          <div class="head_common">
+            <div class="header_white"></div>
+            <span class="header_text" class="header">Training Details</span>
+          </div>
+          <div class="ship_image">
+            <img src='img/container_ship_demo.jpg' style='width:100%; height:150px;'>
+          </div>
+          <div class="arrow_div_training">
+            <button onclick='prevTraining()' style="background:none;border:none;">
+              <span style="background:url('img/arrow-left.png') no-repeat; display: block;height:35px;width:35px;"></span>
+            </button>
+            <button onclick='nextTraining()' style="float:right; background:none;border:none;">
+              <span style="background:url('img/arrow-right.png') no-repeat; display: block;height:35px;width:35px;"></span>
+            </button>
+          </div>
+          <div class="footer-training">
+            <div class="footer-training-spacing"></div>
+            <div class="footer-training-content-s croller">
+              <div id="foot_training" class="footer-training-content">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="test3" class="scene one" style="height:500px;">
+        <div id="openpositions_content">
+          <div class="head_common">
+            <div class="header_white"></div>
+            <span class="header_text" class="header">Open Positions</span>
+          </div>
+          <div class="ship_image">
+            <img src='img/container_ship_demo.jpg' style='width:100%; height:150px;'>
+          </div>
+          <div class="arrow_div_opening">
+            <button onclick='prevOpnining()' style="background:none;border:none;">
+              <span style="background:url('img/arrow-left.png') no-repeat; display: block;height:35px;width:35px;"></span>
+            </button>
+            <button onclick='nextOpnining()' style="float:right; background:none;border:none;">
+              <span style="background:url('img/arrow-right.png') no-repeat; display: block;height:35px;width:35px;"></span>
+            </button>
+          </div>
+          <div class="footer-training">
+            <div class="footer-training-spacing"></div>
+            <div class="footer-training-content-s croller">
+              
+              <div id="foot_opening" class="footer-training-content">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
     
     <div id="correspondance_content" style="display: block;"></div>
