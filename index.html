@@ -54,20 +54,52 @@
   <script type="text/javascript" src="touchswipe/main.js"></script>
   <script id='code_1'>
     $(function() {      
-      $("#test").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
-
+      $("#test1").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
+      $("#test2").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
+      $("#test3").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
       //Swipe handlers.
       function swipe1(event, direction) {
         if (direction == 'left') {
-          $(this).addClass('active');
+          console.log($(this).attr('id'));
+
+          if($(this).attr('id').indexOf('test1') > -1) {
+            $('#test2').removeClass('left');
+            $('#test3').removeClass('left');//.addClass('active');;
+          } else if($(this).attr('id').indexOf('test2') > -1) {
+            $(this).addClass('left').removeClass('active');
+            $('#test1').addClass('active');
+            $('#test3').removeClass('left');
+          } else if($(this).attr('id').indexOf('test3') > -1) {
+            $(this).addClass('left').removeClass('active');
+            $('#test1').removeClass('left');
+            $('#test2').removeClass('right').addClass('active');
+
+          }
+          
         } else if (direction == 'right') {
-          $(this).addClass('after');
+          console.log($(this).attr('id'));
+
+          if($(this).attr('id').indexOf('test1') > -1) {
+            $(this).addClass('right');
+            $('#test1').removeClass('active');
+            $('#test2').removeClass('right').addClass('active');
+            $('#test3').removeClass('right');
+          } else if($(this).attr('id').indexOf('test2') > -1) {
+            $(this).addClass('right');
+            $('#test1').removeClass('right');
+            $('#test2').removeClass('active');
+            $('#test3').removeClass('right').addClass('active');
+          } else if($(this).attr('id').indexOf('test3') > -1) {
+            $('#test1').removeClass('right');//.addClass('active');
+            $('#test2').removeClass('right');
+            $('#test3').removeClass('active');
+          }
         }
+
+        i
+
       }
     
-      function swipe2(event, phase, direction, distance) {
-        $(this).text( phase +" you have swiped " + distance + "px in direction:" + direction );
-      }
     });
   </script>
 </head>
@@ -111,7 +143,16 @@
         <button class="topcoat-button" type="submit">Sign In</button>
       </form>
     </div>
-<section id="test" class="scene one" style="height:500px;">Swipe me</div>
+    <section id="test1" class="scene one active" style="height:500px;">
+
+    </section>
+    <section id="test2" class="scene one" style="height:500px;">
+
+    </section>
+    <section id="test3" class="scene one" style="height:500px;">
+    
+    </section>
+    </div>
     
     <div id="correspondance_content" style="display: block;"></div>
     <div id="doa_content"></div>

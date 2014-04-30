@@ -789,33 +789,35 @@ input::-webkit-calendar-picker-indicator,
 }
 
 
-
-
 section.scene {
   position: absolute;
   width: 100%;
   height: 100%;
-  padding: 0px 20px;
+  padding: 0px 0px;
   -webkit-transition: all .35s ease-out;
   -moz-transition: all .35s ease-out;
   transition: all .35s ease-out;
   background: brown;
 }
-/* line 93, ../sass/screen.scss */
-section.scene.one {
-  background: #1abc9c;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
+
+section.scene.active {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 0px 0px;
+  -webkit-transition: all .35s ease-out;
+  -moz-transition: all .35s ease-out;
+  transition: all .35s ease-out;
+  background: brown;
+  z-index: 10;
 }
-/* line 98, ../sass/screen.scss */
-section.scene.one.active {
-  background: yellow;
+
+section.scene.one.left {
     height: 300px;    
     position: absolute; 
     top: 0;
-    left: -500px;    
-    width: 500px;
+    left: -100px;    
+    width: 100px;
     opacity: 1;    
     -webkit-transition: all 0.7s ease-out;
        -moz-transition: all 0.7s ease-out;
@@ -823,23 +825,15 @@ section.scene.one.active {
          -o-transition: all 0.7s ease-out;
             transition: all 0.7s ease-out;
 }
-.box{
-    position: relative;
-    overflow: hidden;
-}
 
-.section.scene.one:hover .hidden{
-
-    left: 0px;
-}
-section.scene.one.after {
-  background: red;
+section.scene.one.right {
     height: 300px;    
     position: absolute; 
     top: 0;
-    right: -500px;    
-    width: 500px;
-    opacity: 1;    
+    right: 0px;    
+    width: 0px;
+    opacity: 1;
+    overflow-x: hidden;
     -webkit-transition: all 0.7s ease-out;
        -moz-transition: all 0.7s ease-out;
         -ms-transition: all 0.7s ease-out;
