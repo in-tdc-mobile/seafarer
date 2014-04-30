@@ -54,44 +54,44 @@
   <script type="text/javascript" src="touchswipe/main.js"></script>
   <script id='code_1'>
     $(function() {      
-      $("#test1").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
-      $("#test2").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
-      $("#test3").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
+      $("#seaf1").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
+      $("#seaf2").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
+      $("#seaf3").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
       //Swipe handlers.
       function swipe1(event, direction) {
         if (direction == 'left') {
 
-          if($(this).attr('id').indexOf('test1') > -1) {
-            $('#test1').removeClass('active');
-            $('#test2').removeClass('left');
-            $('#test3').removeClass('left').addClass('active');
-          } else if($(this).attr('id').indexOf('test2') > -1) {
+          if($(this).attr('id').indexOf('seaf1') > -1) {
+            $('#seaf1').removeClass('active');
+            $('#seaf2').removeClass('left');
+            $('#seaf3').removeClass('left').addClass('active');
+          } else if($(this).attr('id').indexOf('seaf2') > -1) {
             $(this).addClass('left').removeClass('active');
-            $('#test1').addClass('active');
-            $('#test3').removeClass('left');
-          } else if($(this).attr('id').indexOf('test3') > -1) {
+            $('#seaf1').addClass('active');
+            $('#seaf3').removeClass('left');
+          } else if($(this).attr('id').indexOf('seaf3') > -1) {
             $(this).addClass('left').removeClass('active');
-            $('#test1').removeClass('left');
-            $('#test2').removeClass('right').addClass('active');
+            $('#seaf1').removeClass('left');
+            $('#seaf2').removeClass('right').addClass('active');
 
           }
           
         } else if (direction == 'right') {
 
-          if($(this).attr('id').indexOf('test1') > -1) {
+          if($(this).attr('id').indexOf('seaf1') > -1) {
             $(this).addClass('right');
-            $('#test1').removeClass('active');
-            $('#test2').removeClass('right').addClass('active');
-            $('#test3').removeClass('right');
-          } else if($(this).attr('id').indexOf('test2') > -1) {
+            $('#seaf1').removeClass('active');
+            $('#seaf2').removeClass('right').addClass('active');
+            $('#seaf3').removeClass('right');
+          } else if($(this).attr('id').indexOf('seaf2') > -1) {
             $(this).addClass('right');
-            $('#test1').removeClass('right');
-            $('#test2').removeClass('active');
-            $('#test3').removeClass('right').addClass('active');
-          } else if($(this).attr('id').indexOf('test3') > -1) {
-            $('#test1').removeClass('right').addClass('active');
-            $('#test2').removeClass('right');
-            $('#test3').removeClass('active');
+            $('#seaf1').removeClass('right');
+            $('#seaf2').removeClass('active');
+            $('#seaf3').removeClass('right').addClass('active');
+          } else if($(this).attr('id').indexOf('seaf3') > -1) {
+            $('#seaf1').removeClass('right').addClass('active');
+            $('#seaf2').removeClass('right');
+            $('#seaf3').removeClass('active');
           }
         }
 
@@ -144,12 +144,12 @@
     </div>
     
     <div id="index_content">
-      <section id="test1" class="scene one active" style="height:500px;">
+      <section id="seaf1" class="scene one active">
         <div>
           <div id="show_plan_details"></div>
         </div>
       </section>
-      <section id="test2" class="scene one" style="height:500px;">
+      <section id="seaf2" class="scene one">
         <div id="show_training_details">
           <div class="head_common">
             <div class="header_white"></div>
@@ -167,7 +167,7 @@
           </div>
         </div>
       </section>
-      <section id="test3" class="scene one" style="height:500px;">
+      <section id="seaf3" class="scene one">
         <div id="openpositions_content">
           <div class="head_common">
             <div class="header_white"></div>
