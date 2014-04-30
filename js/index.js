@@ -460,12 +460,11 @@ function openpositions(){
                 if(i>0)  {
                     opening_res_array.push("<hr>");
                 }
-
                 opening_res_array.push("<span> Vessel : "+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span>");
                 if(data[i]['vessel_type']!=null)
                     opening_res_array.push("<br/><span> Vessel Type : "+data[i]['vessel_type']+"</span>");
                 if(data[i]['from_date']!=null)
-                    opening_res_array.push("<br/> <span> Date : "+new String(data[i]['from_date']).split("T")[i]+"</span>");
+                    opening_res_array.push("<br/> <span> Date : "+new String(data[i]['from_date']).split("T")[0 ]+"</span>");
                 if(data[i]['rank_name']!=null)
                     opening_res_array.push("<br/><span> Rank : "+data[i]['rank_name']+"</span>");
                 if(data[i]['sdc']!=null)
