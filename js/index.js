@@ -397,11 +397,10 @@ function show_plan_details() {
     });
 }
 
-var data_traing_temp;
-var training_res_array = new Array(); 
+
 function show_training_details() {
    var url = prefilurl+"get_sf_training_details.php?empid="+$.jStorage.get("empid");
-   var results_array = new Array(); 
+   var training_res_array = new Array(); 
    console.log(url);
    var req = $.ajax({
     url: url,
@@ -415,21 +414,19 @@ function show_training_details() {
         var d = new Date();
         for (var i = 0; i < 1; i++) {
             if(data[i] != null) {
-                data_traing_temp=data;
-                var training_array = new Array(); 
-                nextTr_i=0;
-                training_array.push("<span> Course : "+data[i]['course']+"</span>");
-                training_array.push("<br/><span> Status : "+data[i]['status']+"</span>");
-                training_array.push("<br/><span> Duration Date From: "+new String(data[i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data[i]['to_date']).split("T")[0]+"</span>");
-                training_array.push("<br/><span> Venue : "+data[i]['institution']+"</span>");
-                $(".arrow_div_training").show();
+                if(i>0) {
+                    training_res_array.push("<hr>");
+                }
+                training_res_array.push("<span> Course : "+data[i]['course']+"</span>");
+                training_res_array.push("<br/><span> Status : "+data[i]['status']+"</span>");
+                training_res_array.push("<br/><span> Duration Date From: "+new String(data[i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data[i]['to_date']).split("T")[0]+"</span>");
+                training_res_array.push("<br/><span> Venue : "+data[i]['institution']+"</span>");
             } else {
-                $(".arrow_div_training").hide();
                 training_res_array.push("<span> No training details updated </span><br/>");
                 hide_spinner();
             }
         }
-        training_res_array.push(training_array);
+        training_res_array.push(training_res_array);
         hide_spinner();
         $('#foot_training').html(training_res_array.join(""));
 
@@ -442,36 +439,7 @@ function show_training_details() {
 
     });
 }
-var nextTr_i;
-function nextTraining() {
-    if(nextTr_i<data_traing_temp.length-1) {
-        nextTr_i = nextTr_i+1;
-        var training_array = new Array(); 
-        training_array.push("<span> Course : "+data_traing_temp[nextTr_i]['course']+"</span>");
-        training_array.push("<br/><span> Status : "+data_traing_temp[nextTr_i]['status']+"</span>");
-        training_array.push("<br/><span> Duration Date From: "+new String(data_traing_temp[nextTr_i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data_traing_temp[nextTr_i]['to_date']).split("T")[0]+"</span>");
-        training_array.push("<br/><span> Venue : "+data_traing_temp[nextTr_i]['institution']+"</span><br/>");
-        var training_res_array = new Array(); 
-        training_res_array.push(training_array);
-        $('#foot_training').html(training_res_array.join(""));
-    }
-   
-    
-}
 
-function prevTraining() {
-    if(nextTr_i>=1) {
-        nextTr_i = nextTr_i-1;
-        var training_array = new Array(); 
-        training_array.push("<span> Course : "+data_traing_temp[nextTr_i]['course']+"</span>");
-        training_array.push("<br/><span> Status : "+data_traing_temp[nextTr_i]['status']+"</span>");
-        training_array.push("<br/><span> Duration Date From: "+new String(data_traing_temp[nextTr_i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data_traing_temp[nextTr_i]['to_date']).split("T")[0]+"</span>");
-        training_array.push("<br/><span> Venue : "+data_traing_temp[nextTr_i]['institution']+"</span><br/>");
-        var training_res_array = new Array(); 
-        training_res_array.push(training_array);
-        $('#foot_training').html(training_res_array.join(""));
-    }
-}
 var temp;
 
 function openpositions(){
@@ -519,8 +487,6 @@ function openpositions(){
 
     });
 }
-
-
 
 function show_flight_details() {
     $("#index_content").hide();

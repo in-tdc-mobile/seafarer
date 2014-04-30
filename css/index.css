@@ -574,7 +574,10 @@ span.header {
 }
 
 body{
-  background-color: #E2E2E2;
+  /*background-color: #E2E2E2;*/
+  background-image:url('images/paper.png');
+  background-repeat:repeat;
+  font: 13px "Arial", helvetica, arial, sans-serif;
 }
 
 #container, #index_content, #show_plan_details, #openpositions_content, #show_training_details{
@@ -760,7 +763,7 @@ input::-webkit-calendar-picker-indicator,
 
 #foot_training {
   background-color: rgb(216, 218, 217);
-  margin-top: 153px;
+  /*margin-top: 153px;*/
   border: 1px solid;
   border-radius: 3px;
   margin-left: 5px;
