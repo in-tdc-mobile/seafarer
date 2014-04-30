@@ -640,7 +640,7 @@ body{
   top: 6px;
   right: -7px;*/
   position: relative;
-  top: 6px;
+  top: 7px;
   right: -6px;
   z-index: 1000;
 }
@@ -822,11 +822,11 @@ section.scene.one.left {
     left: -100px;    
     width: 100px;
     opacity: 1;    
-    -webkit-transition: all 0.7s ease-out;
-       -moz-transition: all 0.7s ease-out;
-        -ms-transition: all 0.7s ease-out;
-         -o-transition: all 0.7s ease-out;
-            transition: all 0.7s ease-out;
+    -webkit-transition: all 0.1s ease-out;
+       -moz-transition: all 0.1s ease-out;
+        -ms-transition: all 0.1s ease-out;
+         -o-transition: all 0.1s ease-out;
+            transition: all 0.1s ease-out;
 }
 
 section.scene.one.right {
@@ -837,10 +837,10 @@ section.scene.one.right {
     width: 0px;
     opacity: 1;
     overflow-x: hidden;
-    -webkit-transition: all 0.7s ease-out;
-       -moz-transition: all 0.7s ease-out;
-        -ms-transition: all 0.7s ease-out;
-         -o-transition: all 0.7s ease-out;
-            transition: all 0.7s ease-out;
+    -webkit-transition: all 0.1s ease-out;
+       -moz-transition: all 0.1s ease-out;
+        -ms-transition: all 0.1s ease-out;
+         -o-transition: all 0.1s ease-out;
+            transition: all 0.1s ease-out;
 }
 

@@ -60,11 +60,11 @@
       //Swipe handlers.
       function swipe1(event, direction) {
         if (direction == 'left') {
-          console.log($(this).attr('id'));
 
           if($(this).attr('id').indexOf('test1') > -1) {
+            $('#test1').removeClass('active');
             $('#test2').removeClass('left');
-            $('#test3').removeClass('left');//.addClass('active');;
+            $('#test3').removeClass('left').addClass('active');
           } else if($(this).attr('id').indexOf('test2') > -1) {
             $(this).addClass('left').removeClass('active');
             $('#test1').addClass('active');
@@ -77,7 +77,6 @@
           }
           
         } else if (direction == 'right') {
-          console.log($(this).attr('id'));
 
           if($(this).attr('id').indexOf('test1') > -1) {
             $(this).addClass('right');
@@ -90,7 +89,7 @@
             $('#test2').removeClass('active');
             $('#test3').removeClass('right').addClass('active');
           } else if($(this).attr('id').indexOf('test3') > -1) {
-            $('#test1').removeClass('right');//.addClass('active');
+            $('#test1').removeClass('right').addClass('active');
             $('#test2').removeClass('right');
             $('#test3').removeClass('active');
           }
