@@ -758,7 +758,7 @@ input::-webkit-calendar-picker-indicator,
 }
 
 .footer-training-content {
-  padding: 45px;
+  padding: 10px;
 }
 
 #foot_training {
@@ -769,6 +769,8 @@ input::-webkit-calendar-picker-indicator,
   margin-left: 5px;
   margin-right: 5px;
   border-style: outset;
+  height: 200px;
+  overflow: overlay;
 }
 
 #foot_opening {
@@ -779,6 +781,8 @@ input::-webkit-calendar-picker-indicator,
   margin-left: 5px;
   margin-right: 5px;
   border-style: outset;
+  height: 200px;
+  overflow: overlay;
 }
 .hambrgrdetails {
   margin: 3px;
@@ -822,11 +826,13 @@ section.scene.one.left {
     left: -100px;    
     width: 100px;
     opacity: 1;    
+     transform-style: preserve-3d;
     -webkit-transition: all 0.1s ease-out;
        -moz-transition: all 0.1s ease-out;
         -ms-transition: all 0.1s ease-out;
          -o-transition: all 0.1s ease-out;
             transition: all 0.1s ease-out;
+
 }
 
 section.scene.one.right {

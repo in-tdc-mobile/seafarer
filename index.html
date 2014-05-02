@@ -68,12 +68,13 @@
           } else if($(this).attr('id').indexOf('seaf2') > -1) {
             $(this).addClass('left').removeClass('active');
             $('#seaf1').addClass('active');
+            $('#seaf2').removeClass('left');
             $('#seaf3').removeClass('left');
           } else if($(this).attr('id').indexOf('seaf3') > -1) {
             $(this).addClass('left').removeClass('active');
             $('#seaf1').removeClass('left');
             $('#seaf2').removeClass('right').addClass('active');
-
+            $('#seaf3').removeClass('left');
           }
           
         } else if (direction == 'right') {
@@ -156,7 +157,7 @@
             <span class="header_text" class="header">Training Details</span>
           </div>
           <div class="ship_image">
-            <img src='img/container_ship_demo.jpg' style='width:100%; height:150px;'>
+            <img src='img/container_ship_demo.jpg' style='width:100%; height:150px; '>
           </div>
           <div class="footer-training">
             <div class="footer-training-spacing"></div>
