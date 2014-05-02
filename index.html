@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="css/codiqa.ext.css">  
 
   <script src="kendo-js/jquery.min.js"></script>
+  <script src="js/jquery.transit.min.js"></script>
 
   <!-- jQuery and jQuery Mobile -->
   <!--<script charset="UTF-8" type="text/javascript" src="https://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&s=1"></script>
@@ -45,61 +46,75 @@
   <script src="kendo-js/kendo.all.min.js"></script>
   <script type='application/javascript' src='js/fastclick.min.js'></script>
 
-  <link rel="stylesheet" type="text/css" href="css/swipe_styles.css">
+  <!-- <link rel="stylesheet" type="text/css" href="css/swipe_styles.css"> -->
   <!-- Extra Codiqa features -->
   <script src="js/codiqa.ext.js"></script>
 
-        
+  <script src="js/jquery.transit.min.js"></script>
   <script type="text/javascript" src="touchswipe/jquery.touchSwipe.min.js"></script>
-  <script type="text/javascript" src="touchswipe/main.js"></script>
   <script id='code_1'>
     $(function() {      
       $("#seaf1").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
       $("#seaf2").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
       $("#seaf3").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
+      $("#seaf4").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
       //Swipe handlers.
       function swipe1(event, direction) {
         if (direction == 'left') {
 
           if($(this).attr('id').indexOf('seaf1') > -1) {
-            $('#seaf1').removeClass('active');
-            $('#seaf2').removeClass('left');
-            $('#seaf3').removeClass('left').addClass('active');
+            
           } else if($(this).attr('id').indexOf('seaf2') > -1) {
-            $(this).addClass('left').removeClass('active');
-            $('#seaf1').addClass('active');
-            $('#seaf2').removeClass('left');
-            $('#seaf3').removeClass('left');
+            $("#seaf2").css('z-index', 2);
+            $("#seaf1").css('z-index', 1);
+            $("#seaf1").transition({ x: 0 });
+            $("#seaf2").transition({ x: -$(window).width() });
+
           } else if($(this).attr('id').indexOf('seaf3') > -1) {
-            $(this).addClass('left').removeClass('active');
-            $('#seaf1').removeClass('left');
-            $('#seaf2').removeClass('right').addClass('active');
-            $('#seaf3').removeClass('left');
+
+            $("#seaf3").css('z-index', 2);
+            $("#seaf2").css('z-index', 1);
+            $("#seaf2").transition({ x: 0 });
+            $("#seaf3").transition({ x: -$(window).width() });
+
+          } else if($(this).attr('id').indexOf('seaf4') > -1) {
+
+            $("#seaf4").css('z-index', 2);
+            $("#seaf3").css('z-index', 1);
+            $("#seaf3").transition({ x: 0 });
+            $("#seaf4").transition({ x: -$(window).width() });
+            
           }
           
         } else if (direction == 'right') {
+          
 
           if($(this).attr('id').indexOf('seaf1') > -1) {
-            $(this).addClass('right');
-            $('#seaf1').removeClass('active');
-            $('#seaf2').removeClass('right').addClass('active');
-            $('#seaf3').removeClass('right');
+
+            $("#seaf1").css('z-index', 2);
+            $("#seaf2").css('z-index', 1);
+            $("#seaf2").transition({ x: 0 });
+            $("#seaf1").transition({ x: $(window).width() });
+
           } else if($(this).attr('id').indexOf('seaf2') > -1) {
-            $(this).addClass('right');
-            $('#seaf1').removeClass('right');
-            $('#seaf2').removeClass('active');
-            $('#seaf3').removeClass('right').addClass('active');
+
+            $("#seaf2").css('z-index', 2);
+            $("#seaf3").css('z-index', 1);
+            $("#seaf3").transition({ x: 0 });
+            $("#seaf2").transition({ x: $(window).width() });
+
           } else if($(this).attr('id').indexOf('seaf3') > -1) {
-            $('#seaf1').removeClass('right').addClass('active');
-            $('#seaf2').removeClass('right');
-            $('#seaf3').removeClass('active');
+
+            $("#seaf3").css('z-index', 2);
+            $("#seaf4").css('z-index', 1);
+            $("#seaf4").transition({ x: 0 });
+            $("#seaf3").transition({ x: $(window).width() });
+
+          } else if($(this).attr('id').indexOf('seaf4') > -1) {
+
           }
         }
-
-        i
-
       }
-    
     });
   </script>
 </head>
@@ -145,28 +160,23 @@
     </div>
     
     <div id="index_content">
-      <section id="seaf1" class="scene one active">
-        <div>
-          <div id="show_plan_details"></div>
-        </div>
-      </section>
-      <section id="seaf2" class="scene one">
-        <div id="show_training_details">
-          <div class="head_common">
-            <div class="header_white"></div>
-            <span class="header_text" class="header">Training Details</span>
-          </div>
-          <div class="ship_image">
-            <img src='img/container_ship_demo.jpg' style='width:100%; height:150px; '>
-          </div>
-          <div class="footer-training">
-            <div class="footer-training-spacing"></div>
-            <div class="footer-training-content-s croller">
-              <div id="foot_training" class="footer-training-content">
-              </div>
-            </div>
-          </div>
-        </div>
+      
+      
+      
+      <section id="seaf4" class="scene one">
+      seafarer 4<br>
+      seafarer 4<br>
+      seafarer 4<br>
+      seafarer 4<br>
+      seafarer 4<br>
+      seafarer 4<br>
+      seafarer 4<br>seafarer 4<br>
+      seafarer 4<br>
+      seafarer 4<br>
+      seafarer 4<br>
+      seafarer 4<br>
+      seafarer 4<br>
+      seafarer 4<br>
       </section>
       <section id="seaf3" class="scene one">
         <div id="openpositions_content">
@@ -187,194 +197,31 @@
           </div>
         </div>
       </section>
-    </div>
-    
-    <div id="correspondance_content" style="display: block;"></div>
-    <div id="doa_content"></div>
-    <div id="show_flight_details"></div>
-    <div id="update_profile"></div>
-    <div id="allotment_details"></div>
-    <div id='view_title'></div>
-    <div class='spinner_index'>
-      <img src="img/spinner.gif" width="20px" height="20px" style="display:block;margin:auto;"/>
-    </div>
-</div>
-<script type="text/javascript" src="js/index.js"></script>
-<script src="js/jstorage.js"></script>
-<script type="text/javascript">
-  app.initialize();
-</script>
-
-</body>
-</html>
-
-
-
-
-
-<!-- <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="CWA Mobile">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title></title>
-
-  <link href="kendo-styles/kendoui.common.min.css" rel="stylesheet" />
-  <link href="kendo-styles/kendo.default.min.css" rel="stylesheet" />
-  <link href="kendo-styles/kendo.dataviz.min.css" rel="stylesheet" />
-  <link href="kendo-styles/kendo.dataviz.default.min.css" rel="stylesheet" />
-  <link href="css/hamburger.css" rel="stylesheet" />
-
-  <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
-  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png"/>
-
-
-  <link rel="stylesheet" href="img/icomoon/demo-files/demo.css">
-  <link rel="stylesheet" href="img/icomoon/style.css">
-  <link rel="stylesheet" href="css/topcoat/css/topcoat-mobile-light.css">
-  <link rel="stylesheet" href="css/index.css">
-
-  <link rel="stylesheet" href="css/codiqa.ext.css">  
-
-  <script src="kendo-js/jquery.min.js"></script>
-
-  <script src="js/jquery-1.9.0.min.js"></script>
-  <script src="js/jquery.autocomplete.min.js"></script>
-  <script type="text/javascript" src="js/cardview.js"></script>
-  <script src="kendo-js/kendo.all.min.js"></script>
-  <script type='application/javascript' src='js/fastclick.min.js'></script>
-
-  <link rel="stylesheet" type="text/css" href="css/swipe_styles.css">
-  <script src="js/codiqa.ext.js"></script>
-
-  <link href="touchswipe/css/main.css" type="text/css" rel="stylesheet" />
-        
-  <script type="text/javascript" src="touchswipe/jquery.touchSwipe.min.js"></script>
-  <script type="text/javascript" src="touchswipe/main.js"></script>
-  <script id='code_1'>
-    $(function() {      
-      $("#test").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"auto"} );
-
-      //Swipe handlers.
-      function swipe1(event, direction) {
-        $(this).text( "You have swiped " + direction );
-      }
-    
-      function swipe2(event, phase, direction, distance) {
-        $(this).text( phase +" you have swiped " + distance + "px in direction:" + direction );
-      }
-    });
-  </script>
-</head>
-<body class="light">
-  <div id="sidemenu" style="display:none">
-    <nav class="mobileNav">
-      <ul>
-          <li><a href="#plan"><div>Home</div></a></li>
-          <li><a href="#flight"><div>Flight</div></a></li>
-          <li><a href="#allotment"><div>Allotment</div></a></li>
-          <li><a href="#doa"><div>DoA</div></a></li>
-          <li><a href="#correspondance"><div>Correspondance</div></a></li>
-          <li><a href="#updatecontact"><div>Update Contact</div></a></li>
-          <li><a href="mailto:in-tdc-mobile@bs-shipmanagement.com"><div>Contact Us</div></a></li>
-          <li><a href="#logout"><div>Log Out</div></a></li>
-      </ul>
-    </nav>
-  </div>
-
-  <div id="container" class='smooth full-height'>
-  <div id="hamburger-btn"><span class="hamburger icon-list"></span></div>
-  <div id="bg" class="content on-top"></div>
-  <div id="contentLayer"></div>
-  <div id="content" class='content on-top scroller' style="height:100%">
-    <div class='error' id='ajax_error' style="display: none;margin: 0px;font-style: italic;font-size: 14px;color: rgb(146,146,146);padding: 20px;"> 
-      Sorry, there was a temporary error. Please try again in a minute.<br/>-vidya.sagar@bs-shipmanagement.com
-    </div>
-    <div class='login'>
-      <div class='login_title'><h3>Please login to Seafarer.</h3></div>
-      <form id='login_form'>
-        <div class="input-group">
-          <div class="input-row">
-            <label>Employee</label>
-            <input class="topcoat-text-input" type="text" placeholder="user@bs-shipmanagement.com" id='login_emp'>
+      <section id="seaf2" class="scene one">
+        <div id="show_training_details">
+          <div class="head_common">
+            <div class="header_white"></div>
+            <span class="header_text" class="header">Training Details</span>
           </div>
-          <div class="input-row">
-            <label>Password</label>
-            <input class="topcoat-text-input" type="password" id='login_password'>
+          <div class="ship_image">
+            <img src='img/container_ship_demo.jpg' style='width:100%; height:150px; '>
+          </div>
+          <div class="footer-training">
+            <div class="footer-training-spacing"></div>
+            <div class="footer-training-content-s croller">
+              <div id="foot_training" class="footer-training-content">
+              </div>
+            </div>
           </div>
         </div>
-        <button class="topcoat-button" type="submit">Sign In</button>
-      </form>
+      </section>
+      <section id="seaf1" class="scene one active">
+        <div>
+          <div id="show_plan_details"></div>
+        </div>
+      </section>
     </div>
-<div id="test" class="box" style="height:500px;">Swipe me</div>
-    <div id="index_content">
-      <div id="wrapper">
-        <ul id="deck">
-          <li class="card">
-            <div>
-              <div id="show_plan_details"></div>
-            </div>
-          </li>
-          <li class="card">
-            <div id="show_training_details">
-              <div class="head_common">
-                <div class="header_white"></div>
-                <span class="header_text" class="header">Training Details</span>
-              </div>
-              <div>
-                <img src='img/container_ship_demo.jpg' style='width:100%; height:150px;'>
-              </div>
-              <div class="arrow_div_training">
-                <button onclick='prevTraining()' style="background:none;border:none;">
-                  <span style="background:url('img/arrow-left.png') no-repeat; display: block;height:35px;width:35px;"></span>
-                </button>
-                <button onclick='nextTraining()' style="float:right; background:none;border:none;">
-                  <span style="background:url('img/arrow-right.png') no-repeat; display: block;height:35px;width:35px;"></span>
-                </button>
-              </div>
-              <div class="footer-training">
-                <div class="footer-training-spacing"></div>
-                <div class="footer-training-content-s croller">
-                  <div id="foot_training" class="footer-training-content">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="card">
-            <div id="openpositions_content">
-              <div class="head_common">
-                <div class="header_white"></div>
-                <span class="header_text" class="header">Open Positions</span>
-              </div>
-              <div>
-                <img src='img/container_ship_demo.jpg' style='width:100%; height:150px;'>
-              </div>
-              <div class="arrow_div_opening">
-                <button onclick='prevOpnining()' style="background:none;border:none;">
-                  <span style="background:url('img/arrow-left.png') no-repeat; display: block;height:35px;width:35px;"></span>
-                </button>
-                <button onclick='nextOpnining()' style="float:right; background:none;border:none;">
-                  <span style="background:url('img/arrow-right.png') no-repeat; display: block;height:35px;width:35px;"></span>
-                </button>
-              </div>
-              <div class="footer-training">
-                <div class="footer-training-spacing"></div>
-                <div class="footer-training-content-s croller">
-                  
-                  <div id="foot_opening" class="footer-training-content">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
+    
     <div id="correspondance_content" style="display: block;"></div>
     <div id="doa_content"></div>
     <div id="show_flight_details"></div>
@@ -391,23 +238,5 @@
   app.initialize();
 </script>
 
-<script type="text/javascript">
-
-var deck;
-
-
-  deck = new CardView('#wrapper', {
-    effect: 'slide',
-    direction : 'h',
-   onUpdateContent: function (el, data) {
-      // Code to update the card content
-   }
-  });
-
-document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-
-</script>
-
 </body>
 </html>
- -->
