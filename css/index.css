@@ -763,26 +763,26 @@ input::-webkit-calendar-picker-indicator,
 }
 
 #foot_training {
-  background-color: rgb(216, 218, 217);
-  /*margin-top: 153px;*/
-  border: 1px solid;
-  border-radius: 3px;
-  margin-left: 5px;
-  margin-right: 5px;
-  border-style: outset;
-  height: 200px;
+  margin: 3px;
+  padding: 5px;
+  /* width: 100px; */
+  /* height: 100px; */
+  -webkit-box-shadow: 0 1px 5px #CDCFD1, inset 0 10px 20px #919292;
+  -moz-box-shadow: 0 1px 5px #0061aa, inset 0 10px 20px #b6f9ff;
+  box-shadow: 0 1px 5px #4E4E4E, inset 0 10px 20px #D5D5D5;
+  background: #E4E4E4;
   overflow: overlay;
 }
 
 #foot_opening {
-  background-color: rgb(216, 218, 217);
-  /*margin-top: 153px;*/
-  border: 1px solid;
-  border-radius: 3px;
-  margin-left: 5px;
-  margin-right: 5px;
-  border-style: outset;
-  height: 200px;
+  margin: 3px;
+  padding: 5px;
+  /* width: 100px; */
+  /* height: 100px; */
+  -webkit-box-shadow: 0 1px 5px #CDCFD1, inset 0 10px 20px #919292;
+  -moz-box-shadow: 0 1px 5px #0061aa, inset 0 10px 20px #b6f9ff;
+  box-shadow: 0 1px 5px #4E4E4E, inset 0 10px 20px #D5D5D5;
+  background: #E4E4E4;
   overflow: overlay;
 }
 .hambrgrdetails {
@@ -797,15 +797,16 @@ input::-webkit-calendar-picker-indicator,
 }
 
 
-section.scene {
+div.scene {
   position: absolute;
   width: 100%;
   height: 100%;
   padding: 0px 0px;
-  background: brown;
+  /*background: brown;*/
+  background-image:url('images/paper.png');
 }
 
-section.scene.active {
+div.scene.active {
   /*position: absolute;
   width: 100%;
   height: 100%;
@@ -814,12 +815,5 @@ section.scene.active {
   z-index: 10;*/
 }
 
-section.scene.prev {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  padding: 0px 0px;
-  background: brown;
-}
 
 
