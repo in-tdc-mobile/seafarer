@@ -138,6 +138,9 @@ function route(event) {
     } else if (hash === "#doa") {
         hide_all();
         doadetails();
+    } else if (hash === "#document_details") {
+        hide_all();
+        documentdetails();
     }
     else {
         // page = show_owners();
@@ -647,47 +650,45 @@ function doadetails(){
     var results_array = new Array(); 
     console.log(url);
     var req = $.ajax({
-    url: url,
-    datatype: 'text',
-    beforeSend: function() {
-        show_spinner();
-    },
+        url: url,
+        datatype: 'text',
+        beforeSend: function() {
+            show_spinner();
+        },
 
-    success : function(data) { 
-        var d = new Date();
-        $('#doa_content').show();
+        success : function(data) { 
+            var d = new Date();
+            $('#doa_content').show();
 
-        // results_array.push('<div class="dashboard_tiles">');
-        results_array.push('<div id="plan_details_header"  class="head_common">');
-        results_array.push('<div class="header_white"></div>');
-        results_array.push('<span class="header_text" class="header">DoA Details</span>');
-        results_array.push('</div>');
-        results_array.push('<div class = "hambrgrdetails">');
-        if(data[0] != null) {
-            for (var i = 0; i < data.length; i++) {
-                results_array.push("<span> DoA : "+new String(data[i]['doa']).split("T")[0]+"</span><br/>");
-                if(data[i]['remarks'] != null)
-                    results_array.push("<span> Remark : "+data[i]['remarks']+"</span><br/>");
-                
-                
+            // results_array.push('<div class="dashboard_tiles">');
+            results_array.push('<div id="plan_details_header"  class="head_common">');
+            results_array.push('<div class="header_white"></div>');
+            results_array.push('<span class="header_text" class="header">DoA Details</span>');
+            results_array.push('</div>');
+            results_array.push('<div class = "hambrgrdetails">');
+            if(data[0] != null) {
+                for (var i = 0; i < data.length; i++) {
+                    results_array.push("<span> DoA : "+new String(data[i]['doa']).split("T")[0]+"</span><br/>");
+                    if(data[i]['remarks'] != null)
+                        results_array.push("<span> Remark : "+data[i]['remarks']+"</span><br/>");
+                    
+                    
+                }
+            
+            } else {
+                results_array.push('<span>No DoA Available, please Add DoA</span><br>');
             }
-        
-        } else {
-            results_array.push('<span>No DoA Available, please Add DoA</span><br>');
+            hide_spinner();
+            results_array.push("<button onclick='doaAdd()' style='color:#00303f;font:bold 12px verdana; padding:5px;'>Add DoA</button>");
+            results_array.push('</div>');
+            $('#doa_content').html(results_array.join(""));
+        },
+        error: function (request, status, error) {
+            results_array.push("<span> No DOA Added </span><br/>");
+            results_array.push("<button onclick='doaAdd()' style='color:#00303f;font:bold 12px verdana; padding:5px;'>Add DOA</button>");
+            $('#doa_content').html(results_array.join(""));
+            hide_spinner();
         }
-        hide_spinner();
-        results_array.push("<button onclick='doaAdd()' style='color:#00303f;font:bold 12px verdana; padding:5px;'>Add DoA</button>");
-        results_array.push('</div>');
-        $('#doa_content').html(results_array.join(""));
-    },
-    error: function (request, status, error) {
-        results_array.push("<span> No DOA Added </span><br/>");
-        results_array.push("<button onclick='doaAdd()' style='color:#00303f;font:bold 12px verdana; padding:5px;'>Add DOA</button>");
-        $('#doa_content').html(results_array.join(""));
-        hide_spinner();
-    }
-
-
     });
 }
 
@@ -797,6 +798,59 @@ function correspondancesend() {
     
 }
 
+function documentdetails(){
+    $("#index_content").hide();
+    $('#tile_icons').hide();
+    $('#document_details').show(); 
+    var url = prefilurl+"get_sf_expiry_docs.php?empid="+$.jStorage.get("empid");
+    var results_array = new Array(); 
+    console.log(url);
+    var doc_type='doc_type';
+    var req = $.ajax({
+        url: url,
+        datatype: 'text',
+        beforeSend: function() {
+            show_spinner();
+        },
+
+        success : function(data) { 
+            var d = new Date();
+
+            results_array.push('<div id="plan_details_header"  class="head_common">');
+            results_array.push('<div class="header_white"></div>');
+            results_array.push('<span class="header_text" class="header">Expiry Documents</span>');
+            results_array.push('</div>');
+            results_array.push('<div class = "hambrgrdetails">');
+            if(data[0] != null) {
+                for (var i = 0; i < data.length; i++) {
+                    if(data[i]['doc_type'] != doc_type){
+                        doc_type = data[i]['doc_type'];
+                        results_array.push("<b>"+doc_type+":</b><br/>");
+                    }
+                    if((Date.parse(data[i]['expiry_date'])) < Date.parse(new Date())) {
+                       results_array.push("<span style='color:red'>"+data[i]['name']+" <b>("+new String(data[i]['expiry_date']).split("T")[0]+") </b></span><br/>");
+                    } else if((((Date.parse(data[i]['expiry_date']))-20) < Date.parse(new Date())) && (Date.parse(new Date()<(Date.parse(data[i]['expiry_date']))))){
+                        results_array.push("<span style='color:green'>"+data[i]['name']+" <b>("+new String(data[i]['expiry_date']).split("T")[0]+") </b></span><br/>");
+                    } else {
+                        results_array.push("<span>"+data[i]['name']+" <b>("+new String(data[i]['expiry_date']).split("T")[0]+") </b></span><br/>");
+                    }
+                }
+            
+            } else {
+                results_array.push('<span>No Expiry Documents Details Available</span><br>');
+            }
+            hide_spinner();
+            results_array.push('</div>');
+            $('#document_details').html(results_array.join(""));
+        },
+        error: function (request, status, error) {
+            results_array.push("<span>No Expiry Documents Details Available</span><br/>");
+            $('#document_details').html(results_array.join(""));
+            hide_spinner();
+        }
+    });
+}
+
 
 function show_spinner() {
     $(".spinner_index").css('display','inline');
@@ -897,9 +951,10 @@ function hide_all() {
     $('#show_flight_details').hide();
     $('#update_profile').hide();
     /*$('#tile_icons').hide();*/
-    //$('#allotment_details').hide();
+    $('#allotment_details').hide();
     // $('#openpositions_content').hide();
     $('#doa_content').hide();
+    $('#document_details').hide(); 
     $('body').scrollTop(0);
 
 }

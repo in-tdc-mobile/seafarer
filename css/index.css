@@ -740,7 +740,8 @@ input::-webkit-calendar-picker-indicator,
 #show_flight_details,
 #doa_content,
 #correspondance_content,
-#update_profile{
+#update_profile,
+#document_details{
   /*background-color: black;
   color: white;*/
   height: 100%;
