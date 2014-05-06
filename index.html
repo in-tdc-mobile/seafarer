@@ -50,7 +50,7 @@
   <!-- Extra Codiqa features -->
   <script src="js/codiqa.ext.js"></script>
 
-  <script src="js/jquery.transit.min.js"></script>
+  <!--<script src="js/jquery.transit.min.js"></script> -->
   <script type="text/javascript" src="touchswipe/jquery.touchSwipe.min.js"></script>
   <script id='code_1'>
     $(function() {      
@@ -66,24 +66,35 @@
           if($(this).attr('id').indexOf('seaf1') > -1) {
             
           } else if($(this).attr('id').indexOf('seaf2') > -1) {
-            $("#seaf2").css('z-index', 2);
+            $("#seaf1").css('display','block');
+            $("#seaf2").css('display','none');
+            $("#seaf3").css('display','none');
+            $("#seaf4").css('display','none');
+            /*$("#seaf2").css('z-index', 2);
             $("#seaf1").css('z-index', 1);
             $("#seaf1").transition({ x: 0 });
-            $("#seaf2").transition({ x: -$(window).width() });
+            $("#seaf2").transition({ x: -$(window).width() });*/
 
           } else if($(this).attr('id').indexOf('seaf3') > -1) {
-
-            $("#seaf3").css('z-index', 2);
+            $("#seaf1").css('display','none');
+            $("#seaf2").css('display','block');
+            $("#seaf3").css('display','none');
+            $("#seaf4").css('display','none');
+            /*$("#seaf3").css('z-index', 2);
             $("#seaf2").css('z-index', 1);
             $("#seaf2").transition({ x: 0 });
-            $("#seaf3").transition({ x: -$(window).width() });
+            $("#seaf3").transition({ x: -$(window).width() });*/
 
           } else if($(this).attr('id').indexOf('seaf4') > -1) {
+            $("#seaf1").css('display','none');
+            $("#seaf2").css('display','none');
+            $("#seaf3").css('display','block');
+            $("#seaf4").css('display','none');
 
-            $("#seaf4").css('z-index', 2);
+            /*$("#seaf4").css('z-index', 2);
             $("#seaf3").css('z-index', 1);
             $("#seaf3").transition({ x: 0 });
-            $("#seaf4").transition({ x: -$(window).width() });
+            $("#seaf4").transition({ x: -$(window).width() });*/
             
           }
           
@@ -91,25 +102,36 @@
           
 
           if($(this).attr('id').indexOf('seaf1') > -1) {
+            $("#seaf1").css('display','none');
+            $("#seaf2").css('display','block');
+            $("#seaf3").css('display','none');
+            $("#seaf4").css('display','none');
 
-            $("#seaf1").css('z-index', 2);
+            /*$("#seaf1").css('z-index', 2);
             $("#seaf2").css('z-index', 1);
             $("#seaf2").transition({ x: 0 });
-            $("#seaf1").transition({ x: $(window).width() });
+            $("#seaf1").transition({ x: $(window).width() });*/
 
           } else if($(this).attr('id').indexOf('seaf2') > -1) {
+            $("#seaf1").css('display','none');
+            $("#seaf2").css('display','none');
+            $("#seaf3").css('display','block');
+            $("#seaf4").css('display','none');
 
-            $("#seaf2").css('z-index', 2);
+            /*$("#seaf2").css('z-index', 2);
             $("#seaf3").css('z-index', 1);
             $("#seaf3").transition({ x: 0 });
-            $("#seaf2").transition({ x: $(window).width() });
+            $("#seaf2").transition({ x: $(window).width() });*/
 
           } else if($(this).attr('id').indexOf('seaf3') > -1) {
- $("#seaf1").scrollTop( );
-            $("#seaf3").css('z-index', 2);
+            $("#seaf1").css('display','none');
+            $("#seaf2").css('display','none');
+            $("#seaf3").css('display','none');
+            $("#seaf4").css('display','block');
+            /*$("#seaf3").css('z-index', 2);
             $("#seaf4").css('z-index', 1);
             $("#seaf4").transition({ x: 0 });
-            $("#seaf3").transition({ x: $(window).width() });
+            $("#seaf3").transition({ x: $(window).width() });*/
 
           } else if($(this).attr('id').indexOf('seaf4') > -1) {
 
