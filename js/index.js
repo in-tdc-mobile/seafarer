@@ -241,8 +241,7 @@ function login_success() {
     $('#hamburger-btn').show();
     $('#index_content').show();
     show_plan_details();
-    show_training_details();
-    openpositions();
+    
     // show_flight_details();
     // allotment_details();
     // correspondance();
@@ -312,14 +311,15 @@ function update_profile() {
     });
 
     $('#update_profile').hide();
-    show_plan_details();
+    showdashbord();
     
     $('#tile_icons').show();
 }
 
+
 function show_plan_details() {
     hide_all();
-    var src = 'img/container_ship_demo.jpg';
+    var vessel_typ_img = 'img/ships/container.jpg';
     var cscemail=null;
     $('#index_content').show();
     $('#tile_icons').show();
@@ -354,7 +354,17 @@ function show_plan_details() {
                     port = data['port'];
                 }
                 if(vessel_type.toUpperCase().indexOf('OIL') > -1) {
-                    src = 'img/oil_tanker_demo.jpg';
+                    vessel_typ_img = 'img/ships/oil.jpg';
+                } else if(vessel_type.toUpperCase().indexOf('GAS') > -1) {
+                    vessel_typ_img = 'img/ships/gastak.jpg';
+                } else if(vessel_type.toUpperCase().indexOf('BULK') > -1) {
+                    vessel_typ_img = 'img/ships/bulk.jpg';
+                } else if(vessel_type.toUpperCase().indexOf('CHEMICAL') > -1) {
+                    vessel_typ_img = 'img/ships/chemical.jpg';
+                } else if(vessel_type.toUpperCase().indexOf('RO RO') > -1) {
+                    vessel_typ_img = 'img/ships/roro.jpg';
+                } else if(vessel_type.toUpperCase().indexOf('SHORE') > -1) {
+                    vessel_typ_img = 'img/ships/offshore.jpg';
                 }
                 cscemail = data['csc_email'];
                 results_array.push('<div id="plan_details_header"  class="head_common">');
@@ -362,10 +372,11 @@ function show_plan_details() {
                 results_array.push('<span class="header_text" class="header"><span class="icon-boat"></span> ' + data['vessel_name'] + '(' + data['flag_name'] + ')</span>');
                 // results_array.push('<div id="plan_details_header_menu"><span id="hamburger-btn" class="hamburger icon-list"></span></div>')
                 results_array.push('</div>');
-                results_array.push('<div class="ship_image">');
 
-                results_array.push("<img src="+src+" style='width:100%; height:150px;'>");
+                results_array.push('<div class="ship_image">');
+                results_array.push("<img src="+vessel_typ_img+" style='width:100%; height:150px;'>");
                 results_array.push('</div>');
+
                 results_array.push('<div class="footer">');
                 // results_array.push("<span> Vessel : "+data['vessel_name']+"</span><br/>");
                 // results_array.push("<span> Flag : "++"</span><br/>");
@@ -379,6 +390,8 @@ function show_plan_details() {
                 results_array.push('</div>');
                 //data['phone1'];
                 //data['phone2'];
+                show_training_details();
+                openpositions(vessel_typ_img);
 
             } else {
                 results_array.push('<div style="margin-top: 100px;font-size: large;">No Plan Available for You.. Please Swipe screen for more details</div>')
@@ -397,7 +410,9 @@ function show_plan_details() {
             menuBtn.addEventListener('click', showSidemenu, false);
             contentlayer.addEventListener('click', showSidemenu, false);
         }
+        
     });
+
 }
 
 
@@ -445,8 +460,13 @@ function show_training_details() {
 
 var temp;
 
-function openpositions(){
+function openpositions(vessel_typ_img){
     var url = prefilurl+"get_sf_open_positions.php?empid="+$.jStorage.get("empid");
+    
+    var tr_img_array = new Array(); 
+    tr_img_array.push("<img src="+vessel_typ_img+" style='width:100%; height:150px;'>");
+    $('.opn_pos_img').html(tr_img_array.join(""));
+
     var opening_res_array = new Array(); 
     console.log(url);
     var req = $.ajax({
@@ -750,11 +770,10 @@ function savedoa() {
 }
 
 function showdashbord() {
-    $("#index_content").show();
     /*    $('#show_plan_details').show();
     $('#show_training_details').show();   
     $('#show_flight_details').show();*/
-    show_plan_details();
+
     //show_training_details();
     $("#index_content").show();
     $('#tile_icons').show();

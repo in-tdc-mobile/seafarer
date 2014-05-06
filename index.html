@@ -60,6 +60,7 @@
       $("#seaf4").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
       //Swipe handlers.
       function swipe1(event, direction) {
+
         if (direction == 'left') {
 
           if($(this).attr('id').indexOf('seaf1') > -1) {
@@ -104,7 +105,7 @@
             $("#seaf2").transition({ x: $(window).width() });
 
           } else if($(this).attr('id').indexOf('seaf3') > -1) {
-
+ $("#seaf1").scrollTop( );
             $("#seaf3").css('z-index', 2);
             $("#seaf4").css('z-index', 1);
             $("#seaf4").transition({ x: 0 });
@@ -171,7 +172,8 @@
       seafarer 4<br>
       seafarer 4<br>
       seafarer 4<br>
-      seafarer 4<br>seafarer 4<br>
+      seafarer 4<br>
+      seafarer 4<br>
       seafarer 4<br>
       seafarer 4<br>
       seafarer 4<br>
@@ -185,8 +187,7 @@
             <div class="header_white"></div>
             <span class="header_text" class="header">Open Positions</span>
           </div>
-          <div class="ship_image">
-            <img src='img/container_ship_demo.jpg' style='width:100%; height:150px;'>
+          <div class="opn_pos_img">
           </div>
           <div class="footer-training">
             <div class="footer-training-spacing"></div>
@@ -204,7 +205,7 @@
             <div class="header_white"></div>
             <span class="header_text" class="header">Training Details</span>
           </div>
-          <div class="ship_image">
+          <div class="training_image">
             <img src='img/container_ship_demo.jpg' style='width:100%; height:150px; '>
           </div>
           <div class="footer-training">
