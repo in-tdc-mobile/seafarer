@@ -605,13 +605,13 @@ body{
 .header_white{
   background-color: white;
   opacity: .5;
-  height: 50px;
+  height: 45px;
 }
 
 .header_text{
   font-size: 20px;
   position: relative;
-  top: -40px;
+  top: -34px;
   margin-left: 5px;
 }
 
@@ -765,7 +765,7 @@ input::-webkit-calendar-picker-indicator,
 }
 
 .head_common {
-  height :50px;
+  height :45px;
 }
 
 .arrow_div_training{
