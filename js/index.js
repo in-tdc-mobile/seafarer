@@ -244,7 +244,9 @@ function login_success() {
     $('#shore').show();
     $('#you').hide();
     show_plan_details();
-    
+    show_training_details();
+    openpositions();
+    doadetails();
     // show_flight_details();
     // allotment_details();
     // correspondance();
@@ -399,9 +401,7 @@ function show_plan_details() {
                 results_array.push('</div>');
                 //data['phone1'];
                 //data['phone2'];
-                show_training_details();
-                openpositions();
-                doadetails();
+                
 
             } else {
                 results_array.push('<div style="margin-top: 100px;font-size: large;">No Plan Available for You.. Please Swipe screen for more details</div>')
