@@ -240,6 +240,9 @@ function login_success() {
     $(".login").hide();
     $('#hamburger-btn').show();
     $('#index_content').show();
+    $('#sea').hide();
+    $('#shore').show();
+    $('#you').hide();
     show_plan_details();
     
     // show_flight_details();
@@ -392,6 +395,7 @@ function show_plan_details() {
                 //data['phone2'];
                 show_training_details();
                 openpositions(vessel_typ_img);
+                doadetails();
 
             } else {
                 results_array.push('<div style="margin-top: 100px;font-size: large;">No Plan Available for You.. Please Swipe screen for more details</div>')
@@ -565,9 +569,9 @@ function show_flight_details() {
 }
 
 function allotment_details() {
-    $("#index_content").hide();
-    $('#tile_icons').hide();
-    $('#allotment_details').show(); 
+    /*$("#index_content").hide();
+    $('#tile_icons').hide();*/
+    /*$('#allotment_details').show(); */
     var url = prefilurl+"get_sf_allotment_details.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
     console.log(url);
@@ -662,8 +666,8 @@ function correspondance(){
 }
 
 function doadetails(){
-    $("#index_content").hide();
-    $('#tile_icons').hide();
+    /*$("#index_content").hide();
+    $('#tile_icons').hide();*/
     $('#adddoa').hide();
     $('#doa_content').show(); 
     var url = prefilurl+"get_sf_doa_details.php?empid="+$.jStorage.get("empid");
@@ -737,7 +741,7 @@ function savedoa() {
     var url = prefilurl+"sf_save_doa.php?";
     var remark = $("#coaremark").val();
     var doadate = $("#doadate").val();
-    var emp_id = $.jStorage.get("empid");alert(doadate);
+    var emp_id = $.jStorage.get("empid");
     var form_data= {
         'empid': emp_id,
         'remark': remark,
@@ -754,7 +758,7 @@ function savedoa() {
         success : function(data) {
             if(data == 'Sucess') {
                 showdashbord();
-                $('#doa_content').hide();
+                doadetails();
             } else {
                 alert("Issue in adding doa, please try again");
             }
@@ -818,9 +822,8 @@ function correspondancesend() {
 }
 
 function documentdetails(){
-    $("#index_content").hide();
-    $('#tile_icons').hide();
     $('#document_details').show(); 
+    $("#index_content").hide();
     var url = prefilurl+"get_sf_expiry_docs.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
     console.log(url);
@@ -970,7 +973,7 @@ function hide_all() {
     $('#show_flight_details').hide();
     $('#update_profile').hide();
     /*$('#tile_icons').hide();*/
-    $('#allotment_details').hide();
+    //$('#allotment_details').hide();
     // $('#openpositions_content').hide();
     $('#doa_content').hide();
     $('#document_details').hide(); 
@@ -981,4 +984,23 @@ function hide_all() {
 window.onerror = function(msg, url, linenumber) {
     alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
     return true;
+}
+
+function sea() {
+    $('#sea').show();
+    $('#shore').hide();
+    $('#you').hide();
+    allotment_details();
+}
+
+function shore() {
+    $('#sea').hide();
+    $('#shore').show();
+    $('#you').hide();
+}
+
+function you() {
+    $('#sea').hide();
+    $('#shore').hide();
+    $('#you').show();
 }

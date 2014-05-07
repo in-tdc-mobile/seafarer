@@ -5,7 +5,7 @@
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="CWA Mobile">
+  <meta name="apple-mobile-web-app-title" content="BSMSeafarer">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title></title>
 
@@ -177,74 +177,89 @@
     </div>
     
     <div id="index_content">
-      
-      
-      
-      <div id="seaf4" class="scene one">
-      seafarer 4<br>
-      seafarer 4<br>
-      seafarer 4<br>
-      seafarer 4<br>
-      seafarer 4<br>
-      seafarer 4<br>
-      seafarer 4<br>
-      seafarer 4<br>
-      seafarer 4<br>
-      seafarer 4<br>
-      seafarer 4<br>
-      seafarer 4<br>
-      seafarer 4<br>
-      seafarer 4<br>
+    <div class="topcoat-button-bar" style="width: 100%;">
+      <div class="topcoat-button-bar__item">
+        <button class="topcoat-button-bar__button" style="width: 100%;" onclick='sea()'>Sea</button>
       </div>
-      <div id="seaf3" class="scene one">
-        <div id="openpositions_content">
-          <div class="head_common">
-            <div class="header_white"></div>
-            <span class="header_text" class="header">Open Positions</span>
-          </div>
-          <div class="opn_pos_img">
-          </div>
-          <div class="footer-training">
-            <div class="footer-training-spacing"></div>
-            <div class="footer-training-content-s croller">
-              
-              <div id="foot_opening" class="footer-training-content">
+      <div class="topcoat-button-bar__item">
+        <button class="topcoat-button-bar__button" style="width: 100%;" onclick='shore()'>Shore</button>
+      </div>
+      <div class="topcoat-button-bar__item">
+        <button class="topcoat-button-bar__button" style="width: 100%;" onclick='you()'>You</button>
+      </div>
+    </div>
+      <div id="sea">
+        <div id="seaf6" class="scene one">
+          <div id="allotment_details"></div>
+        </div>
+      </div>
+      <div id="shore">
+        <div id="seaf4" class="scene one">
+          <div id="doa_content"></div>
+        </div>
+        <div id="seaf3" class="scene one">
+          <div id="openpositions_content">
+            <div class="head_common">
+              <div class="header_white"></div>
+              <span class="header_text" class="header">Open Positions</span>
+            </div>
+            <div class="opn_pos_img">
+            </div>
+            <div class="footer-training">
+              <div class="footer-training-spacing"></div>
+              <div class="footer-training-content-s croller">
+                
+                <div id="foot_opening" class="footer-training-content">
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div id="seaf2" class="scene one">
-        <div id="show_training_details">
-          <div class="head_common">
-            <div class="header_white"></div>
-            <span class="header_text" class="header">Training Details</span>
-          </div>
-          <div class="training_image">
-            <img src='img/simulator.gif' style='width:100%; height:150px; '>
-          </div>
-          <div class="footer-training">
-            <div class="footer-training-spacing"></div>
-            <div class="footer-training-content-s croller">
-              <div id="foot_training" class="footer-training-content">
+        <div id="seaf2" class="scene one">
+          <div id="show_training_details">
+            <div class="head_common">
+              <div class="header_white"></div>
+              <span class="header_text" class="header">Training Details</span>
+            </div>
+            <div class="training_image">
+              <img src='img/simulator.gif' style='width:100%; height:150px; '>
+            </div>
+            <div class="footer-training">
+              <div class="footer-training-spacing"></div>
+              <div class="footer-training-content-s croller">
+                <div id="foot_training" class="footer-training-content">
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <div id="seaf1" class="scene one active">
+          <div>
+            <div id="show_plan_details"></div>
+          </div>
+        </div>
       </div>
-      <div id="seaf1" class="scene one active">
-        <div>
-          <div id="show_plan_details"></div>
+      <div id="you">
+        <div id="youbtns">
+          <button class="btns" >Expiry Documents</button>
+          <br>
+          <button class="btns" >Correspondance</button>
+          <br>
+          <button class="btns" >Update Contact</button>
+          <br>
+          <button class="btns" >Contact Us</button>
+          <br>
+          <button class="btns" >Log out</button>
         </div>
       </div>
     </div>
     
     <div id="correspondance_content" style="display: block;"></div>
-    <div id="doa_content"></div>
+    <div id="document_details"></div>
     <div id="show_flight_details"></div>
     <div id="update_profile"></div>
-    <div id="allotment_details"></div>
-    <div id="document_details"></div>
+    
+    
     <div id='view_title'></div>
     <div class='spinner_index'>
       <img src="img/spinner.gif" width="20px" height="20px" style="display:block;margin:auto;"/>

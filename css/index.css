@@ -825,5 +825,47 @@ div.scene.active {
   z-index: 10;*/
 }
 
+.btns {
+  width: 100%;
+  background: #b0b0b0;
+  background-image: -webkit-linear-gradient(top, #b0b0b0, #CCCCCC);
+  background-image: -moz-linear-gradient(top, #b0b0b0, #CCCCCC);
+  background-image: -ms-linear-gradient(top, #b0b0b0, #CCCCCC);
+  background-image: -o-linear-gradient(top, #b0b0b0, #CCCCCC);
+  background-image: linear-gradient(to bottom, #b0b0b0, #CCCCCC);
+  -webkit-border-radius: 3;
+  -moz-border-radius: 3;
+  border-radius: 3px;
+  text-shadow: 1px 1px 3px #666666;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  border-style: none;
+}
 
+.btns:hover {
+  background: #CCCCCC;
+  background-image: -webkit-linear-gradient(top, #CCCCCC, #b0b0b0);
+  background-image: -moz-linear-gradient(top, #CCCCCC, #b0b0b0);
+  background-image: -ms-linear-gradient(top, #CCCCCC, #b0b0b0);
+  background-image: -o-linear-gradient(top, #CCCCCC, #b0b0b0);
+  background-image: linear-gradient(to bottom, #CCCCCC, #b0b0b0);
+  text-decoration: none;
+  border-style: none;
+}
+
+#you {
+  display: block;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+#youbtns {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
 
