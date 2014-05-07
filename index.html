@@ -57,6 +57,10 @@
         if (direction == 'left') {
 
           if($(this).attr('id').indexOf('seaf1') > -1) {
+            $("#seaf1").css('display','none');
+            $("#seaf2").css('display','none');
+            $("#seaf3").css('display','none');
+            $("#seaf4").css('display','block');
             
           } else if($(this).attr('id').indexOf('seaf2') > -1) {
             $("#seaf1").css('display','block');
@@ -127,7 +131,10 @@
             $("#seaf3").transition({ x: $(window).width() });*/
 
           } else if($(this).attr('id').indexOf('seaf4') > -1) {
-
+            $("#seaf1").css('display','block');
+            $("#seaf2").css('display','none');
+            $("#seaf3").css('display','none');
+            $("#seaf4").css('display','none');
           }
         }
       }
@@ -135,21 +142,6 @@
   </script>
 </head>
 <body class="light">
-  <div id="sidemenu" style="display:none">
-    <nav class="mobileNav">
-      <ul>
-          <li><a href="#plan"><div>Home</div></a></li>
-          <li><a href="#flight"><div>Flight</div></a></li>
-          <li><a href="#allotment"><div>Allotment</div></a></li>
-          <li><a href="#doa"><div>DoA</div></a></li>
-          <li><a href="#correspondance"><div>Correspondance</div></a></li>
-          <li><a href="#document_details"><div>Expiry Documents</div></a></li>
-          <li><a href="#updatecontact"><div>Update Contact</div></a></li>
-          <li><a href="mailto:in-tdc-mobile@bs-shipmanagement.com"><div>Contact Us</div></a></li>
-          <li><a href="#logout"><div>Log Out</div></a></li>
-      </ul>
-    </nav>
-  </div>
 
   <div id="container" class='smooth full-height'>
   <!-- <div id="hamburger-btn"><span class="hamburger icon-list"></span></div> -->

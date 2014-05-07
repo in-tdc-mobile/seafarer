@@ -655,16 +655,13 @@ body{
   z-index: 1000;
 }
 
-#back-btn{
+.back-btn{
   height: 38px;
   width: 38px;
   position: absolute;
   top: 6px;
   font-size: 25px;
   right: 15px;
-  background-color: rgb(60, 36, 102);
-  background-image: url(images/Arrows-Back.ico);
-  color: white;
   -webkit-border-radius: 20px 20px 20px 20px;
   border-radius: 20px 20px 20px 20px;
   border: 1px solid;

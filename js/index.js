@@ -273,6 +273,7 @@ function update_profile_page() {
     $('#tile_icons').hide();
     $('#update_profile').show(); 
     var results_array = new Array(); 
+    results_array.push('<button onclick="youback()" class="back-btn"><img src="img/arrow-back.png"></button>');
     results_array.push('<div id="plan_details_header"  class="head_common">');
     results_array.push('<div class="header_white"></div>');
     results_array.push('<span class="header_text" class="header">Update Contact Details</span>');
@@ -528,11 +529,10 @@ function openpositions(){
 function show_flight_details() {
 
     $("#index_content").hide();
-    $('#tile_icons').hide();
     $('#show_flight_details').show(); 
     var url = prefilurl+"get_sf_flight_details.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
-
+    results_array.push('<button onclick="shoreback()" class="back-btn"><img src="img/arrow-back.png"></button>');
     results_array.push('<div id="plan_details_header"  class="head_common">');
     results_array.push('<div class="header_white"></div>');
     results_array.push('<span class="header_text" class="header">Flight Details</span>');
@@ -666,6 +666,7 @@ function correspondance(){
     $("#index_content").hide();
     $('#correspondance_content').show(); 
     var results_array = new Array(); 
+    results_array.push('<button onclick="youback()" class="back-btn"><img src="img/arrow-back.png"></button>');
     results_array.push('<div id="plan_details_header"  class="head_common">');
     results_array.push('<div class="header_white"></div>');
     results_array.push('<span class="header_text" class="header">Correspondance</span>');
@@ -850,7 +851,7 @@ function documentdetails(){
 
         success : function(data) { 
             var d = new Date();
-
+            results_array.push('<button onclick="youback()" class="back-btn"><img src="img/arrow-back.png"></button>');
             results_array.push('<div id="plan_details_header"  class="head_common">');
             results_array.push('<div class="header_white"></div>');
             results_array.push('<span class="header_text" class="header">Expiry Documents</span>');
@@ -884,6 +885,18 @@ function documentdetails(){
             hide_spinner();
         }
     });
+}
+
+function youback() {
+    $('#document_details').hide(); 
+    $('#correspondance_content').hide(); 
+    $('#update_profile').hide(); 
+    $("#index_content").show();
+}
+
+function shoreback(){
+    $('#show_flight_details').hide(); 
+    $("#index_content").show();
 }
 
 
@@ -947,7 +960,7 @@ function bottm_buttons(results_array) {
     results_array.push('<a class="footer-button" href="#flight">');
     results_array.push('<span class="icon-airplane button-icon"></span>');
     results_array.push('</a>');
-    results_array.push('<a class="footer-button" onclick="#correspondance">');
+    results_array.push('<a class="footer-button" href="#correspondance">');
     results_array.push('<span class="icon-chat button-icon"></span>');
     results_array.push('</a>');
     results_array.push('<a id="cscemail" href="http://www.bs-shipmanagement.com">');
@@ -980,7 +993,7 @@ function hide_all() {
     $('#index_content').hide();
     $('#correspondance_content').hide();
     $('#ajax_error').hide();
-    $('#view_title').hide();
+    // $('#view_title').hide();
     //$('#show_plan_details').hide();
     //$('#show_training_details').hide();   
     $('#show_flight_details').hide();
@@ -988,7 +1001,7 @@ function hide_all() {
     /*$('#tile_icons').hide();*/
     //$('#allotment_details').hide();
     // $('#openpositions_content').hide();
-    $('#doa_content').hide();
+    //$('#doa_content').hide();
     $('#document_details').hide(); 
     $('body').scrollTop(0);
 
@@ -1010,10 +1023,18 @@ function shore() {
     $('#sea').hide();
     $('#shore').show();
     $('#you').hide();
+    shoreinitial();
 }
 
 function you() {
     $('#sea').hide();
     $('#shore').hide();
     $('#you').show();
+}
+
+function shoreinitial(){
+    $("#seaf1").show();
+    $("#seaf2").hide();
+    $("#seaf3").hide();
+    $("#seaf4").hide();
 }
