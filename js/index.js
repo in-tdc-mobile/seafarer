@@ -771,7 +771,7 @@ function savedoa() {
 
         success : function(data) {
             if(data == 'Sucess') {
-                showdashbord();
+                //showdashbord();
                 doadetails();
             } else {
                 alert("Issue in adding doa, please try again");
