@@ -319,10 +319,27 @@ function update_profile() {
     $('#tile_icons').show();
 }
 
+function vessel_type_pic(vessel_type) {
+    var vessel_typ_img = 'img/ships/container.jpg';
+    if(vessel_type.toUpperCase().indexOf('OIL') > -1) {
+        vessel_typ_img = 'img/ships/oil.jpg';
+    } else if(vessel_type.toUpperCase().indexOf('GAS') > -1) {
+        vessel_typ_img = 'img/ships/gastak.jpg';
+    } else if(vessel_type.toUpperCase().indexOf('BULK') > -1) {
+        vessel_typ_img = 'img/ships/bulk.jpg';
+    } else if(vessel_type.toUpperCase().indexOf('CHEMICAL') > -1) {
+        vessel_typ_img = 'img/ships/chemical.jpg';
+    } else if(vessel_type.toUpperCase().indexOf('RO RO') > -1) {
+        vessel_typ_img = 'img/ships/roro.jpg';
+    } else if(vessel_type.toUpperCase().indexOf('SHORE') > -1) {
+        vessel_typ_img = 'img/ships/offshore.jpg';
+    }
+    return vessel_typ_img;
+}
 
 function show_plan_details() {
     hide_all();
-    var vessel_typ_img = 'img/ships/container.jpg';
+    
     var cscemail=null;
     $('#index_content').show();
     $('#tile_icons').show();
@@ -342,7 +359,7 @@ function show_plan_details() {
             if(data != null) {
                 var flickerplace="";
                 var port="";
-                var vessel_type = data['vessel_type'];
+                var vessel_type = vessel_type_pic(data['vessel_type']);
                 if(data['port'] == null) {
                     if(data['flag_name'] == null) {
                         flickerplace = data['vessel_type']+',ship,vessel,sea';
@@ -356,19 +373,7 @@ function show_plan_details() {
                     flickerplace = data['port'];
                     port = data['port'];
                 }
-                if(vessel_type.toUpperCase().indexOf('OIL') > -1) {
-                    vessel_typ_img = 'img/ships/oil.jpg';
-                } else if(vessel_type.toUpperCase().indexOf('GAS') > -1) {
-                    vessel_typ_img = 'img/ships/gastak.jpg';
-                } else if(vessel_type.toUpperCase().indexOf('BULK') > -1) {
-                    vessel_typ_img = 'img/ships/bulk.jpg';
-                } else if(vessel_type.toUpperCase().indexOf('CHEMICAL') > -1) {
-                    vessel_typ_img = 'img/ships/chemical.jpg';
-                } else if(vessel_type.toUpperCase().indexOf('RO RO') > -1) {
-                    vessel_typ_img = 'img/ships/roro.jpg';
-                } else if(vessel_type.toUpperCase().indexOf('SHORE') > -1) {
-                    vessel_typ_img = 'img/ships/offshore.jpg';
-                }
+                
                 cscemail = data['csc_email'];
                 results_array.push('<div id="plan_details_header"  class="head_common">');
                 results_array.push('<div class="header_white"></div>');
@@ -377,7 +382,7 @@ function show_plan_details() {
                 results_array.push('</div>');
 
                 results_array.push('<div class="ship_image">');
-                results_array.push("<img src="+vessel_typ_img+" style='width:100%; height:150px;'>");
+                results_array.push("<img src="+vessel_type+" style='width:100%; height:150px;'>");
                 results_array.push('</div>');
 
                 results_array.push('<div class="footer">');
@@ -394,7 +399,7 @@ function show_plan_details() {
                 //data['phone1'];
                 //data['phone2'];
                 show_training_details();
-                openpositions(vessel_typ_img);
+                openpositions();
                 doadetails();
 
             } else {
@@ -464,11 +469,11 @@ function show_training_details() {
 
 var temp;
 
-function openpositions(vessel_typ_img){
+function openpositions(){
     var url = prefilurl+"get_sf_open_positions.php?empid="+$.jStorage.get("empid");
     
     var tr_img_array = new Array(); 
-    tr_img_array.push("<img src="+vessel_typ_img+" style='width:100%; height:150px;'>");
+    tr_img_array.push("<img src='img/openpositions.jpg' style='width:100%; height:150px;'>");
     $('.opn_pos_img').html(tr_img_array.join(""));
 
     var opening_res_array = new Array(); 
@@ -487,23 +492,29 @@ function openpositions(vessel_typ_img){
                 if(i>0)  {
                     opening_res_array.push("<hr>");
                 }
-                opening_res_array.push("<span> Vessel : "+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span>");
+                var vessel_type = data[i]['vessel_type'];
+                opening_res_array.push("<div' class='openpositionbox'>");
+                opening_res_array.push("<div' class='openpositionchild1'>");
+                opening_res_array.push("<img src="+vessel_type_pic(vessel_type)+" style='width:75px; height:75px;'>");
+                opening_res_array.push("</div'>");
+                opening_res_array.push("<div>");
+                opening_res_array.push("<span>"+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span>");
                 if(data[i]['vessel_type']!=null)
-                    opening_res_array.push("<br/><span> Vessel Type : "+data[i]['vessel_type']+"</span>");
+                    opening_res_array.push("<br/><span>"+vessel_type+"</span>");
                 if(data[i]['from_date']!=null)
-                    opening_res_array.push("<br/> <span> Date : "+new String(data[i]['from_date']).split("T")[0 ]+"</span>");
+                    opening_res_array.push("<br/> <span>"+new String(data[i]['from_date']).split("T")[0 ]+"</span>");
                 if(data[i]['rank_name']!=null)
-                    opening_res_array.push("<br/><span> Rank : "+data[i]['rank_name']+"</span>");
+                    opening_res_array.push("<br/><span>"+data[i]['rank_name']+"</span>");
                 if(data[i]['sdc']!=null)
-                    opening_res_array.push("<br/><span> Manager : "+data[i]['sdc']+"</span><br/>");
-
+                    opening_res_array.push("<br/><span>"+data[i]['sdc']+"</span><br/>");
+                opening_res_array.push("</div>");
+                opening_res_array.push("</div>");
             }
         } else {
             opening_res_array.push("<span> No Open positions available </span><br/>");
         }
         hide_spinner();
         $('#foot_opening').html(opening_res_array.join(""));
-
     },
     error: function (request, status, error) {
         opening_res_array.push("<span> No data to display </span><br/>");
