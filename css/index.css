@@ -760,6 +760,10 @@ input::-webkit-calendar-picker-indicator,
   height: 100%;
 }
 
+.head_common_pic {
+  height :0px;
+}
+
 .head_common {
   height :50px;
 }

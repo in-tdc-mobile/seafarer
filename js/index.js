@@ -378,7 +378,7 @@ function show_plan_details() {
                 }
                 
                 cscemail = data['csc_email'];
-                results_array.push('<div id="plan_details_header"  class="head_common">');
+                results_array.push('<div id="plan_details_header"  class="head_common_pic">');
                 results_array.push('<div class="header_white"></div>');
                 results_array.push('<span class="header_text" class="header"><span class="icon-boat"></span> ' + data['vessel_name'] + '(' + data['flag_name'] + ')</span>');
                 // results_array.push('<div id="plan_details_header_menu"><span id="hamburger-btn" class="hamburger icon-list"></span></div>')
