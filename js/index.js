@@ -272,7 +272,7 @@ var d;
 
 function update_profile_page() {
     $('#index_content').hide();
-    $('#tile_icons').hide();
+    /*$('#tile_icons').hide();*/
     $('#update_profile').show(); 
     var results_array = new Array(); 
     results_array.push('<button onclick="youback()" class="back-btn"><img src="img/arrow-back.png"></button>');
