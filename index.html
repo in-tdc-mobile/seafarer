@@ -152,8 +152,8 @@
   </div>
 
   <div id="container" class='smooth full-height'>
-  <div id="hamburger-btn"><span class="hamburger icon-list"></span></div>
-  <div id="bg" class="content on-top"></div>
+  <!-- <div id="hamburger-btn"><span class="hamburger icon-list"></span></div> -->
+  <!-- <div id="bg" class="content on-top"></div> -->
   <div id="contentLayer"></div>
   <div id="content" class='content on-top scroller' style="height:100%">
     <div class='error' id='ajax_error' style="display: none;margin: 0px;font-style: italic;font-size: 14px;color: rgb(146,146,146);padding: 20px;"> 
@@ -241,15 +241,15 @@
       </div>
       <div id="you">
         <div id="youbtns">
-          <button class="btns" >Expiry Documents</button>
+          <a class="btns" onclick="documentdetails()">Expiry Documents</a>
           <br>
-          <button class="btns" >Correspondance</button>
+          <a class="btns" onclick="correspondance()">Correspondance</a>
           <br>
-          <button class="btns" >Update Contact</button>
+          <a class="btns" onclick="update_profile_page()">Update Contact</a>
           <br>
-          <button class="btns" >Contact Us</button>
+          <a class="btns" href="mailto:in-tdc-mobile@bs-shipmanagement.com">Contact Us</a>
           <br>
-          <button class="btns" >Log out</button>
+          <a class="btns" >Log out</a>
         </div>
       </div>
     </div>
@@ -258,8 +258,6 @@
     <div id="document_details"></div>
     <div id="show_flight_details"></div>
     <div id="update_profile"></div>
-    
-    
     <div id='view_title'></div>
     <div class='spinner_index'>
       <img src="img/spinner.gif" width="20px" height="20px" style="display:block;margin:auto;"/>

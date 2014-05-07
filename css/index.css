@@ -655,6 +655,22 @@ body{
   z-index: 1000;
 }
 
+#back-btn{
+  height: 38px;
+  width: 38px;
+  position: absolute;
+  top: 6px;
+  font-size: 25px;
+  right: 15px;
+  background-color: rgb(60, 36, 102);
+  background-image: url(images/Arrows-Back.ico);
+  color: white;
+  -webkit-border-radius: 20px 20px 20px 20px;
+  border-radius: 20px 20px 20px 20px;
+  border: 1px solid;
+  z-index: 1000;
+}
+
 .footer-button{
   height: 30px;
   width: 30px;
@@ -826,6 +842,7 @@ div.scene.active {
 }
 
 .btns {
+  display: inline-block;
   width: 100%;
   background: #b0b0b0;
   background-image: -webkit-linear-gradient(top, #b0b0b0, #CCCCCC);
@@ -846,6 +863,7 @@ div.scene.active {
 }
 
 .btns:hover {
+  display: inline-block;
   background: #CCCCCC;
   background-image: -webkit-linear-gradient(top, #CCCCCC, #b0b0b0);
   background-image: -moz-linear-gradient(top, #CCCCCC, #b0b0b0);

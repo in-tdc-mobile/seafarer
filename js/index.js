@@ -141,7 +141,7 @@ function route(event) {
     } else if (hash === "#document_details") {
         hide_all();
         documentdetails();
-    }
+    } 
     else {
         // page = show_owners();
     }
@@ -406,13 +406,13 @@ function show_plan_details() {
             }
             hide_spinner();
 
-            menuBtn = document.querySelector('#hamburger-btn');
+           /* menuBtn = document.querySelector('#hamburger-btn');
             container = document.querySelector('#container');
             slidemenu = document.querySelector('#sidemenu');
             content = document.querySelector('#content');
             contentlayer = document.querySelector('#contentLayer');
             menuBtn.addEventListener('click', showSidemenu, false);
-            contentlayer.addEventListener('click', showSidemenu, false);
+            contentlayer.addEventListener('click', showSidemenu, false);*/
         }
         
     });
@@ -515,11 +515,13 @@ function openpositions(vessel_typ_img){
 }
 
 function show_flight_details() {
+
     $("#index_content").hide();
     $('#tile_icons').hide();
     $('#show_flight_details').show(); 
     var url = prefilurl+"get_sf_flight_details.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
+
     results_array.push('<div id="plan_details_header"  class="head_common">');
     results_array.push('<div class="header_white"></div>');
     results_array.push('<span class="header_text" class="header">Flight Details</span>');
@@ -931,12 +933,12 @@ function bottm_buttons(results_array) {
     $('#tile_icons').show();
     results_array.push('<hr>');
     results_array.push('<div id="tile_icons">');
-    results_array.push('<div class="footer-button" onclick="show_flight_details()">');
+    results_array.push('<a class="footer-button" href="#flight">');
     results_array.push('<span class="icon-airplane button-icon"></span>');
-    results_array.push('</div>');
-    results_array.push('<div class="footer-button" onclick="correspondance()">');
+    results_array.push('</a>');
+    results_array.push('<a class="footer-button" onclick="#correspondance">');
     results_array.push('<span class="icon-chat button-icon"></span>');
-    results_array.push('</div>');
+    results_array.push('</a>');
     results_array.push('<a id="cscemail" href="http://www.bs-shipmanagement.com">');
     results_array.push('<div class="footer-button"><span class="icon-email2 button-icon"></span></div>');
     results_array.push('</a>');
