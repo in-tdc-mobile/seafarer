@@ -734,6 +734,7 @@ function doaAdd() {
     var doa_array = new Array(); 
     $('#adddoa').show();
 
+    doa_array.push('<button onclick="doadetails()" class="back-btn"><img src="img/arrow-back.png"></button>');
     doa_array.push('<div class="adddoa">');
     doa_array.push('<div id="plan_details_header"  class="head_common">');
     doa_array.push('<div class="header_white"></div>');
