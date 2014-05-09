@@ -950,9 +950,81 @@ function flickercall(tagparam, bgshow) {
         //     // bgshow.css("background-size", "100% 100% ");//no-repeat
 
         // });
-});
+    });
 
 }
+
+function alerts() {
+    getplanalerts();
+}
+
+function getplanalerts() {
+    var url = prefilurl+"get_sf_alert_plan.php?empid="+$.jStorage.get("empid");
+    var alerts_array = new Array(); 
+    alerts_array.push('<button onclick="you()" class="back-btn"><img src="img/arrow-back.png"></button>');
+    alerts_array.push('<div id="plan_details_header"  class="head_common">');
+    alerts_array.push('<div class="header_white"></div>');
+    alerts_array.push('<span class="header_text" class="header">Alerts</span>');
+    alerts_array.push('</div>');
+    var alertcount = 0;
+    console.log(url);
+    var req = $.ajax({
+        url: url,
+        datatype: 'text',
+        beforeSend: function() {
+            show_spinner();
+        },
+
+        success : function(data) {
+            var d = new Date();
+            alerts_array.push('<div class = "hambrgrdetails">');
+            if(data[0] != null) {
+                for (var i = 0; i < data.length; i++) {
+                    alertcount++;
+                    if(data[i]['status'] == 'I') {
+                        alerts_array.push("New Plan is Added.<br>");
+                    } else if(data[i]['status'] == 'U'){
+                        alerts_array.push("There is a change in Plan, please check your ");
+                        if (data[i]['changes'].indexOf('A')>-1){
+                            alerts_array.push("Vessel, ");
+                        }
+                        if (data[i]['changes'].indexOf('B')>-1){
+                            alerts_array.push("Vessel Type, ");
+                        }
+                        if (data[i]['changes'].indexOf('C')>-1){
+                            alerts_array.push("Manager, ");
+                        }
+                        if (data[i]['changes'].indexOf('D')>-1){
+                            alerts_array.push("Date, ");
+                        }
+                        if (data[i]['changes'].indexOf('E')>-1){
+                            alerts_array.push("Port, ");
+                        }
+                        if (data[i]['changes'].indexOf('F')>-1){
+                            alerts_array.push("Flag");
+                        }
+                        
+                    }
+                    
+                }
+            }
+            hide_spinner();
+            alerts_array.push('</div>');
+            $('#alrtnum').html("("+alertcount+")");
+            $('#alert_content').html(alerts_array.join(""));
+        },
+        error: function (request, status, error) {
+            //$('#doa_content').html(results_array.join(""));
+            hide_spinner();
+        }
+    });
+}
+
+function alertdetails() {
+    $("#alert_content").show();
+    $("#index_content").hide();
+}
+
 function bottm_buttons(results_array) {
     // <span class="icon-boat"></span>
     $('#tile_icons').show();
@@ -970,13 +1042,14 @@ function bottm_buttons(results_array) {
     results_array.push('<div class="footer-button">');
     results_array.push('<span class="icon-phone button-icon"></span>');
     results_array.push('</div>');
+
 }
 
 function hide_all() {
     // if($("#contentLayer:visible").length>0){
     //     $('#contentLayer').trigger('click');
     // }
-    if($("#container").hasClass( "opened" )){
+/*    if($("#container").hasClass( "opened" )) {
         var container = document.querySelector('#container');
         var slidemenu = document.querySelector('#sidemenu');
         var content = document.querySelector('#content');
@@ -986,10 +1059,10 @@ function hide_all() {
         slidemenu.classList.toggle('sidemenu--opened');
         content.style.height = "auto";
         contentlayer.classList.toggle('contentlayer-opened');
-    }
+    }*/
 
     $('#btnBack').hide();
-    // $('#navbar').hide();
+    // $('#navbar').hide(); 
     hide_spinner();
     $('#index_content').hide();
     $('#correspondance_content').hide();
@@ -999,6 +1072,7 @@ function hide_all() {
     //$('#show_training_details').hide();   
     $('#show_flight_details').hide();
     $('#update_profile').hide();
+    $("#alert_content").hide();
     /*$('#tile_icons').hide();*/
     //$('#allotment_details').hide();
     // $('#openpositions_content').hide();
@@ -1030,7 +1104,10 @@ function shore() {
 function you() {
     $('#sea').hide();
     $('#shore').hide();
+    $('#index_content').show();
     $('#you').show();
+    $('#alert_content').hide();
+    alerts();
 }
 
 function shoreinitial(){
