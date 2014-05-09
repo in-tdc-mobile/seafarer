@@ -956,6 +956,7 @@ function flickercall(tagparam, bgshow) {
 
 function alerts() {
     getplanalerts();
+    getplanalerts
 }
 
 function getplanalerts() {
@@ -982,7 +983,7 @@ function getplanalerts() {
                 for (var i = 0; i < data.length; i++) {
                     alertcount++;
                     if(data[i]['status'] == 'I') {
-                        alerts_array.push("New Plan is Added.<br>");
+                        alerts_array.push("New Plan is added: "+data[i]['vessel_name']+" ("+new String(data[i]['join_date']).split("T")[0]+") <br>");
                     } else if(data[i]['status'] == 'U'){
                         alerts_array.push("There is a change in Plan, please check your ");
                         if (data[i]['changes'].indexOf('A')>-1){
