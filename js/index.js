@@ -1085,7 +1085,7 @@ function gettrainingalerts(alertcount, alerts_array) {
                             alerts_array.push("Institution, ");
                         }
                         if (data[i]['changes'].indexOf('E')>-1){
-                            alerts_array.push("Training Status, ");
+                            alerts_array.push("Training Status");
                         }
                     }
                 }
@@ -1127,7 +1127,7 @@ function getflightalerts(alertcount, alerts_array) {
                             alerts_array.push("Arrival Date, ");
                         }
                         if (data[i]['changes'].indexOf('D')>-1){
-                            alerts_array.push("Departure Date, ");
+                            alerts_array.push("Departure Date");
                         }
                     }
                 }
