@@ -447,7 +447,7 @@ function show_training_details() {
                 }
                 training_res_array.push("<span> Course : "+data[i]['course']+"</span>");
                 training_res_array.push("<br/><span> Status : "+data[i]['status']+"</span>");
-                training_res_array.push("<br/><span> Duration Date From: "+new String(data[i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data[i]['to_date']).split("T")[0]+"</span>");
+                training_res_array.push("<br/><span> Duration From: "+new String(data[i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data[i]['to_date']).split("T")[0]+"</span>");
                 training_res_array.push("<br/><span> Venue : "+data[i]['institution']+"</span>");
             } else {
                 training_res_array.push("<span> No training details updated </span><br/>");
@@ -1072,7 +1072,7 @@ function gettrainingalerts(alertcount, alerts_array) {
                     alertcount++;
                     if(data[i]['status'] == 'I') { 
                         alerts_array.push("<button class='btns' onclick='seetriningalert()'>");
-                        alerts_array.push("New Training Detail Added on: " +data[i]['institution']+" ("+new String(data[i]['from_date']).split("T")[0]+")");
+                        alerts_array.push("New Training Added: " +data[i]['institution']+" ("+new String(data[i]['from_date']).split("T")[0]+")");
                         alerts_array.push("</button>");
                     } else if(data[i]['status'] == 'U'){
                         alerts_array.push("<button class='btns' onclick='seeplanalert()'>");
