@@ -956,7 +956,7 @@ function flickercall(tagparam, bgshow) {
 
 function alerts() {
     getplanalerts();
-    getplanalerts
+    
 }
 
 function getplanalerts() {
@@ -1009,13 +1009,135 @@ function getplanalerts() {
                     
                 }
             }
+            getallotmentalerts(alertcount, alerts_array);
+        },
+        error: function (request, status, error) {
+            hide_spinner();
+        }
+    });
+}
+
+function getallotmentalerts(alertcount, alerts_array) {
+    var url = prefilurl+"get_sf_alert_allotment.php?empid="+$.jStorage.get("empid");
+    console.log(url);
+    var req = $.ajax({
+        url: url,
+        datatype: 'text',
+        beforeSend: function() {
+            show_spinner();
+        },
+
+        success : function(data) {
+            var d = new Date();
+            if(data[0] != null) {
+                for (var i = 0; i < data.length; i++) {
+                    
+                    /*if(data[i]['status'] == 'I') {*/ 
+                    if((Date.parse(data[i]['processed'])) > Date.parse(new Date())){
+                        alertcount++;
+                        alerts_array.push("Allotment Processed on, " +new String(data[i]['processed']).split("T")[0]);
+                    }
+                    /*} else if(data[i]['status'] == 'U'){
+                        alerts_array.push("There is a change in Plan, please check your ");
+                        if (data[i]['changes'].indexOf('A')>-1){
+                            alerts_array.push("Allotment Processed on, " +new String(data[i]['processed']).split("T")[0]);
+                        }
+                    }*/
+                }
+            }
+            gettrainingalerts(alertcount, alerts_array)
+        },
+        error: function (request, status, error) {
+            hide_spinner();
+        }
+    });
+}
+
+function gettrainingalerts(alertcount, alerts_array) {
+    var url = prefilurl+"get_sf_alert_training.php?empid="+$.jStorage.get("empid");
+    console.log(url);
+    var req = $.ajax({
+        url: url,
+        datatype: 'text',
+        beforeSend: function() {
+            show_spinner();
+        },
+
+        success : function(data) {
+            var d = new Date();
+            if(data[0] != null) {
+                for (var i = 0; i < data.length; i++) {
+                    
+                    if(data[i]['status'] == 'I') { 
+                        alerts_array.push("New Training Detail Added on: " +data[i]['institution']+" ("+new String(data[i]['from_date']).split("T")[0]+")");
+                    } else if(data[i]['status'] == 'U'){
+                        alerts_array.push("There is a change in Training, please check your ");
+                        if (data[i]['changes'].indexOf('A')>-1){
+                            alerts_array.push("Course, ");
+                        }
+                        if (data[i]['changes'].indexOf('B')>-1){
+                            alerts_array.push("From Date, ");
+                        }
+                        if (data[i]['changes'].indexOf('C')>-1){
+                            alerts_array.push("To Date, ");
+                        }
+                        if (data[i]['changes'].indexOf('D')>-1){
+                            alerts_array.push("Institution, ");
+                        }
+                        if (data[i]['changes'].indexOf('E')>-1){
+                            alerts_array.push("Training Status, ");
+                        }
+                    }
+                }
+            }
+            getflightalerts(alertcount, alerts_array)
+        },
+        error: function (request, status, error) {
+            hide_spinner();
+        }
+    });
+}
+
+function getflightalerts(alertcount, alerts_array) {
+    var url = prefilurl+"get_sf_alert_flight.php?empid="+$.jStorage.get("empid");
+    console.log(url);
+    var req = $.ajax({
+        url: url,
+        datatype: 'text',
+        beforeSend: function() {
+            show_spinner();
+        },
+
+        success : function(data) {
+            var d = new Date();
+            if(data[0] != null) {
+                for (var i = 0; i < data.length; i++) {
+                    
+                    if(data[i]['status'] == 'I') { 
+                        alerts_array.push("New Flight Detail Added for the date : "+new String(data[i]['arrival_date']).split("T")[0]);
+                    } else if(data[i]['status'] == 'U'){
+                        alerts_array.push("There is a change in Training, please check your ");
+                        if (data[i]['changes'].indexOf('A')>-1){
+                            alerts_array.push("Arrival, ");
+                        }
+                        if (data[i]['changes'].indexOf('B')>-1){
+                            alerts_array.push("Departure, ");
+                        }
+                        if (data[i]['changes'].indexOf('C')>-1){
+                            alerts_array.push("Arrival Date, ");
+                        }
+                        if (data[i]['changes'].indexOf('D')>-1){
+                            alerts_array.push("Departure Date, ");
+                        }
+                    }
+                }
+            }
             hide_spinner();
             alerts_array.push('</div>');
             $('#alrtnum').html("("+alertcount+")");
             $('#alert_content').html(alerts_array.join(""));
         },
         error: function (request, status, error) {
-            //$('#doa_content').html(results_array.join(""));
             hide_spinner();
         }
     });
