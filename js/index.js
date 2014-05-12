@@ -1069,10 +1069,13 @@ function gettrainingalerts(alertcount, alerts_array) {
             var d = new Date();
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
-                    
+                    alertcount++;
                     if(data[i]['status'] == 'I') { 
+                        alerts_array.push("<button class='btns' onclick='seetriningalert()'>");
                         alerts_array.push("New Training Detail Added on: " +data[i]['institution']+" ("+new String(data[i]['from_date']).split("T")[0]+")");
+                        alerts_array.push("</button>");
                     } else if(data[i]['status'] == 'U'){
+                        alerts_array.push("<button class='btns' onclick='seeplanalert()'>");
                         alerts_array.push("There is a change in Training, please check your ");
                         if (data[i]['changes'].indexOf('A')>-1){
                             alerts_array.push("Course, ");
@@ -1089,6 +1092,7 @@ function gettrainingalerts(alertcount, alerts_array) {
                         if (data[i]['changes'].indexOf('E')>-1){
                             alerts_array.push("Training Status");
                         }
+                        alerts_array.push("</button>");
                     }
                 }
             }
@@ -1114,7 +1118,7 @@ function getflightalerts(alertcount, alerts_array) {
             var d = new Date();
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
-                    
+                    alertcount++;
                     if(data[i]['status'] == 'I') { 
                         alerts_array.push("New Flight Detail Added for the date : "+new String(data[i]['arrival_date']).split("T")[0]);
                     } else if(data[i]['status'] == 'U'){
@@ -1152,6 +1156,18 @@ function alertdetails() {
 
 function seeplanalert() {
     shore();
+}
+
+function seetriningalert() {
+    $('#index_content').show();
+    $('#shore').show();
+    $('#alert_content').hide();
+    $('#sea').hide();
+    $('#you').hide();
+    $("#seaf1").hide();
+    $("#seaf2").show();
+    $("#seaf3").hide();
+    $("#seaf4").hide();
 }
 
 function bottm_buttons(results_array) {
