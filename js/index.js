@@ -1239,3 +1239,9 @@ function shoreinitial(){
     $("#seaf3").hide();
     $("#seaf4").hide();
 }
+
+function logout() {
+    $.jStorage.flush();
+    $('.login').show();
+    $('#index_content').hide();
+}
