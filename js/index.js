@@ -440,7 +440,7 @@ function show_training_details() {
     success : function(data) { 
         
         var d = new Date();
-        for (var i = 0; i < 1; i++) {
+        for (var i = 0; i < data.length; i++) {
             if(data[i] != null) {
                 if(i>0) {
                     training_res_array.push("<hr>");
