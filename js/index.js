@@ -983,7 +983,9 @@ function getplanalerts() {
                 for (var i = 0; i < data.length; i++) {
                     alertcount++;
                     if(data[i]['status'] == 'I') {
+                        alerts_array.push("<button class='btns' onclick='seeplanalert()'>");
                         alerts_array.push("New Plan is added: "+data[i]['vessel_name']+" ("+new String(data[i]['join_date']).split("T")[0]+") <br>");
+                        alerts_array.push("</button>");
                     } else if(data[i]['status'] == 'U'){
                         alerts_array.push("There is a change in Plan, please check your ");
                         if (data[i]['changes'].indexOf('A')>-1){
@@ -1148,6 +1150,10 @@ function alertdetails() {
     $("#index_content").hide();
 }
 
+function seeplanalert() {
+    shore();
+}
+
 function bottm_buttons(results_array) {
     // <span class="icon-boat"></span>
     $('#tile_icons').show();
@@ -1218,8 +1224,10 @@ function sea() {
 }
 
 function shore() {
-    $('#sea').hide();
+    $('#index_content').show();
     $('#shore').show();
+    $('#alert_content').hide();
+    $('#sea').hide();
     $('#you').hide();
     shoreinitial();
 }
