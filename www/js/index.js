@@ -561,13 +561,14 @@ function show_flight_details() {
                     results_array.push("<span> Travel Route : "+data[i]['travel_route']+"</span><br/>");
                     results_array.push("<span> Remarks : "+data[i]['remarks']+"</span><br/>");
                     hide_spinner();
-                }
-            } else {
+                }                
+     
+        } else {
                 results_array.push("<span> No details updated. </span><br/>");
+                hide_spinner();
             }
             results_array.push('</div>');
             $('#show_flight_details').html(results_array.join(""));
-            hide_spinner();
         },
         error: function (request, status, error) {
             results_array.push("<span> No data avilable. </span><br/>");
@@ -1117,11 +1118,11 @@ function getflightalerts(alertcount, alerts_array) {
                 for (var i = 0; i < data.length; i++) {
                     alertcount++;
                     if(data[i]['status'].trim() == 'I') { 
-                        alerts_array.push("<button class='btns' onclick='show_flight_details()'>");
+                        alerts_array.push("<button class='btns' onclick='seeflightalert()'>");
                         alerts_array.push("New Flight Detail Added for the date : "+new String(data[i]['arrival_date']).split("T")[0]);
                         alerts_array.push("</button>");
                     } else if(data[i]['status'] == 'U'){
-                        alerts_array.push("<button class='btns' onclick='show_flight_details()'>");
+                        alerts_array.push("<button class='btns' onclick='seeflightalert()'>");
                         alerts_array.push("There is a change in Training, please check ");
                         if (data[i]['changes'].indexOf('A')>-1){
                             alerts_array.push("Arrival, ");
@@ -1263,6 +1264,12 @@ function shoreinitial(){
     $("#seaf2").hide();
     $("#seaf3").hide();
     $("#seaf4").hide();
+}
+
+function seeflightalert(){
+    $('#show_flight_details').show();
+    $('#alert_content').hide();
+    show_flight_details();
 }
 
 function logout() {
