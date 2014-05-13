@@ -61,7 +61,7 @@ function show_plan_details() {alert("show_plan_details");
         beforeSend: function() {
         },
 
-        success : function(data) {
+        success : function(data) { alert("1");
             $('#show_plan_details').show();
             
             if(data != null) {
@@ -119,6 +119,7 @@ function show_plan_details() {alert("show_plan_details");
             contentlayer.addEventListener('click', showSidemenu, false);*/
         },
         error: function (request, status, error) {
+            alert(error);
         results_array.push("<span> No plan to display"+error+"</span><br/>");
         $('#show_training_details').html(results_array.join(""));
         hide_spinner();
