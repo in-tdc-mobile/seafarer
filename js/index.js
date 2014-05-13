@@ -385,7 +385,7 @@ function show_plan_details() {
                 results_array.push('</div>');
 
                 results_array.push('<div class="ship_image">');
-                results_array.push("<img src="+vessel_type+" style='width:100%; height:150px;'>");
+                results_array.push("<img src="+vessel_type+" class='dip_img'>");
                 results_array.push('</div>');
 
                 results_array.push('<div class="footer">');
@@ -474,7 +474,7 @@ function openpositions(){
     var url = prefilurl+"get_sf_open_positions.php?empid="+$.jStorage.get("empid");
     
     var tr_img_array = new Array(); 
-    tr_img_array.push("<img src='img/openpositions.jpg' style='width:100%; height:150px;'>");
+    tr_img_array.push("<img src='img/openpositions.jpg' class='dip_img'>");
     $('.opn_pos_img').html(tr_img_array.join(""));
 
     var opening_res_array = new Array(); 
