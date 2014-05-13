@@ -48,7 +48,7 @@ var app = {
     }
 };
 
-var prefilurl = "https://getVesselTracker.com/seafarer_dev/";
+var prefilurl = "http://getVesselTracker.com/seafarer_dev/";
 
 function show_plan_details() {alert("show_plan_details");
     var cscemail=null;
@@ -119,7 +119,9 @@ function show_plan_details() {alert("show_plan_details");
             contentlayer.addEventListener('click', showSidemenu, false);*/
         },
         error: function (request, status, error) {
-            alert(error);
+            alert("error:"+error);
+            alert("status:"+status);
+            alert("request:"+request);
         results_array.push("<span> No plan to display"+error+"</span><br/>");
         $('#show_training_details').html(results_array.join(""));
         hide_spinner();
