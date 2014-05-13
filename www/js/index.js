@@ -202,7 +202,7 @@ $(document).ready(function() {
     }
 });
 
-var prefilurl = 'https://getVesselTracker.com/seafarer_dev/';
+var prefilurl = "https://getVesselTracker.com/seafarer_dev/";
 /*$.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
     options.url = 'https://getVesselTracker.com/seafarer_dev/'+ options.url ;//+ options.url + "&pal_user_email=" + $.jStorage.get("pal_user_name");
 });
@@ -342,7 +342,6 @@ function vessel_type_pic(vessel_type) {
 
 function show_plan_details() {
     hide_all();
-    alert("1");
     var cscemail=null;
     $('#index_content').show();
     $('#tile_icons').show();
@@ -356,7 +355,7 @@ function show_plan_details() {
             show_spinner();
         },
 
-        success : function(data) {alert("2");
+        success : function(data) {
             $('#show_plan_details').show();
             
             if(data != null) {
@@ -421,8 +420,8 @@ function show_plan_details() {
             contentlayer.addEventListener('click', showSidemenu, false);*/
         },
         error: function (request, status, error) {
-        training_res_array.push("<span> No plan to display"+error+"</span><br/>");
-        $('#show_training_details').html(training_res_array.join(""));
+        results_array.push("<span> No plan to display"+error+"</span><br/>");
+        $('#show_training_details').html(results_array.join(""));
         hide_spinner();
     }
         
