@@ -531,7 +531,6 @@ function openpositions(){
 }
 
 function show_flight_details() {
-
     $("#index_content").hide();
     $('#show_flight_details').show(); 
     var url = prefilurl+"get_sf_flight_details.php?empid="+$.jStorage.get("empid");
@@ -553,7 +552,6 @@ function show_flight_details() {
         success : function(data) {
             if (data != null && data != "") {    
                 var d = new Date();
-                $('#show_flight_details').show();                
                 
                 for (var i = 0; i < data.length; i++) {
                     results_array.push("<span> Departure : "+data[i]['departure']+"</span><br/>");
@@ -564,18 +562,14 @@ function show_flight_details() {
                     results_array.push("<span> Remarks : "+data[i]['remarks']+"</span><br/>");
                     hide_spinner();
                 }
-                results_array.push('</div>');
-                $('#show_flight_details').html(results_array.join(""));
             } else {
-                $('#show_flight_details').show();
                 results_array.push("<span> No details updated. </span><br/>");
-                results_array.push('</div>');
-                $('#show_flight_details').html(results_array.join(""));
-                hide_spinner();
             }
+            results_array.push('</div>');
+            $('#show_flight_details').html(results_array.join(""));
+            hide_spinner();
         },
         error: function (request, status, error) {
-            $('#show_flight_details').show();
             results_array.push("<span> No data avilable. </span><br/>");
             results_array.push('</div>');
             $('#show_flight_details').html(results_array.join(""));
@@ -900,8 +894,8 @@ function youback() {
 }
 
 function shoreback(){
-    $('#show_flight_details').hide(); 
     $("#index_content").show();
+    $('#show_flight_details').hide(); 
 }
 
 
@@ -1119,14 +1113,16 @@ function getflightalerts(alertcount, alerts_array) {
         },
 
         success : function(data) {
-            var d = new Date();
-            if(data[0] != null) {
+                if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
                     alertcount++;
-                    if(data[i]['status'] == 'I') { 
+                    if(data[i]['status'].trim() == 'I') { 
+                        alerts_array.push("<button class='btns' onclick='show_flight_details()'>");
                         alerts_array.push("New Flight Detail Added for the date : "+new String(data[i]['arrival_date']).split("T")[0]);
+                        alerts_array.push("</button>");
                     } else if(data[i]['status'] == 'U'){
-                        alerts_array.push("There is a change in Training, please check your ");
+                        alerts_array.push("<button class='btns' onclick='show_flight_details()'>");
+                        alerts_array.push("There is a change in Training, please check ");
                         if (data[i]['changes'].indexOf('A')>-1){
                             alerts_array.push("Arrival, ");
                         }
@@ -1139,6 +1135,7 @@ function getflightalerts(alertcount, alerts_array) {
                         if (data[i]['changes'].indexOf('D')>-1){
                             alerts_array.push("Departure Date");
                         }
+                        alerts_array.push("</button>");
                     }
                 }
             }
