@@ -76,7 +76,7 @@ function successHandler (result) {
 
 // result contains any error description text returned from the plugin call
 function errorHandler (error) {
-    alert(error);
+    alert("register_push_service errorHandler:"+error);
 }
 
 function onNotificationGCM (e) {
