@@ -279,6 +279,7 @@ $('#login_form').submit(function(){
 });
 
 function login_success() {
+    register_push_service();
     $(".login").hide();
     $('#hamburger-btn').show();
     $('#index_content').show();
