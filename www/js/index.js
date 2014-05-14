@@ -79,7 +79,7 @@ function errorHandler (error) {
     alert(error);
 }
 
-onNotificationGCM: function(e) {
+function onNotificationGCM (e) {
     switch( e.event )
     {
         case 'registered':
