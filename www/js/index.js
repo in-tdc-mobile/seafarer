@@ -17,19 +17,11 @@
  * under the License.
  */
 "use strict";
-var vessel_markers_with_imo = new Array();
-var vessel_markers = new Array();
-var markerCluster;
-var open_info_window;
-var mcOptions = {minimumClusterSize: 3,gridSize: 75, maxZoom:15, minZoom:2};//gridSize: 600, maxZoom:15, minimumClusterSize: 10};
-var infowindow;
-var marker, i,position;
-var sdc_settings = '["1","2","3","4","5","6","8","10","11"]';
-
 
 var app = {
     // Application Constructor
     initialize: function() {
+        alert('app init');
         this.bindEvents();
     },
     // Bind Event Listeners
@@ -37,24 +29,38 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
+        alert('app bind');
         document.addEventListener('deviceready', this.onDeviceReady, false);
-        document.addEventListener("backbutton", this.onBackKeyDown, false);
     },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        alert('Device ready now');
         app.receivedEvent('deviceready');
-        /*app.receivedEvent('deviceready');
-        navigator.splashscreen.show();*/
-        // if (parseFloat(window.device.version) === 7.0) {
-        //   document.body.style.marginTop = "20px";
-        // }
+        hide_all();
+        $('#hamburger-btn').hide();
+        try{
+            var login_empid = $.jStorage.get("empid");
+            // $.jStorage.set("pal_user_email", '');
+            if (login_empid == null) {
+              hide_all();
+                $('.login').show();
+            } else {
+                $('.login').hide();
+                login_success();
+                
+            }
+            
+        }
+        catch(err){    
+            alert("Error in document ready:"+err);
+        }
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-       /* var parentElement = document.getElementById(id);
+        /*var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
 
@@ -67,12 +73,13 @@ var app = {
 
 function register_push_service() {
     var pushNotification = window.plugins.pushNotification;
-    pushNotification.register(app.successHandler, app.errorHandler,{"senderID":"1075090837516","ecb":"app.onNotificationGCM"});
+    pushNotification.register(successHandler, errorHandler,{"senderID":"1075090837516","ecb":"onNotificationGCM"});
 
 }
 
 function successHandler (result) {
-    alert('Callback Success! Result = '+result)
+    alert('Callback Success! Result = '+result);
+
 }
 
 // result contains any error description text returned from the plugin call
@@ -88,6 +95,7 @@ function onNotificationGCM (e) {
             {
                 console.log("Regid " + e.regid);
                 alert('registration id = '+e.regid);
+                write_reg_id_to_aws(e.regid);
             }
         break;
 
@@ -104,6 +112,25 @@ function onNotificationGCM (e) {
           alert('An unknown GCM event has occurred');
           break;
     }
+}
+
+function write_reg_id_to_aws(push_reg_id) {
+
+    var empid = $.jStorage.get("empid");
+    var form_data= {
+      'empid': empid,
+      'gcm_registry_id': push_reg_id,
+    };
+    req = $.ajax({
+      url: prefilurl+"sf_register_push_device.php",
+      type: "post",
+      data: form_data,
+
+      success : function(response) {
+        $.jStorage.set("push_registered", true);
+      }
+      
+    });
 }
 
 // Handle the back button
@@ -219,12 +246,12 @@ var container;
 var slidemenu;
 var content;
 var contentlayer;
-
-window.addEventListener('load', function () {
+//TODO
+/*window.addEventListener('load', function () {
     FastClick.attach(document.body);
 }, false);
-
-$(document).ready(function() {
+*/
+/*$(document).ready(function() {
     
     hide_all();
     $('#hamburger-btn').hide();
@@ -237,13 +264,14 @@ $(document).ready(function() {
         } else {
             $('.login').hide();
             login_success();
+            
         }
-        register_push_service();
+        
     }
     catch(err){    
         alert("document ready:"+err);
     }
-});
+});*/
 
 var prefilurl = "https://getVesselTracker.com/seafarer_dev/";
 /*$.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
@@ -385,6 +413,7 @@ function vessel_type_pic(vessel_type) {
 }
 
 function show_plan_details() {
+    register_push_service();
     hide_all();
     var cscemail=null;
     $('#index_content').show();
@@ -574,7 +603,7 @@ function openpositions(){
     });
 }
 
-function show_flight_details() { alert("");
+function show_flight_details() {
     $("#index_content").hide();
     $('#show_flight_details').show(); 
     var url = prefilurl+"get_sf_flight_details.php?empid="+$.jStorage.get("empid");
