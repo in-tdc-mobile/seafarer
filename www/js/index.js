@@ -46,21 +46,22 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-        navigator.splashscreen.show();
+        /*app.receivedEvent('deviceready');
+        navigator.splashscreen.show();*/
         // if (parseFloat(window.device.version) === 7.0) {
         //   document.body.style.marginTop = "20px";
         // }
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        // var parentyearent = document.getyearentById(id);
-        // var listeningyearent = parentyearent.querySelector('.listening');
-        // var receivedyearent = parentyearent.querySelector('.received');
+        var parentElement = document.getElementById(id);
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
 
-        // listeningyearent.setAttribute('style', 'display:none;');
-        // receivedyearent.setAttribute('style', 'display:block;');
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
 
-        // console.log('Received Event: ' + id);
+        console.log('Received Event: ' + id);
     }
 };
 
