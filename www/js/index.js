@@ -98,7 +98,20 @@ function onNotificationGCM (e) {
 
         case 'message':
           // this is the actual push notification. its format depends on the data model from the push server
-          alert('message = '+e.message+' msgcnt = '+e.msgcnt);
+          // alert('this one message = '+e.message+' msgcnt = '+e.msgcnt);
+
+            if(e.message.toUpperCase().indexOf('PLAN') > -1) {
+                shore();
+            }
+            if(e.message.toUpperCase().indexOf('TRAINING') > -1) {
+                gotrainingpage();
+            }
+            if(e.message.toUpperCase().indexOf('FLIGHT') > -1) {
+                seeflightalert();
+            }
+            if(e.message.toUpperCase().indexOf('ALLOTMENT') > -1) {
+                sea();
+            }
         break;
 
         case 'error':
@@ -244,11 +257,11 @@ var slidemenu;
 var content;
 var contentlayer;
 //TODO
-/*window.addEventListener('load', function () {
+window.addEventListener('load', function () {
     FastClick.attach(document.body);
 }, false);
-*/
-/*$(document).ready(function() {
+
+$(document).ready(function() {
     
     hide_all();
     $('#hamburger-btn').hide();
@@ -268,7 +281,7 @@ var contentlayer;
     catch(err){    
         alert("document ready:"+err);
     }
-});*/
+});
 
 var prefilurl = "https://getVesselTracker.com/seafarer_dev/";
 /*$.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
@@ -410,7 +423,7 @@ function vessel_type_pic(vessel_type) {
 }
 
 function show_plan_details() {
-    register_push_service();
+    //register_push_service();
     hide_all();
     var cscemail=null;
     $('#index_content').show();
@@ -1104,10 +1117,13 @@ function getallotmentalerts(alertcount, alerts_array) {
                 for (var i = 0; i < data.length; i++) {
                     
                     /*if(data[i]['status'] == 'I') {*/ 
-                    if((Date.parse(data[i]['processed'])) > Date.parse(new Date())){
+                    //if((Date.parse(data[i]['processed'])) > Date.parse(new Date())){
                         alertcount++;
+                        alerts_array.push("<button class='btns' onclick='seeallotmentalert()'>");
                         alerts_array.push("Allotment Processed on, " +new String(data[i]['processed']).split("T")[0]);
-                    }
+                        alerts_array.push("</button>");
+                        
+                    //}
                     /*} else if(data[i]['status'] == 'U'){
                         alerts_array.push("There is a change in Plan, please check your ");
                         if (data[i]['changes'].indexOf('A')>-1){
@@ -1230,6 +1246,12 @@ function seeplanalert() {
     shore();
 }
 
+function seeallotmentalert() {
+    $("#alert_content").hide();
+    $("#index_content").show();
+    sea();
+}
+
 function seetriningalert() {
     $('#index_content').show();
     $('#shore').show();
@@ -1299,10 +1321,10 @@ function hide_all() {
 
 }
 
-window.onerror = function(msg, url, linenumber) {
+/*window.onerror = function(msg, url, linenumber) {
     alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
     return true;
-}
+}*/
 
 function sea() {
     $('#sea').show();
@@ -1346,4 +1368,20 @@ function logout() {
     $.jStorage.flush();
     $('.login').show();
     $('#index_content').hide();
+}
+
+function goflightpage() {
+    seeflightalert();
+}
+
+function gotrainingpage() {
+    $('#index_content').show();
+    $('#shore').show();
+    $('#alert_content').hide();
+    $('#sea').hide();
+    $('#you').hide();
+    $("#seaf1").hide();
+    $("#seaf2").hide();
+    $("#seaf3").show();
+    $("#seaf4").hide();
 }
