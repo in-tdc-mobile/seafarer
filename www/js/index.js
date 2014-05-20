@@ -474,10 +474,10 @@ function show_plan_details() {
                 // results_array.push("<span> Vessel : "+data['vessel_name']+"</span><br/>");
                 // results_array.push("<span> Flag : "++"</span><br/>");
                 results_array.push('<div style="margin-left:5px">')
-                results_array.push("<span> Vessel Type : "+data['vessel_type']+"</span><br/>");
-                results_array.push("<span> Manager : "+data['emp_sdc_name']+"</span><br/>");
-                results_array.push("<span> Exp. Join Date : "+new String(data['from_date']).split("T")[0]+"</span><br/>");
-                results_array.push("<span> Exp. Join Port : "+port+"</span><br/>");
+                results_array.push("<span><b> Vessel Type :</b> "+data['vessel_type']+"</span><br/>");
+                results_array.push("<span><b> Manager :</b> "+data['emp_sdc_name']+"</span><br/>");
+                results_array.push("<span><b> Exp. Join Date :</b> "+new String(data['from_date']).split("T")[0]+"</span><br/>");
+                results_array.push("<span><b> Exp. Join Port :</b> "+port+"</span><br/>");
                 results_array.push('</div>')                
                 bottm_buttons(results_array);
                 results_array.push('</div>');
@@ -532,10 +532,11 @@ function show_training_details() {
                 if(i>0) {
                     training_res_array.push("<hr>");
                 }
-                training_res_array.push("<span> Course : "+data[i]['course']+"</span>");
-                training_res_array.push("<br/><span> Status : "+data[i]['status']+"</span>");
-                training_res_array.push("<br/><span> Duration From: "+new String(data[i]['from_date']).split("T")[0]+"&nbsp;&nbsp;&nbsp;&nbsp;To: "+new String(data[i]['to_date']).split("T")[0]+"</span>");
-                training_res_array.push("<br/><span> Venue : "+data[i]['institution']+"</span>");
+                training_res_array.push("<span><b>Course :</b> "+data[i]['course']+"</span>");
+                training_res_array.push("<br/><span><b>Status :</b> "+data[i]['status']+"</span>");
+                training_res_array.push("<br/><span><b>From :</b> "+new String(data[i]['from_date']).split("T")[0]+"</span>");
+                training_res_array.push("<br/><span><b>To :</b> "+new String(data[i]['to_date']).split("T")[0]+"</span>");
+                training_res_array.push("<br/><span><b>Venue :</b> "+data[i]['institution']+"</span>");
             } else {
                 training_res_array.push("<span> No training details updated </span><br/>");
                 hide_spinner();
@@ -583,7 +584,7 @@ function openpositions(){
                 var vessel_type = data[i]['vessel_type'];
                 opening_res_array.push("<div' class='openpositionbox'>");
                 opening_res_array.push("<div' class='openpositionchild1'>");
-                opening_res_array.push("<img src="+vessel_type_pic(vessel_type)+" style='width:75px; height:75px;'>");
+                opening_res_array.push("<img src="+vessel_type_pic(vessel_type)+" style='width:85px; height:80px;'>");
                 opening_res_array.push("</div'>");
                 opening_res_array.push("<div>");
                 opening_res_array.push("<span>"+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span>");
@@ -686,11 +687,11 @@ function allotment_details() {
             results_array.push('</div>');
             results_array.push('<div class = "hambrgrdetails">');
             if(data[0] != null) {
-                results_array.push("<span> Last Processed : "+new String(data[0]['processed_on']).split("T")[0]+"</span><br/>");
+                results_array.push("<span><b> Last Processed :</b> "+new String(data[0]['processed_on']).split("T")[0]+"</span><br/>");
                 results_array.push("<br><b>Balance Amount:</b><br>");
                 if(data[0] != null) {
                     for (var i = 0; i < data.length; i++) {
-                        results_array.push("&nbsp;&nbsp;<span>"+data[i]['name']+" : "+data[i]['bf_bal_sf_cur']+"</span><br/>");
+                        results_array.push("&nbsp;&nbsp;<span><b>"+data[i]['name']+" :</b> "+data[i]['bf_bal_sf_cur']+"</span><br/>");
                         period = data[i]['max_period'];
                         hide_spinner();
                     }
@@ -788,9 +789,9 @@ function doadetails(){
             results_array.push('<div class = "hambrgrdetails">');
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
-                    results_array.push("<span> DoA : "+new String(data[i]['doa']).split("T")[0]+"</span><br/>");
+                    results_array.push("<span><b>DoA :</b> "+new String(data[i]['doa']).split("T")[0]+"</span><br/>");
                     if(data[i]['remarks'] != null)
-                        results_array.push("<span> Remark : "+data[i]['remarks']+"</span><br/>");
+                        results_array.push("<span><b>Remark :</b> "+data[i]['remarks']+"</span><br/>");
                     
                     
                 }

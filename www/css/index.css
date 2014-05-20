@@ -587,7 +587,9 @@ body{
   /*background-color: #E2E2E2;*/
   background-image:url('images/paper.png');
   background-repeat:repeat;
-  font: 13px "Arial", helvetica, arial, sans-serif;
+  font: menu 59px;
+  font: "Arial", helvetica, arial, sans-serif;
+
 }
 
 #container, #index_content, #show_plan_details, #openpositions_content, #show_training_details{
