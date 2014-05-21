@@ -217,9 +217,12 @@ function route(event) {
     } else if (hash === "#doa") {
         hide_all();
         doadetails();
-    } else if (hash === "#document_details") {
+    } else if (hash === "#expirydocs") {
         hide_all();
         documentdetails();
+    } else if (hash === "#alert") {
+        hide_all();
+        alerts();
     } 
     else {
         // page = show_owners();
@@ -326,9 +329,9 @@ function login_success() {
     $('#shore').show();
     $('#you').hide();
     show_plan_details();
-    show_training_details();
+    /*show_training_details();
     openpositions();
-    doadetails();
+    doadetails();*/
     // show_flight_details();
     // allotment_details();
     // correspondance();
@@ -357,7 +360,7 @@ function update_profile_page() {
     /*$('#tile_icons').hide();*/
     $('#update_profile').show(); 
     var results_array = new Array(); 
-    results_array.push('<button onclick="youback()" class="back-btn"><img src="img/arrow-back.png"></button>');
+    //results_array.push('<button onclick="youback()" class="back-btn"><img src="img/arrow-back.png"></button>');
     results_array.push('<div id="plan_details_header"  class="head_common">');
     results_array.push('<div class="header_white"></div>');
     results_array.push('<span class="header_text" class="header">Update Contact Details</span>');
@@ -427,7 +430,7 @@ function show_plan_details() {
     hide_all();
     var cscemail=null;
     $('#index_content').show();
-    $('#tile_icons').show();
+    
     var results_array = new Array(); 
     var url = prefilurl+"get_sf_plan_details.php?empid="+$.jStorage.get("empid");
     console.log(url);
@@ -460,12 +463,9 @@ function show_plan_details() {
                 }
                 
                 cscemail = data['csc_email'];
-                results_array.push('<div id="plan_details_header"  class="head_common_pic">');
-                results_array.push('<div class="header_white"></div>');
-                results_array.push('<span class="header_text" class="header"><span class="icon-boat"></span> ' + data['vessel_name'] + '(' + data['flag_name'] + ')</span>');
-                //results_array.push('<div id="plan_details_header_menu"><span id="hamburger-btn" class="hamburger icon-list"></span></div>')
-                results_array.push('</div>');
 
+                setheadername(results_array, '<span class="icon-boat"></span>  '+data['vessel_name'] + '(' + data['flag_name'] + ')');
+                
                 results_array.push('<div class="ship_image">');
                 results_array.push("<img src="+vessel_type+" class='dip_img'>");
                 results_array.push('</div>');
@@ -514,16 +514,20 @@ function show_plan_details() {
 
 
 function show_training_details() {
-   var url = prefilurl+"get_sf_training_details.php?empid="+$.jStorage.get("empid");
-   var training_res_array = new Array(); 
-   console.log(url);
-   var req = $.ajax({
+    hide_all();
+    $('#show_training_details').show();
+    var url = prefilurl+"get_sf_training_details.php?empid="+$.jStorage.get("empid");
+    var training_res_array = new Array(); 
+    setheadername(training_res_array, "Training");
+    training_res_array.push("<div class='training_image'> <img src='img/simulator.jpg' class='dip_img'> </div>");
+    console.log(url);
+    var req = $.ajax({
     url: url,
     datatype: 'text',
     beforeSend: function() {
         show_spinner();
     },
-
+    
     success : function(data) { 
         
         var d = new Date();
@@ -544,8 +548,8 @@ function show_training_details() {
         }
         training_res_array.push(training_res_array);
         hide_spinner();
-        $('#foot_training').html(training_res_array.join(""));
-
+        //$('#foot_training').html(training_res_array.join(""));
+        $('#show_training_details').html(training_res_array.join(""));
     },
     error: function (request, status, error) {
         training_res_array.push("<span> No data to display </span><br/>");
@@ -558,14 +562,15 @@ function show_training_details() {
 
 var temp;
 
-function openpositions(){
+function openpositions() {
+    hide_all()
+    $('#index_content').show();
+    $('#openpositions_content').show();
     var url = prefilurl+"get_sf_open_positions.php?empid="+$.jStorage.get("empid");
-    
-    var tr_img_array = new Array(); 
-    tr_img_array.push("<img src='img/openpositions.jpg' class='dip_img'>");
-    $('.opn_pos_img').html(tr_img_array.join(""));
 
     var opening_res_array = new Array(); 
+    setheadername(opening_res_array, "Open Positions");
+    opening_res_array.push("<div' class='opn_pos_img'><img src='img/openpositions.jpg' class='dip_img'></div>");
     console.log(url);
     var req = $.ajax({
     url: url,
@@ -603,11 +608,11 @@ function openpositions(){
             opening_res_array.push("<span> No Open positions available </span><br/>");
         }
         hide_spinner();
-        $('#foot_opening').html(opening_res_array.join(""));
+        $('#openpositions_content').html(opening_res_array.join(""));
     },
     error: function (request, status, error) {
         opening_res_array.push("<span> No data to display </span><br/>");
-        $('#foot_opening').html(opening_res_array.join(""));
+        $('#openpositions_content').html(opening_res_array.join(""));
         hide_spinner();
     }
 
@@ -619,7 +624,7 @@ function show_flight_details() {
     $('#show_flight_details').show(); 
     var url = prefilurl+"get_sf_flight_details.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
-    results_array.push('<button onclick="shoreback()" class="back-btn"><img src="img/arrow-back.png"></button>');
+    //results_array.push('<button onclick="shoreback()" class="back-btn"><img src="img/arrow-back.png"></button>');
     results_array.push('<div id="plan_details_header"  class="head_common">');
     results_array.push('<div class="header_white"></div>');
     results_array.push('<span class="header_text" class="header">Flight Details</span>');
@@ -665,9 +670,8 @@ function show_flight_details() {
 }
 
 function allotment_details() {
-    /*$("#index_content").hide();
-    $('#tile_icons').hide();*/
-    /*$('#allotment_details').show(); */
+    $("#index_content").hide();
+    $('#allotment_details').show();
     var url = prefilurl+"get_sf_allotment_details.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
     console.log(url);
@@ -749,7 +753,7 @@ function correspondance(){
     $("#index_content").hide();
     $('#correspondance_content').show(); 
     var results_array = new Array(); 
-    results_array.push('<button onclick="youback()" class="back-btn"><img src="img/arrow-back.png"></button>');
+    //results_array.push('<button onclick="youback()" class="back-btn"><img src="img/arrow-back.png"></button>');
     results_array.push('<div id="plan_details_header"  class="head_common">');
     results_array.push('<div class="header_white"></div>');
     results_array.push('<span class="header_text" class="header">Correspondance</span>');
@@ -817,7 +821,7 @@ function doaAdd() {
     var doa_array = new Array(); 
     $('#adddoa').show();
 
-    doa_array.push('<button onclick="doadetails()" class="back-btn"><img src="img/arrow-back.png"></button>');
+    //doa_array.push('<button onclick="doadetails()" class="back-btn"><img src="img/arrow-back.png"></button>');
     doa_array.push('<div class="adddoa">');
     doa_array.push('<div id="plan_details_header"  class="head_common">');
     doa_array.push('<div class="header_white"></div>');
@@ -920,8 +924,9 @@ function correspondancesend() {
 }
 
 function documentdetails(){
+    hide_all();
+    $("#index_content").show();
     $('#document_details').show(); 
-    $("#index_content").hide();
     var url = prefilurl+"get_sf_expiry_docs.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
     console.log(url);
@@ -935,7 +940,7 @@ function documentdetails(){
 
         success : function(data) { 
             var d = new Date();
-            results_array.push('<button onclick="youback()" class="back-btn"><img src="img/arrow-back.png"></button>');
+            //results_array.push('<button onclick="youback()" class="back-btn"><img src="img/arrow-back.png"></button>');
             results_array.push('<div id="plan_details_header"  class="head_common">');
             results_array.push('<div class="header_white"></div>');
             results_array.push('<span class="header_text" class="header">Expiry Documents</span>');
@@ -1038,14 +1043,16 @@ function flickercall(tagparam, bgshow) {
 }
 
 function alerts() {
+    hide_all();
+    $("#index_content").show();
+    $('#alert_content').show(); 
     getplanalerts();
-    
 }
 
 function getplanalerts() {
     var url = prefilurl+"get_sf_alert_plan.php?empid="+$.jStorage.get("empid");
     var alerts_array = new Array(); 
-    alerts_array.push('<button onclick="you()" class="back-btn"><img src="img/arrow-back.png"></button>');
+    //alerts_array.push('<button onclick="you()" class="back-btn"><img src="img/arrow-back.png"></button>');
     alerts_array.push('<div id="plan_details_header"  class="head_common">');
     alerts_array.push('<div class="header_white"></div>');
     alerts_array.push('<span class="header_text" class="header">Alerts</span>');
@@ -1066,7 +1073,7 @@ function getplanalerts() {
                 for (var i = 0; i < data.length; i++) {
                     alertcount++;
                     if(data[i]['status'] == 'I') {
-                        alerts_array.push("<button class='btns' onclick='seeplanalert()'>");
+                        alerts_array.push("<button class='btns' onclick='show_plan_details()'>");
                         alerts_array.push("New Plan is added: "+data[i]['vessel_name']+" ("+new String(data[i]['join_date']).split("T")[0]+") <br>");
                         alerts_array.push("</button>");
                     } else if(data[i]['status'] == 'U'){
@@ -1120,7 +1127,7 @@ function getallotmentalerts(alertcount, alerts_array) {
                     /*if(data[i]['status'] == 'I') {*/ 
                     //if((Date.parse(data[i]['processed'])) > Date.parse(new Date())){
                         alertcount++;
-                        alerts_array.push("<button class='btns' onclick='seeallotmentalert()'>");
+                        alerts_array.push("<button class='btns' onclick='allotment_details()'>");
                         alerts_array.push("Allotment Processed on, " +new String(data[i]['processed']).split("T")[0]);
                         alerts_array.push("</button>");
                         
@@ -1157,7 +1164,7 @@ function gettrainingalerts(alertcount, alerts_array) {
                 for (var i = 0; i < data.length; i++) {
                     alertcount++;
                     if(data[i]['status'] == 'I') { 
-                        alerts_array.push("<button class='btns' onclick='seetriningalert()'>");
+                        alerts_array.push("<button class='btns' onclick='show_training_details()'>");
                         alerts_array.push("New Training Added: " +data[i]['institution']+" ("+new String(data[i]['from_date']).split("T")[0]+")");
                         alerts_array.push("</button>");
                     } else if(data[i]['status'] == 'U'){
@@ -1205,7 +1212,7 @@ function getflightalerts(alertcount, alerts_array) {
                 for (var i = 0; i < data.length; i++) {
                     alertcount++;
                     if(data[i]['status'].trim() == 'I') { 
-                        alerts_array.push("<button class='btns' onclick='seeflightalert()'>");
+                        alerts_array.push("<button class='btns' onclick='show_flight_details()'>");
                         alerts_array.push("New Flight Detail Added for the date : "+new String(data[i]['arrival_date']).split("T")[0]);
                         alerts_array.push("</button>");
                     } else if(data[i]['status'] == 'U'){
@@ -1307,16 +1314,16 @@ function hide_all() {
     $('#index_content').hide();
     $('#correspondance_content').hide();
     $('#ajax_error').hide();
-    // $('#view_title').hide();
-    //$('#show_plan_details').hide();
-    //$('#show_training_details').hide();   
+    $('#view_title').hide();
+    $('#show_plan_details').hide();
+    $('#show_training_details').hide();   
     $('#show_flight_details').hide();
     $('#update_profile').hide();
     $("#alert_content").hide();
     /*$('#tile_icons').hide();*/
-    //$('#allotment_details').hide();
-    // $('#openpositions_content').hide();
-    //$('#doa_content').hide();
+    $('#allotment_details').hide();
+    $('#openpositions_content').hide();
+    $('#doa_content').hide();
     $('#document_details').hide(); 
     $('body').scrollTop(0);
 
@@ -1385,4 +1392,12 @@ function gotrainingpage() {
     $("#seaf2").hide();
     $("#seaf3").show();
     $("#seaf4").hide();
+}
+
+function setheadername(results_array, name) { 
+    results_array.push('<div id="plan_details_header"  class="head_common_pic">');
+    results_array.push('<div class="header_white"></div>');
+    results_array.push('<span class="header_text" class="header"> ' + name + '</span>');
+    //results_array.push('<div id="plan_details_header_menu"><span id="hamburger-btn" class="hamburger icon-list"></span></div>')
+    results_array.push('</div>');
 }
