@@ -101,16 +101,16 @@ function onNotificationGCM (e) {
           // alert('this one message = '+e.message+' msgcnt = '+e.msgcnt);
 
             if(e.message.toUpperCase().indexOf('PLAN') > -1) {
-                shore();
+                show_plan_details();
             }
             if(e.message.toUpperCase().indexOf('TRAINING') > -1) {
-                gotrainingpage();
+                show_training_details();
             }
             if(e.message.toUpperCase().indexOf('FLIGHT') > -1) {
-                seeflightalert();
+                show_flight_details();
             }
             if(e.message.toUpperCase().indexOf('ALLOTMENT') > -1) {
-                sea();
+                allotment_details();
             }
         break;
 
@@ -979,19 +979,6 @@ function documentdetails(){
     });
 }
 
-function youback() {
-    $('#document_details').hide(); 
-    $('#correspondance_content').hide(); 
-    $('#update_profile').hide(); 
-    $("#index_content").show();
-}
-
-function shoreback(){
-    $("#index_content").show();
-    $('#show_flight_details').hide(); 
-}
-
-
 function show_spinner() {
     $(".spinner_index").css('display','inline');
     $(".spinner_index").center();
@@ -1075,10 +1062,11 @@ function getplanalerts() {
                 for (var i = 0; i < data.length; i++) {
                     alertcount++;
                     if(data[i]['status'] == 'I') {
-                        alerts_array.push("<button class='btns' onclick='show_plan_details()'>");
+                        alerts_array.push("<a class='btns' href='#plan'>");
                         alerts_array.push("New Plan is added: "+data[i]['vessel_name']+" ("+new String(data[i]['join_date']).split("T")[0]+") <br>");
-                        alerts_array.push("</button>");
+                        alerts_array.push("</a>");
                     } else if(data[i]['status'] == 'U'){
+                        alerts_array.push("<a class='btns' href='#plan'>");
                         alerts_array.push("There is a change in Plan, please check your ");
                         if (data[i]['changes'].indexOf('A')>-1){
                             alerts_array.push("Vessel, ");
@@ -1098,6 +1086,7 @@ function getplanalerts() {
                         if (data[i]['changes'].indexOf('F')>-1){
                             alerts_array.push("Flag");
                         }
+                        alerts_array.push("</a>");
                         
                     }
                     
@@ -1124,14 +1113,16 @@ function getallotmentalerts(alertcount, alerts_array) {
         success : function(data) {
             var d = new Date();
             if(data[0] != null) {
+
                 for (var i = 0; i < data.length; i++) {
                     
                     /*if(data[i]['status'] == 'I') {*/ 
                     //if((Date.parse(data[i]['processed'])) > Date.parse(new Date())){
                         alertcount++;
-                        alerts_array.push("<button class='btns' onclick='allotment_details()'>");
+                       
+                        alerts_array.push("<a class='btns' href='#allotment'>");
                         alerts_array.push("Allotment Processed on, " +new String(data[i]['processed']).split("T")[0]);
-                        alerts_array.push("</button>");
+                        alerts_array.push("</a>");
                         
                     //}
                     /*} else if(data[i]['status'] == 'U'){
@@ -1166,11 +1157,13 @@ function gettrainingalerts(alertcount, alerts_array) {
                 for (var i = 0; i < data.length; i++) {
                     alertcount++;
                     if(data[i]['status'] == 'I') { 
-                        alerts_array.push("<button class='btns' onclick='show_training_details()'>");
+                        alerts_array.push("<br>");
+                        alerts_array.push("<a class='btns' href='#training'>");
                         alerts_array.push("New Training Added: " +data[i]['institution']+" ("+new String(data[i]['from_date']).split("T")[0]+")");
-                        alerts_array.push("</button>");
+                        alerts_array.push("</a>");
                     } else if(data[i]['status'] == 'U'){
-                        alerts_array.push("<button class='btns' onclick='seeplanalert()'>");
+                        alerts_array.push("<br>");
+                        alerts_array.push("<a class='btns' href='#training'>");
                         alerts_array.push("There is a change in Training, please check your ");
                         if (data[i]['changes'].indexOf('A')>-1){
                             alerts_array.push("Course, ");
@@ -1187,7 +1180,7 @@ function gettrainingalerts(alertcount, alerts_array) {
                         if (data[i]['changes'].indexOf('E')>-1){
                             alerts_array.push("Training Status");
                         }
-                        alerts_array.push("</button>");
+                        alerts_array.push("</a>");
                     }
                 }
             }
@@ -1214,11 +1207,13 @@ function getflightalerts(alertcount, alerts_array) {
                 for (var i = 0; i < data.length; i++) {
                     alertcount++;
                     if(data[i]['status'].trim() == 'I') { 
-                        alerts_array.push("<button class='btns' onclick='show_flight_details()'>");
+                        alerts_array.push("<br>");
+                        alerts_array.push("<a class='btns' href='#flight'>");
                         alerts_array.push("New Flight Detail Added for the date : "+new String(data[i]['arrival_date']).split("T")[0]);
-                        alerts_array.push("</button>");
+                        alerts_array.push("</a>");
                     } else if(data[i]['status'] == 'U'){
-                        alerts_array.push("<button class='btns' onclick='seeflightalert()'>");
+                        alerts_array.push("<br>");
+                        alerts_array.push("<a class='btns' href='#flight'>");
                         alerts_array.push("There is a change in Training, please check ");
                         if (data[i]['changes'].indexOf('A')>-1){
                             alerts_array.push("Arrival, ");
@@ -1232,7 +1227,7 @@ function getflightalerts(alertcount, alerts_array) {
                         if (data[i]['changes'].indexOf('D')>-1){
                             alerts_array.push("Departure Date");
                         }
-                        alerts_array.push("</button>");
+                        alerts_array.push("</a>");
                     }
                 }
             }
@@ -1245,33 +1240,6 @@ function getflightalerts(alertcount, alerts_array) {
             hide_spinner();
         }
     });
-}
-
-function alertdetails() {
-    $("#alert_content").show();
-    $("#index_content").hide();
-}
-
-function seeplanalert() {
-    shore();
-}
-
-function seeallotmentalert() {
-    $("#alert_content").hide();
-    $("#index_content").show();
-    sea();
-}
-
-function seetriningalert() {
-    $('#index_content').show();
-    $('#shore').show();
-    $('#alert_content').hide();
-    $('#sea').hide();
-    $('#you').hide();
-    $("#seaf1").hide();
-    $("#seaf2").show();
-    $("#seaf3").hide();
-    $("#seaf4").hide();
 }
 
 function bottm_buttons(results_array) {
@@ -1313,7 +1281,7 @@ function hide_all() {
     $('#btnBack').hide();
     // $('#navbar').hide(); 
     hide_spinner();
-    $('#index_content').hide();
+    //$('#index_content').hide();
     $('#correspondance_content').hide();
     $('#ajax_error').hide();
     $('#view_title').hide();
@@ -1321,7 +1289,7 @@ function hide_all() {
     $('#show_training_details').hide();   
     $('#show_flight_details').hide();
     $('#update_profile').hide();
-    $("#alert_content").hide();
+    //$("#alert_content").hide();
     /*$('#tile_icons').hide();*/
     $('#allotment_details').hide();
     $('#openpositions_content').hide();
@@ -1336,64 +1304,10 @@ function hide_all() {
     return true;
 }*/
 
-function sea() {
-    $('#sea').show();
-    $('#shore').hide();
-    $('#you').hide();
-    allotment_details();
-}
-
-function shore() {
-    $('#index_content').show();
-    $('#shore').show();
-    $('#alert_content').hide();
-    $('#sea').hide();
-    $('#you').hide();
-    shoreinitial();
-}
-
-function you() {
-    $('#sea').hide();
-    $('#shore').hide();
-    $('#index_content').show();
-    $('#you').show();
-    $('#alert_content').hide();
-    alerts();
-}
-
-function shoreinitial(){
-    $("#seaf1").show();
-    $("#seaf2").hide();
-    $("#seaf3").hide();
-    $("#seaf4").hide();
-}
-
-function seeflightalert(){
-    $('#show_flight_details').show();
-    $('#alert_content').hide();
-    show_flight_details();
-}
-
 function logout() {
     $.jStorage.flush();
     $('.login').show();
     $('#index_content').hide();
-}
-
-function goflightpage() {
-    seeflightalert();
-}
-
-function gotrainingpage() {
-    $('#index_content').show();
-    $('#shore').show();
-    $('#alert_content').hide();
-    $('#sea').hide();
-    $('#you').hide();
-    $("#seaf1").hide();
-    $("#seaf2").hide();
-    $("#seaf3").show();
-    $("#seaf4").hide();
 }
 
 function setheadername(results_array, name, head_pic_name) { 

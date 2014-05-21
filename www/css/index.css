@@ -428,6 +428,32 @@ a {
   transform: translateX(-70%);
 }
 
+.leftsmooth {
+  -moz-transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+  -o-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  transform: translateX(-100%);
+  -webkit-transition-duration:.2s;
+  -moz-transition-duration:.2s;
+  -ms-transition-duration:.2s;
+  -o-transition-duration:.2s;
+  transition-duration:.2s;
+}
+
+.rightsmooth {
+  -moz-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  -o-transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  transform: translateX(100%);
+  -webkit-transition-duration:.2s;
+  -moz-transition-duration:.2s;
+  -ms-transition-duration:.2s;
+  -o-transition-duration:.2s;
+  transition-duration:.2s;
+}
+
 .sidemenu--opened{
   display: block !important;
   z-index: 1 !important;
@@ -592,7 +618,7 @@ body{
 
 }
 
-#container, #show_plan_details, #openpositions_content, #show_training_details{
+#container, #index_content, #alert_content {
   position: absolute;
   top:0px;
   bottom:0px;
@@ -846,7 +872,8 @@ div.scene.active {
 }
 
 .btns {
-  display: inline-block;
+  list-style-type:circle;
+  /*display: inline-block;
   width: 100%;
   background: #b0b0b0;
   background-image: -webkit-linear-gradient(top, #b0b0b0, #949494);
@@ -864,11 +891,11 @@ div.scene.active {
   padding: 10px 20px 10px 20px;
   text-decoration: none;
   border-style: none;
-  margin-bottom: 2px;
+  margin-bottom: 2px;*/
 }
 
 .btns:hover {
-  display: inline-block;
+  /*display: inline-block;
   background: #CCCCCC;
   background-image: -webkit-linear-gradient(top, #b0b0b0, #7C7C7C);
   background-image: -moz-linear-gradient(top, #b0b0b0, #7C7C7C);
@@ -876,7 +903,7 @@ div.scene.active {
   background-image: -o-linear-gradient(top, #b0b0b0, #7C7C7C);
   background-image: linear-gradient(to bottom, #b0b0b0, #7C7C7C);
   text-decoration: none;
-  border-style: none;
+  border-style: none;*/
 }
 
 #you {
