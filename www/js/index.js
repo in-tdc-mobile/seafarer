@@ -99,7 +99,7 @@ function onNotificationGCM (e) {
         case 'message':
           // this is the actual push notification. its format depends on the data model from the push server
           // alert('this one message = '+e.message+' msgcnt = '+e.msgcnt);
-
+            index_page_call();
             if(e.message.toUpperCase().indexOf('PLAN') > -1) {
                 show_plan_details();
             }
@@ -323,7 +323,8 @@ $('#login_form').submit(function(){
 });
 
 function login_success() {
-    
+    $('#index_content').css('display','block');
+    $('#alert_content').css('display','block');
     $(".login").hide();
     $('#hamburger-btn').show();
     $('#index_content').show();
@@ -1031,6 +1032,12 @@ function flickercall(tagparam, bgshow) {
     });
 
 }
+function alerts_btn_call() {
+    $("#index_content").addClass('rightsmooth');
+    $("#alert_content").removeClass('leftsmooth');
+    $("#alert_content").css('z-index', 2);
+    $("#index_content").css('z-index', 1);
+}
 
 function alerts() {
     /*hide_all();
@@ -1307,16 +1314,24 @@ function hide_all() {
 function logout() {
     $.jStorage.flush();
     $('.login').show();
-    $('#index_content').hide();
+    $('#index_content').css('display','none');
+    $('#alert_content').css('display','none');
 }
 
 function setheadername(results_array, name, head_pic_name) { 
     if(head_pic_name.indexOf("pic")>-1)
-        results_array.push('<div id="plan_details_header"  class="head_common_pic">');
+        results_array.push('<div id="plan_details_header"  class="head_common_pic">');//head_common_pic
     else
-        results_array.push('<div id="plan_details_header"  class="head_common">');
+        results_array.push('<div id="plan_details_header"  class="head_common_pic">');//head_common
     results_array.push('<div class="header_white"></div>');
     results_array.push('<span class="header_text" class="header"> ' + name + '</span>');
     //results_array.push('<div id="plan_details_header_menu"><span id="hamburger-btn" class="hamburger icon-list"></span></div>')
     results_array.push('</div>');
+}
+
+function index_page_call() {
+    $("#index_content").addClass('rightsmooth');
+    $("#alert_content").removeClass('leftsmooth');
+    $("#alert_content").css('z-index', 2);
+    $("#index_content").css('z-index', 1);
 }

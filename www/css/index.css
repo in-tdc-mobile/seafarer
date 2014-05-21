@@ -628,13 +628,13 @@ body{
 
 #plan_details_header{
   font-size: 14px;
-  /*height: 45px;*/
+  height: 45px;
 }
 
 .header_white{
   background-color: white;
   opacity: .5;
-  height: 45px;
+  height: 85px;
 }
 
 .header_text{
@@ -673,6 +673,22 @@ body{
   border: 1px solid;
   z-index: 1000;
 }
+
+#alert-btn{
+  height: 38px;
+  width: 38px;
+  position: absolute;
+  top: 6px;
+  font-size: 25px;
+  left: 15px;
+  background-color: rgb(60, 36, 102);
+  color: white;
+  -webkit-border-radius: 20px 20px 20px 20px;
+  border-radius: 20px 20px 20px 20px;
+  border: 1px solid;
+  z-index: 1000;
+}
+
 
 .hamburger{
   /*position: relative;
@@ -844,6 +860,7 @@ input::-webkit-calendar-picker-indicator,
 .hambrgrdetails {
   margin: 3px;
   padding: 5px;
+  margin-top: 45px;
   /* width: 100px; */
   /* height: 100px; */
   -webkit-box-shadow: 0 1px 5px #CDCFD1, inset 0 10px 20px #919292;
