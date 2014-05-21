@@ -463,7 +463,7 @@ function show_plan_details() {
                 results_array.push('<div id="plan_details_header"  class="head_common_pic">');
                 results_array.push('<div class="header_white"></div>');
                 results_array.push('<span class="header_text" class="header"><span class="icon-boat"></span> ' + data['vessel_name'] + '(' + data['flag_name'] + ')</span>');
-                // results_array.push('<div id="plan_details_header_menu"><span id="hamburger-btn" class="hamburger icon-list"></span></div>')
+                //results_array.push('<div id="plan_details_header_menu"><span id="hamburger-btn" class="hamburger icon-list"></span></div>')
                 results_array.push('</div>');
 
                 results_array.push('<div class="ship_image">');
@@ -494,17 +494,17 @@ function show_plan_details() {
             }
             hide_spinner();
 
-           /* menuBtn = document.querySelector('#hamburger-btn');
+            menuBtn = document.querySelector('#hamburger-btn');
             container = document.querySelector('#container');
             slidemenu = document.querySelector('#sidemenu');
             content = document.querySelector('#content');
             contentlayer = document.querySelector('#contentLayer');
             menuBtn.addEventListener('click', showSidemenu, false);
-            contentlayer.addEventListener('click', showSidemenu, false);*/
+            contentlayer.addEventListener('click', showSidemenu, false);
         },
         error: function (request, status, error) {
         results_array.push("<span> No plan to display"+error+"</span><br/>");
-        $('#show_training_details').html(results_array.join(""));
+        $('#show_plan_details').html(results_array.join(""));
         hide_spinner();
     }
         
