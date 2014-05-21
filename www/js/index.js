@@ -520,6 +520,7 @@ function show_training_details() {
     var training_res_array = new Array(); 
     setheadername(training_res_array, "Training");
     training_res_array.push("<div class='training_image'> <img src='img/simulator.jpg' class='dip_img'> </div>");
+    training_res_array.push('<div class="footer">');
     console.log(url);
     var req = $.ajax({
     url: url,
@@ -548,10 +549,12 @@ function show_training_details() {
         }
         training_res_array.push(training_res_array);
         hide_spinner();
+        training_res_array.push('</div>');
         //$('#foot_training').html(training_res_array.join(""));
         $('#show_training_details').html(training_res_array.join(""));
     },
     error: function (request, status, error) {
+        opening_res_array.push("</div>");
         training_res_array.push("<span> No data to display </span><br/>");
         $('#show_training_details').html(training_res_array.join(""));
         hide_spinner();
@@ -570,7 +573,8 @@ function openpositions() {
 
     var opening_res_array = new Array(); 
     setheadername(opening_res_array, "Open Positions");
-    opening_res_array.push("<div' class='opn_pos_img'><img src='img/openpositions.jpg' class='dip_img'></div>");
+    opening_res_array.push("<div class='opn_pos_img'><img src='img/openpositions.jpg' class='dip_img'></div>");
+    opening_res_array.push("<div class='footer'>");
     console.log(url);
     var req = $.ajax({
     url: url,
@@ -602,16 +606,17 @@ function openpositions() {
                 if(data[i]['sdc']!=null)
                     opening_res_array.push("<br/><span>"+data[i]['sdc']+"</span><br/>");
                 opening_res_array.push("</div>");
-                opening_res_array.push("</div>");
             }
         } else {
             opening_res_array.push("<span> No Open positions available </span><br/>");
         }
         hide_spinner();
+        opening_res_array.push("</div>");
         $('#openpositions_content').html(opening_res_array.join(""));
     },
     error: function (request, status, error) {
         opening_res_array.push("<span> No data to display </span><br/>");
+        opening_res_array.push("</div>");
         $('#openpositions_content').html(opening_res_array.join(""));
         hide_spinner();
     }
