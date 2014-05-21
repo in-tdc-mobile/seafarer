@@ -47,99 +47,52 @@
   <script type="text/javascript" src="touchswipe/jquery.touchSwipe.min.js"></script>
   <script id='code_1'>
     $(function() {      
-      $("#seaf1").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
-      $("#seaf2").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
-      $("#seaf3").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
-      $("#seaf4").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
+      $("#index_content").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
+      $("#alert_content").swipe( { swipeLeft:swipe1, swipeRight:swipe1, allowPageScroll:"vertical"} );
       //Swipe handlers.
       function swipe1(event, direction) {
 
         if (direction == 'left') {
-
-          if($(this).attr('id').indexOf('seaf1') > -1) {
-            $("#seaf1").css('display','none');
-            $("#seaf2").css('display','none');
-            $("#seaf3").css('display','none');
-            $("#seaf4").css('display','block');
+          if($(this).attr('id').indexOf('index_content') > -1) {
+            $("#index_content").css('display','none');
+            $("#alert_content").css('display','block');
             
-          } else if($(this).attr('id').indexOf('seaf2') > -1) {
-            $("#seaf1").css('display','block');
-            $("#seaf2").css('display','none');
-            $("#seaf3").css('display','none');
-            $("#seaf4").css('display','none');
+          } else if($(this).attr('id').indexOf('alert_content') > -1) {
+            $("#index_content").css('display','block');
+            $("#alert_content").css('display','none');
             /*$("#seaf2").css('z-index', 2);
             $("#seaf1").css('z-index', 1);
             $("#seaf1").transition({ x: 0 });
             $("#seaf2").transition({ x: -$(window).width() });*/
 
-          } else if($(this).attr('id').indexOf('seaf3') > -1) {
-            $("#seaf1").css('display','none');
-            $("#seaf2").css('display','block');
-            $("#seaf3").css('display','none');
-            $("#seaf4").css('display','none');
-            /*$("#seaf3").css('z-index', 2);
-            $("#seaf2").css('z-index', 1);
-            $("#seaf2").transition({ x: 0 });
-            $("#seaf3").transition({ x: -$(window).width() });*/
-
-          } else if($(this).attr('id').indexOf('seaf4') > -1) {
-            $("#seaf1").css('display','none');
-            $("#seaf2").css('display','none');
-            $("#seaf3").css('display','block');
-            $("#seaf4").css('display','none');
-
-            /*$("#seaf4").css('z-index', 2);
-            $("#seaf3").css('z-index', 1);
-            $("#seaf3").transition({ x: 0 });
-            $("#seaf4").transition({ x: -$(window).width() });*/
-            
           }
           
         } else if (direction == 'right') {
           
-
-          if($(this).attr('id').indexOf('seaf1') > -1) {
-            $("#seaf1").css('display','none');
-            $("#seaf2").css('display','block');
-            $("#seaf3").css('display','none');
-            $("#seaf4").css('display','none');
+          if($(this).attr('id').indexOf('index_content') > -1) {
+            $("#index_content").css('display','none');
+            $("#alert_content").css('display','block');
 
             /*$("#seaf1").css('z-index', 2);
             $("#seaf2").css('z-index', 1);
             $("#seaf2").transition({ x: 0 });
             $("#seaf1").transition({ x: $(window).width() });*/
 
-          } else if($(this).attr('id').indexOf('seaf2') > -1) {
-            $("#seaf1").css('display','none');
-            $("#seaf2").css('display','none');
-            $("#seaf3").css('display','block');
-            $("#seaf4").css('display','none');
+          } else if($(this).attr('id').indexOf('alert_content') > -1) {
+            $("#index_content").css('display','block');
+            $("#alert_content").css('display','none');
 
             /*$("#seaf2").css('z-index', 2);
             $("#seaf3").css('z-index', 1);
             $("#seaf3").transition({ x: 0 });
             $("#seaf2").transition({ x: $(window).width() });*/
 
-          } else if($(this).attr('id').indexOf('seaf3') > -1) {
-            $("#seaf1").css('display','none');
-            $("#seaf2").css('display','none');
-            $("#seaf3").css('display','none');
-            $("#seaf4").css('display','block');
-            /*$("#seaf3").css('z-index', 2);
-            $("#seaf4").css('z-index', 1);
-            $("#seaf4").transition({ x: 0 });
-            $("#seaf3").transition({ x: $(window).width() });*/
-
-          } else if($(this).attr('id').indexOf('seaf4') > -1) {
-            $("#seaf1").css('display','block');
-            $("#seaf2").css('display','none');
-            $("#seaf3").css('display','none');
-            $("#seaf4").css('display','none');
-          }
+          } 
         }
       }
     });
   </script>
+  
 </head>
 <body class="light">
 <div id="sidemenu" style="display:none">
@@ -163,6 +116,7 @@
 
   <div id="container" class='smooth full-height'>
   <div id="hamburger-btn"><span class="hamburger icon-list"></span></div>
+
   <!-- <div id="bg" class="content on-top"></div> -->
   <div id="contentLayer"></div>
   <div id="content" class='content on-top scroller' style="height:100%">
@@ -254,6 +208,7 @@
         </div>
       </div>
     </div> -->
+    <div id="index_content" style="height:100%;">
       <div id="show_plan_details"></div>
       <div id="show_training_details"></div>
       <div id="correspondance_content" style="display: block;"></div>
@@ -263,10 +218,10 @@
       <div id="openpositions_content"></div>
       <div id="doa_content"></div>
       <div id="document_details"></div>
-      <div id="alert_content"></div>
+      
       <div id='view_title'></div>
-     
-    
+    </div> 
+    <div id="alert_content" style="height:100%;"></div>
 
     <div class='spinner_index'>
       <img src="img/spinner.gif" width="20px" height="20px" style="display:block;margin:auto;"/>

@@ -592,7 +592,7 @@ body{
 
 }
 
-#container, #index_content, #show_plan_details, #openpositions_content, #show_training_details{
+#container, #show_plan_details, #openpositions_content, #show_training_details{
   position: absolute;
   top:0px;
   bottom:0px;
@@ -602,6 +602,7 @@ body{
 
 #plan_details_header{
   font-size: 14px;
+  /*height: 45px;*/
 }
 
 .header_white{
