@@ -1298,7 +1298,7 @@ function hide_all() {
     // if($("#contentLayer:visible").length>0){
     //     $('#contentLayer').trigger('click');
     // }
-/*    if($("#container").hasClass( "opened" )) {
+    if($("#container").hasClass( "opened" )) {
         var container = document.querySelector('#container');
         var slidemenu = document.querySelector('#sidemenu');
         var content = document.querySelector('#content');
@@ -1308,7 +1308,7 @@ function hide_all() {
         slidemenu.classList.toggle('sidemenu--opened');
         content.style.height = "auto";
         contentlayer.classList.toggle('contentlayer-opened');
-    }*/
+    }
 
     $('#btnBack').hide();
     // $('#navbar').hide(); 
