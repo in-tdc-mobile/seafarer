@@ -417,11 +417,8 @@ function update_profile() {
             hide_spinner();
         }
     });
-
-    $('#update_profile').hide();
-    showdashbord();
-    
-    $('#tile_icons').show();
+    //$('#update_profile').hide();
+    //$('#tile_icons').show();
 }
 
 function vessel_type_pic(vessel_type) {
@@ -805,7 +802,8 @@ function correspondancesend() {
     var form_data= {
         'empid': emp_id,
         'managerid': -1,
-        'message': message
+        'message': message,
+        'subject':''
     };
     var req = $.ajax({
         url: url,
@@ -880,12 +878,14 @@ function doadetails(){
             }
             hide_spinner();
             results_array.push("<button onclick='doaAdd()' style='color:#00303f;font:bold 12px verdana; padding:5px;'>Give DoA</button>");
+            results_array.push("<button onclick='doaAdd()' style='color:#00303f;font:bold 12px verdana; padding:5px;'>Cancel DoA</button>");
             results_array.push('</div>');
             $('#doa_content').html(results_array.join(""));
         },
         error: function (request, status, error) {
             results_array.push("<span> No DOA Given </span><br/>");
             results_array.push("<button onclick='doaAdd()' style='color:#00303f;font:bold 12px verdana; padding:5px;'>Give DOA</button>");
+            results_array.push("<button onclick='doaAdd()' style='color:#00303f;font:bold 12px verdana; padding:5px;'>Cancel DoA</button>");
             $('#doa_content').html(results_array.join(""));
             hide_spinner();
         }
