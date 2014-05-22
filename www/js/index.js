@@ -38,6 +38,8 @@ var app = {
         app.receivedEvent('deviceready');
         hide_all();
         $('#hamburger-btn').hide();
+        $('#top_icons').hide(); 
+        $('#alert-btn').hide(); 
         try{
             var login_empid = $.jStorage.get("empid");
             // $.jStorage.set("pal_user_email", '');
@@ -270,6 +272,8 @@ $(document).ready(function() {
     
     hide_all();
     $('#hamburger-btn').hide();
+    $('#top_icons').hide(); 
+    $('#alert-btn').hide(); 
     try{
         var login_empid = $.jStorage.get("empid");
         // $.jStorage.set("pal_user_email", '');
@@ -327,6 +331,8 @@ function login_success() {
     $('#alert_content').css('display','block');
     $(".login").hide();
     $('#hamburger-btn').show();
+    $('#top_icons').show(); 
+    $('#alert-btn').show(); 
     $('#index_content').show();
     $('#sea').hide();
     $('#shore').show();
@@ -360,15 +366,13 @@ function login_failure() {
 var d;
 
 function update_profile_page() {
+    index_page_call();
     $('#index_content').show();
     /*$('#tile_icons').hide();*/
     $('#update_profile').show(); 
     var results_array = new Array(); 
     //results_array.push('<button onclick="youback()" class="back-btn"><img src="img/arrow-back.png"></button>');
-    results_array.push('<div id="plan_details_header"  class="head_common">');
-    results_array.push('<div class="header_white"></div>');
-    results_array.push('<span class="header_text" class="header">Update Contact Details</span>');
-    results_array.push('</div>');
+    setheadername(results_array, "Update Contact Details", "name");
     results_array.push('<div class = "hambrgrdetails">');
     results_array.push('<form onsubmit="return update_profile()" ><input type="text" placeholder="Email" id="prof_email" class="biginput topcoat-text-input">');
     results_array.push('<input type="text" id="prof_phone" placeholder="Phone" class="biginput topcoat-text-input">');
@@ -378,6 +382,9 @@ function update_profile_page() {
 }
 
 function update_profile() {
+    var results_array = new Array(); 
+    setheadername(results_array, "Update Contact Details", "name");
+    results_array.push('<div class = "hambrgrdetails">');
     var url = prefilurl+"insert_emp_profile.php?";
     console.log(url);
     var email = $("#prof_email").val();
@@ -397,10 +404,16 @@ function update_profile() {
         },
 
         success : function(data) {
+            results_array.push('</span> Profile Updated...</span>');  
+            results_array.push('</div>');
+            $('#update_profile').html(results_array.join(""));
             hide_spinner();
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-            alert("error in update");
+            results_array.push('</span> Issue in Profile Updation...</span>');  
+            results_array.push('</div>');
+            $('#update_profile').html(results_array.join(""));
+            //alert("error in update");
             hide_spinner();
         }
     });
@@ -430,6 +443,7 @@ function vessel_type_pic(vessel_type) {
 }
 
 function show_plan_details() {
+    index_page_call();
     //register_push_service();
     hide_all();
     var cscemail=null;
@@ -519,6 +533,7 @@ function show_plan_details() {
 
 
 function show_training_details() {
+    index_page_call();
     hide_all();
     $('#index_content').show();
     $('#show_training_details').show();
@@ -541,7 +556,7 @@ function show_training_details() {
         for (var i = 0; i < data.length; i++) {
             if(data[i] != null) {
                 if(i>0) {
-                    training_res_array.push("<hr>");
+                    training_res_array.push("<hr class='style-one'>");
                 }
                 training_res_array.push("<span><b>Course :</b> "+data[i]['course']+"</span>");
                 training_res_array.push("<br/><span><b>Status :</b> "+data[i]['status']+"</span>");
@@ -572,6 +587,7 @@ function show_training_details() {
 var temp;
 
 function openpositions() {
+    index_page_call();
     hide_all()
     $('#index_content').show();
     $('#openpositions_content').show();
@@ -594,7 +610,7 @@ function openpositions() {
         if(data[0] != null) {
             for(var i=0; i<data.length; i++) {
                 if(i>0)  {
-                    opening_res_array.push("<hr>");
+                    opening_res_array.push("<hr class='style-one'>");
                 }
                 var vessel_type = data[i]['vessel_type'];
                 opening_res_array.push("<div' class='openpositionbox'>");
@@ -631,6 +647,7 @@ function openpositions() {
 }
 
 function show_flight_details() {
+    index_page_call();
     hide_all();
     $("#index_content").show();
     $('#show_flight_details').show(); 
@@ -640,7 +657,7 @@ function show_flight_details() {
     results_array.push("<div> <img src='img/flight.jpg' class='dip_img'> </div>");
     //results_array.push('<button onclick="shoreback()" class="back-btn"><img src="img/arrow-back.png"></button>');
 
-    results_array.push('<div class = "hambrgrdetails">');
+    results_array.push('<div class = "hambrgrdetails" style="margin-top: 0px;">');
     console.log(url);
     var req = $.ajax({
         url: url,
@@ -681,6 +698,7 @@ function show_flight_details() {
 }
 
 function allotment_details() {
+    index_page_call();
     hide_all();
     $("#index_content").show();
     $('#allotment_details').show();
@@ -699,7 +717,7 @@ function allotment_details() {
         success : function(data) {
             var d = new Date();
             var period=0;
-            results_array.push('<div class = "hambrgrdetails">');
+            results_array.push('<div class = "hambrgrdetails" style="margin-top: 0px;">');
             if(data[0] != null) {
                 results_array.push("<span><b> Last Processed :</b> "+new String(data[0]['processed_on']).split("T")[0]+"</span><br/>");
                 results_array.push("<br><b>Balance Amount:</b><br>");
@@ -760,6 +778,7 @@ function allotted_details(period, results_array) {
 }
 
 function correspondance(){
+    index_page_call();
     hide_all();
     $("#index_content").show();
     $('#correspondance_content').show(); 
@@ -774,7 +793,56 @@ function correspondance(){
     $('#correspondance_content').html(results_array.join(""));
 }
 
+function correspondancesend() {
+    var results_array = new Array(); 
+    setheadername(results_array, "Correspondance", "name");
+    results_array.push('<div class = "hambrgrdetails">');
+    results_array.push('<img src = "img/email-send.png">');
+    var url = prefilurl+"sf_insert_correspondance.php?";
+    console.log(url);
+    var message = $("#message").val();
+    var emp_id = $.jStorage.get("empid");
+    var form_data= {
+        'empid': emp_id,
+        'managerid': -1,
+        'message': message
+    };
+    var req = $.ajax({
+        url: url,
+        type: "post",
+        data: form_data,
+        beforeSend: function() {
+            show_spinner();
+        },
+
+        success : function(data) {
+            if(data == 'Sucess') {
+                //$('#correspondance_content').hide();
+                //showdashbord();
+                hide_spinner();
+                results_array.push('</span> Correspondance send...</span>');
+                results_array.push("</div>");
+                $('#correspondance_content').html(results_array.join(""));
+                
+            } else {
+                hide_spinner();
+                results_array.push("Issue in sending Correspondance, please try again");
+                results_array.push("</div>");
+                $('#correspondance_content').html(results_array.join(""));
+            }
+        },
+        error: function (request, status, error) {
+            results_array.push("Issue in sending Correspondance, please try again:"+error);
+            results_array.push("</div>");
+            $('#correspondance_content').html(results_array.join(""));
+        }
+     
+    });
+    
+}
+
 function doadetails(){
+    index_page_call();
     hide_all();
     /*$("#index_content").hide();
     $('#tile_icons').hide();*/
@@ -808,16 +876,16 @@ function doadetails(){
                 }
             
             } else {
-                results_array.push('<span>No DoA Available, please Add DoA</span><br>');
+                results_array.push('<span>No DoA Available, please Give DoA</span><br>');
             }
             hide_spinner();
-            results_array.push("<button onclick='doaAdd()' style='color:#00303f;font:bold 12px verdana; padding:5px;'>Add DoA</button>");
+            results_array.push("<button onclick='doaAdd()' style='color:#00303f;font:bold 12px verdana; padding:5px;'>Give DoA</button>");
             results_array.push('</div>');
             $('#doa_content').html(results_array.join(""));
         },
         error: function (request, status, error) {
-            results_array.push("<span> No DOA Added </span><br/>");
-            results_array.push("<button onclick='doaAdd()' style='color:#00303f;font:bold 12px verdana; padding:5px;'>Add DOA</button>");
+            results_array.push("<span> No DOA Given </span><br/>");
+            results_array.push("<button onclick='doaAdd()' style='color:#00303f;font:bold 12px verdana; padding:5px;'>Give DOA</button>");
             $('#doa_content').html(results_array.join(""));
             hide_spinner();
         }
@@ -830,7 +898,7 @@ function doaAdd() {
 
     //doa_array.push('<button onclick="doadetails()" class="back-btn"><img src="img/arrow-back.png"></button>');
     doa_array.push('<div class="adddoa">');
-    setheadername(results_array, "DoA Details");
+    setheadername(doa_array, "DoA Details");
     doa_array.push('<div class = "hambrgrdetails">');
     doa_array.push('<form onsubmit="savedoa(); return false;" >');
     doa_array.push('<span>Date:</span><br><input class="topcoat-date-picker" type="date" id="doadate">');
@@ -889,45 +957,8 @@ function showdashbord() {
     $('#tile_icons').show();
 }
 
-function correspondancesend() {
-    var results_array = new Array(); 
-    var url = prefilurl+"sf_insert_correspondance.php?";
-    console.log(url);
-    var message = $("#message").val();
-    var emp_id = $.jStorage.get("empid");
-    var form_data= {
-        'empid': emp_id,
-        'managerid': -1,
-        'message': message
-    };
-    var req = $.ajax({
-        url: url,
-        type: "post",
-        data: form_data,
-        beforeSend: function() {
-            show_spinner();
-        },
-
-        success : function(data) {
-            if(data == 'Sucess') {
-                $('#correspondance_content').hide();
-                showdashbord();
-                hide_spinner();
-            } else {
-                hide_spinner();
-                alert("Issue in sending Correspondance, please try again");
-            }
-        },
-        error: function (request, status, error) {
-            alert("error:"+error);
-            alert("status:"+status);
-            alert("request:"+status);
-     }
- });
-    
-}
-
 function documentdetails(){
+    index_page_call();
     hide_all();
     $("#index_content").show();
     $('#document_details').show(); 
@@ -1072,6 +1103,7 @@ function getplanalerts() {
                         alerts_array.push("<a class='btns' href='#plan'>");
                         alerts_array.push("New Plan is added: "+data[i]['vessel_name']+" ("+new String(data[i]['join_date']).split("T")[0]+") <br>");
                         alerts_array.push("</a>");
+                        alerts_array.push("<hr  class='style-one'>")
                     } else if(data[i]['status'] == 'U'){
                         alerts_array.push("<a class='btns' href='#plan'>");
                         alerts_array.push("There is a change in Plan, please check your ");
@@ -1094,6 +1126,7 @@ function getplanalerts() {
                             alerts_array.push("Flag");
                         }
                         alerts_array.push("</a>");
+                        alerts_array.push("<hr  class='style-one'>")
                         
                     }
                     
@@ -1130,6 +1163,7 @@ function getallotmentalerts(alertcount, alerts_array) {
                         alerts_array.push("<a class='btns' href='#allotment'>");
                         alerts_array.push("Allotment Processed on, " +new String(data[i]['processed']).split("T")[0]);
                         alerts_array.push("</a>");
+                        alerts_array.push("<hr  class='style-one'>")
                         
                     //}
                     /*} else if(data[i]['status'] == 'U'){
@@ -1164,12 +1198,13 @@ function gettrainingalerts(alertcount, alerts_array) {
                 for (var i = 0; i < data.length; i++) {
                     alertcount++;
                     if(data[i]['status'] == 'I') { 
-                        alerts_array.push("<br>");
+                       // alerts_array.push("<br>");
                         alerts_array.push("<a class='btns' href='#training'>");
                         alerts_array.push("New Training Added: " +data[i]['institution']+" ("+new String(data[i]['from_date']).split("T")[0]+")");
                         alerts_array.push("</a>");
+                        alerts_array.push("<hr  class='style-one'>")
                     } else if(data[i]['status'] == 'U'){
-                        alerts_array.push("<br>");
+                        //alerts_array.push("<br>");
                         alerts_array.push("<a class='btns' href='#training'>");
                         alerts_array.push("There is a change in Training, please check your ");
                         if (data[i]['changes'].indexOf('A')>-1){
@@ -1188,6 +1223,7 @@ function gettrainingalerts(alertcount, alerts_array) {
                             alerts_array.push("Training Status");
                         }
                         alerts_array.push("</a>");
+                        alerts_array.push("<hr  class='style-one'>")
                     }
                 }
             }
@@ -1214,12 +1250,13 @@ function getflightalerts(alertcount, alerts_array) {
                 for (var i = 0; i < data.length; i++) {
                     alertcount++;
                     if(data[i]['status'].trim() == 'I') { 
-                        alerts_array.push("<br>");
+                        //alerts_array.push("<br>");
                         alerts_array.push("<a class='btns' href='#flight'>");
                         alerts_array.push("New Flight Detail Added for the date : "+new String(data[i]['arrival_date']).split("T")[0]);
                         alerts_array.push("</a>");
+                        alerts_array.push("<hr  class='style-one'>")
                     } else if(data[i]['status'] == 'U'){
-                        alerts_array.push("<br>");
+                        //alerts_array.push("<br>");
                         alerts_array.push("<a class='btns' href='#flight'>");
                         alerts_array.push("There is a change in Training, please check ");
                         if (data[i]['changes'].indexOf('A')>-1){
@@ -1235,6 +1272,7 @@ function getflightalerts(alertcount, alerts_array) {
                             alerts_array.push("Departure Date");
                         }
                         alerts_array.push("</a>");
+                        alerts_array.push("<hr  class='style-one'>")
                     }
                 }
             }
@@ -1252,7 +1290,7 @@ function getflightalerts(alertcount, alerts_array) {
 function bottm_buttons(results_array) {
     // <span class="icon-boat"></span>
     $('#tile_icons').show();
-    results_array.push('<hr>');
+    results_array.push("<hr class='style-one'>");
     results_array.push('<div id="tile_icons">');
     results_array.push('<a class="footer-button" href="#flight">');
     results_array.push('<span class="icon-airplane button-icon"></span>');
@@ -1302,6 +1340,7 @@ function hide_all() {
     $('#openpositions_content').hide();
     $('#doa_content').hide();
     $('#document_details').hide(); 
+
     $('body').scrollTop(0);
 
 }
@@ -1313,15 +1352,19 @@ function hide_all() {
 
 function logout() {
     $.jStorage.flush();
+    hide_all();
     $('.login').show();
+    $('#hamburger-btn').hide();
+    $('#top_icons').hide(); 
+    $('#alert-btn').hide(); 
     $('#index_content').css('display','none');
     $('#alert_content').css('display','none');
 }
 
 function setheadername(results_array, name, head_pic_name) { 
-    if(head_pic_name.indexOf("pic")>-1)
+    /*if(head_pic_name.indexOf("pic")>-1)
         results_array.push('<div id="plan_details_header"  class="head_common_pic">');//head_common_pic
-    else
+    else*/
         results_array.push('<div id="plan_details_header"  class="head_common_pic">');//head_common
     results_array.push('<div class="header_white"></div>');
     results_array.push('<span class="header_text" class="header"> ' + name + '</span>');
@@ -1330,8 +1373,8 @@ function setheadername(results_array, name, head_pic_name) {
 }
 
 function index_page_call() {
-    $("#index_content").addClass('rightsmooth');
-    $("#alert_content").removeClass('leftsmooth');
-    $("#alert_content").css('z-index', 2);
-    $("#index_content").css('z-index', 1);
+    $("#alert_content").addClass('leftsmooth');
+    $("#index_content").removeClass('rightsmooth');
+    $("#index_content").css('z-index', 2);
+    $("#alert_content").css('z-index', 1);
 }

@@ -87,19 +87,24 @@
           <li><a href="#expirydocs"><div>Expiry Documents</div></a></li>
           <li><a href="#correspondance"><div>Correspondance</div></a></li>
           <li><a href="#updatecontact"><div>Update Contact</div></a></li>
-          <li><a href="mailto:in-tdc-mobile@bs-shipmanagement.com"><div>Contact Us</div></a></li>
-          <li><a href="#logout"><div>Log Out</div></a></li>
+          <li><a href="mailto:in-tdc-mobile@bs-shipmanagement.com"><div>Feedback</div></a></li>
+          <li><a href="#" onclick="logout()"><div>Logout</div></a></li>
       </ul>
     </nav>
   </div>
 
   <div id="container" class='smooth full-height'>
-  <div>
-    <div id="hamburger-btn"><span class="hamburger icon-list"></span></div>
-    <div id="alert-btn" onclick="alerts_btn_call()">
-      <img src="img/bell.png" style="margin-top: 5px; margin-left: 4px;"></img>
-    </div>
+  <div class="center">
+    <img src="img/logo_big_mybsm.png" class="bsmlogo"/>
   </div>
+    <div id="top_icons">
+      <div id="hamburger-btn"><span class="hamburger icon-list"></span></div>
+      <div id="alert-btn" onclick="alerts_btn_call()">
+        <img src="img/bell.png" style="margin-top: 5px; margin-left: 4px;"/>
+      </div>
+      <hr class="style-four" style="margin-top: 10px;">
+    </div>
+  
   <!-- <div id="bg" class="content on-top"></div> -->
   <div id="contentLayer"></div>
   <div id="content" class='content on-top scroller' style="height:100%">
@@ -107,7 +112,9 @@
       Sorry, there was a temporary error. Please try again in a minute.<br/>-vidya.sagar@bs-shipmanagement.com
     </div>
     <div class='login'>
-      <div class='login_title'><h3>Please login to Seafarer.</h3></div>
+      <div class='login_title'>
+        <!-- <h3>Please login to Seafarer.</h3> -->
+      </div>
       <form id='login_form'>
         <div class="input-group">
           <div class="input-row">
