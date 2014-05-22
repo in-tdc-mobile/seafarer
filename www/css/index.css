@@ -1030,3 +1030,8 @@ nav li {
   padding: 15px;
 }
 
+.hamb_div {
+  float: left;
+  margin-right: 3px;
+}
+

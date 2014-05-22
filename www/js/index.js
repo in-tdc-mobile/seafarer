@@ -985,14 +985,14 @@ function documentdetails(){
                 for (var i = 0; i < data.length; i++) {
                     if(data[i]['doc_type'] != doc_type){
                         doc_type = data[i]['doc_type'];
-                        results_array.push("<b>"+doc_type+":</b><br/>");
+                        results_array.push("<b>"+doc_type.slice(1)+":</b><br>");
                     }
                     if((Date.parse(data[i]['expiry_date'])) < Date.parse(new Date())) {
-                       results_array.push("<span style='color:red'>"+data[i]['name']+" <b>("+new String(data[i]['expiry_date']).split("T")[0]+") </b></span><br/>");
+                       results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:red'>"+data[i]['name']+" <b>("+new String(data[i]['expiry_date']).split("T")[0]+") </b></span><br/>");
                     } else if((((Date.parse(data[i]['expiry_date']))-20) < Date.parse(new Date())) && (Date.parse(new Date()<(Date.parse(data[i]['expiry_date']))))){
-                        results_array.push("<span style='color:green'>"+data[i]['name']+" <b>("+new String(data[i]['expiry_date']).split("T")[0]+") </b></span><br/>");
+                        results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>"+data[i]['name']+" <b>("+new String(data[i]['expiry_date']).split("T")[0]+") </b></span><br/>");
                     } else {
-                        results_array.push("<span>"+data[i]['name']+" <b>("+new String(data[i]['expiry_date']).split("T")[0]+") </b></span><br/>");
+                        results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span>"+data[i]['name']+" <b>("+new String(data[i]['expiry_date']).split("T")[0]+") </b></span><br/>");
                     }
                 }
             
@@ -1099,9 +1099,10 @@ function getplanalerts() {
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
                     alertcount++;
+                    $('#h_plan').html('<img src="img/tick.png">');
                     if(data[i]['status'] == 'I') {
                         alerts_array.push("<a class='btns' href='#plan'>");
-                        alerts_array.push("New Plan is added: "+data[i]['vessel_name']+" ("+new String(data[i]['join_date']).split("T")[0]+") <br>");
+                        alerts_array.push("You are lined up for "+data[i]['vessel_name']+" ("+new String(data[i]['join_date']).split("T")[0]+") <br>");
                         alerts_array.push("</a>");
                         alerts_array.push("<hr  class='style-one'>")
                     } else if(data[i]['status'] == 'U'){
@@ -1153,7 +1154,7 @@ function getallotmentalerts(alertcount, alerts_array) {
         success : function(data) {
             var d = new Date();
             if(data[0] != null) {
-
+                $('#h_allotment').html('<img src="img/tick.png">');
                 for (var i = 0; i < data.length; i++) {
                     
                     /*if(data[i]['status'] == 'I') {*/ 
@@ -1197,6 +1198,7 @@ function gettrainingalerts(alertcount, alerts_array) {
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
                     alertcount++;
+                    $('#h_training').html('<img src="img/tick.png">');
                     if(data[i]['status'] == 'I') { 
                        // alerts_array.push("<br>");
                         alerts_array.push("<a class='btns' href='#training'>");
@@ -1249,12 +1251,14 @@ function getflightalerts(alertcount, alerts_array) {
                 if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
                     alertcount++;
+                    $('#h_flight').html('<img src="img/tick.png">');
                     if(data[i]['status'].trim() == 'I') { 
                         //alerts_array.push("<br>");
                         alerts_array.push("<a class='btns' href='#flight'>");
                         alerts_array.push("New Flight Detail Added for the date : "+new String(data[i]['arrival_date']).split("T")[0]);
                         alerts_array.push("</a>");
                         alerts_array.push("<hr  class='style-one'>")
+
                     } else if(data[i]['status'] == 'U'){
                         //alerts_array.push("<br>");
                         alerts_array.push("<a class='btns' href='#flight'>");
