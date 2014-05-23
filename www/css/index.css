@@ -589,7 +589,7 @@ span.header {
 }
 
 #content {
-    top: 0px; 
+  top: 0px; 
   position: absolute;
   bottom: 0px;
   left:0px;
@@ -619,7 +619,7 @@ body{
 
 }
 
-#container, #index_content, #alert_content {
+#container,  #alert_content {
   position: absolute;
   top:0px;
   bottom:0px;
@@ -630,6 +630,7 @@ body{
 #plan_details_header{
   font-size: 14px;
   height: 45px;
+  background-color: aqua;
 }
 
 .header_white{
@@ -640,8 +641,8 @@ body{
 
 .header_text{
   font-size: 20px;
-  position: relative;
-  top: -34px;
+  /*position: relative;
+  top: -34px;*/
   margin-left: 5px;
 }
 
@@ -666,28 +667,28 @@ body{
   position: absolute;
   top: 3px;
   font-size: 25px;
-  right: 15px;
-  background-color: rgb(60, 36, 102);
+  right: 10px;
+ /* background-color: rgb(60, 36, 102);
   color: white;
   -webkit-border-radius: 20px 20px 20px 20px;
   border-radius: 20px 20px 20px 20px;
   border: 1px solid;
-  z-index: 1000;
+  z-index: 1000;*/
 }
 
 #alert-btn{
   height: 38px;
   width: 38px;
   position: absolute;
-  top: 3px;
+  top: 7px;
   font-size: 25px;
-  left: 15px;
-  background-color: rgb(60, 36, 102);
+  left: 7px;
+/*  background-color: rgb(60, 36, 102);
   color: white;
   -webkit-border-radius: 20px 20px 20px 20px;
   border-radius: 20px 20px 20px 20px;
-  border: 1px solid;
-  z-index: 1000;
+  border: 1px solid;*/
+  z-index: 3;
 }
 
 
@@ -722,7 +723,7 @@ body{
   font-size: 15px;
   /* right: 15px; */
   background-color: white;
-  color: rgb(60, 36, 102);
+  color: #3e3c3d;
   -webkit-border-radius: 20px 20px 20px 20px;
   border-radius: 20px 20px 20px 20px;
   border: 1px solid;
@@ -861,8 +862,8 @@ input::-webkit-calendar-picker-indicator,
 .hambrgrdetails {
   margin: 3px;
   padding: 5px;
-  margin-top: 45px;
-  /* width: 100px; */
+  /*margin-top: 45px;
+   width: 100px; */
   /* height: 100px; */
   -webkit-box-shadow: 0 1px 5px #CDCFD1, inset 0 10px 20px #919292;
   -moz-box-shadow: 0 1px 5px #0061aa, inset 0 10px 20px #b6f9ff;
@@ -971,7 +972,7 @@ hr.style-one {
 }
 
 hr.style-four {
-  height: 12px;
+  height: 7px;
   border: 0;
   box-shadow: inset 0 12px 12px -12px rgba(0,0,0,0.5);
 }
@@ -984,54 +985,26 @@ hr.style-four {
   /*background-color:#b0e0e6;*/
 }
 .bsmlogo {
-  margin-top: 15px; 
-  margin-left: 4px; 
+/*  margin-top: 15px; 
+  margin-left: 4px;*/ 
   z-index: 1000; 
   position: relative;
-}
-
-nav li {
-  position: relative;
-  font-size: 1em;
-  font-weight: bold;
-  border-bottom: 1px solid #48317A;
-  border-top: 1px solid #444444;
-  padding: 15px;
-}
-
-nav {
-  right: 0px;
-  top: 0px;
-  position: absolute;
-  z-index: 0;
-  width: 70%;
-  height: 100%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background: #8F0047;
-  background: -moz-linear-gradient(top, #3e3c3d 0%, #2d2c2d 100%);
-  /* background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#48317A), color-stop(100%,#48317A)); */
-  /* background: -webkit-linear-gradient(top, #3e3c3d 0%,#2d2c2d 100%); */
-  background: -o-linear-gradient(top, #3e3c3d 0%,#2d2c2d 100%);
-  background: -ms-linear-gradient(top, #3e3c3d 0%,#2d2c2d 100%);
-  background: linear-gradient(to bottom, #48317A 0%,#48317A 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3e3c3d', endColorstr='#2d2c2d',GradientType=0 );
-}
-
-nav li {
-  position: relative;
-  font-size: 1em;
-  font-weight: bold;
-  border-bottom: 1px solid #BEBEBE;
-  border-top: 1px solid #48317A;
-  padding: 15px;
 }
 
 .hamb_div {
   float: left;
   margin-right: 3px;
 }
+
+/*.header_bar{
+  font-size: 14px;
+  height: 45px;
+  font-size: 14px;
+  height: 45px;
+  background-color: red;
+  position: fixed;
+  width: 100%;
+}*/
+
+
 

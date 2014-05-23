@@ -915,7 +915,8 @@ function doaAdd(status) {
         doa_array.push('<span>Date:</span><br><input class="topcoat-date-picker" type="date" id="doadate">');
         doa_array.push('<br><span>Remark:</span><br><textarea class="topcoat-text-input--large" id="coaremark"></textarea></br>');
         doa_array.push('<span id="error_doa" style="color:red"></span><br>');
-        doa_array.push('<input type="submit" value="Save DoA" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
+        doa_array.push('<input type="submit" value="Save DoA" style="color:#00303f;font:bold 12px verdana; padding:5px;">');
+        doa_array.push('<input type="button" onclick="doadetails()" value="back" style="color: #00303f;font: bold 12px verdana;padding: 5px;">');
         doa_array.push('</form>');
         doa_array.push('</div>');
         doa_array.push('</div>');
@@ -926,6 +927,7 @@ function doaAdd(status) {
 }
 
 function savedoa() {
+    alert($(this).attr('value'))
     var results_array = new Array(); 
     var url = prefilurl+"sf_save_doa.php?";
     var remark = $("#coaremark").val();
@@ -1034,10 +1036,11 @@ function documentdetails(){
         success : function(data) { 
             var d = new Date();
             //results_array.push('<button onclick="youback()" class="back-btn"><img src="img/arrow-back.png"></button>');
-            results_array.push('<div id="plan_details_header"  class="head_common">');
+            /*results_array.push('<div id="plan_details_header"  class="head_common">');
             results_array.push('<div class="header_white"></div>');
             results_array.push('<span class="header_text" class="header">Expiry Documents</span>');
-            results_array.push('</div>');
+            results_array.push('</div>');*/
+            setheadername(results_array, "Expiry Documents");
             results_array.push('<div class = "hambrgrdetails">');
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
@@ -1138,10 +1141,11 @@ function getplanalerts() {
     var url = prefilurl+"get_sf_alert_plan.php?empid="+$.jStorage.get("empid");
     var alerts_array = new Array(); 
     //alerts_array.push('<button onclick="you()" class="back-btn"><img src="img/arrow-back.png"></button>');
-    alerts_array.push('<div id="plan_details_header"  class="head_common">');
+    /*alerts_array.push('<div id="plan_details_header"  class="head_common">');
     alerts_array.push('<div class="header_white"></div>');
     alerts_array.push('<span class="header_text" class="header">Alerts</span>');
-    alerts_array.push('</div>');
+    alerts_array.push('</div>');*/
+    setheadername(alerts_array, "Alerts");
     var alertcount = 0;
     console.log(url);
     var req = $.ajax({
@@ -1366,15 +1370,15 @@ function bottm_buttons(results_array) {
     results_array.push('<span class="icon-airplane button-icon"></span>');
     results_array.push('</a>');
     results_array.push('<a class="footer-button" href="#correspondance">');
-    results_array.push('<span class="icon-chat button-icon"></span>');
+    results_array.push('<span class="icon-bubbles button-icon"></span>');
     results_array.push('</a>');
-    results_array.push('<a id="cscemail" href="http://www.bs-shipmanagement.com">');
-    results_array.push('<div class="footer-button"><span class="icon-email2 button-icon"></span></div>');
+    results_array.push('<a class="footer-button" id="cscemail" href="http://www.bs-shipmanagement.com">');
+    results_array.push('<span class="icon-mail button-icon"></span>');
     results_array.push('</a>');
-    results_array.push('<div class="footer-button">');
+    results_array.push('<a class="footer-button">');
     results_array.push('<span class="icon-phone button-icon"></span>');
+    results_array.push('</a>');
     results_array.push('</div>');
-
 }
 
 function hide_all() {
@@ -1435,11 +1439,18 @@ function setheadername(results_array, name, head_pic_name) {
     /*if(head_pic_name.indexOf("pic")>-1)
         results_array.push('<div id="plan_details_header"  class="head_common_pic">');//head_common_pic
     else*/
-        results_array.push('<div id="plan_details_header"  class="head_common_pic">');//head_common
-    results_array.push('<div class="header_white"></div>');
+    //results_array.push('<div id="header_bar"></div>');//head_common
+    //results_array.push('<div id="plan_details_header"  class="head_common_pic">');//head_common
+    //results_array.push('<div class="header_white"></div>');
+    results_array.push('<div class="header">');
+    results_array.push('<h1>');
+    results_array.push('<img src="img/bsm_logo_glow.png" style="height: 19px; padding-top:13px; padding-right: 5px;">MyBSM');
+    results_array.push('</h1>');
+    results_array.push('<hr class="style-four" style="margin-top: 10px;">');
+    results_array.push('</div>');
     results_array.push('<span class="header_text" class="header"> ' + name + '</span>');
     //results_array.push('<div id="plan_details_header_menu"><span id="hamburger-btn" class="hamburger icon-list"></span></div>')
-    results_array.push('</div>');
+    //results_array.push('</div>');
 }
 
 function index_page_call() {
