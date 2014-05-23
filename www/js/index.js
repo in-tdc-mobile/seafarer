@@ -372,7 +372,7 @@ function update_profile_page() {
     $('#update_profile').show(); 
     var results_array = new Array(); 
     //results_array.push('<button onclick="youback()" class="back-btn"><img src="img/arrow-back.png"></button>');
-    setheadername(results_array, "Update Contact Details", "name");
+    setheadername(results_array, '<span class="icon-pencil2 pagename-icon"></span>  Update Contact Details', "name");
     results_array.push('<div class = "hambrgrdetails">');
     results_array.push('<form onsubmit="return update_profile()" ><input type="text" placeholder="Email" id="prof_email" class="biginput topcoat-text-input">');
     results_array.push('<input type="text" id="prof_phone" placeholder="Phone" class="biginput topcoat-text-input">');
@@ -383,7 +383,7 @@ function update_profile_page() {
 
 function update_profile() {
     var results_array = new Array(); 
-    setheadername(results_array, "Update Contact Details", "name");
+    setheadername(results_array, '<span class="icon-pencil2"></span>  Update Contact Details', "name");
     results_array.push('<div class = "hambrgrdetails">');
     var url = prefilurl+"insert_emp_profile.php?";
     console.log(url);
@@ -479,7 +479,7 @@ function show_plan_details() {
                 
                 cscemail = data['csc_email'];
 
-                setheadername(results_array, '<span class="icon-boat"></span>  '+data['vessel_name'] + '(' + data['flag_name'] + ')', "pic");
+                setheadername(results_array, '<span class="icon-briefcase pagename-icon"></span><span class="icon-boat"></span>  '+data['vessel_name'] + '(' + data['flag_name'] + ')', "pic");
                 
                 results_array.push('<div class="ship_image">');
                 results_array.push("<img src="+vessel_type+" class='dip_img'>");
@@ -536,7 +536,7 @@ function show_training_details() {
     $('#show_training_details').show();
     var url = prefilurl+"get_sf_training_details.php?empid="+$.jStorage.get("empid");
     var training_res_array = new Array(); 
-    setheadername(training_res_array, "Training", "pic");
+    setheadername(training_res_array, '<span class="icon-users pagename-icon"></span>  Training', "pic");
     training_res_array.push("<div class='training_image'> <img src='img/simulator.jpg' class='dip_img'> </div>");
     training_res_array.push('<div class="footer">');
     console.log(url);
@@ -591,7 +591,7 @@ function openpositions() {
     var url = prefilurl+"get_sf_open_positions.php?empid="+$.jStorage.get("empid");
 
     var opening_res_array = new Array(); 
-    setheadername(opening_res_array, "Open Positions", "pic");
+    setheadername(opening_res_array, '<span class="icon-megaphone pagename-icon"></span>  Open Positions', "pic");
     opening_res_array.push("<div class='opn_pos_img'><img src='img/openpositions.jpg' class='dip_img'></div>");
     opening_res_array.push("<div class='footer'>");
     console.log(url);
@@ -650,7 +650,7 @@ function show_flight_details() {
     $('#show_flight_details').show(); 
     var url = prefilurl+"get_sf_flight_details.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
-    setheadername(results_array, "Flight Details", "pic");
+    setheadername(results_array, '<span class="icon-airplane2  pagename-icon"></span>  Flight Details', "pic");
     results_array.push("<div> <img src='img/flight.jpg' class='dip_img'> </div>");
     //results_array.push('<button onclick="shoreback()" class="back-btn"><img src="img/arrow-back.png"></button>');
 
@@ -701,7 +701,7 @@ function allotment_details() {
     $('#allotment_details').show();
     var url = prefilurl+"get_sf_allotment_details.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
-    setheadername(results_array, "Allotment Details", "pic");
+    setheadername(results_array, '<span class="icon-banknote pagename-icon"></span>  Allotment Details', "pic");
     results_array.push("<div> <img src='img/money.jpg' class='dip_img'> </div>");
     console.log(url);
     var req = $.ajax({
@@ -785,7 +785,7 @@ function correspondance(){
     $('#correspondance_content').show(); 
     var results_array = new Array(); 
     //results_array.push('<button onclick="youback()" class="back-btn"><img src="img/arrow-back.png"></button>');
-    setheadername(results_array, "Correspondance", "name");
+    setheadername(results_array, '<span class="icon-bubbles  pagename-icon"></span>  Correspondance', "name");
     results_array.push('<div class = "hambrgrdetails">');
     results_array.push('<form onsubmit="return correspondancesend()" >');
     results_array.push('<textarea class="topcoat-text-input--large" id="message" style="height: 250px;line-height: 1.5rem;"></textarea></br>');
@@ -797,7 +797,7 @@ function correspondance(){
 
 function correspondancesend() {
     var results_array = new Array(); 
-    setheadername(results_array, "Correspondance", "name");
+    setheadername(results_array, '<span class="icon-bubbles  pagename-icon"></span>  Correspondance', "name");
     results_array.push('<div class = "hambrgrdetails">');
     results_array.push('<img src = "img/email-send.png">');
     var url = prefilurl+"sf_insert_correspondance.php?";
@@ -872,7 +872,7 @@ function doadetails(){
             var add = 'adddoa';
             var cancel = 'canceldoa';
             // results_array.push('<div class="dashboard_tiles">');
-            setheadername(results_array, "DoA Details", "name");
+            setheadername(results_array, '<span class="icon-calendar4 pagename-icon"></span>  DoA Details', "name");
             results_array.push('<div class = "hambrgrdetails">');
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
@@ -909,7 +909,7 @@ function doaAdd(status) {
 
         //doa_array.push('<button onclick="doadetails()" class="back-btn"><img src="img/arrow-back.png"></button>');
         doa_array.push('<div class="adddoa">');
-        setheadername(doa_array, "DoA Details");
+        setheadername(doa_array, '<span class="icon-calendar4 pagename-icon"></span>  DoA Details', "name");
         doa_array.push('<div class = "hambrgrdetails">');
         doa_array.push("<form onsubmit=savedoa(); return false; >");
         doa_array.push('<span>Date:</span><br><input class="topcoat-date-picker" type="date" id="doadate">');
@@ -1040,7 +1040,7 @@ function documentdetails(){
             results_array.push('<div class="header_white"></div>');
             results_array.push('<span class="header_text" class="header">Expiry Documents</span>');
             results_array.push('</div>');*/
-            setheadername(results_array, "Expiry Documents");
+            setheadername(results_array, '<span class="icon-file pagename-icon"></span>  Expiry Documents');
             results_array.push('<div class = "hambrgrdetails">');
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
@@ -1145,7 +1145,7 @@ function getplanalerts() {
     alerts_array.push('<div class="header_white"></div>');
     alerts_array.push('<span class="header_text" class="header">Alerts</span>');
     alerts_array.push('</div>');*/
-    setheadername(alerts_array, "Alerts");
+    setheadername(alerts_array, '<span class="icon-bell2 pagename-icon"></span>  Alerts');
     var alertcount = 0;
     console.log(url);
     var req = $.ajax({

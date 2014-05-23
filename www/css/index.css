@@ -737,6 +737,11 @@ body{
   right: -7px;
 }
 
+.pagename-icon{
+  /*position: relative;
+  top: 2px;*/
+}
+
 
 input[type=date] {
   -webkit-appearance: none;
