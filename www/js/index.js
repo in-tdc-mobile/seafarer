@@ -572,7 +572,7 @@ function show_training_details() {
         $('#show_training_details').html(training_res_array.join(""));
     },
     error: function (request, status, error) {
-        opening_res_array.push("</div>");
+        training_res_array.push("</div>");
         training_res_array.push("<span> No data to display </span><br/>");
         $('#show_training_details').html(training_res_array.join(""));
         hide_spinner();
