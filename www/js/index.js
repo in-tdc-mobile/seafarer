@@ -1358,7 +1358,7 @@ function getflightalerts(alertcount, alerts_array) {
             }
             hide_spinner();
             alerts_array.push('</div>');
-            $('#alrtnum').html("("+alertcount+")");
+            $('#alert_count').html(alertcount);
             $('#alert_content').html(alerts_array.join(""));
         },
         error: function (request, status, error) {

@@ -691,6 +691,25 @@ body{
   z-index: 3;
 }
 
+#alert_count_btn{
+  height: 28px;
+  width: 28px;
+  position: absolute;
+  top: 5px;
+  font-size: 20px;
+  left: 8px;
+/*  background-color: rgb(60, 36, 102);
+  color: white;
+  -webkit-border-radius: 20px 20px 20px 20px;
+  border-radius: 20px 20px 20px 20px;
+  border: 1px solid;*/
+  z-index: 2;
+}
+
+#alert_count { 
+  margin-left: 10px;
+}
+
 
 .hamburger{
   /*position: relative;
