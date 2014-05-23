@@ -1217,13 +1217,13 @@ function getallotmentalerts(alertcount, alerts_array) {
             if(data[0] != null) {
                 
                 for (var i = 0; i < data.length; i++) {
-                    
+                    var pro_date = new Date(data[i]['processed']);
                     /*if(data[i]['status'] == 'I') {*/ 
                     //if((Date.parse(data[i]['processed'])) > Date.parse(new Date())){
                         alertcount++;
                         $('#h_allotment').html('<img src="img/tick.png">');
                         alerts_array.push("<a class='btns' href='#allotment'>");
-                        alerts_array.push("Allotment Processed on, " +new String(data[i]['processed']).split("T")[0]);
+                        alerts_array.push("Allotment Processed on " +getMonthName(pro_date.getMonth()) +", "+pro_date.getFullYear());
                         alerts_array.push("</a>");
                         alerts_array.push("<hr  class='style-one'>")
                         
