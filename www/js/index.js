@@ -716,15 +716,19 @@ function allotment_details() {
             var period=0;
             results_array.push('<div class = "hambrgrdetails" style="margin-top: 0px;">');
             if(data[0] != null) {
-                results_array.push("<span><b> Last Processed :</b> "+new String(data[0]['processed_on']).split("T")[0]+"</span><br/>");
-                results_array.push("<br><b>Balance Amount:</b><br>");
+                var pro_date = new Date(data[0]['processed_on']);
+                results_array.push("<span> Amount is Processed on "+getMonthName(pro_date.getMonth()) +", "+pro_date.getFullYear() +"</span><br/>");
+                results_array.push("Balance Amount is ");
+                var balamnt=0;
                 if(data[0] != null) {
-                    for (var i = 0; i < data.length; i++) {
-                        results_array.push("&nbsp;&nbsp;<span><b>"+data[i]['name']+" :</b> "+data[i]['bf_bal_sf_cur']+"</span><br/>");
+                    for (var i = 0; i < data.length; i++) {console.log(data[i]['bf_bal_sf_cur']);
+                        balamnt=parseFloat(balamnt)+parseFloat(data[i]['bf_bal_sf_cur']);
+                        //results_array.push("&nbsp;&nbsp;<span><b>"+data[i]['name']+" :</b> "+data[i]['bf_bal_sf_cur']+"</span><br/>");
                         period = data[i]['max_period'];
                         hide_spinner();
                     }
                 }
+                results_array.push(prsflt(balamnt));
             }
             allotted_details(period, results_array);
             
@@ -756,9 +760,9 @@ function allotted_details(period, results_array) {
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
                     if(i == 0){
-                        results_array.push("<br><b>Allotted to:</b><br>");
+                        results_array.push("<br> Amount Allotted to ");
                     }
-                    results_array.push("&nbsp;&nbsp;"+data[i]['beneficiary_name']+": "+data[i]['amount']+"("+data[i]['currency']+")");
+                    results_array.push("<br>&nbsp;&nbsp;"+data[i]['beneficiary_name']+": "+data[i]['amount']+"("+data[i]['currency']+")");
                 }
             } else {
                 results_array.push("<br>No Allotments for you.")
@@ -785,6 +789,7 @@ function correspondance(){
     results_array.push('<div class = "hambrgrdetails">');
     results_array.push('<form onsubmit="return correspondancesend()" >');
     results_array.push('<textarea class="topcoat-text-input--large" id="message" style="height: 250px;line-height: 1.5rem;"></textarea></br>');
+    results_array.push('<span id="error_corrspondance" style="color:red"></span><br>');
     results_array.push('<input type="submit" value="Send" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
     results_array.push('</div>');
     $('#correspondance_content').html(results_array.join(""));
@@ -805,38 +810,42 @@ function correspondancesend() {
         'message': message,
         'subject':''
     };
-    var req = $.ajax({
-        url: url,
-        type: "post",
-        data: form_data,
-        beforeSend: function() {
-            show_spinner();
-        },
+    
+    if(message == null || message == '') {
+        $('#error_corrspondance').html("Please enter text and continue..");
+    } else {
+        var req = $.ajax({
+            url: url,
+            type: "post",
+            data: form_data,
+            beforeSend: function() {
+                show_spinner();
+            },
 
-        success : function(data) {
-            if(data == 'Sucess') {
-                //$('#correspondance_content').hide();
-                //showdashbord();
-                hide_spinner();
-                results_array.push('</span> Correspondance send...</span>');
-                results_array.push("</div>");
-                $('#correspondance_content').html(results_array.join(""));
-                
-            } else {
-                hide_spinner();
-                results_array.push("Issue in sending Correspondance, please try again");
+            success : function(data) {
+                if(data == 'Sucess') {
+                    //$('#correspondance_content').hide();
+                    //showdashbord();
+                    hide_spinner();
+                    results_array.push('</span> Correspondance send...</span>');
+                    results_array.push("</div>");
+                    $('#correspondance_content').html(results_array.join(""));
+                    
+                } else {
+                    hide_spinner();
+                    results_array.push("Issue in sending Correspondance, please try again");
+                    results_array.push("</div>");
+                    $('#correspondance_content').html(results_array.join(""));
+                }
+            },
+            error: function (request, status, error) {
+                results_array.push("Issue in sending Correspondance, please try again:"+error);
                 results_array.push("</div>");
                 $('#correspondance_content').html(results_array.join(""));
             }
-        },
-        error: function (request, status, error) {
-            results_array.push("Issue in sending Correspondance, please try again:"+error);
-            results_array.push("</div>");
-            $('#correspondance_content').html(results_array.join(""));
-        }
-     
-    });
-    
+         
+        });
+    }
 }
 
 function doadetails(){
@@ -905,6 +914,7 @@ function doaAdd(status) {
         doa_array.push("<form onsubmit=savedoa(); return false; >");
         doa_array.push('<span>Date:</span><br><input class="topcoat-date-picker" type="date" id="doadate">');
         doa_array.push('<br><span>Remark:</span><br><textarea class="topcoat-text-input--large" id="coaremark"></textarea></br>');
+        doa_array.push('<span id="error_doa" style="color:red"></span><br>');
         doa_array.push('<input type="submit" value="Save DoA" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
         doa_array.push('</form>');
         doa_array.push('</div>');
@@ -927,30 +937,34 @@ function savedoa() {
         'doadate': doadate,
         'operation': 'A'
     };
-    var req = $.ajax({
-        url: url,
-        type: "post",
-        data: form_data,
-        beforeSend: function() {
-            show_spinner();
-        },
+    if(doadate == null || doadate == '' || (Date.parse(doadate) < Date.parse(new Date()))) {
+        $('#error_doa').html("Please enter a valid future date and continue..");
+    } else {
+        var req = $.ajax({
+            url: url,
+            type: "post",
+            data: form_data,
+            beforeSend: function() {
+                show_spinner();
+            },
 
-        success : function(data) {
-            if(data == 'Sucess') {
-                //showdashbord();
-                doadetails();
-            } else {
-                alert("Issue in adding doa, please try again");
+            success : function(data) {
+                if(data == 'Sucess') {
+                    //showdashbord();
+                    doadetails();
+                } else {
+                    alert("Issue in adding doa, please try again");
+                }
+                
+                hide_spinner();
+            },
+            error: function (request, status, error) {
+                alert("error:"+error);
+                alert("status:"+status);
+                alert("request:"+request);
             }
-            
-            hide_spinner();
-        },
-        error: function (request, status, error) {
-            alert("error:"+error);
-            alert("status:"+status);
-            alert("request:"+request);
-        }
-    });
+        });
+    }
 }
 
 function canceldoa() {
@@ -1142,14 +1156,17 @@ function getplanalerts() {
             alerts_array.push('<div class = "hambrgrdetails">');
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
-                    alertcount++;
-                    $('#h_plan').html('<img src="img/tick.png">');
+                    
                     if(data[i]['status'] == 'I') {
+                        alertcount++;
+                        $('#h_plan').html('<img src="img/tick.png">');
                         alerts_array.push("<a class='btns' href='#plan'>");
                         alerts_array.push("You are lined up for "+data[i]['vessel_name']+" ("+new String(data[i]['join_date']).split("T")[0]+") <br>");
                         alerts_array.push("</a>");
                         alerts_array.push("<hr  class='style-one'>")
                     } else if(data[i]['status'] == 'U'){
+                        alertcount++;
+                        $('#h_plan').html('<img src="img/tick.png">');
                         alerts_array.push("<a class='btns' href='#plan'>");
                         alerts_array.push("There is a change in Plan, please check your ");
                         if (data[i]['changes'].indexOf('A')>-1){
@@ -1198,13 +1215,13 @@ function getallotmentalerts(alertcount, alerts_array) {
         success : function(data) {
             var d = new Date();
             if(data[0] != null) {
-                $('#h_allotment').html('<img src="img/tick.png">');
+                
                 for (var i = 0; i < data.length; i++) {
                     
                     /*if(data[i]['status'] == 'I') {*/ 
                     //if((Date.parse(data[i]['processed'])) > Date.parse(new Date())){
                         alertcount++;
-                       
+                        $('#h_allotment').html('<img src="img/tick.png">');
                         alerts_array.push("<a class='btns' href='#allotment'>");
                         alerts_array.push("Allotment Processed on, " +new String(data[i]['processed']).split("T")[0]);
                         alerts_array.push("</a>");
@@ -1241,9 +1258,9 @@ function gettrainingalerts(alertcount, alerts_array) {
             var d = new Date();
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
-                    alertcount++;
-                    $('#h_training').html('<img src="img/tick.png">');
                     if(data[i]['status'] == 'I') { 
+                        alertcount++;
+                        $('#h_training').html('<img src="img/tick.png">');
                        // alerts_array.push("<br>");
                         alerts_array.push("<a class='btns' href='#training'>");
                         alerts_array.push("New Training Added: " +data[i]['institution']+" ("+new String(data[i]['from_date']).split("T")[0]+")");
@@ -1251,6 +1268,8 @@ function gettrainingalerts(alertcount, alerts_array) {
                         alerts_array.push("<hr  class='style-one'>")
                     } else if(data[i]['status'] == 'U'){
                         //alerts_array.push("<br>");
+                        alertcount++;
+                        $('#h_training').html('<img src="img/tick.png">');
                         alerts_array.push("<a class='btns' href='#training'>");
                         alerts_array.push("There is a change in Training, please check your ");
                         if (data[i]['changes'].indexOf('A')>-1){
@@ -1294,9 +1313,10 @@ function getflightalerts(alertcount, alerts_array) {
         success : function(data) {
                 if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
-                    alertcount++;
-                    $('#h_flight').html('<img src="img/tick.png">');
+                    
                     if(data[i]['status'].trim() == 'I') { 
+                        alertcount++;
+                        $('#h_flight').html('<img src="img/tick.png">');
                         //alerts_array.push("<br>");
                         alerts_array.push("<a class='btns' href='#flight'>");
                         alerts_array.push("New Flight Detail Added for the date : "+new String(data[i]['arrival_date']).split("T")[0]);
@@ -1304,6 +1324,8 @@ function getflightalerts(alertcount, alerts_array) {
                         alerts_array.push("<hr  class='style-one'>")
 
                     } else if(data[i]['status'] == 'U'){
+                        alertcount++;
+                        $('#h_flight').html('<img src="img/tick.png">');    
                         //alerts_array.push("<br>");
                         alerts_array.push("<a class='btns' href='#flight'>");
                         alerts_array.push("There is a change in Training, please check ");
@@ -1425,4 +1447,35 @@ function index_page_call() {
     $("#index_content").removeClass('rightsmooth');
     $("#index_content").css('z-index', 2);
     $("#alert_content").css('z-index', 1);
+}
+
+function getMonthName(month) {
+    var mname = "Jan"
+    if(month == 2)
+        mname = "Feb";
+    if(month == 3)
+        mname = "Mar";
+    if(month == 4)
+        mname = "Apr";
+    if(month == 5)
+        mname = "May";
+    if(month == 6)
+        mname = "Jun";
+    if(month == 7)
+        mname = "July";
+    if(month == 8)
+        mname = "Aug";
+    if(month == 9)
+        mname = "Sep";
+    if(month == 10)
+        mname = "Oct";
+    if(month == 11)
+        mname = "Nov";
+    if(month == 12)
+        mname = "Dec";
+    return mname;
+}
+
+function prsflt(e){
+  return parseFloat(e).toFixed(2);
 }
