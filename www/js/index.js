@@ -536,7 +536,7 @@ function show_training_details() {
     $('#show_training_details').show();
     var url = prefilurl+"get_sf_training_details.php?empid="+$.jStorage.get("empid");
     var training_res_array = new Array(); 
-    setheadername(training_res_array, '<span class="icon-users pagename-icon"></span>  Training', "pic");
+    setheadername(training_res_array, '   Training', "pic");
     training_res_array.push("<div class='training_image'> <img src='img/simulator.jpg' class='dip_img'> </div>");
     training_res_array.push('<div class="footer">');
     console.log(url);
@@ -912,7 +912,7 @@ function doaAdd(status) {
         setheadername(doa_array, '<span class="icon-calendar4 pagename-icon"></span>  DoA Details', "name");
         doa_array.push('<div class = "hambrgrdetails">');
         doa_array.push("<form onsubmit=savedoa(); return false; >");
-        doa_array.push('<span>Date:</span><br><input class="topcoat-date-picker" type="date" id="doadate">');
+        doa_array.push('<span>Date:</span><br><input class="topcoat-date-picker" type="date" value='+new Date()+' id="doadate">');
         doa_array.push('<br><span>Remark:</span><br><textarea class="topcoat-text-input--large" id="coaremark"></textarea></br>');
         doa_array.push('<span id="error_doa" style="color:red"></span><br>');
         doa_array.push('<input type="submit" value="Save DoA" style="color:#00303f;font:bold 12px verdana; padding:5px;">');
@@ -927,7 +927,6 @@ function doaAdd(status) {
 }
 
 function savedoa() {
-    alert($(this).attr('value'))
     var results_array = new Array(); 
     var url = prefilurl+"sf_save_doa.php?";
     var remark = $("#coaremark").val();
@@ -1164,6 +1163,7 @@ function getplanalerts() {
                     if(data[i]['status'] == 'I') {
                         alertcount++;
                         $('#h_plan').html('<img src="img/tick.png">');
+                        alerts_array.push('<span class="icon-briefcase pagename-icon"></span>  ');
                         alerts_array.push("<a class='btns' href='#plan'>");
                         alerts_array.push("You are lined up for "+data[i]['vessel_name']+" ("+new String(data[i]['join_date']).split("T")[0]+") <br>");
                         alerts_array.push("</a>");
@@ -1171,6 +1171,7 @@ function getplanalerts() {
                     } else if(data[i]['status'] == 'U'){
                         alertcount++;
                         $('#h_plan').html('<img src="img/tick.png">');
+                        alerts_array.push('<span class="icon-briefcase pagename-icon"></span>  ');
                         alerts_array.push("<a class='btns' href='#plan'>");
                         alerts_array.push("There is a change in Plan, please check your ");
                         if (data[i]['changes'].indexOf('A')>-1){
@@ -1226,6 +1227,7 @@ function getallotmentalerts(alertcount, alerts_array) {
                     //if((Date.parse(data[i]['processed'])) > Date.parse(new Date())){
                         alertcount++;
                         $('#h_allotment').html('<img src="img/tick.png">');
+                        alerts_array.push('<span class="icon-banknote pagename-icon"></span>  ');
                         alerts_array.push("<a class='btns' href='#allotment'>");
                         alerts_array.push("Allotment Processed on " +getMonthName(pro_date.getMonth()) +", "+pro_date.getFullYear());
                         alerts_array.push("</a>");
@@ -1266,6 +1268,7 @@ function gettrainingalerts(alertcount, alerts_array) {
                         alertcount++;
                         $('#h_training').html('<img src="img/tick.png">');
                        // alerts_array.push("<br>");
+                        alerts_array.push('<span class="icon-users pagename-icon"></span>  ');
                         alerts_array.push("<a class='btns' href='#training'>");
                         alerts_array.push("New Training Added: " +data[i]['institution']+" ("+new String(data[i]['from_date']).split("T")[0]+")");
                         alerts_array.push("</a>");
@@ -1274,6 +1277,7 @@ function gettrainingalerts(alertcount, alerts_array) {
                         //alerts_array.push("<br>");
                         alertcount++;
                         $('#h_training').html('<img src="img/tick.png">');
+                        alerts_array.push('<span class="icon-users pagename-icon"></span>  ');
                         alerts_array.push("<a class='btns' href='#training'>");
                         alerts_array.push("There is a change in Training, please check your ");
                         if (data[i]['changes'].indexOf('A')>-1){
@@ -1322,6 +1326,7 @@ function getflightalerts(alertcount, alerts_array) {
                         alertcount++;
                         $('#h_flight').html('<img src="img/tick.png">');
                         //alerts_array.push("<br>");
+                        alerts_array.push('<span class="icon-airplane2 pagename-icon"></span>  ');
                         alerts_array.push("<a class='btns' href='#flight'>");
                         alerts_array.push("New Flight Detail Added for the date : "+new String(data[i]['arrival_date']).split("T")[0]);
                         alerts_array.push("</a>");
@@ -1331,6 +1336,7 @@ function getflightalerts(alertcount, alerts_array) {
                         alertcount++;
                         $('#h_flight').html('<img src="img/tick.png">');    
                         //alerts_array.push("<br>");
+                        alerts_array.push('<span class="icon-airplane2 pagename-icon"></span>  ');
                         alerts_array.push("<a class='btns' href='#flight'>");
                         alerts_array.push("There is a change in Training, please check ");
                         if (data[i]['changes'].indexOf('A')>-1){
