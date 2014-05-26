@@ -675,8 +675,8 @@ function show_flight_details() {
                     results_array.push("<span> Departure Date :  "+new String(data[i]['departure_date']).split("T")[i]+"</span><br/>");
                     results_array.push("<span> Arrival : "+data[i]['arrival']+"</span><br/>");
                     results_array.push("<span> Arrival Date : "+new String(data[i]['arrival_date']).split("T")[i]+"</span><br/>");
-                    results_array.push("<span> Travel Route : "+data[i]['travel_route']+"</span><br/>");
-                    results_array.push("<span> Remarks : "+data[i]['remarks']+"</span><br/>");
+                    results_array.push("<span> Travel Route : "+nullcheck(data[i]['travel_route'])+"</span><br/>");
+                    results_array.push("<span> Remarks : "+nullcheck(data[i]['remarks'])+"</span><br/>");
                     hide_spinner();
                 }                
      
@@ -1388,4 +1388,10 @@ function getMonthName(month) {
 
 function prsflt(e){
   return parseFloat(e).toFixed(2);
+}
+
+function nullcheck(data) {
+    if(data == null)
+        data = '';
+    return data;
 }
