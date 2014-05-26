@@ -481,7 +481,7 @@ function show_plan_details() {
                 }
                 
                 cscemail = data['csc_email'];
-
+                $.jStorage.set("cscemail", cscemail)
                 setheadername(results_array, '<span class="icon-briefcase pagename-icon"></span><span class="icon-boat"></span>  '+data['vessel_name'] + '(' + data['flag_name'] + ')', "pic");
                 
                 results_array.push('<div class="ship_image">');
@@ -491,14 +491,14 @@ function show_plan_details() {
                 results_array.push('<div class="footer">');
                 // results_array.push("<span> Vessel : "+data['vessel_name']+"</span><br/>");
                 // results_array.push("<span> Flag : "++"</span><br/>");
-                results_array.push('<div style="margin-left:5px">')
+                results_array.push('<div style="margin-left:5px">');
                 results_array.push("<span><b> Vessel Type :</b> "+data['vessel_type']+"</span><br/>");
                 results_array.push("<span><b> Manager :</b> "+data['emp_sdc_name']+"</span><br/>");
                 results_array.push("<span><b> Exp. Join Date :</b> "+new String(data['from_date']).split("T")[0]+"</span><br/>");
                 results_array.push("<span><b> Exp. Join Port :</b> "+port+"</span><br/>");
-                results_array.push('</div>')                
-                bottm_buttons(results_array);
                 results_array.push('</div>');
+                bottm_buttons("P" ,results_array, "mailto:"+cscemail);
+                
                 //data['phone1'];
                 //data['phone2'];
                 
@@ -507,9 +507,9 @@ function show_plan_details() {
                 results_array.push('<div style="margin-top: 100px;font-size: large;">No Plan Available for You.. Please Swipe screen for more details</div>')
             }
             $('#show_plan_details').html(results_array.join(""));
-            if(cscemail != null) {
+           /* if(cscemail != null) {
                 document.getElementById("cscemail").href="mailto:"+cscemail;
-            }
+            }*/
             hide_spinner();
 
             menuBtn = document.querySelector('#hamburger-btn');
@@ -794,6 +794,7 @@ function correspondance(){
     results_array.push('<textarea class="topcoat-text-input--large" id="message" style="height: 250px;line-height: 1.5rem;"></textarea></br>');
     results_array.push('<span id="error_corrspondance" style="color:red"></span><br>');
     results_array.push('<input type="submit" value="Send" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
+    bottm_buttons("C" ,results_array, "mailto:"+$.jStorage.get("cscemail"));
     results_array.push('</div>');
     $('#correspondance_content').html(results_array.join(""));
 }
@@ -1370,23 +1371,31 @@ function getflightalerts(alertcount, alerts_array) {
     });
 }
 
-function bottm_buttons(results_array) {
+function bottm_buttons(page, results_array, cscemail) {
     // <span class="icon-boat"></span>
     $('#tile_icons').show();
     results_array.push("<hr class='style-one'>");
     results_array.push('<div id="tile_icons">');
-    results_array.push('<a class="footer-button" href="#flight">');
-    results_array.push('<span class="icon-airplane button-icon"></span>');
-    results_array.push('</a>');
-    results_array.push('<a class="footer-button" href="#correspondance">');
-    results_array.push('<span class="icon-bubbles button-icon"></span>');
-    results_array.push('</a>');
-    results_array.push('<a class="footer-button" id="cscemail" href="http://www.bs-shipmanagement.com">');
-    results_array.push('<span class="icon-mail button-icon"></span>');
-    results_array.push('</a>');
-    results_array.push('<a class="footer-button">');
-    results_array.push('<span class="icon-phone button-icon"></span>');
-    results_array.push('</a>');
+    if(page == "P") {
+        results_array.push('<a class="footer-button" href="#flight">');
+        results_array.push('<span class="icon-airplane button-icon"></span>');
+        results_array.push('</a>');
+    }
+    if(page == "P") {
+        results_array.push('<a class="footer-button" href="#correspondance">');
+        results_array.push('<span class="icon-bubbles button-icon"></span>');
+        results_array.push('</a>');
+    }
+    if(page == "P" || page == "C") {
+        results_array.push('<a class="footer-button" id="cscemail" href=\"'+cscemail+'\">');
+        results_array.push('<span class="icon-mail button-icon"></span>');
+        results_array.push('</a>');
+    }
+    if(page == "P" || page == "C") {
+        results_array.push('<a class="footer-button">');
+        results_array.push('<span class="icon-phone button-icon"></span>');
+        results_array.push('</a>');
+    }
     results_array.push('</div>');
 }
 
