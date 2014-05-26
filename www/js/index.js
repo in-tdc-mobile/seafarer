@@ -800,24 +800,23 @@ function correspondance(){
 }
 
 function correspondancesend() {
-    var results_array = new Array(); 
-    setheadername(results_array, '<span class="icon-bubbles  pagename-icon"></span>  Correspondance', "name");
-    results_array.push('<div class = "hambrgrdetails">');
-    results_array.push('<img src = "img/email-send.png">');
-    var url = prefilurl+"sf_insert_correspondance.php?";
-    console.log(url);
     var message = $("#message").val();
-    var emp_id = $.jStorage.get("empid");
-    var form_data= {
-        'empid': emp_id,
-        'managerid': -1,
-        'message': message,
-        'subject':''
-    };
-    
     if(message == null || message == '') {
         $('#error_corrspondance').html("Please enter text and continue..");
     } else {
+        var results_array = new Array(); 
+        setheadername(results_array, '<span class="icon-bubbles  pagename-icon"></span>  Correspondance', "name");
+        results_array.push('<div class = "hambrgrdetails">');
+        results_array.push('<img src = "img/email-send.png">');
+        var url = prefilurl+"sf_insert_correspondance.php?";
+        console.log(url);
+        var emp_id = $.jStorage.get("empid");
+        var form_data= {
+            'empid': emp_id,
+            'managerid': -1,
+            'message': message,
+            'subject':''
+        };
         var req = $.ajax({
             url: url,
             type: "post",
