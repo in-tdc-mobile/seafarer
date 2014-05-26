@@ -40,6 +40,7 @@ var app = {
         $('#hamburger-btn').hide();
         $('#top_icons').hide(); 
         $('#alert-btn').hide(); 
+        $('#alert_count_btn').hide(); 
         try{
             var login_empid = $.jStorage.get("empid");
             // $.jStorage.set("pal_user_email", '');
@@ -274,6 +275,7 @@ $(document).ready(function() {
     $('#hamburger-btn').hide();
     $('#top_icons').hide(); 
     $('#alert-btn').hide(); 
+    $('#alert_count_btn').hide(); 
     try{
         var login_empid = $.jStorage.get("empid");
         // $.jStorage.set("pal_user_email", '');
@@ -333,6 +335,7 @@ function login_success() {
     $('#hamburger-btn').show();
     $('#top_icons').show(); 
     $('#alert-btn').show(); 
+    $('#alert_count_btn').show(); 
     $('#index_content').show();
     $('#sea').hide();
     $('#shore').show();
@@ -1437,6 +1440,7 @@ function logout() {
     $('#hamburger-btn').hide();
     $('#top_icons').hide(); 
     $('#alert-btn').hide(); 
+    $('#alert_count_btn').hide(); 
     $('#index_content').css('display','none');
     $('#alert_content').css('display','none');
 }
