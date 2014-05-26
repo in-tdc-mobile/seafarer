@@ -1135,19 +1135,8 @@ function alerts_btn_call() {
 }
 
 function alerts() {
-    /*hide_all();
-    $('#alert_content').show(); */
-    getplanalerts();
-}
-
-function getplanalerts() {
-    var url = prefilurl+"get_sf_alert_plan.php?empid="+$.jStorage.get("empid");
+    var url = prefilurl+"get_sf_alerts.php?empid="+$.jStorage.get("empid");
     var alerts_array = new Array(); 
-    //alerts_array.push('<button onclick="you()" class="back-btn"><img src="img/arrow-back.png"></button>');
-    /*alerts_array.push('<div id="plan_details_header"  class="head_common">');
-    alerts_array.push('<div class="header_white"></div>');
-    alerts_array.push('<span class="header_text" class="header">Alerts</span>');
-    alerts_array.push('</div>');*/
     setheadername(alerts_array, '<span class="icon-bell2 pagename-icon"></span>  Alerts');
     var alertcount = 0;
     console.log(url);
@@ -1164,147 +1153,39 @@ function getplanalerts() {
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
                     
-                    if(data[i]['status'] == 'I') {
                         alertcount++;
-                        $('#h_plan').html('<img src="img/tick.png">');
-                        alerts_array.push('<span class="icon-briefcase pagename-icon"></span>  ');
-                        alerts_array.push("<a class='btns' href='#plan'>");
-                        alerts_array.push("You are lined up for "+data[i]['vessel_name']+" ("+new String(data[i]['join_date']).split("T")[0]+") <br>");
-                        alerts_array.push("</a>");
-                        alerts_array.push("<hr  class='style-one'>")
-                    } else if(data[i]['status'] == 'U'){
-                        alertcount++;
-                        $('#h_plan').html('<img src="img/tick.png">');
-                        alerts_array.push('<span class="icon-briefcase pagename-icon"></span>  ');
-                        alerts_array.push("<a class='btns' href='#plan'>");
-                        alerts_array.push("There is a change in Plan, please check your ");
-                        if (data[i]['changes'].indexOf('A')>-1){
-                            alerts_array.push("Vessel, ");
-                        }
-                        if (data[i]['changes'].indexOf('B')>-1){
-                            alerts_array.push("Vessel Type, ");
-                        }
-                        if (data[i]['changes'].indexOf('C')>-1){
-                            alerts_array.push("Manager, ");
-                        }
-                        if (data[i]['changes'].indexOf('D')>-1){
-                            alerts_array.push("Date, ");
-                        }
-                        if (data[i]['changes'].indexOf('E')>-1){
-                            alerts_array.push("Port, ");
-                        }
-                        if (data[i]['changes'].indexOf('F')>-1){
-                            alerts_array.push("Flag");
-                        }
-                        alerts_array.push("</a>");
-                        alerts_array.push("<hr  class='style-one'>")
                         
-                    }
-                    
-                }
-            }
-            getallotmentalerts(alertcount, alerts_array);
-        },
-        error: function (request, status, error) {
-            hide_spinner();
-        }
-    });
-}
-
-function getallotmentalerts(alertcount, alerts_array) {
-    var url = prefilurl+"get_sf_alert_allotment.php?empid="+$.jStorage.get("empid");
-    console.log(url);
-    var req = $.ajax({
-        url: url,
-        datatype: 'text',
-        beforeSend: function() {
-            show_spinner();
-        },
-
-        success : function(data) {
-            var d = new Date();
-            if(data[0] != null) {
-                
-                for (var i = 0; i < data.length; i++) {
-                    var pro_date = new Date(data[i]['processed']);
-                    /*if(data[i]['status'] == 'I') {*/ 
-                    //if((Date.parse(data[i]['processed'])) > Date.parse(new Date())){
-                        alertcount++;
-                        $('#h_allotment').html('<img src="img/tick.png">');
-                        alerts_array.push('<span class="icon-banknote pagename-icon"></span>  ');
-                        alerts_array.push("<a class='btns' href='#allotment'>");
-                        alerts_array.push("Allotment Processed on " +getMonthName(pro_date.getMonth()) +", "+pro_date.getFullYear());
-                        alerts_array.push("</a>");
-                        alerts_array.push("<hr  class='style-one'>")
                         
-                    //}
-                    /*} else if(data[i]['status'] == 'U'){
-                        alerts_array.push("There is a change in Plan, please check your ");
-                        if (data[i]['changes'].indexOf('A')>-1){
-                            alerts_array.push("Allotment Processed on, " +new String(data[i]['processed']).split("T")[0]);
+                        if(data[i]['alert_name'] == "FLIGHT") {
+                            $('#h_flight').html('<img src="img/tick.png">');
+                            alerts_array.push('<span class="icon-airplane2 pagename-icon"></span>  ');
+                            alerts_array.push("<a class='btns' href='#flight'>");
                         }
-                    }*/
-                }
-            }
-            gettrainingalerts(alertcount, alerts_array)
-        },
-        error: function (request, status, error) {
-            hide_spinner();
-        }
-    });
-}
-
-function gettrainingalerts(alertcount, alerts_array) {
-    var url = prefilurl+"get_sf_alert_training.php?empid="+$.jStorage.get("empid");
-    console.log(url);
-    var req = $.ajax({
-        url: url,
-        datatype: 'text',
-        beforeSend: function() {
-            show_spinner();
-        },
-
-        success : function(data) {
-            var d = new Date();
-            if(data[0] != null) {
-                for (var i = 0; i < data.length; i++) {
-                    if(data[i]['status'] == 'I') { 
-                        alertcount++;
-                        $('#h_training').html('<img src="img/tick.png">');
-                       // alerts_array.push("<br>");
-                        alerts_array.push('<span class="icon-users pagename-icon"></span>  ');
-                        alerts_array.push("<a class='btns' href='#training'>");
-                        alerts_array.push("New Training Added: " +data[i]['institution']+" ("+new String(data[i]['from_date']).split("T")[0]+")");
+                        if(data[i]['alert_name'] == "TRAINING") {
+                            $('#h_training').html('<img src="img/tick.png">');
+                            alerts_array.push('<span class="icon-users pagename-icon"></span>  ');
+                            alerts_array.push("<a class='btns' href='#training'>");
+                        }
+                        if(data[i]['alert_name'] == "ALLOTMENT") {
+                            $('#h_allotment').html('<img src="img/tick.png">');
+                            alerts_array.push('<span class="icon-banknote pagename-icon"></span>  ');
+                            alerts_array.push("<a class='btns' href='#allotment'>");
+                        }
+                        if(data[i]['alert_name'] == "PLAN") {
+                            $('#h_plan').html('<img src="img/tick.png">');
+                            alerts_array.push('<span class="icon-briefcase pagename-icon"></span>  ');
+                            alerts_array.push("<a class='btns' href='#plan'>");
+                        }
+                        
+                        alerts_array.push(data[i]['message']);
                         alerts_array.push("</a>");
                         alerts_array.push("<hr  class='style-one'>")
-                    } else if(data[i]['status'] == 'U'){
-                        //alerts_array.push("<br>");
-                        alertcount++;
-                        $('#h_training').html('<img src="img/tick.png">');
-                        alerts_array.push('<span class="icon-users pagename-icon"></span>  ');
-                        alerts_array.push("<a class='btns' href='#training'>");
-                        alerts_array.push("There is a change in Training, please check your ");
-                        if (data[i]['changes'].indexOf('A')>-1){
-                            alerts_array.push("Course, ");
-                        }
-                        if (data[i]['changes'].indexOf('B')>-1){
-                            alerts_array.push("From Date, ");
-                        }
-                        if (data[i]['changes'].indexOf('C')>-1){
-                            alerts_array.push("To Date, ");
-                        }
-                        if (data[i]['changes'].indexOf('D')>-1){
-                            alerts_array.push("Institution, ");
-                        }
-                        if (data[i]['changes'].indexOf('E')>-1){
-                            alerts_array.push("Training Status");
-                        }
-                        alerts_array.push("</a>");
-                        alerts_array.push("<hr  class='style-one'>")
-                    }
                 }
+                hide_spinner();
+                alerts_array.push('</div>');
+                $('#alert_count').html(alertcount);
+                $('#alert_content').html(alerts_array.join(""));
             }
-            getflightalerts(alertcount, alerts_array)
         },
         error: function (request, status, error) {
             hide_spinner();
