@@ -1272,6 +1272,8 @@ function bottm_buttons(page, results_array, cscemail) {
         results_array.push('</a>');
     }
     if(page == "P" || page == "C") {
+        if(page == "C")
+            results_array.push('<div style="float: left; padding-top: 15px;">Contact CSC </div>');
         results_array.push('<a class="footer-button" id="cscemail" href=\"'+cscemail+'\">');
         results_array.push('<span class="icon-mail button-icon"></span>');
         results_array.push('</a>');
