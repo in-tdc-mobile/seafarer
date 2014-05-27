@@ -518,7 +518,6 @@ function show_training_details() {
     var training_res_array = new Array(); 
     setheadername(training_res_array, '   Training', "pic");
     training_res_array.push("<div class='training_image'> <img src='img/simulator.jpg' class='dip_img'> </div>");
-    training_res_array.push('<div class="footer">');
     console.log(url);
     var req = $.ajax({
     url: url,
@@ -530,16 +529,20 @@ function show_training_details() {
     success : function(data) { 
         
         var d = new Date();
+        training_res_array.push('<div class="footer">');
+        training_res_array.push("<ul class='topcoat-list__container' id='listview'>");
         for (var i = 0; i < data.length; i++) {
             if(data[i] != null) {
                 if(i>0) {
-                    training_res_array.push("<hr class='style-one'>");
+                    // training_res_array.push("<hr class='style-one'>");
                 }
+                training_res_array.push("<li class='topcoat-list__item'>");                
                 training_res_array.push("<span><b>Course :</b> "+data[i]['course']+"</span>");
                 training_res_array.push("<br/><span><b>Status :</b> "+data[i]['status']+"</span>");
                 training_res_array.push("<br/><span><b>From :</b> "+dateformat(data[i]['from_date'], "dd-mon-yyyy")+"</span>");
                 training_res_array.push("<br/><span><b>To :</b> "+dateformat(data[i]['to_date'], "dd-mon-yyyy")+"</span>");
                 training_res_array.push("<br/><span><b>Venue :</b> "+data[i]['institution']+"</span>");
+                training_res_array.push("</li>");
             } else {
                 training_res_array.push("<span> No training details updated </span><br/>");
                 hide_spinner();
@@ -547,6 +550,7 @@ function show_training_details() {
         }
         training_res_array.push(training_res_array);
         hide_spinner();
+        training_res_array.push("</ul>");
         training_res_array.push('</div>');
         //$('#foot_training').html(training_res_array.join(""));
         $('#show_training_details').html(training_res_array.join(""));
@@ -570,9 +574,12 @@ function openpositions() {
     var url = prefilurl+"get_sf_open_positions.php?empid="+$.jStorage.get("empid");
 
     var opening_res_array = new Array(); 
-    setheadername(opening_res_array, '<span class="icon-megaphone pagename-icon"></span>  Open Positions', "pic");
+    setheadername(opening_res_array, '<span class="icon-megaphone2 pagename-icon"></span>  Open Positions', "pic");
     opening_res_array.push("<div class='opn_pos_img'><img src='img/openpositions.jpg' class='dip_img'></div>");
-    opening_res_array.push("<div class='footer'>");
+    // opening_res_array.push("<div class='footer'>");
+    
+    // opening_res_array.push("<ul class='topcoat-list__container'>");
+
     console.log(url);
     var req = $.ajax({
     url: url,
@@ -586,13 +593,15 @@ function openpositions() {
         if(data[0] != null) {
             for(var i=0; i<data.length; i++) {
                 if(i>0)  {
-                    opening_res_array.push("<hr class='style-one'>");
+                    // opening_res_array.push("<hr class='style-one'>");
                 }
                 var vessel_type = data[i]['vessel_type'];
-                opening_res_array.push("<div' class='openpositionbox'>");
-                opening_res_array.push("<div' class='openpositionchild1'>");
+                // opening_res_array.push("<li class='topcoat-list__item'>");
+                opening_res_array.push("<div class='footer'>");
+                opening_res_array.push("<div class='openpositionbox'>");
+                opening_res_array.push("<div class='openpositionchild1'>");
                 opening_res_array.push("<img src="+vessel_type_pic(vessel_type)+" style='width:85px; height:80px;'>");
-                opening_res_array.push("</div'>");
+                opening_res_array.push("</div>");
                 opening_res_array.push("<div>");
                 opening_res_array.push("<span>"+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span>");
                 if(data[i]['vessel_type']!=null)
@@ -604,12 +613,16 @@ function openpositions() {
                 if(data[i]['sdc']!=null)
                     opening_res_array.push("<br/><span>"+data[i]['sdc']+"</span><br/>");
                 opening_res_array.push("</div>");
+                opening_res_array.push("</div>");
+                opening_res_array.push("</div>");
+                // opening_res_array.push("</li>");                
             }
         } else {
             opening_res_array.push("<span> No Open positions available </span><br/>");
         }
         hide_spinner();
-        opening_res_array.push("</div>");
+        // opening_res_array.push("</ul>");
+        // opening_res_array.push("</div>");
         $('#openpositions_content').html(opening_res_array.join(""));
     },
     error: function (request, status, error) {
@@ -633,7 +646,7 @@ function show_flight_details() {
     results_array.push("<div> <img src='img/flight.jpg' class='dip_img'> </div>");
     //results_array.push('<button onclick="shoreback()" class="back-btn"><img src="img/arrow-back.png"></button>');
 
-    results_array.push('<div class = "hambrgrdetails" style="margin-top: 0px;">');
+    results_array.push('<div class = "footer" style="margin-top: 0px;">');
     console.log(url);
     var req = $.ajax({
         url: url,
@@ -693,7 +706,7 @@ function allotment_details() {
         success : function(data) {
             var d = new Date();
             var period=0;
-            results_array.push('<div class = "hambrgrdetails" style="margin-top: 0px;">');
+            results_array.push('<div class = "footer" style="margin-top: 0px;">');
             if(data[0] != null) {
                 var pro_date = new Date(data[0]['processed_on']);
                 results_array.push("<span> Amount is Processed on "+getMonthName(pro_date.getMonth()) +", "+pro_date.getFullYear() +"</span><br/>");
@@ -852,22 +865,24 @@ function doadetails(){
             var cancel = 'canceldoa';
             // results_array.push('<div class="dashboard_tiles">');
             setheadername(results_array, '<span class="icon-calendar4 pagename-icon"></span>  DoA Details', "name");
-            results_array.push('<div class = "hambrgrdetails">');
+            results_array.push('<div class = "footer">');
+            results_array.push("<div style='margin-top:30px;'>");            
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
                     results_array.push("<span><b>DoA :</b> "+dateformat(data[i]['doa'], "dd-mon-yyyy")+"</span><br/>");
                     if(data[i]['remarks'] != null)
                         results_array.push("<span><b>Remark :</b> "+data[i]['remarks']+"</span><br/>");
-                    
-                    
                 }
             
             } else {
                 results_array.push('<span>No DoA Available, please Give DoA</span><br>');
             }
+            results_array.push("</div>");
             hide_spinner();
+            results_array.push("<div style='margin-top:40px;margin-bottom:15px;'>");
             results_array.push("<button onclick=\"doaAdd('"+add+"')\" style='color:#00303f;font:bold 12px verdana; padding:5px;'>Give DoA</button>");
             results_array.push("<button onclick=\"doaAdd('"+cancel+"')\" style='color:#00303f;font:bold 12px verdana; padding:5px;'>Cancel DoA</button>");
+            results_array.push("</div>");
             results_array.push('</div>');
             $('#doa_content').html(results_array.join(""));
         },
@@ -1008,23 +1023,35 @@ function documentdetails(){
             results_array.push('<div class="header_white"></div>');
             results_array.push('<span class="header_text" class="header">Expiry Documents</span>');
             results_array.push('</div>');*/
-            setheadername(results_array, '<span class="icon-file pagename-icon"></span>  Expiry Documents');
+            setheadername(results_array, '<span class="icon-file pagename-icon"></span>My Documents');
             results_array.push('<div class = "hambrgrdetails">');
             if(data[0] != null) {
-                for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i < data.length; i++) {                    
                     if(data[i]['doc_type'] != doc_type){
+                        if ( i!=0 ) {
+                            results_array.push('</div>'); 
+                            results_array.push("</ul>");
+                        }
+                        results_array.push('<div class = "footer">');
                         doc_type = data[i]['doc_type'];
-                        results_array.push("<b>"+doc_type.slice(1)+":</b><br>");
+                        results_array.push("<b><div class='header_text'>"+toTitleCase(doc_type.slice(1))+"</div></b><br>");                        
+                        results_array.push("<ul class='topcoat-list__container'>");
                     }
                     if((Date.parse(data[i]['expiry_date'])) < Date.parse(new Date())) {
-                       results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:red'>"+data[i]['name']+" <b>("+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+") </b></span><br/>");
+                        results_array.push("<li class='topcoat-list__item'>");
+                        results_array.push("<span style='color:red'>"+toTitleCase(data[i]['name'])+" <b>("+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+") </b></span><br/>");
+                        results_array.push("</li>");                        
                     } else if((((Date.parse(data[i]['expiry_date']))-20) < Date.parse(new Date())) && (Date.parse(new Date()<(Date.parse(data[i]['expiry_date']))))) {
-                        results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>"+data[i]['name']+" <b>("+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+") </b></span><br/>");
+                        results_array.push("<li class='topcoat-list__item'>");
+                        results_array.push("<span style='color:green'>"+toTitleCase(data[i]['name'])+" <b>("+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+") </b></span><br/>");
+                        results_array.push("</li>");                        
                     } else {
-                        results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span>"+data[i]['name']+" <b>("+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+") </b></span><br/>");
+                        results_array.push("<li class='topcoat-list__item'>");
+                        results_array.push("<span>"+toTitleCase(data[i]['name'])+" <b>("+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+") </b></span><br/>");
+                        results_array.push("</li>");                        
                     }
                 }
-            
+                results_array.push('</div>'); 
             } else {
                 results_array.push('<span>No Expiry Documents Details Available</span><br>');
             }
@@ -1121,6 +1148,7 @@ function alerts() {
         success : function(data) {
             var d = new Date();
             alerts_array.push('<div class = "hambrgrdetails">');
+            alerts_array.push('<ul class="topcoat-list__container">');
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
                     
@@ -1128,32 +1156,37 @@ function alerts() {
                         
                         
                         if(data[i]['alert_name'] == "FLIGHT") {
-                            $('#h_flight').html('<img src="img/tick.png">');
+                            // $('#h_flight').html('<img src="img/tick.png">');
+                            alerts_array.push('<li class="topcoat-list__item">');
                             alerts_array.push('<span class="icon-airplane2 pagename-icon"></span>  ');
                             alerts_array.push("<a class='btns' href='#flight'>");
                         }
                         if(data[i]['alert_name'] == "TRAINING") {
-                            $('#h_training').html('<img src="img/tick.png">');
+                            // $('#h_training').html('<img src="img/tick.png">');
+                            alerts_array.push('<li class="topcoat-list__item">');
                             alerts_array.push('<span class="icon-users pagename-icon"></span>  ');
                             alerts_array.push("<a class='btns' href='#training'>");
                         }
                         if(data[i]['alert_name'] == "ALLOTMENT") {
-                            $('#h_allotment').html('<img src="img/tick.png">');
+                            // $('#h_allotment').html('<img src="img/tick.png">');
+                            alerts_array.push('<li class="topcoat-list__item">');
                             alerts_array.push('<span class="icon-banknote pagename-icon"></span>  ');
                             alerts_array.push("<a class='btns' href='#allotment'>");
                         }
                         if(data[i]['alert_name'] == "PLAN") {
-                            $('#h_plan').html('<img src="img/tick.png">');
+                            // $('#h_plan').html('<img src="img/tick.png">');
+                            alerts_array.push('<li class="topcoat-list__item">');
                             alerts_array.push('<span class="icon-briefcase pagename-icon"></span>  ');
                             alerts_array.push("<a class='btns' href='#plan'>");
                         }
                         
-                        alerts_array.push(data[i]['message']);
+                        alerts_array.push(toTitleCase(data[i]['message']));
                         alerts_array.push("</a>");
-                        alerts_array.push("<hr  class='style-one'>")
+                        alerts_array.push("</li>");
+                        // alerts_array.push("<hr  class='style-one'>")
                 }
                 hide_spinner();
-                alerts_array.push('</div>');
+                alerts_array.push('</ul></div>');
                 $('#alert_count').html(alertcount);
                 $('#alert_content').html(alerts_array.join(""));
             }
@@ -1226,11 +1259,11 @@ function getflightalerts(alertcount, alerts_array) {
 function bottm_buttons(page, results_array, cscemail) {
     // <span class="icon-boat"></span>
     $('#tile_icons').show();
-    results_array.push("<hr class='style-one'>");
+    results_array.push("<hr>");
     results_array.push('<div id="tile_icons">');
     if(page == "P") {
         results_array.push('<a class="footer-button" href="#flight">');
-        results_array.push('<span class="icon-airplane button-icon"></span>');
+        results_array.push('<span class="icon-airplane2 button-icon"></span>');
         results_array.push('</a>');
     }
     if(page == "P") {
@@ -1313,13 +1346,19 @@ function setheadername(results_array, name, head_pic_name) {
     //results_array.push('<div id="header_bar"></div>');//head_common
     //results_array.push('<div id="plan_details_header"  class="head_common_pic">');//head_common
     //results_array.push('<div class="header_white"></div>');
-    results_array.push('<div class="header">');
-    results_array.push('<h1>');
-    results_array.push('<img src="img/bsm_logo_glow.png" style="height: 19px; padding-top:13px; padding-right: 5px;">MyBSM');
-    results_array.push('</h1>');
-    results_array.push('<hr class="style-four" style="margin-top: 10px;">');
+    results_array.push('<div class="topcoat-navigation-bar on-top header">');
+    results_array.push('<div class="topcoat-navigation-bar__item left quarter">');
+      // results_array.push('<a id="btnBack" class="topcoat-icon-button--quiet back-button" href="javascript:step_back()">');
+      //   results_array.push('<span class="topcoat-icon topcoat-icon--back"></span>');
+      // results_array.push('</a>');
     results_array.push('</div>');
-    results_array.push('<span class="header_text" class="header"> ' + name + '</span>');
+    results_array.push('<div class="topcoat-navigation-bar__item center half">');
+    results_array.push('<h1 class="topcoat-navigation-bar__title">')
+    results_array.push('<img src="img/bsm_logo_glow.png" style="height: 19px; padding-top:13px; padding-right: 5px;">MyBSM');
+    results_array.push('</h1></div>');
+    // results_array.push('<hr class="style-four" style="margin-top: 10px;">');
+    results_array.push('</div>');
+    results_array.push('<div class="header_text" class="header"> ' + name + '</div>');
     //results_array.push('<div id="plan_details_header_menu"><span id="hamburger-btn" class="hamburger icon-list"></span></div>')
     //results_array.push('</div>');
 }
