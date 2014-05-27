@@ -537,8 +537,8 @@ function show_training_details() {
                 }
                 training_res_array.push("<span><b>Course :</b> "+data[i]['course']+"</span>");
                 training_res_array.push("<br/><span><b>Status :</b> "+data[i]['status']+"</span>");
-                training_res_array.push("<br/><span><b>From :</b> "+new String(data[i]['from_date']).split("T")[0]+"</span>");
-                training_res_array.push("<br/><span><b>To :</b> "+new String(data[i]['to_date']).split("T")[0]+"</span>");
+                training_res_array.push("<br/><span><b>From :</b> "+dateformatddmmyyyy(data[i]['from_date'])+"</span>");
+                training_res_array.push("<br/><span><b>To :</b> "+dateformatddmmyyyy(data[i]['to_date'])+"</span>");
                 training_res_array.push("<br/><span><b>Venue :</b> "+data[i]['institution']+"</span>");
             } else {
                 training_res_array.push("<span> No training details updated </span><br/>");
