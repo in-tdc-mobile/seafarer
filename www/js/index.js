@@ -1017,11 +1017,11 @@ function documentdetails(){
                         results_array.push("<b>"+doc_type.slice(1)+":</b><br>");
                     }
                     if((Date.parse(data[i]['expiry_date'])) < Date.parse(new Date())) {
-                       results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:red'>"+data[i]['name']+" <b>("+new String(data[i]['expiry_date']).split("T")[0]+") </b></span><br/>");
-                    } else if((((Date.parse(data[i]['expiry_date']))-20) < Date.parse(new Date())) && (Date.parse(new Date()<(Date.parse(data[i]['expiry_date']))))){
-                        results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>"+data[i]['name']+" <b>("+new String(data[i]['expiry_date']).split("T")[0]+") </b></span><br/>");
+                       results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:red'>"+data[i]['name']+" <b>("+dateformatddmmyyyy(data[i]['expiry_date'])+") </b></span><br/>");
+                    } else if((((Date.parse(data[i]['expiry_date']))-20) < Date.parse(new Date())) && (Date.parse(new Date()<(Date.parse(data[i]['expiry_date']))))) {
+                        results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>"+data[i]['name']+" <b>("+dateformatddmmyyyy(data[i]['expiry_date'])+") </b></span><br/>");
                     } else {
-                        results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span>"+data[i]['name']+" <b>("+new String(data[i]['expiry_date']).split("T")[0]+") </b></span><br/>");
+                        results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span>"+data[i]['name']+" <b>("+dateformatddmmyyyy(data[i]['expiry_date'])+") </b></span><br/>");
                     }
                 }
             
