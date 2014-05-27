@@ -451,7 +451,7 @@ function show_plan_details() {
                         flickerplace = data['flag_name']+',flag';
                     }
                     // alert(flickerplace);
-                    port = "not yet allotted";                        
+                    port = "Not Yet Allotted";                        
                 } else {
                     flickerplace = data['port'];
                     port = data['port'];
@@ -766,7 +766,7 @@ function correspondance(){
     //results_array.push('<button onclick="youback()" class="back-btn"><img src="img/arrow-back.png"></button>');
     setheadername(results_array, '<span class="icon-bubbles  pagename-icon"></span>  Correspondance', "name");
     results_array.push('<div class = "hambrgrdetails">');
-    results_array.push('<form onsubmit="return correspondancesend()" >');
+    results_array.push('<form onsubmit=correspondancesend(); return false; >');
     results_array.push('<textarea class="topcoat-text-input--large" id="message" style="width: 100%; height: 250px;line-height: 1.5rem;"></textarea></br>');
     results_array.push('<span id="error_corrspondance" style="color:red"></span><br>');
     results_array.push('<input type="submit" value="Send" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
