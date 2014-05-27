@@ -243,28 +243,14 @@ function route(event) {
 
 var step_back = function() {};
 
-var current_step = function() {};
 
-var temp;
-var pal_user_id;
-var cwa_app_id;
-var pal_user_name;
-var owners_array;
-var owner_vessels;
-var owner_crew;
-var dashboard_settings;
-var user_rights_settings;
-var selected_owner_id;
-var selected_vessel_id;
-var vessel_location;
-var show_vessel_tracker;
 
 var menuBtn;
-var container;
+var containr;
 var slidemenu;
-var content;
+var contnt;
 var contentlayer;
-//TODO
+
 window.addEventListener('load', function () {
     FastClick.attach(document.body);
 }, false);
@@ -342,20 +328,13 @@ function login_success() {
     $('#you').hide();
     show_plan_details();
     alerts();
-    /*show_training_details();
-    openpositions();
-    doadetails();*/
-    // show_flight_details();
-    // allotment_details();
-    // correspondance();
-    
 }
 
 function showSidemenu () {
-    container.classList.toggle('opened');
+    containr.classList.toggle('opened');
     slidemenu.classList.toggle('sidemenu--opened');
     contentlayer.classList.toggle('contentlayer-opened');
-    content.style.height = "auto";
+    contnt.style.height = "auto";
     $('#container').resize();
 }
 
@@ -371,10 +350,8 @@ var d;
 function update_profile_page() {
     index_page_call();
     $('#index_content').show();
-    /*$('#tile_icons').hide();*/
     $('#update_profile').show(); 
     var results_array = new Array(); 
-    //results_array.push('<button onclick="youback()" class="back-btn"><img src="img/arrow-back.png"></button>');
     setheadername(results_array, '<span class="icon-pencil2 pagename-icon"></span>  Update Contact Details', "name");
     results_array.push('<div class = "hambrgrdetails">');
     results_array.push('<form onsubmit="return update_profile()" ><input type="text" placeholder="Email" id="prof_email" class="biginput topcoat-text-input">');
@@ -513,9 +490,9 @@ function show_plan_details() {
             hide_spinner();
 
             menuBtn = document.querySelector('#hamburger-btn');
-            container = document.querySelector('#container');
+            containr = document.querySelector('#container');
             slidemenu = document.querySelector('#sidemenu');
-            content = document.querySelector('#content');
+            contnt = document.querySelector('#content');
             contentlayer = document.querySelector('#contentLayer');
             menuBtn.addEventListener('click', showSidemenu, false);
             contentlayer.addEventListener('click', showSidemenu, false);
@@ -584,7 +561,6 @@ function show_training_details() {
     });
 }
 
-var temp;
 
 function openpositions() {
     index_page_call();
@@ -605,7 +581,7 @@ function openpositions() {
         show_spinner();
     },
 
-    success : function(data) { temp = data;;
+    success : function(data) {
         var d = new Date();
         if(data[0] != null) {
             for(var i=0; i<data.length; i++) {
@@ -1009,16 +985,6 @@ function canceldoa() {
     });
 }
 
-function showdashbord() {
-    /*    $('#show_plan_details').show();
-    $('#show_training_details').show();   
-    $('#show_flight_details').show();*/
-
-    //show_training_details();
-    $("#index_content").show();
-    $('#tile_icons').show();
-}
-
 function documentdetails(){
     index_page_call();
     hide_all();
@@ -1083,7 +1049,7 @@ function hide_spinner() {
     $(".spinner_index").hide();
 }
 
-function dateformat(dat) { 
+function dateformatddmmyyyy(dat) { 
     var d = new Date(dat);
     console.log(dat);
     console.log(d.getDate()+"-"+d.getMonth()+"-"+d.getYear());
@@ -1284,14 +1250,14 @@ function hide_all() {
     //     $('#contentLayer').trigger('click');
     // }
     if($("#container").hasClass( "opened" )) {
-        var container = document.querySelector('#container');
+        var containr = document.querySelector('#container');
         var slidemenu = document.querySelector('#sidemenu');
-        var content = document.querySelector('#content');
+        var contnt = document.querySelector('#content');
         var contentlayer = document.querySelector('#contentLayer');
 
-        container.classList.toggle('opened');
+        containr.classList.toggle('opened');
         slidemenu.classList.toggle('sidemenu--opened');
-        content.style.height = "auto";
+        contnt.style.height = "auto";
         contentlayer.classList.toggle('contentlayer-opened');
     }
 
