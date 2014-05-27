@@ -1052,8 +1052,8 @@ function hide_spinner() {
 function dateformatddmmyyyy(dat) { 
     if(dat != null && dat != '') {
         var d = new Date(dat);
-        console.log(dat);
-        console.log(d.getDate()+"-"+d.getMonth()+"-"+d.getYear());
+        //console.log(dat);
+        //console.log(d.getDate()+"-"+d.getMonth()+"-"+d.getYear());
         dat = d.getDate()+"-"+getMonthName(d.getMonth())+"-"+d.getFullYear();
     } else {
         dat = '';
