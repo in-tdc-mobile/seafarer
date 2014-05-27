@@ -1317,10 +1317,10 @@ function hide_all() {
 
 }
 
-/*window.onerror = function(msg, url, linenumber) {
+window.onerror = function(msg, url, linenumber) {
     alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
     return true;
-}*/
+}
 
 function logout() {
     $.jStorage.flush();
