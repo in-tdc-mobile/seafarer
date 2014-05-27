@@ -471,7 +471,7 @@ function show_plan_details() {
                 results_array.push('<div style="margin-left:5px">');
                 results_array.push("<span><b> Vessel Type :</b> "+data['vessel_type']+"</span><br/>");
                 results_array.push("<span><b> Manager :</b> "+data['emp_sdc_name']+"</span><br/>");
-                results_array.push("<span><b> Exp. Join Date :</b> "+new String(data['from_date']).split("T")[0]+"</span><br/>");
+                results_array.push("<span><b> Exp. Join Date :</b> "+dateformatddmmyyyy(data['from_date'])+"</span><br/>");
                 results_array.push("<span><b> Exp. Join Port :</b> "+port+"</span><br/>");
                 results_array.push('</div>');
                 bottm_buttons("P" ,results_array, "mailto:"+cscemail);
@@ -1050,10 +1050,15 @@ function hide_spinner() {
 }
 
 function dateformatddmmyyyy(dat) { 
-    var d = new Date(dat);
-    console.log(dat);
-    console.log(d.getDate()+"-"+d.getMonth()+"-"+d.getYear());
-    return d.getDate()+"-"+d.getMonth()+"-"+d.getYear();
+    if(dat != null && dat != '') {
+        var d = new Date(dat);
+        console.log(dat);
+        console.log(d.getDate()+"-"+d.getMonth()+"-"+d.getYear());
+        dat = d.getDate()+"-"+getMonthName(d.getMonth())+"-"+d.getFullYear();
+    } else {
+        dat = '';
+    }
+    return dat
 }
 
 function flickercall(tagparam, bgshow) {
