@@ -598,7 +598,7 @@ function openpositions() {
                 if(data[i]['vessel_type']!=null)
                     opening_res_array.push("<br/><span>"+vessel_type+"</span>");
                 if(data[i]['from_date']!=null)
-                    opening_res_array.push("<br/> <span>"+new String(data[i]['from_date']).split("T")[0 ]+"</span>");
+                    opening_res_array.push("<br/> <span>"+dateformatddmmyyyy(data[i]['from_date'])+"</span>");
                 if(data[i]['rank_name']!=null)
                     opening_res_array.push("<br/><span>"+data[i]['rank_name']+"</span>");
                 if(data[i]['sdc']!=null)
@@ -648,9 +648,9 @@ function show_flight_details() {
                 
                 for (var i = 0; i < data.length; i++) {
                     results_array.push("<span> Departure : "+data[i]['departure']+"</span><br/>");
-                    results_array.push("<span> Departure Date :  "+new String(data[i]['departure_date']).split("T")[i]+"</span><br/>");
+                    results_array.push("<span> Departure Date :  "+dateformatddmmyyyy(data[i]['departure_date'])+"</span><br/>");
                     results_array.push("<span> Arrival : "+data[i]['arrival']+"</span><br/>");
-                    results_array.push("<span> Arrival Date : "+new String(data[i]['arrival_date']).split("T")[i]+"</span><br/>");
+                    results_array.push("<span> Arrival Date : "+dateformatddmmyyyy(data[i]['arrival_date'])+"</span><br/>");
                     results_array.push("<span> Travel Route : "+nullcheck(data[i]['travel_route'])+"</span><br/>");
                     results_array.push("<span> Remarks : "+nullcheck(data[i]['remarks'])+"</span><br/>");
                     hide_spinner();
@@ -855,7 +855,7 @@ function doadetails(){
             results_array.push('<div class = "hambrgrdetails">');
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
-                    results_array.push("<span><b>DoA :</b> "+new String(data[i]['doa']).split("T")[0]+"</span><br/>");
+                    results_array.push("<span><b>DoA :</b> "+dateformatddmmyyyy(data[i]['doa'])+"</span><br/>");
                     if(data[i]['remarks'] != null)
                         results_array.push("<span><b>Remark :</b> "+data[i]['remarks']+"</span><br/>");
                     
