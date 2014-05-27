@@ -1054,7 +1054,7 @@ function dateformatddmmyyyy(dat) {
         var d = new Date(dat);
         //console.log(dat);
         //console.log(d.getDate()+"-"+d.getMonth()+"-"+d.getYear());
-        dat = d.getDate()+"-"+getMonthName(d.getMonth())+"-"+d.getFullYear();
+        dat = ("0" + d.getDate()).slice(-2)+"-"+getMonthName(d.getMonth())+"-"+d.getFullYear();
     } else {
         dat = '';
     }
@@ -1288,10 +1288,10 @@ function hide_all() {
 
 }
 
-window.onerror = function(msg, url, linenumber) {
+/*window.onerror = function(msg, url, linenumber) {
     alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
     return true;
-}
+}*/
 
 function logout() {
     $.jStorage.flush();
