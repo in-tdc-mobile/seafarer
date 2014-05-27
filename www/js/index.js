@@ -471,7 +471,7 @@ function show_plan_details() {
                 results_array.push('<div style="margin-left:5px">');
                 results_array.push("<span><b> Vessel Type :</b> "+data['vessel_type']+"</span><br/>");
                 results_array.push("<span><b> Manager :</b> "+data['emp_sdc_name']+"</span><br/>");
-                results_array.push("<span><b> Exp. Join Date :</b> "+dateformatddmmyyyy(data['from_date'])+"</span><br/>");
+                results_array.push("<span><b> Exp. Join Date :</b> "+dateformat(data['from_date'], "dd-mon-yyyy")+"</span><br/>");
                 results_array.push("<span><b> Exp. Join Port :</b> "+port+"</span><br/>");
                 results_array.push('</div>');
                 bottm_buttons("P" ,results_array, "mailto:"+cscemail);
@@ -537,8 +537,8 @@ function show_training_details() {
                 }
                 training_res_array.push("<span><b>Course :</b> "+data[i]['course']+"</span>");
                 training_res_array.push("<br/><span><b>Status :</b> "+data[i]['status']+"</span>");
-                training_res_array.push("<br/><span><b>From :</b> "+dateformatddmmyyyy(data[i]['from_date'])+"</span>");
-                training_res_array.push("<br/><span><b>To :</b> "+dateformatddmmyyyy(data[i]['to_date'])+"</span>");
+                training_res_array.push("<br/><span><b>From :</b> "+dateformat(data[i]['from_date'], "dd-mon-yyyy")+"</span>");
+                training_res_array.push("<br/><span><b>To :</b> "+dateformat(data[i]['to_date'], "dd-mon-yyyy")+"</span>");
                 training_res_array.push("<br/><span><b>Venue :</b> "+data[i]['institution']+"</span>");
             } else {
                 training_res_array.push("<span> No training details updated </span><br/>");
@@ -598,7 +598,7 @@ function openpositions() {
                 if(data[i]['vessel_type']!=null)
                     opening_res_array.push("<br/><span>"+vessel_type+"</span>");
                 if(data[i]['from_date']!=null)
-                    opening_res_array.push("<br/> <span>"+dateformatddmmyyyy(data[i]['from_date'])+"</span>");
+                    opening_res_array.push("<br/> <span>"+dateformat(data[i]['from_date'], "dd-mon-yyyy")+"</span>");
                 if(data[i]['rank_name']!=null)
                     opening_res_array.push("<br/><span>"+data[i]['rank_name']+"</span>");
                 if(data[i]['sdc']!=null)
@@ -648,9 +648,9 @@ function show_flight_details() {
                 
                 for (var i = 0; i < data.length; i++) {
                     results_array.push("<span> Departure : "+data[i]['departure']+"</span><br/>");
-                    results_array.push("<span> Departure Date :  "+dateformatddmmyyyy(data[i]['departure_date'])+"</span><br/>");
+                    results_array.push("<span> Departure Date :  "+dateformat(data[i]['departure_date'], "dd-mon-yyyy")+"</span><br/>");
                     results_array.push("<span> Arrival : "+data[i]['arrival']+"</span><br/>");
-                    results_array.push("<span> Arrival Date : "+dateformatddmmyyyy(data[i]['arrival_date'])+"</span><br/>");
+                    results_array.push("<span> Arrival Date : "+dateformat(data[i]['arrival_date'], "dd-mon-yyyy")+"</span><br/>");
                     results_array.push("<span> Travel Route : "+nullcheck(data[i]['travel_route'])+"</span><br/>");
                     results_array.push("<span> Remarks : "+nullcheck(data[i]['remarks'])+"</span><br/>");
                     hide_spinner();
@@ -855,7 +855,7 @@ function doadetails(){
             results_array.push('<div class = "hambrgrdetails">');
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
-                    results_array.push("<span><b>DoA :</b> "+dateformatddmmyyyy(data[i]['doa'])+"</span><br/>");
+                    results_array.push("<span><b>DoA :</b> "+dateformat(data[i]['doa'], "dd-mon-yyyy")+"</span><br/>");
                     if(data[i]['remarks'] != null)
                         results_array.push("<span><b>Remark :</b> "+data[i]['remarks']+"</span><br/>");
                     
@@ -1017,11 +1017,11 @@ function documentdetails(){
                         results_array.push("<b>"+doc_type.slice(1)+":</b><br>");
                     }
                     if((Date.parse(data[i]['expiry_date'])) < Date.parse(new Date())) {
-                       results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:red'>"+data[i]['name']+" <b>("+dateformatddmmyyyy(data[i]['expiry_date'])+") </b></span><br/>");
+                       results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:red'>"+data[i]['name']+" <b>("+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+") </b></span><br/>");
                     } else if((((Date.parse(data[i]['expiry_date']))-20) < Date.parse(new Date())) && (Date.parse(new Date()<(Date.parse(data[i]['expiry_date']))))) {
-                        results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>"+data[i]['name']+" <b>("+dateformatddmmyyyy(data[i]['expiry_date'])+") </b></span><br/>");
+                        results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>"+data[i]['name']+" <b>("+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+") </b></span><br/>");
                     } else {
-                        results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span>"+data[i]['name']+" <b>("+dateformatddmmyyyy(data[i]['expiry_date'])+") </b></span><br/>");
+                        results_array.push("&nbsp;&nbsp;&nbsp;&nbsp;<span>"+data[i]['name']+" <b>("+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+") </b></span><br/>");
                     }
                 }
             
@@ -1049,12 +1049,13 @@ function hide_spinner() {
     $(".spinner_index").hide();
 }
 
-function dateformatddmmyyyy(dat) { 
+function dateformat(dat, format) { 
     if(dat != null && dat != '') {
         var d = new Date(dat);
         //console.log(dat);
         //console.log(d.getDate()+"-"+d.getMonth()+"-"+d.getYear());
-        dat = ("0" + d.getDate()).slice(-2)+"-"+getMonthName(d.getMonth())+"-"+d.getFullYear();
+        if(format == "dd-mon-yyyy")
+            dat = ("0" + d.getDate()).slice(-2)+"-"+getMonthName(d.getMonth())+"-"+d.getFullYear();
     } else {
         dat = '';
     }
