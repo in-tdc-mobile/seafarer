@@ -423,7 +423,7 @@ function show_plan_details() {
     index_page_call();
     //register_push_service();
     hide_all();
-    var cscemail=null;
+    var cscemail="https://www.bs-shipmanagement.com";
     $('#index_content').show();
     $('#show_plan_details').show();
     var results_array = new Array(); 
@@ -457,7 +457,9 @@ function show_plan_details() {
                     port = data['port'];
                 }
                 
-                cscemail = data['csc_email'];
+                if( data['csc_email']!=null &&  data['csc_email']!='' )
+                    cscemail = "mailto:"+data['csc_email'];
+
                 $.jStorage.set("cscemail", cscemail)
                 setheadername(results_array, '<span class="icon-briefcase pagename-icon"></span><span class="icon-boat"></span>  '+data['vessel_name'] + '(' + data['flag_name'] + ')', "pic");
                 
@@ -474,7 +476,7 @@ function show_plan_details() {
                 results_array.push("<span><b> Exp. Join Date :</b> "+dateformat(data['from_date'], "dd-mon-yyyy")+"</span><br/>");
                 results_array.push("<span><b> Exp. Join Port :</b> "+port+"</span><br/>");
                 results_array.push('</div>');
-                bottm_buttons("P" ,results_array, "mailto:"+cscemail);
+                bottm_buttons("P" ,results_array, cscemail);
                 
                 //data['phone1'];
                 //data['phone2'];
@@ -783,7 +785,7 @@ function correspondance(){
     results_array.push('<textarea class="topcoat-text-input--large" id="message" style="width: 100%; height: 250px;line-height: 1.5rem;"></textarea></br>');
     results_array.push('<span id="error_corrspondance" style="color:red"></span><br>');
     results_array.push('<input type="submit" value="Send" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
-    bottm_buttons("C" ,results_array, "mailto:"+$.jStorage.get("cscemail"));
+    bottm_buttons("C" ,results_array, $.jStorage.get("cscemail"));
     results_array.push('</div>');
     $('#correspondance_content').html(results_array.join(""));
 }
@@ -1126,7 +1128,6 @@ function flickercall(tagparam, bgshow) {
 
 }
 function alerts_btn_call() {
-    console.log( $("#alert_content").css("z-index"));
     if($("#alert_content").css("z-index") == 1) {
         $("#index_content").addClass('rightsmooth');
         $("#alert_content").removeClass('leftsmooth');
@@ -1207,65 +1208,6 @@ function alerts() {
                 $('#alert_count').html(alertcount);
                 $('#alert_content').html(alerts_array.join(""));
             }
-        },
-        error: function (request, status, error) {
-            hide_spinner();
-        }
-    });
-}
-
-function getflightalerts(alertcount, alerts_array) {
-    var url = prefilurl+"get_sf_alert_flight.php?empid="+$.jStorage.get("empid");
-    console.log(url);
-    var req = $.ajax({
-        url: url,
-        datatype: 'text',
-        beforeSend: function() {
-            show_spinner();
-        },
-
-        success : function(data) {
-                if(data[0] != null) {
-                for (var i = 0; i < data.length; i++) {
-                    
-                    if(data[i]['status'].trim() == 'I') { 
-                        alertcount++;
-                        $('#h_flight').html('<img src="img/tick.png">');
-                        //alerts_array.push("<br>");
-                        alerts_array.push('<span class="icon-airplane2 pagename-icon"></span>  ');
-                        alerts_array.push("<a class='btns' href='#flight'>");
-                        alerts_array.push("New Flight Detail Added for the date : "+new String(data[i]['arrival_date']).split("T")[0]);
-                        alerts_array.push("</a>");
-                        alerts_array.push("<hr  class='style-one'>")
-
-                    } else if(data[i]['status'] == 'U'){
-                        alertcount++;
-                        $('#h_flight').html('<img src="img/tick.png">');    
-                        //alerts_array.push("<br>");
-                        alerts_array.push('<span class="icon-airplane2 pagename-icon"></span>  ');
-                        alerts_array.push("<a class='btns' href='#flight'>");
-                        alerts_array.push("There is a change in Training, please check ");
-                        if (data[i]['changes'].indexOf('A')>-1){
-                            alerts_array.push("Arrival, ");
-                        }
-                        if (data[i]['changes'].indexOf('B')>-1){
-                            alerts_array.push("Departure, ");
-                        }
-                        if (data[i]['changes'].indexOf('C')>-1){
-                            alerts_array.push("Arrival Date, ");
-                        }
-                        if (data[i]['changes'].indexOf('D')>-1){
-                            alerts_array.push("Departure Date");
-                        }
-                        alerts_array.push("</a>");
-                        alerts_array.push("<hr  class='style-one'>")
-                    }
-                }
-            }
-            hide_spinner();
-            alerts_array.push('</div>');
-            $('#alert_count').html(alertcount);
-            $('#alert_content').html(alerts_array.join(""));
         },
         error: function (request, status, error) {
             hide_spinner();
