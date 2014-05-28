@@ -1126,10 +1126,18 @@ function flickercall(tagparam, bgshow) {
 
 }
 function alerts_btn_call() {
-    $("#index_content").addClass('rightsmooth');
-    $("#alert_content").removeClass('leftsmooth');
-    $("#alert_content").css('z-index', 2);
-    $("#index_content").css('z-index', 1);
+    console.log( $("#alert_content").css("z-index"));
+    if($("#alert_content").css("z-index") == 1) {
+        $("#index_content").addClass('rightsmooth');
+        $("#alert_content").removeClass('leftsmooth');
+        $("#alert_content").css('z-index', 2);
+        $("#index_content").css('z-index', 1);
+    } else {
+        $("#alert_content").addClass('leftsmooth');
+        $("#index_content").removeClass('rightsmooth');
+        $("#index_content").css('z-index', 2);
+        $("#alert_content").css('z-index', 1);
+    }
 }
 
 function alerts() {
