@@ -1179,8 +1179,17 @@ function alerts() {
                             alerts_array.push('<span class="icon-briefcase pagename-icon"></span>  ');
                             alerts_array.push("<a class='btns' href='#plan'>");
                         }
+                        if(data[i]['alert_name'] == "OPEN_POSITION") {
+                            // $('#h_plan').html('<img src="img/tick.png">');
+                            alerts_array.push('<li class="topcoat-list__item">');
+                            alerts_array.push('<span class="icon-megaphone2 pagename-icon"></span>  ');
+                            alerts_array.push("<a class='btns' href='#openpositions'>");
+                            alerts_array.push(data[i]['status']+" "+toTitleCase(data[i]['message']));
+                        } else {
+                            alerts_array.push(toTitleCase(data[i]['message']));
+                        }
                         
-                        alerts_array.push(toTitleCase(data[i]['message']));
+                        
                         alerts_array.push("</a>");
                         alerts_array.push("</li>");
                         // alerts_array.push("<hr  class='style-one'>")
