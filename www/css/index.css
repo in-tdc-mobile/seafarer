@@ -511,7 +511,7 @@ html, body {
     bottom: 0px;
     left: 0px;
     right: 0px;
-    /*height: auto !important;*/
+    height: auto !important;
 }
 
 .header{
@@ -520,16 +520,14 @@ html, body {
     z-index: 11;
 }
 
-.content{
-    /*background: #dfe2e2;*/
-    /*background-color: #FFFFFF;*/
-    -webkit-overflow-scrolling: touch;
-    margin:0;
-    /*padding: 1rem;
-    height:100%; */
-    /*height: 920px !important;*/
-    /*min-height: 1000px !important;*/
-    /*background-color: black;*/  
+
+.content {
+  /*background: #dfe2e2;*/
+  background-color: #FFFFFF;
+  margin:0;
+  padding: 1rem;
+  height:100%;
+  min-height: 1000px !important;
 }
 
 .contentlayer-opened{
