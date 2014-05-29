@@ -956,9 +956,11 @@ function savedoa() {
                 hide_spinner();
             },
             error: function (request, status, error) {
-                alert("error:"+error);
+                 doadetails();
+                 hide_spinner();
+                /*alert("error:"+error);
                 alert("status:"+status);
-                alert("request:"+request);
+                alert("request:"+request);*/
             }
         });
     }
