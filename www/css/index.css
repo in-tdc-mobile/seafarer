@@ -523,6 +523,7 @@ html, body {
 .content{
     /*background: #dfe2e2;*/
     /*background-color: #FFFFFF;*/
+    -webkit-overflow-scrolling: touch;
     margin:0;
     /*padding: 1rem;
     height:100%; */
@@ -622,6 +623,7 @@ body{
   background: #FFF;
   font: menu 59px;
   /*font: "Arial", helvetica, arial, sans-serif;*/
+  -webkit-overflow-scrolling: touch;
   text-transform: capitalize;
 
 }
@@ -1023,8 +1025,8 @@ hr.style-four {
 {
   margin-left:auto;
   margin-right:auto;
-  width:60%;
-  /*background-color:#b0e0e6;*/
+  /*width:60%;
+  background-color:#b0e0e6;*/
 }
 .bsmlogo {
 /*  margin-top: 15px; 
