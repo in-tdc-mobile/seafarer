@@ -68,7 +68,28 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);*/
-    }
+    },
+    register: function() {
+        var pushNotification = window.plugins.pushNotification;
+        pushNotification.registerDevice({alert:true, badge:true, sound:true}, function(status) {
+            app.myLog.value+=JSON.stringify(['registerDevice status: ', status])+"\n";
+            app.storeToken(status.deviceToken);
+        });
+    },
+    storeToken: function(token) {
+        console.log("Token is " + token);
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.open("POST","http://127.0.0.1:8888",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send("token="+token+"&message=pushnotificationtester");
+        xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState==4) {
+                //a response now exists in the responseTest property.
+                console.log("Registration response: " + xmlhttp.responseText);
+                app.myLog.value+="Registration server returned: " + xmlhttp.responseText;
+            }
+        }
+    }    
 };
 
 function register_push_service() {
