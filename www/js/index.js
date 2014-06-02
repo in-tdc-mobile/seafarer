@@ -93,7 +93,7 @@ function onNotificationGCM (e) {
         case 'registered':
             if ( e.regid.length > 0 )
             {
-                console.log("Regid " + e.regid);
+                //console.log("Regid " + e.regid);
                 alert('registration id = '+e.regid);
                 write_reg_id_to_aws(e.regid);
             }
@@ -366,7 +366,7 @@ function update_profile() {
     setheadername(results_array, '<span class="icon-pencil2"></span>  Update Contact Details', "name");
     results_array.push('<div class = "hambrgrdetails">');
     var url = prefilurl+"insert_emp_profile.php?";
-    console.log(url);
+    //console.log(url);
     var email = $("#prof_email").val();
     var phone = $("#prof_phone").val();
     var emp_id = $.jStorage.get("empid");
@@ -428,7 +428,7 @@ function show_plan_details() {
     $('#show_plan_details').show();
     var results_array = new Array(); 
     var url = prefilurl+"get_sf_plan_details.php?empid="+$.jStorage.get("empid");
-    console.log(url);
+    //console.log(url);
     var req = $.ajax({
         url: url,
         datatype: 'text',
@@ -520,7 +520,7 @@ function show_training_details() {
     var training_res_array = new Array(); 
     setheadername(training_res_array, '   Training', "pic");
     training_res_array.push("<div class='training_image'> <img src='img/simulator.jpg' class='dip_img'> </div>");
-    console.log(url);
+    //console.log(url);
     var req = $.ajax({
     url: url,
     datatype: 'text',
@@ -582,7 +582,7 @@ function openpositions() {
     
     // opening_res_array.push("<ul class='topcoat-list__container'>");
 
-    console.log(url);
+    //console.log(url);
     var req = $.ajax({
     url: url,
     datatype: 'text',
@@ -649,7 +649,7 @@ function show_flight_details() {
     //results_array.push('<button onclick="shoreback()" class="back-btn"><img src="img/arrow-back.png"></button>');
 
     results_array.push('<div class = "footer" style="margin-top: 0px;">');
-    console.log(url);
+    //console.log(url);
     var req = $.ajax({
         url: url,
         datatype: 'text',
@@ -697,7 +697,7 @@ function allotment_details() {
     var results_array = new Array(); 
     setheadername(results_array, '<span class="icon-banknote pagename-icon"></span>  Allotment Details', "pic");
     results_array.push("<div> <img src='img/money.jpg' class='dip_img'> </div>");
-    console.log(url);
+    //console.log(url);
     var req = $.ajax({
         url: url,
         datatype: 'text',
@@ -715,7 +715,8 @@ function allotment_details() {
                 results_array.push("Balance Amount is ");
                 var balamnt=0;
                 if(data[0] != null) {
-                    for (var i = 0; i < data.length; i++) {console.log(data[i]['bf_bal_sf_cur']);
+                    for (var i = 0; i < data.length; i++) {
+                        //console.log(data[i]['bf_bal_sf_cur']);
                         balamnt=parseFloat(balamnt)+parseFloat(data[i]['bf_bal_sf_cur']);
                         //results_array.push("&nbsp;&nbsp;<span><b>"+data[i]['name']+" :</b> "+data[i]['bf_bal_sf_cur']+"</span><br/>");
                         period = data[i]['max_period'];
@@ -741,7 +742,7 @@ function allotted_details(period, results_array) {
     /*var empid = 614946;
     period = 201307;*/
     var url = prefilurl+"get_sf_allotted_details.php?empid="+empid+"&period="+period;
-    console.log(url);
+    //console.log(url);
     var req = $.ajax({
         url: url,
         datatype: 'text',
@@ -800,7 +801,7 @@ function correspondancesend() {
         results_array.push('<div class = "hambrgrdetails">');
         results_array.push('<img src = "img/email-send.png">');
         var url = prefilurl+"sf_insert_correspondance.php?";
-        console.log(url);
+        //console.log(url);
         var emp_id = $.jStorage.get("empid");
         var form_data= {
             'empid': emp_id,
@@ -852,7 +853,7 @@ function doadetails(){
     $('#doa_content').show(); 
     var url = prefilurl+"get_sf_doa_details.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
-    console.log(url);
+    //console.log(url);
     var req = $.ajax({
         url: url,
         datatype: 'text',
@@ -1011,7 +1012,7 @@ function documentdetails(){
     $('#document_details').show(); 
     var url = prefilurl+"get_sf_expiry_docs.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
-    console.log(url);
+    //console.log(url);
     var doc_type='doc_type';
     var req = $.ajax({
         url: url,
@@ -1105,13 +1106,13 @@ function flickercall(tagparam, bgshow) {
     'flickr.photos.search&api_key=' + apiKey + 
     '&tags=' + tag + '&per_page='+ perPage + '&sort='+ sort + '&privacy_filter='+ privacy_filter +
     '&safe_search='+ safe_search + '&jsoncallback=?';
-    console.log(url);
+    //console.log(url);
     $.getJSON(url, function(data){
 
         var curphoto = data.photos.photo[Math.round(Math.random()*10)];
         var basePhotoURL = 'http://farm' + curphoto.farm + '.static.flickr.com/'
         + curphoto.server + '/' + curphoto.id + '_' + curphoto.secret + '.jpg';            
-        console.log(basePhotoURL);
+        //console.log(basePhotoURL);
             bgshow.css("background", "url("+basePhotoURL+")");//no-repeat
             bgshow.css("background-size", "150% 150%");//no-repeat
             bgshow.css("background-positon", "center center");//no-repeat
@@ -1148,7 +1149,7 @@ function alerts() {
     var alerts_array = new Array(); 
     setheadername(alerts_array, '<span class="icon-bell2 pagename-icon"></span>  Alerts');
     var alertcount = 0;
-    console.log(url);
+    //console.log(url);
     var req = $.ajax({
         url: url,
         datatype: 'text',
