@@ -57,6 +57,7 @@ var app = {
         catch(err){    
             alert("Error in document ready:"+err);
         }
+        app.register();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
