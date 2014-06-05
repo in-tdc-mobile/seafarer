@@ -36,6 +36,7 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        app.register();
         hide_all();
         $('#hamburger-btn').hide();
         $('#top_icons').hide(); 
@@ -57,7 +58,7 @@ var app = {
         catch(err){    
             alert("Error in document ready:"+err);
         }
-        app.register();
+        
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -70,6 +71,25 @@ var app = {
 
         console.log('Received Event: ' + id);*/
     },
+    setBadge: function(num) {
+        var pushNotification = window.plugins.pushNotification;
+        app.myLog.value+="Clear badge... \n";
+        pushNotification.setApplicationIconBadgeNumber(num);
+    },
+    receiveStatus: function() {
+        var pushNotification = window.plugins.pushNotification;
+        pushNotification.getRemoteNotificationStatus(function(status) {
+            app.myLog.value+=JSON.stringify(['Registration check - getRemoteNotificationStatus', status])+"\n";
+        });
+    },
+    getPending: function() {
+        var pushNotification = window.plugins.pushNotification;
+        pushNotification.getPendingNotifications(function(notifications) {
+            app.myLog.value+=JSON.stringify(['getPendingNotifications', notifications])+"\n";
+            console.log(JSON.stringify(['getPendingNotifications', notifications]));
+            alert("getPending"+JSON.stringify(['getPendingNotifications', notifications]));
+        });
+    },
     register: function() { alert("register")
         var pushNotification = window.plugins.pushNotification;
         pushNotification.registerDevice({alert:true, badge:true, sound:true}, function(status) {
@@ -78,6 +98,7 @@ var app = {
         });
     },
     storeToken: function(token) {
+        console.log("Token is " + token);
         alert("Token is " + token);
         var xmlhttp=new XMLHttpRequest();
         xmlhttp.open("POST","http://127.0.0.1:8888",true);
@@ -86,6 +107,7 @@ var app = {
         xmlhttp.onreadystatechange=function() {
             if (xmlhttp.readyState==4) {
                 //a response now exists in the responseTest property.
+                console.log("Registration response: " + xmlhttp.responseText);
                 alert("Registration response: " + xmlhttp.responseText);
                 app.myLog.value+="Registration server returned: " + xmlhttp.responseText;
             }
