@@ -504,6 +504,7 @@ function show_plan_details() {
                 
 
             } else {
+                setheadername(results_array, '<span class="icon-briefcase pagename-icon"></span>  Plan Details', "pic");
                 results_array.push('<div style="margin-top: 100px;font-size: large;">No Plan Available for You.. Please Swipe screen for more details</div>')
             }
             $('#show_plan_details').html(results_array.join(""));
