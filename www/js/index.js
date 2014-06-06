@@ -20,6 +20,7 @@
 
 var app = {
     // Application Constructor
+    myLog: document.getElementById("log"),
     initialize: function() {
         this.bindEvents();
     },
