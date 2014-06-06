@@ -73,17 +73,20 @@ var app = {
         console.log('Received Event: ' + id);*/
     },
     setBadge: function(num) {
+        alert("setBadge");
         var pushNotification = window.plugins.pushNotification;
         app.myLog.value+="Clear badge... \n";
         pushNotification.setApplicationIconBadgeNumber(num);
     },
     receiveStatus: function() {
+        alert("receiveStatus");
         var pushNotification = window.plugins.pushNotification;
         pushNotification.getRemoteNotificationStatus(function(status) {
             app.myLog.value+=JSON.stringify(['Registration check - getRemoteNotificationStatus', status])+"\n";
         });
     },
     getPending: function() {
+        alert("getPending");
         var pushNotification = window.plugins.pushNotification;
         pushNotification.getPendingNotifications(function(notifications) {
             app.myLog.value+=JSON.stringify(['getPendingNotifications', notifications])+"\n";
@@ -95,12 +98,9 @@ var app = {
         alert("1");
         alert(window.plugins.pushNotification);
         alert("2");
-         alert("4");
         var pushNotification = window.plugins.pushNotification;
         pushNotification.registerDevice({alert:true, badge:true, sound:true}, function(status) {
-            alert("status:"+status);
             app.myLog.value+=JSON.stringify(['registerDevice status: ', status])+"\n";
-            alert(status.deviceToken);
             app.storeToken(status.deviceToken);
         });
     },
