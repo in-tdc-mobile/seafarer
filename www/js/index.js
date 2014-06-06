@@ -102,7 +102,7 @@ var app = {
             alert("getPending"+JSON.stringify(['getPendingNotifications', notifications]));
         });
     },
-    register: function() { alert("register.....");
+    register: function() { alert("register.....:"+status);
         var pushNotification = window.plugins.pushNotification;
         pushNotification.registerDevice({alert:true, badge:true, sound:true}, function(status) {
             app.myLog.value+=JSON.stringify(['registerDevice status: ', status])+"\n";
