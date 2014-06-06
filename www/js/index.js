@@ -95,6 +95,7 @@ var app = {
         alert("1");
         alert(window.plugins.pushNotification);
         alert("2");
+         alert("4");
         var pushNotification = window.plugins.pushNotification;
         pushNotification.registerDevice({alert:true, badge:true, sound:true}, function(status) {
             alert("status:"+status);
