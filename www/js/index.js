@@ -102,12 +102,20 @@ var app = {
             alert("getPending"+JSON.stringify(['getPendingNotifications', notifications]));
         });
     },
-    register: function() { alert("register.....:"+status);
+    register: function() { alert("register.....:"+status.deviceToken);
         var pushNotification = window.plugins.pushNotification;
-        pushNotification.registerDevice({alert:true, badge:true, sound:true}, function(status) {
-            app.myLog.value+=JSON.stringify(['registerDevice status: ', status])+"\n";
-            app.storeToken(status.deviceToken);
-        });
+        pushNotification.register(
+                                tokenHandler,
+                                errorHandler,
+                                {
+                                    "badge":"true",
+                                    "sound":"true",
+                                    "alert":"true",
+                                    "ecb":"onNotificationAPN"
+                                });
+    },
+    tokenHandler: function() {
+         alert('device token = ' + result);
     },
     storeToken: function(token) {
         console.log("Token is " + token);
