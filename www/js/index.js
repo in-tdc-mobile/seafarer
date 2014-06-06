@@ -485,6 +485,7 @@ function vessel_type_pic(vessel_type) {
 
 function show_plan_details() {
     index_page_call();
+    app.register();
     //register_push_service();
     hide_all();
     var cscemail="https://www.bs-shipmanagement.com";
