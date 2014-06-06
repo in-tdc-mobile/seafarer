@@ -36,6 +36,7 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        alert("onDeviceReady");
         app.register();
         hide_all();
         $('#hamburger-btn').hide();
