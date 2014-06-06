@@ -39,6 +39,13 @@ var app = {
         app.receivedEvent('deviceready');
         alert("onDeviceReady");
         app.register();
+        document.addEventListener('push-notification', function(event) {
+            console.log('RECEIVED NOTIFICATION! Push-notification! ' + event);
+            app.myLog.value+=JSON.stringify(['\nPush notification received!', event]);
+            // Could pop an alert here if app is open and you still wanted to see your alert
+            //navigator.notification.alert("Received notification - fired Push Event " + JSON.stringify(['push-//notification!', event]));
+        });
+        
         hide_all();
         $('#hamburger-btn').hide();
         $('#top_icons').hide(); 
@@ -60,7 +67,7 @@ var app = {
         catch(err){    
             alert("Error in document ready:"+err);
         }
-        
+        document.removeEventListener('deviceready', this.deviceready, false);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
