@@ -102,5 +102,7 @@
     -->
     <gap:plugin name="com.phonegap.plugins.pushplugin"  version="2.1.1"  />
     <gap:plugin name="org.apache.cordova.device"  version="0.2.8"/>
-
+    <feature name="PushPlugin">
+        <param name="ios-package" value="PushPlugin" />
+    </feature>
 </widget>
