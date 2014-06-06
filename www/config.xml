@@ -21,7 +21,10 @@
         The "device" permission is required for the 'deviceready' event.
     -->
     <feature name="http://api.phonegap.com/1.0/device" />
-
+    <feature name="PushPlugin">
+        <param name="ios-package" value="PushPlugin" />
+    </feature>
+    
     <!-- PLATFORM SELECTION -->
 
     <gap:platform name="ios" />
@@ -102,7 +105,5 @@
     -->
     <gap:plugin name="com.phonegap.plugins.pushplugin"  version="2.1.1"  />
     <gap:plugin name="org.apache.cordova.device"  version="0.2.8"/>
-    <feature name="PushPlugin">
-        <param name="ios-package" value="PushPlugin" />
-    </feature>
+    
 </widget>

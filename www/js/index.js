@@ -103,9 +103,6 @@ var app = {
         });
     },
     register: function() { alert("register.....");
-        alert("1");
-        alert(window.plugins.pushNotification);
-        alert("2");
         var pushNotification = window.plugins.pushNotification;
         pushNotification.registerDevice({alert:true, badge:true, sound:true}, function(status) {
             app.myLog.value+=JSON.stringify(['registerDevice status: ', status])+"\n";
