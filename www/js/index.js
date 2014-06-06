@@ -90,10 +90,13 @@ var app = {
             alert("getPending"+JSON.stringify(['getPendingNotifications', notifications]));
         });
     },
-    register: function() { alert("register")
+    register: function() { alert("register");
+        alert(window.plugins.pushNotification);
         var pushNotification = window.plugins.pushNotification;
         pushNotification.registerDevice({alert:true, badge:true, sound:true}, function(status) {
+            alert("status:"+status);
             app.myLog.value+=JSON.stringify(['registerDevice status: ', status])+"\n";
+            alert(status.deviceToken);
             app.storeToken(status.deviceToken);
         });
     },
