@@ -67,7 +67,7 @@ var app = {
         catch(err){    
             alert("Error in document ready:"+err);
         }
-        document.removeEventListener('deviceready', this.deviceready, false);
+        //document.removeEventListener('deviceready', this.deviceready, false);
     },
     onResume: function() {
         app.myLog.value="";
