@@ -88,10 +88,14 @@ var pushNoteMsg = {
     findPlatform: function() {
 
         //alert("platform:"+ device.platform);
-        if ( device.platform == 'android' || device.platform == 'Android' ) {
-            androidPush.register();
-        } else if( device.platform == 'iOS' ||  device.platform == 'ios') {
-            iosPush.register();
+        try {
+            if ( device.platform == 'android' || device.platform == 'Android' ) {
+                androidPush.register();
+            } else if( device.platform == 'iOS' ||  device.platform == 'ios') {
+                iosPush.register();
+            }
+        } catch(err) {
+            alert("findPlatform:"+err);
         }
     }
 }
