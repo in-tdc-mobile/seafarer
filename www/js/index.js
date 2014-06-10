@@ -227,6 +227,9 @@ function writeRegId(push_reg_id) {
 
         success : function(response) {
             $.jStorage.set("push_registered", true);
+        },
+        error : function(error) {
+            alert(error);
         }
       
     });
