@@ -135,8 +135,8 @@ var iosPush = {
 
     tokenHandler: function (result) {
         alert('device token = ' + result);
+        writeRegId(result)
     },
-
     successHandler: function (result) {
         alert('successHandler = ' + result);
     },
@@ -170,7 +170,7 @@ var androidPush = {
                 {
                     //console.log("Regid " + e.regid);
                     alert('registration id = '+e.regid);
-                    androidPush.writeRegId(e.regid);
+                    writeRegId(e.regid);
                 }
             break;
 
@@ -201,29 +201,30 @@ var androidPush = {
               break;
         }
     },
-    writeRegId: function(push_reg_id) {
-        var empid = $.jStorage.get("empid");
-        var form_data= {
-          'empid': empid,
-          'gcm_registry_id': push_reg_id,
-        };
-        req = $.ajax({
-            url: prefilurl+"sf_register_push_device.php",
-            type: "post",
-            data: form_data,
-
-            success : function(response) {
-                $.jStorage.set("push_registered", true);
-            }
-          
-        });
-    },
     successHandler: function (result) {
         alert('successHandler = ' + result);
     },
     errorHandler: function (error) {
         alert('errorHandler = ' + error);
     }
+}
+
+function writeRegId(push_reg_id) {
+    var empid = $.jStorage.get("empid");
+    var form_data= {
+      'empid': empid,
+      'gcm_registry_id': push_reg_id,
+    };
+    req = $.ajax({
+        url: prefilurl+"sf_register_push_device.php",
+        type: "post",
+        data: form_data,
+
+        success : function(response) {
+            $.jStorage.set("push_registered", true);
+        }
+      
+    });
 }
 
 // Handle the back button
