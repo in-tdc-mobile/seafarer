@@ -138,8 +138,7 @@ var iosPush = {
     },
 
     tokenHandler: function (result) {
-        alert('device token = ' + result);
-        writeRegId(result)
+        writeRegId(result);
     },
     successHandler: function (result) {
         alert('successHandler = ' + result);
@@ -173,7 +172,7 @@ var androidPush = {
                 if ( e.regid.length > 0 )
                 {
                     //console.log("Regid " + e.regid);
-                    alert('registration id = '+e.regid);
+                    //alert('registration id = '+e.regid);
                     writeRegId(e.regid);
                 }
             break;
@@ -214,7 +213,9 @@ var androidPush = {
 }
 
 function writeRegId(push_reg_id) {
+    alert("push_reg_id:"+push_reg_id);
     var empid = $.jStorage.get("empid");
+    alert("empid:"+empid);
     var form_data= {
       'empid': empid,
       'gcm_registry_id': push_reg_id,
