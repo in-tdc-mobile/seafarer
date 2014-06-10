@@ -87,7 +87,7 @@ var iosPush = {
     register: function() {
         var pushNotification = window.plugins.pushNotification;
         try{
-           pushNotification.register(
+            pushNotification.register(
             iosPush.tokenHandler,
             errorHandler,
             {
@@ -97,10 +97,8 @@ var iosPush = {
                 "ecb":"iosPush.onNotificationAPN"
             });
         } catch(err) {
-            alert("reg err:"+err);
+            alert("ios reg err:"+err);
         }
-
-        alert("register 2");
     },
 
     onNotificationAPN: function(event) {
@@ -139,7 +137,17 @@ var iosPush = {
 var androidPush = {
     register: function() {
         var pushNotification = window.plugins.pushNotification;
-        pushNotification.register(androidPush.successHandler, androidPush.errorHandler,{"senderID":"1075090837516","ecb":"androidPush.onNotificationGCM"});
+        try {
+            pushNotification.register(
+            androidPush.successHandler, 
+            androidPush.errorHandler,
+            {
+                "senderID":"1075090837516",
+                "ecb":"androidPush.onNotificationGCM"
+            });
+        } catch(err) {
+            alert("androidPush reg err:"+err);
+        }
     },
     onNotificationGCM: function(e) {
         switch( e.event )
@@ -187,13 +195,13 @@ var androidPush = {
           'gcm_registry_id': push_reg_id,
         };
         req = $.ajax({
-          url: prefilurl+"sf_register_push_device.php",
-          type: "post",
-          data: form_data,
+            url: prefilurl+"sf_register_push_device.php",
+            type: "post",
+            data: form_data,
 
-          success : function(response) {
-            $.jStorage.set("push_registered", true);
-          }
+            success : function(response) {
+                $.jStorage.set("push_registered", true);
+            }
           
         });
     },
