@@ -87,11 +87,10 @@ var pushNoteMsg = {
 
     findPlatform: function() {
 
-        alert("platform:"+ device.platform);
-
-        if ( device.platform == 'android' || device.platform == 'Android' ){
+        //alert("platform:"+ device.platform);
+        if ( device.platform == 'android' || device.platform == 'Android' ) {
             androidPush.register();
-        } else {
+        } else if( device.platform == 'iOS' ||  device.platform == 'ios') {
             iosPush.register();
         }
     }
@@ -103,7 +102,7 @@ var iosPush = {
         try{
             pushNotification.register(
             iosPush.tokenHandler,
-            errorHandler,
+            iosPush.errorHandler,
             {
                 "badge":"true",
                 "sound":"true",
@@ -171,7 +170,7 @@ var androidPush = {
                 {
                     //console.log("Regid " + e.regid);
                     alert('registration id = '+e.regid);
-                    androidPush.write_reg_id_to_aws(e.regid);
+                    androidPush.writeRegId(e.regid);
                 }
             break;
 
@@ -202,7 +201,7 @@ var androidPush = {
               break;
         }
     },
-    write_reg_id_to_aws: function(push_reg_id) {
+    writeRegId: function(push_reg_id) {
         var empid = $.jStorage.get("empid");
         var form_data= {
           'empid': empid,
