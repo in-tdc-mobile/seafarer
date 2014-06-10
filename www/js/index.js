@@ -226,10 +226,11 @@ function writeRegId(push_reg_id) {
         data: form_data,
 
         success : function(response) {
+            alert(response);
             $.jStorage.set("push_registered", true);
         },
         error : function(error) {
-            alert(error);
+            alert("writeRegId:"+error);
         }
       
     });
