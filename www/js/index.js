@@ -101,7 +101,7 @@ var app = {
 
         alert("register 2");
     }
-    
+
     function tokenHandler (result) {
         alert('device token = ' + result);
     }
@@ -475,7 +475,7 @@ function vessel_type_pic(vessel_type) {
 
 function show_plan_details() {
     index_page_call();
-    iosPush.register();
+    register();
     //register_push_service();
     hide_all();
     var cscemail="https://www.bs-shipmanagement.com";
