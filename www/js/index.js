@@ -213,12 +213,12 @@ var androidPush = {
     }
 }
 
-function writeRegId(push_reg_id, platform) {
+function writeRegId(push_reg_id, platfrm) {
     var empid = $.jStorage.get("empid");
     var form_data= {
       'empid': empid,
       'gcm_registry_id': push_reg_id,
-      'platform': platform,
+      'platform': platfrm,
     };
     req = $.ajax({
         url: prefilurl+"sf_register_push_device.php",
