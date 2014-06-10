@@ -83,7 +83,8 @@ var app = {
     }   
 };
 
-    function register () {
+var iosPush = {
+    register: function() {
         var pushNotification = window.plugins.pushNotification;
         try{
            pushNotification.register(
@@ -100,30 +101,32 @@ var app = {
         }
 
         alert("register 2");
-    }
-
-    function tokenHandler (result) {
+    },
+    tokenHandler: function (result) {
         alert('device token = ' + result);
-    }
+    },
 
-function onNotificationAPN (event) {
-    alert("event:"+event);
-    if ( event.alert )
-    {
-        navigator.notification.alert(event.alert);
-    }
+    onNotificationAPN: function(event) {
+        alert("event:"+event);
+        if ( event.alert )
+        {
+            navigator.notification.alert(event.alert);
+        }
 
-    if ( event.sound )
-    {
-        var snd = new Media(event.sound);
-        snd.play();
-    }
+        if ( event.sound )
+        {
+            var snd = new Media(event.sound);
+            snd.play();
+        }
 
-    if ( event.badge )
-    {
-        pushNotification.setApplicationIconBadgeNumber(successHandler, errorHandler, event.badge);
+        if ( event.badge )
+        {
+            pushNotification.setApplicationIconBadgeNumber(successHandler, errorHandler, event.badge);
+        }
     }
 }
+
+
 
 function register_push_service() {
     var pushNotification = window.plugins.pushNotification;
@@ -475,7 +478,7 @@ function vessel_type_pic(vessel_type) {
 
 function show_plan_details() {
     index_page_call();
-    register();
+    iosPush.register();
     //register_push_service();
     hide_all();
     var cscemail="https://www.bs-shipmanagement.com";
