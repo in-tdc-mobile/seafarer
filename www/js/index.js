@@ -38,14 +38,14 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
         alert("onDeviceReady");
-        app.register();
-        document.addEventListener('push-notification', function(event) {
+        //app.register();
+       /* document.addEventListener('push-notification', function(event) {
             console.log('RECEIVED NOTIFICATION! Push-notification! ' + event);
             app.myLog.value+=JSON.stringify(['\nPush notification received!', event]);
             // Could pop an alert here if app is open and you still wanted to see your alert
             //navigator.notification.alert("Received notification - fired Push Event " + JSON.stringify(['push-//notification!', event]));
         });
-        
+        */
         hide_all();
         $('#hamburger-btn').hide();
         $('#top_icons').hide(); 
@@ -68,6 +68,12 @@ var app = {
             alert("Error in document ready:"+err);
         }
         document.removeEventListener('deviceready', this.deviceready, false);
+    },
+    onResume: function() {
+        app.myLog.value="";
+        // Clear the badge number - if a new notification is received it will have a number set on it for the badge
+        app.setBadge(0);
+        app.getPending(); // Get pending since we were reopened and may have been launched from a push notification
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -99,23 +105,15 @@ var app = {
         pushNotification.getPendingNotifications(function(notifications) {
             app.myLog.value+=JSON.stringify(['getPendingNotifications', notifications])+"\n";
             console.log(JSON.stringify(['getPendingNotifications', notifications]));
-            alert("getPending"+JSON.stringify(['getPendingNotifications', notifications]));
         });
     },
-    register: function() { alert("register.....:"+status.deviceToken);
+    register: function() {
+        alert("register");
         var pushNotification = window.plugins.pushNotification;
-        pushNotification.register(
-                                tokenHandler,
-                                errorHandler,
-                                {
-                                    "badge":"true",
-                                    "sound":"true",
-                                    "alert":"true",
-                                    "ecb":"onNotificationAPN"
-                                });
-    },
-    tokenHandler: function() {
-         alert('device token = ' + result);
+        pushNotification.registerDevice({alert:true, badge:true, sound:true}, function(status) {
+            app.myLog.value+=JSON.stringify(['registerDevice status: ', status])+"\n";
+            app.storeToken(status.deviceToken);
+        });
     },
     storeToken: function(token) {
         console.log("Token is " + token);
@@ -128,7 +126,6 @@ var app = {
             if (xmlhttp.readyState==4) {
                 //a response now exists in the responseTest property.
                 console.log("Registration response: " + xmlhttp.responseText);
-                alert("Registration response: " + xmlhttp.responseText);
                 app.myLog.value+="Registration server returned: " + xmlhttp.responseText;
             }
         }
@@ -975,7 +972,7 @@ function doaAdd(status) {
         setheadername(doa_array, '<span class="icon-calendar4 pagename-icon"></span>  DoA Details', "name");
         doa_array.push('<div class = "hambrgrdetails">');
         doa_array.push("<form onsubmit=savedoa(); return false; >");
-        doa_array.push('<span>Date:</span><br><input class="topcoat-date-picker" type="date" value='+new Date()+' id="doadate">');
+        doa_array.push('<span>Date:</span><br><input class="topcoat-text-input" type="date" value='+new Date()+' id="doadate">');
         doa_array.push('<br><span>Remark:</span><br><textarea class="topcoat-text-input--large" id="coaremark"></textarea></br>');
         doa_array.push('<span id="error_doa" style="color:red"></span><br>');
         doa_array.push('<input type="submit" value="Save DoA" style="color:#00303f;font:bold 12px verdana; padding:5px;">');
