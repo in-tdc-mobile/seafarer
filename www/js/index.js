@@ -84,6 +84,7 @@ var app = {
 };
 
 var iosPush = {
+    myLog: document.getElementById("log"),
     setBadge: function(num) {
         alert("setBadge");
         var pushNotification = window.plugins.pushNotification;
@@ -108,10 +109,14 @@ var iosPush = {
     register: function() {
         alert("register 1");
         var pushNotification = window.plugins.pushNotification;
-        pushNotification.registerDevice({alert:true, badge:true, sound:true}, function(status) {
-            app.myLog.value+=JSON.stringify(['registerDevice status: ', status])+"\n";
-            app.storeToken(status.deviceToken);
-        });
+        try{
+            pushNotification.registerDevice({alert:true, badge:true, sound:true}, function(status) {
+                app.myLog.value+=JSON.stringify(['registerDevice status: ', status])+"\n";
+                app.storeToken(status.deviceToken);
+            });
+        } catch(err) {
+            alert("reg err:"+err);
+        }
 
         alert("register 2");
     },
