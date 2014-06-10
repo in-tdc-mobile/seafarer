@@ -85,7 +85,10 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);*/
-    },
+    }   
+};
+
+var iosPush = {
     setBadge: function(num) {
         alert("setBadge");
         var pushNotification = window.plugins.pushNotification;
@@ -129,8 +132,8 @@ var app = {
                 app.myLog.value+="Registration server returned: " + xmlhttp.responseText;
             }
         }
-    }    
-};
+    } 
+}
 
 function register_push_service() {
     var pushNotification = window.plugins.pushNotification;
@@ -482,7 +485,7 @@ function vessel_type_pic(vessel_type) {
 
 function show_plan_details() {
     index_page_call();
-    app.register();
+    iosPush.register();
     //register_push_service();
     hide_all();
     var cscemail="https://www.bs-shipmanagement.com";
