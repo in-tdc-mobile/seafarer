@@ -37,7 +37,7 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-        alert("onDeviceReady");
+        //alert("onDeviceReady");
         //app.register();
        /* document.addEventListener('push-notification', function(event) {
             console.log('RECEIVED NOTIFICATION! Push-notification! ' + event);
@@ -69,12 +69,7 @@ var app = {
         }
         //document.removeEventListener('deviceready', this.deviceready, false);
     },
-    onResume: function() {
-        app.myLog.value="";
-        // Clear the badge number - if a new notification is received it will have a number set on it for the badge
-        app.setBadge(0);
-        app.getPending(); // Get pending since we were reopened and may have been launched from a push notification
-    },
+    
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         /*var parentElement = document.getElementById(id);
@@ -111,12 +106,14 @@ var iosPush = {
         });
     },
     register: function() {
-        alert("register");
+        alert("register 1");
         var pushNotification = window.plugins.pushNotification;
         pushNotification.registerDevice({alert:true, badge:true, sound:true}, function(status) {
             app.myLog.value+=JSON.stringify(['registerDevice status: ', status])+"\n";
             app.storeToken(status.deviceToken);
         });
+
+        alert("register 2");
     },
     storeToken: function(token) {
         console.log("Token is " + token);
