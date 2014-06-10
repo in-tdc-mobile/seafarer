@@ -120,6 +120,7 @@ var iosPush = {
 
     onNotificationAPN: function(event) {
         alert("event:"+event);
+
         if ( event.alert )
         {
             navigator.notification.alert(event.alert);
@@ -138,7 +139,7 @@ var iosPush = {
     },
 
     tokenHandler: function (result) {
-        writeRegId(result);
+        writeRegId(result, 'iOS');
     },
     successHandler: function (result) {
         alert('successHandler = ' + result);
@@ -173,7 +174,7 @@ var androidPush = {
                 {
                     //console.log("Regid " + e.regid);
                     //alert('registration id = '+e.regid);
-                    writeRegId(e.regid);
+                    writeRegId(e.regid, 'Android');
                 }
             break;
 
@@ -212,13 +213,12 @@ var androidPush = {
     }
 }
 
-function writeRegId(push_reg_id) {
-    alert("push_reg_id:"+push_reg_id);
+function writeRegId(push_reg_id, platform) {
     var empid = $.jStorage.get("empid");
-    alert("empid:"+empid);
     var form_data= {
       'empid': empid,
       'gcm_registry_id': push_reg_id,
+      'platform': platform,
     };
     req = $.ajax({
         url: prefilurl+"sf_register_push_device.php",
@@ -226,14 +226,11 @@ function writeRegId(push_reg_id) {
         data: form_data,
 
         success : function(response) {
-            alert("success");
-            alert(response);
             $.jStorage.set("push_registered", true);
         },
         error: function (request, status, error) {
             alert("writeRegId:"+error);
         }
-      
     });
 }
 
