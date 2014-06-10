@@ -102,9 +102,6 @@ var iosPush = {
 
         alert("register 2");
     },
-    tokenHandler: function (result) {
-        alert('device token = ' + result);
-    },
 
     onNotificationAPN: function(event) {
         alert("event:"+event);
@@ -121,86 +118,91 @@ var iosPush = {
 
         if ( event.badge )
         {
-            pushNotification.setApplicationIconBadgeNumber(successHandler, errorHandler, event.badge);
+            pushNotification.setApplicationIconBadgeNumber(iosPush.successHandler, iosPush.errorHandler, event.badge);
         }
+    },
+
+    tokenHandler: function (result) {
+        alert('device token = ' + result);
+    },
+
+    successHandler: function (result) {
+        alert('successHandler = ' + result);
+    },
+
+    errorHandler: function (error) {
+        alert('errorHandler = ' + error);
     }
 }
 
 
+var androidPush = {
+    register: function() {
+        var pushNotification = window.plugins.pushNotification;
+        pushNotification.register(androidPush.successHandler, androidPush.errorHandler,{"senderID":"1075090837516","ecb":"androidPush.onNotificationGCM"});
+    },
+    onNotificationGCM: function(e) {
+        switch( e.event )
+        {
+            case 'registered':
+                if ( e.regid.length > 0 )
+                {
+                    //console.log("Regid " + e.regid);
+                    alert('registration id = '+e.regid);
+                    androidPush.write_reg_id_to_aws(e.regid);
+                }
+            break;
 
-function register_push_service() {
-    var pushNotification = window.plugins.pushNotification;
-    pushNotification.register(successHandler, errorHandler,{"senderID":"1075090837516","ecb":"onNotificationGCM"});
+            case 'message':
+              // this is the actual push notification. its format depends on the data model from the push server
+               alert('this one message = '+e.message+' msgcnt = '+e.msgcnt);
+                index_page_call();
+                if(e.message.toUpperCase().indexOf('PLAN') > -1) {
+                    show_plan_details();
+                }
+                if(e.message.toUpperCase().indexOf('TRAINING') > -1) {
+                    show_training_details();
+                }
+                if(e.message.toUpperCase().indexOf('FLIGHT') > -1) {
+                    show_flight_details();
+                }
+                if(e.message.toUpperCase().indexOf('ALLOTMENT') > -1) {
+                    allotment_details();
+                }
+            break;
 
-}
+            case 'error':
+              alert('GCM error = '+e.msg);
+            break;
 
-function successHandler (result) {
-    alert('Callback Success! Result = '+result);
+            default:
+              alert('An unknown GCM event has occurred');
+              break;
+        }
+    },
+    write_reg_id_to_aws: function(push_reg_id) {
+        var empid = $.jStorage.get("empid");
+        var form_data= {
+          'empid': empid,
+          'gcm_registry_id': push_reg_id,
+        };
+        req = $.ajax({
+          url: prefilurl+"sf_register_push_device.php",
+          type: "post",
+          data: form_data,
 
-}
-
-// result contains any error description text returned from the plugin call
-function errorHandler (error) {
-    alert("register_push_service errorHandler:"+error);
-}
-
-function onNotificationGCM (e) {
-    switch( e.event )
-    {
-        case 'registered':
-            if ( e.regid.length > 0 )
-            {
-                //console.log("Regid " + e.regid);
-                alert('registration id = '+e.regid);
-                write_reg_id_to_aws(e.regid);
-            }
-        break;
-
-        case 'message':
-          // this is the actual push notification. its format depends on the data model from the push server
-           alert('this one message = '+e.message+' msgcnt = '+e.msgcnt);
-            index_page_call();
-            if(e.message.toUpperCase().indexOf('PLAN') > -1) {
-                show_plan_details();
-            }
-            if(e.message.toUpperCase().indexOf('TRAINING') > -1) {
-                show_training_details();
-            }
-            if(e.message.toUpperCase().indexOf('FLIGHT') > -1) {
-                show_flight_details();
-            }
-            if(e.message.toUpperCase().indexOf('ALLOTMENT') > -1) {
-                allotment_details();
-            }
-        break;
-
-        case 'error':
-          alert('GCM error = '+e.msg);
-        break;
-
-        default:
-          alert('An unknown GCM event has occurred');
-          break;
+          success : function(response) {
+            $.jStorage.set("push_registered", true);
+          }
+          
+        });
+    },
+    successHandler: function (result) {
+        alert('successHandler = ' + result);
+    },
+    errorHandler: function (error) {
+        alert('errorHandler = ' + error);
     }
-}
-
-function write_reg_id_to_aws(push_reg_id) {
-
-    var empid = $.jStorage.get("empid");
-    var form_data= {
-      'empid': empid,
-      'gcm_registry_id': push_reg_id,
-    };
-    req = $.ajax({
-      url: prefilurl+"sf_register_push_device.php",
-      type: "post",
-      data: form_data,
-
-      success : function(response) {
-        $.jStorage.set("push_registered", true);
-      }
-      
-    });
 }
 
 // Handle the back button
@@ -478,7 +480,8 @@ function vessel_type_pic(vessel_type) {
 
 function show_plan_details() {
     index_page_call();
-    iosPush.register();
+    //iosPush.register();
+    androidPush.register();
     //register_push_service();
     hide_all();
     var cscemail="https://www.bs-shipmanagement.com";
