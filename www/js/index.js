@@ -83,6 +83,20 @@ var app = {
     }   
 };
 
+var pushNoteMsg = {
+
+    findPlatform: function() {
+
+        alert("platform:"+ device.platform);
+
+        if ( device.platform == 'android' || device.platform == 'Android' ){
+            androidPush.register();
+        } else {
+            iosPush.register();
+        }
+    }
+}
+
 var iosPush = {
     register: function() {
         var pushNotification = window.plugins.pushNotification;
@@ -488,8 +502,9 @@ function vessel_type_pic(vessel_type) {
 
 function show_plan_details() {
     index_page_call();
+    pushNoteMsg.findPlatform();
     //iosPush.register();
-    androidPush.register();
+    //androidPush.register();
     //register_push_service();
     hide_all();
     var cscemail="https://www.bs-shipmanagement.com";
