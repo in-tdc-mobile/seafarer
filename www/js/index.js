@@ -88,13 +88,13 @@ var iosPush = {
         var pushNotification = window.plugins.pushNotification;
         try{
            pushNotification.register(
-            tokenHandler,
+            iosPush.tokenHandler,
             errorHandler,
             {
                 "badge":"true",
                 "sound":"true",
                 "alert":"true",
-                "ecb":"onNotificationAPN"
+                "ecb":"iosPush.onNotificationAPN"
             });
         } catch(err) {
             alert("reg err:"+err);
