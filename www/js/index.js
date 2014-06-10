@@ -83,8 +83,7 @@ var app = {
     }   
 };
 
-var iosPush = {
-    register: function() {
+    function register () {
         var pushNotification = window.plugins.pushNotification;
         try{
            pushNotification.register(
@@ -101,11 +100,11 @@ var iosPush = {
         }
 
         alert("register 2");
-    },
-    function tokenHandler (result) {
-    alert('device token = ' + result);
     }
-}
+    
+    function tokenHandler (result) {
+        alert('device token = ' + result);
+    }
 
 function onNotificationAPN (event) {
     alert("event:"+event);
