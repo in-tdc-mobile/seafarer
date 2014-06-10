@@ -138,7 +138,7 @@ var iosPush = {
     },
 
     tokenHandler: function (result) {
-        writeRegId("ssdsdsdsdsds2131232");
+        writeRegId(result);
     },
     successHandler: function (result) {
         alert('successHandler = ' + result);
