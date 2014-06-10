@@ -84,35 +84,17 @@ var app = {
 };
 
 var iosPush = {
-    myLog: document.getElementById("log"),
-    setBadge: function(num) {
-        alert("setBadge");
-        var pushNotification = window.plugins.pushNotification;
-        app.myLog.value+="Clear badge... \n";
-        pushNotification.setApplicationIconBadgeNumber(num);
-    },
-    receiveStatus: function() {
-        alert("receiveStatus");
-        var pushNotification = window.plugins.pushNotification;
-        pushNotification.getRemoteNotificationStatus(function(status) {
-            app.myLog.value+=JSON.stringify(['Registration check - getRemoteNotificationStatus', status])+"\n";
-        });
-    },
-    getPending: function() {
-        alert("getPending");
-        var pushNotification = window.plugins.pushNotification;
-        pushNotification.getPendingNotifications(function(notifications) {
-            app.myLog.value+=JSON.stringify(['getPendingNotifications', notifications])+"\n";
-            console.log(JSON.stringify(['getPendingNotifications', notifications]));
-        });
-    },
     register: function() {
-        alert("register 1");
         var pushNotification = window.plugins.pushNotification;
         try{
-            pushNotification.registerDevice({alert:true, badge:true, sound:true}, function(status) {
-                app.myLog.value+=JSON.stringify(['registerDevice status: ', status])+"\n";
-                app.storeToken(status.deviceToken);
+           pushNotification.register(
+            tokenHandler,
+            errorHandler,
+            {
+                "badge":"true",
+                "sound":"true",
+                "alert":"true",
+                "ecb":"onNotificationAPN"
             });
         } catch(err) {
             alert("reg err:"+err);
@@ -120,21 +102,28 @@ var iosPush = {
 
         alert("register 2");
     },
-    storeToken: function(token) {
-        console.log("Token is " + token);
-        alert("Token is " + token);
-        var xmlhttp=new XMLHttpRequest();
-        xmlhttp.open("POST","http://127.0.0.1:8888",true);
-        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        xmlhttp.send("token="+token+"&message=pushnotificationtester");
-        xmlhttp.onreadystatechange=function() {
-            if (xmlhttp.readyState==4) {
-                //a response now exists in the responseTest property.
-                console.log("Registration response: " + xmlhttp.responseText);
-                app.myLog.value+="Registration server returned: " + xmlhttp.responseText;
-            }
-        }
-    } 
+    function tokenHandler (result) {
+    alert('device token = ' + result);
+    }
+}
+
+function onNotificationAPN (event) {
+    alert("event:"+event);
+    if ( event.alert )
+    {
+        navigator.notification.alert(event.alert);
+    }
+
+    if ( event.sound )
+    {
+        var snd = new Media(event.sound);
+        snd.play();
+    }
+
+    if ( event.badge )
+    {
+        pushNotification.setApplicationIconBadgeNumber(successHandler, errorHandler, event.badge);
+    }
 }
 
 function register_push_service() {
