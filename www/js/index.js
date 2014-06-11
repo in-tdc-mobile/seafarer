@@ -214,6 +214,7 @@ var androidPush = {
 }
 
 function writeRegId(push_reg_id, platfrm) {
+    alert(push_reg_id);
     var empid = $.jStorage.get("empid");
     var form_data= {
       'empid': empid,
