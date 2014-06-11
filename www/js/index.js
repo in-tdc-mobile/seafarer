@@ -227,7 +227,9 @@ function writeRegId(push_reg_id, platfrm) {
         data: form_data,
 
         success : function(response) {
+            alert("succ 1");
             $.jStorage.set("push_registered", true);
+            alert("succ 2");
         },
         error: function (request, status, error) {
             alert("writeRegId:"+error);
