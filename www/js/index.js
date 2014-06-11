@@ -572,7 +572,7 @@ function show_plan_details() {
 
             } else {
                 setheadername(results_array, '<span class="icon-briefcase pagename-icon"></span>  Plan Details', "pic");
-                results_array.push('<div style="margin-top: 100px;font-size: large;">No Plan Available for You.. Please Swipe screen for more details</div>')
+                results_array.push('<div style="margin-top: 100px;font-size: large;">You have not been planned for a vessel yet. <br/> Please swipe left to open the menu.</div>')
             }
             $('#show_plan_details').html(results_array.join(""));
            /* if(cscemail != null) {
@@ -800,7 +800,7 @@ function allotment_details() {
             results_array.push('<div class = "footer" style="margin-top: 0px;">');
             if(data[0] != null) {
                 var pro_date = new Date(data[0]['processed_on']);
-                results_array.push("<span> Amount is Processed on "+getMonthName(pro_date.getMonth()) +", "+pro_date.getFullYear() +"</span><br/>");
+                results_array.push("<span> Amount is Processed on <b>"+getMonthName(pro_date.getMonth()) +", "+pro_date.getFullYear() +"</b></span><br/>");
                 results_array.push("Balance Amount is ");
                 var balamnt=0;
                 if(data[0] != null) {
@@ -812,7 +812,7 @@ function allotment_details() {
                         hide_spinner();
                     }
                 }
-                results_array.push(prsflt(balamnt));
+                results_array.push('<b>'+prsflt(balamnt)+'</b>');
             }
             allotted_details(period, results_array);
             
@@ -849,7 +849,7 @@ function allotted_details(period, results_array) {
                     results_array.push("<br>&nbsp;&nbsp;"+data[i]['beneficiary_name']+": "+data[i]['amount']+"("+data[i]['currency']+")");
                 }
             } else {
-                results_array.push("<br>No Allotments for you.")
+                results_array.push("<br>You have not set any allotments.")
             }
             hide_spinner();
             $('#allotment_details').html(results_array.join(""));
