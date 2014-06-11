@@ -95,7 +95,7 @@ var pushNoteMsg = {
                 iosPush.register();
             }
         } catch(err) {
-            alert("findPlatform:"+err);
+            //alert("findPlatform:"+err);
         }
     }
 }
@@ -114,7 +114,7 @@ var iosPush = {
                 "ecb":"iosPush.onNotificationAPN"
             });
         } catch(err) {
-            alert("ios reg err:"+err);
+            //alert("ios reg err:"+err);
         }
     },
 
@@ -142,11 +142,11 @@ var iosPush = {
         writeRegId(result, 'iOS');
     },
     successHandler: function (result) {
-        alert('successHandler = ' + result);
+        //alert('successHandler = ' + result);
     },
 
     errorHandler: function (error) {
-        alert('errorHandler = ' + error);
+       // alert('errorHandler = ' + error);
     }
 }
 
@@ -163,7 +163,7 @@ var androidPush = {
                 "ecb":"androidPush.onNotificationGCM"
             });
         } catch(err) {
-            alert("androidPush reg err:"+err);
+            //alert("androidPush reg err:"+err);
         }
     },
     onNotificationGCM: function(e) {
@@ -197,19 +197,19 @@ var androidPush = {
             break;
 
             case 'error':
-              alert('GCM error = '+e.msg);
+              //alert('GCM error = '+e.msg);
             break;
 
             default:
-              alert('An unknown GCM event has occurred');
+              //alert('An unknown GCM event has occurred');
               break;
         }
     },
     successHandler: function (result) {
-        alert('successHandler = ' + result);
+       // alert('successHandler = ' + result);
     },
     errorHandler: function (error) {
-        alert('errorHandler = ' + error);
+       // alert('errorHandler = ' + error);
     }
 }
 
@@ -227,12 +227,10 @@ function writeRegId(push_reg_id, platfrm) {
         data: form_data,
 
         success : function(response) {
-            alert("succ 1");
             $.jStorage.set("push_registered", true);
-            alert("succ 2");
         },
         error: function (request, status, error) {
-            alert("writeRegId:"+error);
+            //alert("writeRegId:"+error);
         }
     });
 }
