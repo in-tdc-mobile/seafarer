@@ -603,7 +603,7 @@ function show_plan_details() {
         
     });
 
-    pushNoteMsg.findPlatform();
+   // pushNoteMsg.findPlatform();
 }
 
 
