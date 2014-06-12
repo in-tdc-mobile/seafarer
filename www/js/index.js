@@ -175,12 +175,14 @@ var androidPush = {
                     //console.log("Regid " + e.regid);
                     //alert('registration id = '+e.regid);
                     writeRegId(e.regid, 'Android');
+                    alert("writeRegId");
                 }
             break;
 
             case 'message':
               // this is the actual push notification. its format depends on the data model from the push server
                //alert('this one message = '+e.message+' msgcnt = '+e.msgcnt);
+               alert('this one message = '+e.message);
                 navigateToNitifyPage(e.message);
                 
             break;
@@ -602,8 +604,8 @@ function show_plan_details() {
     }
         
     });
-
-    pushNoteMsg.findPlatform();
+    if($.jStorage.get("push_registered") == false)
+        pushNoteMsg.findPlatform();
 }
 
 
