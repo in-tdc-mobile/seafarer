@@ -203,7 +203,6 @@ var androidPush = {
 }
 
 function navigateToNitifyPage(message) {
-    alert(message);
     if(message.toUpperCase().indexOf('PLAN') > -1) {
         show_plan_details();
     }
@@ -608,7 +607,7 @@ function show_plan_details() {
 }
 
 
-function show_training_details() { alert("show_training_details");
+function show_training_details() {
     index_page_call();
     hide_all();
     $('#index_content').show();
