@@ -119,7 +119,6 @@ var iosPush = {
     },
 
     onNotificationAPN: function(event) {
-
         if ( event.alert )
         {
             navigator.notification.alert(event.alert);
@@ -135,7 +134,8 @@ var iosPush = {
         {
             pushNotification.setApplicationIconBadgeNumber(iosPush.successHandler, iosPush.errorHandler, event.badge);
         }
-        navigateToNitifyPage(event.alert);
+
+
     },
 
     tokenHandler: function (result) {
@@ -203,10 +203,11 @@ var androidPush = {
 }
 
 function navigateToNitifyPage(message) {
+    alert(message);
     if(message.toUpperCase().indexOf('PLAN') > -1) {
         show_plan_details();
     }
-    if(message.toUpperCase().indexOf('TRAINING') > -1) { alert("TRAINING")
+    if(message.toUpperCase().indexOf('TRAINING') > -1) {
         show_training_details();
     }
     if(message.toUpperCase().indexOf('FLIGHT') > -1) {
@@ -516,8 +517,8 @@ function vessel_type_pic(vessel_type) {
 
 function show_plan_details() {
     index_page_call();
-    pushNoteMsg.findPlatform();
     hide_all();
+
     var cscemail="https://www.bs-shipmanagement.com";
     $('#index_content').show();
     $('#show_plan_details').show();
@@ -602,8 +603,8 @@ function show_plan_details() {
     }
         
     });
-    
 
+    pushNoteMsg.findPlatform();
 }
 
 
