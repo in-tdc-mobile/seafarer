@@ -119,7 +119,6 @@ var iosPush = {
     },
 
     onNotificationAPN: function(event) {
-        alert("event:"+event);
 
         if ( event.alert )
         {
