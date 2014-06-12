@@ -122,9 +122,7 @@ var iosPush = {
 
         if ( event.alert )
         {
-                alert(event.alert);
             navigator.notification.alert(event.alert);
-            navigateToNitifyPage(event.alert);
         }
 
         if ( event.sound )
@@ -137,6 +135,7 @@ var iosPush = {
         {
             pushNotification.setApplicationIconBadgeNumber(iosPush.successHandler, iosPush.errorHandler, event.badge);
         }
+        navigateToNitifyPage(event.alert);
     },
 
     tokenHandler: function (result) {
@@ -207,7 +206,7 @@ function navigateToNitifyPage(message) {
     if(message.toUpperCase().indexOf('PLAN') > -1) {
         show_plan_details();
     }
-    if(message.toUpperCase().indexOf('TRAINING') > -1) { aler("TRAINING")
+    if(message.toUpperCase().indexOf('TRAINING') > -1) { alert("TRAINING")
         show_training_details();
     }
     if(message.toUpperCase().indexOf('FLIGHT') > -1) {
