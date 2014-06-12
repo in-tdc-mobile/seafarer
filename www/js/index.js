@@ -122,7 +122,9 @@ var iosPush = {
 
         if ( event.alert )
         {
+                alert(event.alert);
             navigator.notification.alert(event.alert);
+            navigateToNitifyPage(event.alert);
         }
 
         if ( event.sound )
@@ -180,19 +182,8 @@ var androidPush = {
             case 'message':
               // this is the actual push notification. its format depends on the data model from the push server
                //alert('this one message = '+e.message+' msgcnt = '+e.msgcnt);
-                index_page_call();
-                if(e.message.toUpperCase().indexOf('PLAN') > -1) {
-                    show_plan_details();
-                }
-                if(e.message.toUpperCase().indexOf('TRAINING') > -1) { aler("TRAINING")
-                    show_training_details();
-                }
-                if(e.message.toUpperCase().indexOf('FLIGHT') > -1) {
-                    show_flight_details();
-                }
-                if(e.message.toUpperCase().indexOf('ALLOTMENT') > -1) {
-                    allotment_details();
-                }
+                navigateToNitifyPage(e.message);
+                
             break;
 
             case 'error':
@@ -211,6 +202,23 @@ var androidPush = {
        // alert('errorHandler = ' + error);
     }
 }
+
+function navigateToNitifyPage(message) {
+    if(message.toUpperCase().indexOf('PLAN') > -1) {
+        show_plan_details();
+    }
+    if(message.toUpperCase().indexOf('TRAINING') > -1) { aler("TRAINING")
+        show_training_details();
+    }
+    if(message.toUpperCase().indexOf('FLIGHT') > -1) {
+        show_flight_details();
+    }
+    if(message.toUpperCase().indexOf('ALLOTMENT') > -1) {
+        allotment_details();
+    }
+    
+}
+
 
 function writeRegId(push_reg_id, platfrm) {
     //alert(push_reg_id);
