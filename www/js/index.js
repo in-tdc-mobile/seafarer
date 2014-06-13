@@ -1006,11 +1006,11 @@ function doaAdd(status) {
         doa_array.push('<div class="adddoa">');
         setheadername(doa_array, '<span class="icon-calendar4 pagename-icon"></span>  DoA Details', "name");
         doa_array.push('<div class = "hambrgrdetails">');
-        doa_array.push("<form onsubmit=savedoa(); return false; >");
+        doa_array.push("<form>");
         doa_array.push('<span>Date:</span><br><input class="topcoat-text-input" type="date" value='+new Date()+' id="doadate">');
         doa_array.push('<br><span>Remark:</span><br><textarea class="topcoat-text-input--large" id="coaremark"></textarea></br>');
         doa_array.push('<span id="error_doa" style="color:red"></span><br>');
-        doa_array.push('<input type="submit" value="Save DoA" style="color:#00303f;font:bold 12px verdana; padding:5px;">');
+        doa_array.push('<input type="button" onclick="savedoa()" value="Save DoA" style="color:#00303f;font:bold 12px verdana; padding:5px;">');
         doa_array.push('<input type="button" onclick="doadetails()" value="back" style="color: #00303f;font: bold 12px verdana;padding: 5px;">');
         doa_array.push('</form>');
         doa_array.push('</div>');
