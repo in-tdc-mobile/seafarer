@@ -655,6 +655,7 @@ function show_training_details() {
         training_res_array.push('</div>');
         //$('#foot_training').html(training_res_array.join(""));
         $('#show_training_details').html(training_res_array.join(""));
+        //update_alert_seen("TRAINING");
     },
     error: function (request, status, error) {
         training_res_array.push("</div>");
@@ -1247,7 +1248,7 @@ function getempdetails() {
         success : function(data) {
             if(data[0] != null) {
                 emp_det_array.push(nullcheck(toTitleCase(data[0]['first_name']))+" "+nullcheck(toTitleCase(data[0]['sur_name'])));//+nullcheck(toTitleCase(data[0]['last_name']))+" "
-                emp_det_array.push("<br>"+toTitleCase(data[0]['column1']));
+                emp_det_array.push("<br>"+toTitleCase(data[0]['nationality']));
                 emp_det_array.push("<br>"+toTitleCase(data[0]['rank_grp_name']));
             } 
             $('#empprof').html(emp_det_array.join(""));
@@ -1352,6 +1353,21 @@ function alerts() {
         error: function (request, status, error) {
             hide_spinner();
         }
+    });
+}
+
+function update_alert_seen(page) {
+    var url = prefilurl+"sf_update_slert_seen.php?empid="+$.jStorage.get("empid")+"&pagename="+page;
+    var emp_det_array = new Array(); 
+    var req = $.ajax({
+        url: url,
+        datatype: 'text',
+        beforeSend: function() {
+        },
+
+        success : function(data) {
+        }
+        
     });
 }
 
