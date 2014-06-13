@@ -1246,7 +1246,7 @@ function getempdetails() {
 
         success : function(data) {
             if(data[0] != null) {
-                emp_det_array.push(nullcheck(toTitleCase(data[0]['first_name']))+" "+nullcheck(toTitleCase(data[0]['last_name']))+" "+nullcheck(toTitleCase(data[0]['sur_name'])));
+                emp_det_array.push(nullcheck(toTitleCase(data[0]['first_name']))+" "+nullcheck(toTitleCase(data[0]['sur_name'])));//+nullcheck(toTitleCase(data[0]['last_name']))+" "
                 emp_det_array.push("<br>"+toTitleCase(data[0]['column1']));
                 emp_det_array.push("<br>"+toTitleCase(data[0]['rank_grp_name']));
             } 
