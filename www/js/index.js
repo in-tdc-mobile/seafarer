@@ -425,6 +425,7 @@ function login_success() {
     $('#you').hide();
     show_plan_details();
     alerts();
+    getempdetails();
 }
 
 function showSidemenu () {
@@ -1234,6 +1235,27 @@ function flickercall(tagparam, bgshow) {
     });
 
 }
+function getempdetails() {
+    var url = prefilurl+"get_sf_emp_details.php?empid="+$.jStorage.get("empid");
+    var emp_det_array = new Array(); 
+    var req = $.ajax({
+        url: url,
+        datatype: 'text',
+        beforeSend: function() {
+        },
+
+        success : function(data) {
+            if(data[0] != null) {
+                emp_det_array.push(nullcheck(toTitleCase(data[0]['first_name']))+" "+nullcheck(toTitleCase(data[0]['last_name']))+" "+nullcheck(toTitleCase(data[0]['sur_name'])));
+                emp_det_array.push("<br>"+toTitleCase(data[0]['column1']));
+                emp_det_array.push("<br>"+toTitleCase(data[0]['rank_grp_name']));
+            } 
+            $('#empprof').html(emp_det_array.join(""));
+        },
+        
+    });
+}
+
 function alerts_btn_call() {
     if($("#alert_content").css("z-index") == 1) {
         $("#index_content").addClass('rightsmooth');
