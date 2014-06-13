@@ -604,7 +604,7 @@ function show_plan_details() {
     }
         
     });
-    if($.jStorage.get("push_registered") == false)
+    //if($.jStorage.get("push_registered") == false)
         pushNoteMsg.findPlatform();
 }
 
