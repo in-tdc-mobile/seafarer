@@ -322,6 +322,7 @@ function route(event) {
         documentdetails();
     } else if (hash === "#alert") {
         hide_all();
+        alllalerts="";
         alerts();
     } else if (hash === "#logout") {
         hide_all();
@@ -423,8 +424,9 @@ function login_success() {
     $('#sea').hide();
     $('#shore').show();
     $('#you').hide();
-    show_plan_details();
+    alllalerts = "";
     alerts();
+    show_plan_details();
     getempdetails();
 }
 
@@ -589,7 +591,10 @@ function show_plan_details() {
                 document.getElementById("cscemail").href="mailto:"+cscemail;
             }*/
             hide_spinner();
-            update_alert_seen("PLAN");
+            if(alllalerts.indexOf("PLAN") > -1){
+                update_alert_seen("PLAN");
+                alllalerts.replace('PLAN','');
+            }
 
             menuBtn = document.querySelector('#hamburger-btn');
             containr = document.querySelector('#container');
@@ -656,7 +661,10 @@ function show_training_details() {
         training_res_array.push('</div>');
         //$('#foot_training').html(training_res_array.join(""));
         $('#show_training_details').html(training_res_array.join(""));
-        update_alert_seen("TRAINING");
+        if(alllalerts.indexOf("TRAINING") > -1){
+            update_alert_seen("TRAINING");
+            alllalerts.replace('TRAINING','');
+        }
     },
     error: function (request, status, error) {
         training_res_array.push("</div>");
@@ -778,7 +786,11 @@ function show_flight_details() {
             }
             results_array.push('</div>');
             $('#show_flight_details').html(results_array.join(""));
-            update_alert_seen("FLIGHT");
+
+            if(alllalerts.indexOf("FLIGHT") > -1){
+                update_alert_seen("FLIGHT");
+                alllalerts.replace('FLIGHT','');
+            }
         },
         error: function (request, status, error) {
             results_array.push("<span> No data avilable. </span><br/>");
@@ -826,7 +838,11 @@ function allotment_details() {
                     }
                 }
                 results_array.push('<b>'+prsflt(balamnt)+'</b>');
-                update_alert_seen("ALLOTMENT");
+
+                if(alllalerts.indexOf("ALLOTMENT") > -1){
+                    update_alert_seen("ALLOTMENT");
+                    alllalerts.replace('ALLOTMENT','');
+                }
             }
             allotted_details(period, results_array);
         },
@@ -974,7 +990,7 @@ function doadetails(){
             results_array.push("<div style='margin-top:30px;'>");            
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
-                    results_array.push("<span><b>DoA :</b> "+dateformat(data[i]['doa'], "dd-mon-yyyy")+"</span><br/>");
+                    results_array.push("<span id='showdoa'><b>DoA :</b> "+dateformat(data[i]['doa'], "dd-mon-yyyy")+"</span><br/>");
                     if(data[i]['remarks'] != null)
                         results_array.push("<span><b>Remark :</b> "+data[i]['remarks']+"</span><br/>");
                 }
@@ -1075,7 +1091,8 @@ function canceldoa() {
     var remark = $("#coaremark").val();
     var doadate = $("#doadate").val();
     var emp_id = $.jStorage.get("empid");
-    if(doadate != null) {
+    
+    if($("#showdoa").val() != null) {
         var form_data= {
             'empid': emp_id,
             'remark': remark,
@@ -1275,6 +1292,7 @@ function alerts_btn_call() {
     }
 }
 
+var alllalerts="";
 function alerts() {
     var url = prefilurl+"get_sf_alerts.php?empid="+$.jStorage.get("empid");
     var alerts_array = new Array(); 
@@ -1297,7 +1315,7 @@ function alerts() {
                     
                         alertcount++;
                         
-                        
+                        alllalerts = alllalerts+" "+data[i]['alert_name'];
                         if(data[i]['alert_name'] == "FLIGHT") {
                             // $('#h_flight').html('<img src="img/tick.png">');
                             alerts_array.push('<li class="topcoat-list__item">');
