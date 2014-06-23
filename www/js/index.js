@@ -1075,36 +1075,38 @@ function canceldoa() {
     var remark = $("#coaremark").val();
     var doadate = $("#doadate").val();
     var emp_id = $.jStorage.get("empid");
-    var form_data= {
-        'empid': emp_id,
-        'remark': remark,
-        'doadate': doadate,
-        'operation': 'C'
-    };
-    var req = $.ajax({
-        url: url,
-        type: "post",
-        data: form_data,
-        beforeSend: function() {
-            show_spinner();
-        },
+    if(doadate != null) {
+        var form_data= {
+            'empid': emp_id,
+            'remark': remark,
+            'doadate': doadate,
+            'operation': 'C'
+        };
+        var req = $.ajax({
+            url: url,
+            type: "post",
+            data: form_data,
+            beforeSend: function() {
+                show_spinner();
+            },
 
-        success : function(data) {
-            if(data == 'Sucess') {
-                //showdashbord();
-                doadetails();
-            } else {
-                alert("Issue in adding doa, please try again");
+            success : function(data) {
+                if(data == 'Sucess') {
+                    //showdashbord();
+                    doadetails();
+                } else {
+                    alert("Issue in adding doa, please try again");
+                }
+                
+                hide_spinner();
+            },
+            error: function (request, status, error) {
+                alert("error:"+error);
+                alert("status:"+status);
+                alert("request:"+request);
             }
-            
-            hide_spinner();
-        },
-        error: function (request, status, error) {
-            alert("error:"+error);
-            alert("status:"+status);
-            alert("request:"+request);
-        }
-    });
+        });
+    }
 }
 
 function documentdetails(){
