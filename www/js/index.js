@@ -589,6 +589,7 @@ function show_plan_details() {
                 document.getElementById("cscemail").href="mailto:"+cscemail;
             }*/
             hide_spinner();
+            update_alert_seen("PLAN");
 
             menuBtn = document.querySelector('#hamburger-btn');
             containr = document.querySelector('#container');
@@ -655,7 +656,7 @@ function show_training_details() {
         training_res_array.push('</div>');
         //$('#foot_training').html(training_res_array.join(""));
         $('#show_training_details').html(training_res_array.join(""));
-        //update_alert_seen("TRAINING");
+        update_alert_seen("TRAINING");
     },
     error: function (request, status, error) {
         training_res_array.push("</div>");
@@ -777,6 +778,7 @@ function show_flight_details() {
             }
             results_array.push('</div>');
             $('#show_flight_details').html(results_array.join(""));
+            update_alert_seen("FLIGHT");
         },
         error: function (request, status, error) {
             results_array.push("<span> No data avilable. </span><br/>");
@@ -824,9 +826,9 @@ function allotment_details() {
                     }
                 }
                 results_array.push('<b>'+prsflt(balamnt)+'</b>');
+                update_alert_seen("ALLOTMENT");
             }
             allotted_details(period, results_array);
-            
         },
         error: function (request, status, error) {
            results_array.push("<span> No data to display </span><br/>");
