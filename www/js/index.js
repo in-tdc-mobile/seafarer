@@ -679,7 +679,7 @@ function show_training_details() {
 
 function openpositions() {
     index_page_call();
-    hide_all()
+    hide_all();
     $('#index_content').show();
     $('#openpositions_content').show();
     var url = prefilurl+"get_sf_open_positions.php?empid="+$.jStorage.get("empid");
@@ -730,6 +730,7 @@ function openpositions() {
             }
         } else {
             opening_res_array.push("<span> No Open positions available </span><br/>");
+            //opening_res_array.push("<button onclick='giveDoa()' ><img src='img/arrow-back.png'></button>");
         }
         hide_spinner();
         // opening_res_array.push("</ul>");
@@ -744,6 +745,14 @@ function openpositions() {
     }
 
     });
+}
+
+function giveDoa() {
+    //index_page_call();
+    hide_all();
+    $('#index_content').show(); 
+    $('#doa_content').show(); 
+    doaAdd("adddoa", "OPEN_POSITION");
 }
 
 function show_flight_details() {
@@ -984,6 +993,7 @@ function doadetails(){
             $('#doa_content').show();
             var add = 'adddoa';
             var cancel = 'canceldoa';
+            var from_tab = 'DOA';
             // results_array.push('<div class="dashboard_tiles">');
             setheadername(results_array, '<span class="icon-calendar4 pagename-icon"></span>  DoA Details', "name");
             results_array.push('<div class = "footer">');
@@ -1001,36 +1011,36 @@ function doadetails(){
             results_array.push("</div>");
             hide_spinner();
             results_array.push("<div style='margin-top:40px;margin-bottom:15px;'>");
-            results_array.push("<button onclick=\"doaAdd('"+add+"')\" style='color:#00303f;font:bold 12px verdana; padding:5px;'>Give DoA</button>");
-            results_array.push("<button onclick=\"doaAdd('"+cancel+"')\" style='color:#00303f;font:bold 12px verdana; padding:5px;'>Cancel DoA</button>");
+            results_array.push("<button onclick=doaAdd(\"'"+add+"'\",'DOA') style='color:#00303f;font:bold 12px verdana; padding:5px;'>Give DoA</button>");
+            results_array.push("<button onclick=doaAdd(\"'"+cancel+"'\",'DOA') style='color:#00303f;font:bold 12px verdana; padding:5px;'>Cancel DoA</button>");
             results_array.push("</div>");
             results_array.push('</div>');
             $('#doa_content').html(results_array.join(""));
         },
         error: function (request, status, error) {
             results_array.push("<span> No DOA Given </span><br/>");
-            results_array.push("<button onclick=\"doaAdd('"+add+"')\" style='color:#00303f;font:bold 12px verdana; padding:5px;'>Give DOA</button>");
-            results_array.push("<button onclick=\"doaAdd('"+cancel+"')\" style='color:#00303f;font:bold 12px verdana; padding:5px;'>Cancel DoA</button>");
+            results_array.push("<button onclick=doaAdd(\"'"+add+"'\",'DOA')  style='color:#00303f;font:bold 12px verdana; padding:5px;'>Give DOA</button>");
+            results_array.push("<button onclick=doaAdd(\"'"+cancel+"'\",'DOA') style='color:#00303f;font:bold 12px verdana; padding:5px;'>Cancel DoA</button>");
             $('#doa_content').html(results_array.join(""));
             hide_spinner();
         }
     });
 }
 
-function doaAdd(status) {
+function doaAdd(status, page) {
     if(status.indexOf('adddoa')>-1) {
         var doa_array = new Array(); 
         $('#adddoa').show();
 
         //doa_array.push('<button onclick="doadetails()" class="back-btn"><img src="img/arrow-back.png"></button>');
-        doa_array.push('<div class="adddoa">');
-        setheadername(doa_array, '<span class="icon-calendar4 pagename-icon"></span>  DoA Details', "name");
-        doa_array.push('<div class = "hambrgrdetails">');
+        doa_array.push("<div class='adddoa'>");
+        setheadername(doa_array, "<span class='icon-calendar4 pagename-icon'></span>  DoA Details", "name");
+        doa_array.push("<div class = 'hambrgrdetails'>");
         doa_array.push("<form>");
-        doa_array.push('<span>Date:</span><br><input class="topcoat-text-input" type="date" value='+new Date()+' id="doadate">');
-        doa_array.push('<br><span>Remark:</span><br><textarea class="topcoat-text-input--large" id="coaremark"></textarea></br>');
-        doa_array.push('<span id="error_doa" style="color:red"></span><br>');
-        doa_array.push('<input type="button" onclick="savedoa()" value="Save DoA" style="color:#00303f;font:bold 12px verdana; padding:5px;">');
+        doa_array.push("<span>Date:</span><br><input class='topcoat-text-input' type='date' value="+new Date()+" id='doadate'>");
+        doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark'></textarea></br>");
+        doa_array.push("<span id='error_doa' style='color:red'></span><br>");
+        doa_array.push("<input type='button' onclick=\"savedoa('"+page+"')\" value='Save DoA' style='color:#00303f;font:bold 12px verdana; padding:5px;'>");
         doa_array.push('<input type="button" onclick="doadetails()" value="back" style="color: #00303f;font: bold 12px verdana;padding: 5px;">');
         doa_array.push('</form>');
         doa_array.push('</div>');
@@ -1041,7 +1051,7 @@ function doaAdd(status) {
     }
 }
 
-function savedoa() {
+function savedoa(page) {
     var results_array = new Array(); 
     var url = prefilurl+"sf_save_doa.php?";
     var remark = $("#coaremark").val();
@@ -1067,7 +1077,10 @@ function savedoa() {
             success : function(data) {
                 if(data == 'Sucess') {
                     //showdashbord();
-                    doadetails();
+                    if(page == "DOA")
+                        doadetails();
+                    else if(page == "OPEN_POSITION")
+                        openpositions();
                 } else {
                     alert("Issue in adding doa, please try again");
                 }
