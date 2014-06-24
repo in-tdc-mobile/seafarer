@@ -1091,7 +1091,7 @@ function canceldoa() {
     var remark = $("#coaremark").val();
     var doadate = $("#doadate").val();
     var emp_id = $.jStorage.get("empid");
-    
+
     if($("#showdoa").val() != null) {
         var form_data= {
             'empid': emp_id,
@@ -1151,7 +1151,7 @@ function documentdetails(){
             results_array.push('</div>');*/
             setheadername(results_array, '<span class="icon-file pagename-icon"></span>My Documents');
             results_array.push('<div class = "hambrgrdetails">');
-            var tep_docname = "new";
+           // var tep_docname = "new";
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {     
 
@@ -1166,22 +1166,22 @@ function documentdetails(){
                         results_array.push("<ul class='topcoat-list__container'>");
                     }
 
-                    if(tep_docname != data[i]['name']) {
-                        tep_docname = data[i]['name'];
+                    /*if(tep_docname != data[i]['name']) {
+                        tep_docname = data[i]['name'];*/
                         if((Date.parse(data[i]['expiry_date'])) < Date.parse(new Date())) {
                             results_array.push("<li class='topcoat-list__item'>");
-                            results_array.push("<span style='color:red'>"+toTitleCase(data[i]['name'])+" <b>("+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+") </b></span><br/>");
+                            results_array.push("<span style='color:red'>"+toTitleCase(data[i]['name'])+" <b>("+data[i]['document_no']+") - "+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+" </b></span><br/>");
                             results_array.push("</li>");                        
                         } else if((((Date.parse(data[i]['expiry_date']))-20) < Date.parse(new Date())) && (Date.parse(new Date()<(Date.parse(data[i]['expiry_date']))))) {
                             results_array.push("<li class='topcoat-list__item'>");
-                            results_array.push("<span style='color:green'>"+toTitleCase(data[i]['name'])+" <b>("+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+") </b></span><br/>");
+                            results_array.push("<span style='color:green'>"+toTitleCase(data[i]['name'])+" <b>("+data[i]['document_no']+") - "+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+" </b></span><br/>");
                             results_array.push("</li>");                        
                         } else {
                             results_array.push("<li class='topcoat-list__item'>");
-                            results_array.push("<span>"+toTitleCase(data[i]['name'])+" <b>("+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+") </b></span><br/>");
+                            results_array.push("<span>"+toTitleCase(data[i]['name'])+" <b>("+data[i]['document_no']+") - "+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+" </b></span><br/>");
                             results_array.push("</li>");                        
                         }
-                    }
+                    //}
                 }
                 results_array.push('</div>'); 
             } else {
