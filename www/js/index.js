@@ -1020,7 +1020,7 @@ function doadetails(){
             hide_spinner();
             results_array.push("<div style='margin-top:40px;margin-bottom:15px;'>");
             results_array.push("<button onclick=doaAdd(\"'"+add+"'\",'DOA') style='color:#00303f;font:bold 12px verdana; padding:5px;'>Give DoA</button>");
-            results_array.push("<button onclick=doaAdd(\"'"+cancel+"'\",'DOA') style='color:#00303f;font:bold 12px verdana; padding:5px;'>Cancel DoA</button>");
+            results_array.push("<button disabled onclick=doaAdd(\"'"+cancel+"'\",'DOA') style='color:#919191;font:bold 12px verdana; padding:5px;'>Cancel DoA</button>");
             results_array.push("</div>");
             results_array.push('</div>');
             $('#doa_content').html(results_array.join(""));
@@ -1028,7 +1028,7 @@ function doadetails(){
         error: function (request, status, error) {
             results_array.push("<span> No DOA Given </span><br/>");
             results_array.push("<button onclick=doaAdd(\"'"+add+"'\",'DOA')  style='color:#00303f;font:bold 12px verdana; padding:5px;'>Give DOA</button>");
-            results_array.push("<button onclick=doaAdd(\"'"+cancel+"'\",'DOA') style='color:#00303f;font:bold 12px verdana; padding:5px;'>Cancel DoA</button>");
+            results_array.push("<button disabled onclick=doaAdd(\"'"+cancel+"'\",'DOA') style='color:#919191;font:bold 12px verdana; padding:5px;'>Cancel DoA</button>");
             $('#doa_content').html(results_array.join(""));
             hide_spinner();
         }
@@ -1048,7 +1048,7 @@ function doaAdd(status, page) {
         doa_array.push("<span>Date:</span><br><input class='topcoat-text-input' type='date' value="+new Date()+" id='doadate'>");
         doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark'></textarea></br>");
         doa_array.push("<span id='error_doa' style='color:red'></span><br>");
-        doa_array.push("<input type='button' onclick=\"savedoa('"+page+"')\" value='Save DoA' style='color:#00303f;font:bold 12px verdana; padding:5px;'>");
+        doa_array.push("<input disabled type='button' onclick=\"savedoa('"+page+"')\" value='Save DoA' style='color:#919191;font:bold 12px verdana; padding:5px;'>");
         doa_array.push('<input type="button" onclick="doadetails()" value="back" style="color: #00303f;font: bold 12px verdana;padding: 5px;">');
         doa_array.push('</form>');
         doa_array.push('</div>');
