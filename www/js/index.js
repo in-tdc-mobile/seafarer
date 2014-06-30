@@ -523,7 +523,7 @@ function show_plan_details() {
     index_page_call();
     hide_all();
 
-    var cscemail="https://www.bs-shipmanagement.com";
+    var csc_contact_det="https://www.bs-shipmanagement.com";
     $('#index_content').show();
     $('#show_plan_details').show();
     var results_array = new Array(); 
@@ -557,10 +557,17 @@ function show_plan_details() {
                     port = data['port'];
                 }
                 
-                if( data['csc_email']!=null &&  data['csc_email']!='' )
-                    cscemail = "mailto:"+data['csc_email'];
+                if( data['csc_email']!=null && data['csc_email']!='' )
+                    csc_contact_det = "mailto:"+data['csc_email'];
 
-                $.jStorage.set("cscemail", cscemail)
+                if( data['phone1']!=null && data['phone1']!='' )
+                    csc_contact_det = csc_contact_det+"&&"+data['phone1'];
+                
+                if( data['phone2']!=null && data['phone2']!='' )
+                    csc_contact_det = csc_contact_det+"&&"+data['phone2'];
+
+
+                $.jStorage.set("csc_contact_det", csc_contact_det);
                 setheadername(results_array, '<span class="icon-briefcase pagename-icon"></span><span class="icon-boat"></span>  '+data['vessel_name'] + '(' + data['flag_name'] + ')', "pic");
                 
                 results_array.push('<div class="ship_image">');
@@ -576,7 +583,8 @@ function show_plan_details() {
                 results_array.push("<span><b> Exp. Join Date :</b> "+dateformat(data['from_date'], "dd-mon-yyyy")+"</span><br/>");
                 results_array.push("<span><b> Exp. Join Port :</b> "+port+"</span><br/>");
                 results_array.push('</div>');
-                bottm_buttons("P" ,results_array, cscemail);
+                cscemaildet = csc_contact_det;
+                bottm_buttons("P" ,results_array);
                 
                 //data['phone1'];
                 //data['phone2'];
@@ -913,7 +921,7 @@ function correspondance(){
     results_array.push('<textarea class="topcoat-text-input--large" id="message" style="width: 100%; height: 250px;line-height: 1.5rem;"></textarea></br>');
     results_array.push('<span id="error_corrspondance" style="color:red"></span><br>');
     results_array.push('<input type="button" onclick="correspondancesend()" value="Send" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
-    bottm_buttons("C" ,results_array, $.jStorage.get("cscemail"));
+    bottm_buttons("C" ,results_array);
     results_array.push('</div>');
     $('#correspondance_content').html(results_array.join(""));
 }
@@ -1406,8 +1414,13 @@ function update_alert_seen(page) {
     });
 }
 
-function bottm_buttons(page, results_array, cscemail) {
+var cscemaildet;
+
+function bottm_buttons(page, results_array) {
+
     // <span class="icon-boat"></span>
+    var csc_contact_email_id = $.jStorage.get("csc_contact_det").split('&&')[0];
+    var csc_contact_Phone1 = "tel:"+$.jStorage.get("csc_contact_det").split('&&')[1];
     $('#tile_icons').show();
     results_array.push("<hr>");
     results_array.push('<div id="tile_icons">');
@@ -1424,12 +1437,16 @@ function bottm_buttons(page, results_array, cscemail) {
     if(page == "P" || page == "C") {
         if(page == "C")
             results_array.push('<div style="float: left; padding-top: 15px;">Contact CSC </div>');
-        results_array.push('<a class="footer-button" id="cscemail" href=\"'+cscemail+'\">');
+        results_array.push('<a class="footer-button" id="cscemail" href=\"'+csc_contact_email_id+'\">');
         results_array.push('<span class="icon-mail button-icon"></span>');
         results_array.push('</a>');
     }
     if(page == "P" || page == "C") {
-        results_array.push('<a class="footer-button">');
+
+        if( csc_contact_Phone1!=null && csc_contact_Phone1!='' )
+            results_array.push('<a class="footer-button"  href=\"'+csc_contact_Phone1+'\">');
+        else 
+            results_array.push('<a class="footer-button">');
         results_array.push('<span class="icon-phone button-icon"></span>');
         results_array.push('</a>');
     }
