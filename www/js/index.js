@@ -1419,8 +1419,13 @@ var cscemaildet;
 function bottm_buttons(page, results_array) {
 
     // <span class="icon-boat"></span>
-    var csc_contact_email_id = $.jStorage.get("csc_contact_det").split('&&')[0];
-    var csc_contact_Phone1 = "tel:"+$.jStorage.get("csc_contact_det").split('&&')[1];
+    var csc_contact_email_id;
+    var csc_contact_Phone1;
+    if( $.jStorage.get("csc_contact_det")!=null && $.jStorage.get("csc_contact_det")!='' ) {
+        csc_contact_email_id = $.jStorage.get("csc_contact_det").split('&&')[0];
+        csc_contact_Phone1 = "tel:"+$.jStorage.get("csc_contact_det").split('&&')[1];
+    }
+    
     $('#tile_icons').show();
     results_array.push("<hr>");
     results_array.push('<div id="tile_icons">');
@@ -1437,7 +1442,11 @@ function bottm_buttons(page, results_array) {
     if(page == "P" || page == "C") {
         if(page == "C")
             results_array.push('<div style="float: left; padding-top: 15px;">Contact CSC </div>');
-        results_array.push('<a class="footer-button" id="cscemail" href=\"'+csc_contact_email_id+'\">');
+        if( csc_contact_Phone1!=null && csc_contact_Phone1!='' )
+            results_array.push('<a class="footer-button" id="cscemail" href=\"'+csc_contact_email_id+'\">');
+        else 
+            results_array.push('<a class="footer-button" id="cscemail">');
+        
         results_array.push('<span class="icon-mail button-icon"></span>');
         results_array.push('</a>');
     }
