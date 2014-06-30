@@ -1221,20 +1221,23 @@ function documentdetails(){
 
                     /*if(tep_docname != data[i]['name']) {
                         tep_docname = data[i]['name'];*/
+                        results_array.push("<li class='topcoat-list__item'>");
+
                         if((Date.parse(data[i]['expiry_date'])) < Date.parse(new Date())) {
-                            results_array.push("<li class='topcoat-list__item'>");
-                            results_array.push("<span style='color:red'>"+toTitleCase(data[i]['name'])+" <b>("+data[i]['document_no']+") - "+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+" </b></span><br/>");
-                            results_array.push("</li>");                        
+                            results_array.push("<span style='color:red'>"+toTitleCase(data[i]['name']));
                         } else if((((Date.parse(data[i]['expiry_date']))-20) < Date.parse(new Date())) && (Date.parse(new Date()<(Date.parse(data[i]['expiry_date']))))) {
-                            results_array.push("<li class='topcoat-list__item'>");
-                            results_array.push("<span style='color:green'>"+toTitleCase(data[i]['name'])+" <b>("+data[i]['document_no']+") - "+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+" </b></span><br/>");
-                            results_array.push("</li>");                        
+                            results_array.push("<span style='color:green'>"+toTitleCase(data[i]['name']));
                         } else {
-                            results_array.push("<li class='topcoat-list__item'>");
-                            results_array.push("<span>"+toTitleCase(data[i]['name'])+" <b>("+data[i]['document_no']+") - "+dateformat(data[i]['expiry_date'], "dd-mon-yyyy")+" </b></span><br/>");
-                            results_array.push("</li>");                        
+                            results_array.push("<span>"+toTitleCase(data[i]['name']));
                         }
-                    //}
+
+                        if(data[i]['document_no']!=null && data[i]['document_no']!='' ) 
+                            results_array.push("("+data[i]['document_no']+")");
+
+                        results_array.push(" - "+dateformat(data[i]['expiry_date'], "dd-mon-yyyy"));
+                        results_array.push("</span><br/>");
+                        results_array.push("</li>");
+                        results_array.push("</li>");  
                 }
                 results_array.push('</div>'); 
             } else {
