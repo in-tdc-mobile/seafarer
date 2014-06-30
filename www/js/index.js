@@ -523,12 +523,12 @@ function show_plan_details() {
     index_page_call();
     hide_all();
 
-    var csc_contact_det="https://www.bs-shipmanagement.com";
+    var csc_contact_det;
     $('#index_content').show();
     $('#show_plan_details').show();
     var results_array = new Array(); 
     var url = prefilurl+"get_sf_plan_details.php?empid="+$.jStorage.get("empid");
-    //console.log(url);
+    console.log(url);
     var req = $.ajax({
         url: url,
         datatype: 'text',
@@ -583,7 +583,6 @@ function show_plan_details() {
                 results_array.push("<span><b> Exp. Join Date :</b> "+dateformat(data['from_date'], "dd-mon-yyyy")+"</span><br/>");
                 results_array.push("<span><b> Exp. Join Port :</b> "+port+"</span><br/>");
                 results_array.push('</div>');
-                cscemaildet = csc_contact_det;
                 bottm_buttons("P" ,results_array);
                 
                 //data['phone1'];
@@ -593,6 +592,7 @@ function show_plan_details() {
             } else {
                 setheadername(results_array, '<span class="icon-briefcase pagename-icon"></span>  Plan Details', "pic");
                 results_array.push('<div style="margin-top: 100px;font-size: large;">You have not been planned for a vessel yet. <br/> Please swipe left to open the menu.</div>')
+                getCurrCompanyDt(results_array);
             }
             $('#show_plan_details').html(results_array.join(""));
            /* if(cscemail != null) {
@@ -621,6 +621,38 @@ function show_plan_details() {
     });
     //if($.jStorage.get("push_registered") == false)
         pushNoteMsg.findPlatform();
+}
+
+function getCurrCompanyDt(results_array) {
+    var curr_cmp_array = new Array(); 
+    var url = prefilurl+"get_sf_emp_curr_company.php?empid="+$.jStorage.get("empid");
+    var req = $.ajax({
+        url: url,
+        datatype: 'text',
+        beforeSend: function() {
+            show_spinner();
+        },
+
+        success : function(data) {
+             var csc_contact_det;
+            if(data != null) {
+                
+                if( data['csc_email']!=null && data['csc_email']!='' )
+                    csc_contact_det = "mailto:"+data['csc_email'];
+
+                if( data['phone1']!=null && data['phone1']!='' )
+                    csc_contact_det = csc_contact_det+"&&"+data['phone1'];
+                
+                if( data['phone2']!=null && data['phone2']!='' )
+                    csc_contact_det = csc_contact_det+"&&"+data['phone2'];
+
+
+                $.jStorage.set("csc_contact_det", csc_contact_det);
+                
+            }
+        }
+    });
+    bottm_buttons("P" ,results_array);
 }
 
 
@@ -1414,7 +1446,6 @@ function update_alert_seen(page) {
     });
 }
 
-var cscemaildet;
 
 function bottm_buttons(page, results_array) {
 
@@ -1425,7 +1456,7 @@ function bottm_buttons(page, results_array) {
         csc_contact_email_id = $.jStorage.get("csc_contact_det").split('&&')[0];
         csc_contact_Phone1 = "tel:"+$.jStorage.get("csc_contact_det").split('&&')[1];
     }
-    
+
     $('#tile_icons').show();
     results_array.push("<hr>");
     results_array.push('<div id="tile_icons">');
