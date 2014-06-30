@@ -528,7 +528,7 @@ function show_plan_details() {
     $('#show_plan_details').show();
     var results_array = new Array(); 
     var url = prefilurl+"get_sf_plan_details.php?empid="+$.jStorage.get("empid");
-    console.log(url);
+    //console.log(url);
     var req = $.ajax({
         url: url,
         datatype: 'text',
@@ -766,7 +766,13 @@ function openpositions() {
                 opening_res_array.push("</div>");
                 opening_res_array.push("</div>");
                 opening_res_array.push("</div>");
-                // opening_res_array.push("</li>");                
+                // opening_res_array.push("</li>"); 
+                if(data.length-1 == i) {
+                    if(alllalerts.indexOf("OPEN_POSITION") > -1) {
+                        update_alert_seen("OPEN_POSITION");
+                        alllalerts.replace('OPEN_POSITION','');
+                    }             
+                }
             }
         } else {
             opening_res_array.push("<span> No Open positions available </span><br/>");
@@ -1426,6 +1432,13 @@ function alerts() {
                 alerts_array.push('</ul></div>');
                 $('#alert_count').html(alertcount);
                 $('#alert_content').html(alerts_array.join(""));
+            } else {
+                alerts_array.push('<li class="topcoat-list__item">');
+                                    alerts_array.push("<a>");
+                                    alerts_array.push("No Alert");   
+                alerts_array.push('</ul></div>');
+                $('#alert_count').html("0");
+                $('#alert_content').html(alerts_array.join(""));
             }
         },
         error: function (request, status, error) {
@@ -1436,6 +1449,7 @@ function alerts() {
 
 function update_alert_seen(page) {
     var url = prefilurl+"sf_update_slert_seen.php?empid="+$.jStorage.get("empid")+"&pagename="+page;
+    console.log(url);
     var emp_det_array = new Array(); 
     var req = $.ajax({
         url: url,
