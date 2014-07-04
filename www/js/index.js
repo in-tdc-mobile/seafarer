@@ -992,7 +992,11 @@ function getcorrespondance() {
             var d = new Date();
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
-                    results_array.push("<p class='triangle-right left' style='word-wrap:break-word;'>"+data[i]['message']);
+                    if(data[i]['user_type'] == 'MOBUSER')
+                        results_array.push("<p class='triangle-right left' style='word-wrap:break-word;'>");
+                    else 
+                        results_array.push("<p class='triangle-right right' style='word-wrap:break-word;'>");
+                    results_array.push(data[i]['message']);
                     if(data[i]['is_read'] == 'Y')
                         results_array.push("<img src = 'img/check-mark-md.png' style='float: right;'>");
                     results_array.push("</p>");
