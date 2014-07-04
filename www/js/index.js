@@ -962,7 +962,7 @@ function correspondance(content){
     results_array.push('<div class = "hambrgrdetails">');
     results_array.push('<form  >');
     if(content != null && content != "")
-        results_array.push("<textarea class='topcoat-text-input--large' id='message' style='width: 100%; height: 250px;line-height: 1.5rem;'>Reg:"+$(content).children().text()+"</textarea></br>");
+        results_array.push("<textarea class='topcoat-text-input--large' id='message' style='width: 100%; height: 250px;line-height: 1.5rem;'>Reg:"+$(content).children().text()+":-</textarea></br>");
     else
         results_array.push('<textarea class="topcoat-text-input--large" id="message" style="width: 100%; height: 250px;line-height: 1.5rem;"></textarea></br>');
     results_array.push('<span id="error_corrspondance" style="color:red"></span><br>');
@@ -1094,7 +1094,7 @@ function doaAdd(status, page, content) {
         doa_array.push("<form>");
         doa_array.push("<span>Date:</span><br><input class='topcoat-text-input' type='date' value="+new Date()+" id='doadate'>");
         if(content != null && content != "")
-            doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width:100%'>Reg:"+$(content).children().text()+"</textarea></br>");
+            doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width:100%'>Reg:"+$(content).children().text()+":-</textarea></br>");
         else
             doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width:100%'></textarea></br>");
         doa_array.push("<span id='error_doa' style='color:red'></span><br>");
@@ -1137,8 +1137,11 @@ function savedoa(page) {
                     //showdashbord();
                     if(page == "DOA")
                         doadetails();
-                    else if(page == "OPEN_POSITION")
-                        openpositions();
+                    else if(page == "OPEN_POSITION") {
+                        hide_all();
+                        $('#index_content').show(); 
+                        $('#openpositions_content').show(); 
+                    }
                 } else {
                     alert("Issue in adding doa, please try again");
                 }
@@ -1200,8 +1203,11 @@ function canceldoa() {
 function backdoa(page) {
     if(page == "DOA")
         doadetails();
-    else if(page == "OPEN_POSITION")
-        openpositions();
+    else if(page == "OPEN_POSITION"){
+        hide_all();
+        $('#index_content').show(); 
+        $('#openpositions_content').show(); 
+    }
 }
 
 function documentdetails(){
