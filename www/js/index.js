@@ -529,7 +529,7 @@ function show_plan_details() {
     $('#show_plan_details').show();
     var results_array = new Array(); 
     var url = prefilurl+"get_sf_plan_details.php?empid="+$.jStorage.get("empid");
-    console.log(url);
+    //console.log(url);
     var req = $.ajax({
         url: url,
         datatype: 'text',
@@ -734,7 +734,7 @@ function openpositions() {
     
     // opening_res_array.push("<ul class='topcoat-list__container'>");
 
-    console.log(url);
+    //console.log(url);
     var req = $.ajax({
     url: url,
     datatype: 'text',
@@ -952,14 +952,15 @@ function allotted_details(period, results_array) {
 }
 
 function correspondance(content){
+    
     index_page_call();
     hide_all();
     $("#index_content").show();
     $('#correspondance_content').show(); 
     var results_array = new Array(); 
-    //results_array.push('<button onclick="youback()" class="back-btn"><img src="img/arrow-back.png"></button>');
     setheadername(results_array, '<span class="icon-bubbles  pagename-icon"></span>  Correspondance', "name");
     results_array.push('<div class = "hambrgrdetails">');
+
     results_array.push('<form  >');
     if(content != null && content != "")
         results_array.push("<textarea class='topcoat-text-input--large' id='message' style='width: 100%; height: 250px;line-height: 1.5rem;'>Reg:"+$(content).children().text()+":-</textarea></br>");
@@ -967,9 +968,38 @@ function correspondance(content){
         results_array.push('<textarea class="topcoat-text-input--large" id="message" style="width: 100%; height: 250px;line-height: 1.5rem;"></textarea></br>');
     results_array.push('<span id="error_corrspondance" style="color:red"></span><br>');
     results_array.push('<input type="button" onclick="correspondancesend()" value="Send" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
-    bottm_buttons("C" ,results_array);
+    results_array.push('<div id="corrdet"></div>')
+    //bottm_buttons("C" ,results_array);
     results_array.push('</div>');
     $('#correspondance_content').html(results_array.join(""));
+
+    getcorrespondance();
+}
+
+function getcorrespondance() {
+    var empid = $.jStorage.get("empid");
+    var results_array = new Array(); 
+    var url = prefilurl+"get_sf_correspondance.php?empid="+empid;
+    console.log(url);
+    var req = $.ajax({
+        url: url,
+        datatype: 'text',
+        beforeSend: function() {
+            show_spinner();
+        },
+
+        success : function(data) {
+            var d = new Date();
+            if(data[0] != null) {
+                for (var i = 0; i < data.length; i++) {
+                    results_array.push("<p class='triangle-right left' style='word-wrap:break-word;'>"+data[i]['message']+"</p>");
+
+                }
+            }
+            hide_spinner();
+            $('#corrdet').html(results_array.join(""));
+        },
+    });
 }
 
 function correspondancesend() {
