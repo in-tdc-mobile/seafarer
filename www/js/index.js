@@ -307,7 +307,7 @@ function route(event) {
         allotment_details();
     } else if (hash === "#correspondance") {
         hide_all();
-        correspondance();
+        correspondance("");
     } else if (hash === "#openpositions") {
         hide_all();
         openpositions();
@@ -519,6 +519,7 @@ function vessel_type_pic(vessel_type) {
     return vessel_typ_img;
 }
 
+var emp_csc_id;
 function show_plan_details() {
     index_page_call();
     hide_all();
@@ -528,7 +529,7 @@ function show_plan_details() {
     $('#show_plan_details').show();
     var results_array = new Array(); 
     var url = prefilurl+"get_sf_plan_details.php?empid="+$.jStorage.get("empid");
-    //console.log(url);
+    console.log(url);
     var req = $.ajax({
         url: url,
         datatype: 'text',
@@ -566,6 +567,7 @@ function show_plan_details() {
                 if( data['phone2']!=null && data['phone2']!='' )
                     csc_contact_det = csc_contact_det+"&&"+data['phone2'];
 
+                emp_csc_id = data['csc_id'];
 
                 $.jStorage.set("csc_contact_det", csc_contact_det);
                 setheadername(results_array, '<span class="icon-briefcase pagename-icon"></span><span class="icon-boat"></span>  '+data['vessel_name'] + '(' + data['flag_name'] + ')', "pic");
@@ -646,6 +648,7 @@ function getCurrCompanyDt(results_array) {
                 if( data['phone2']!=null && data['phone2']!='' )
                     csc_contact_det = csc_contact_det+"&&"+data['phone2'];
 
+                emp_csc_id = data['csc_id'];
 
                 $.jStorage.set("csc_contact_det", csc_contact_det);
                 
@@ -731,7 +734,7 @@ function openpositions() {
     
     // opening_res_array.push("<ul class='topcoat-list__container'>");
 
-    //console.log(url);
+    console.log(url);
     var req = $.ajax({
     url: url,
     datatype: 'text',
@@ -748,21 +751,23 @@ function openpositions() {
                 }
                 var vessel_type = data[i]['vessel_type'];
                 // opening_res_array.push("<li class='topcoat-list__item'>");
-                opening_res_array.push("<div class='footer'>");
+                opening_res_array.push("<div class='footer' id="+data[i]['vessel_name'].replace(/ +/g, "")+">");
                 opening_res_array.push("<div class='openpositionbox'>");
                 opening_res_array.push("<div class='openpositionchild1'>");
                 opening_res_array.push("<img src="+vessel_type_pic(vessel_type)+" style='width:85px; height:80px;'>");
+                opening_res_array.push('<br><span class="icon-calendar4 pagename-icon" onclick="giveDoa('+data[i]['vessel_name'].replace(/ +/g, "")+')"></span>');
+                opening_res_array.push('<span class="icon-bubbles" style="margin-left: 8px" onclick="correspondance('+data[i]['vessel_name'].replace(/ +/g, "")+')"></span>');
                 opening_res_array.push("</div>");
-                opening_res_array.push("<div>");
-                opening_res_array.push("<span>"+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span>");
+                opening_res_array.push("<div id='op_content'>");
+                opening_res_array.push("<span id='v_name'>"+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span>");
                 if(data[i]['vessel_type']!=null)
-                    opening_res_array.push("<br/><span>"+vessel_type+"</span>");
+                    opening_res_array.push("<br/><span id='v_type'>"+vessel_type+"</span>");
                 if(data[i]['from_date']!=null)
-                    opening_res_array.push("<br/> <span>"+dateformat(data[i]['from_date'], "dd-mon-yyyy")+"</span>");
+                    opening_res_array.push("<br/> <span id='v_date'>"+dateformat(data[i]['from_date'], "dd-mon-yyyy")+"</span>");
                 if(data[i]['rank_name']!=null)
-                    opening_res_array.push("<br/><span>"+data[i]['rank_name']+"</span>");
+                    opening_res_array.push("<br/><span id='v_rank'>"+data[i]['rank_name']+"</span>");
                 if(data[i]['sdc']!=null)
-                    opening_res_array.push("<br/><span>"+data[i]['sdc']+"</span><br/>");
+                    opening_res_array.push("<br/><span id='v_sdc'>"+data[i]['sdc']+"</span><br/>");
                 opening_res_array.push("</div>");
                 opening_res_array.push("</div>");
                 opening_res_array.push("</div>");
@@ -792,13 +797,13 @@ function openpositions() {
 
     });
 }
-
-function giveDoa() {
+function giveDoa(paramid) {
+    paramid;
     //index_page_call();
     hide_all();
     $('#index_content').show(); 
     $('#doa_content').show(); 
-    doaAdd("adddoa", "OPEN_POSITION");
+    doaAdd("adddoa", "OPEN_POSITION", paramid);
 }
 
 function show_flight_details() {
@@ -946,7 +951,7 @@ function allotted_details(period, results_array) {
     });
 }
 
-function correspondance(){
+function correspondance(content){
     index_page_call();
     hide_all();
     $("#index_content").show();
@@ -956,7 +961,10 @@ function correspondance(){
     setheadername(results_array, '<span class="icon-bubbles  pagename-icon"></span>  Correspondance', "name");
     results_array.push('<div class = "hambrgrdetails">');
     results_array.push('<form  >');
-    results_array.push('<textarea class="topcoat-text-input--large" id="message" style="width: 100%; height: 250px;line-height: 1.5rem;"></textarea></br>');
+    if(content != null && content != "")
+        results_array.push("<textarea class='topcoat-text-input--large' id='message' style='width: 100%; height: 250px;line-height: 1.5rem;'>Reg:"+$(content).children().text()+"</textarea></br>");
+    else
+        results_array.push('<textarea class="topcoat-text-input--large" id="message" style="width: 100%; height: 250px;line-height: 1.5rem;"></textarea></br>');
     results_array.push('<span id="error_corrspondance" style="color:red"></span><br>');
     results_array.push('<input type="button" onclick="correspondancesend()" value="Send" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
     bottm_buttons("C" ,results_array);
@@ -976,11 +984,12 @@ function correspondancesend() {
         var url = prefilurl+"sf_insert_correspondance.php?";
         //console.log(url);
         var emp_id = $.jStorage.get("empid");
+
         var form_data= {
             'empid': emp_id,
-            'managerid': -1,
+            'managerid': emp_csc_id,
             'message': message,
-            'subject':''
+            'subject':'sub'
         };
         var req = $.ajax({
             url: url,
@@ -1057,23 +1066,23 @@ function doadetails(){
             results_array.push("</div>");
             hide_spinner();
             results_array.push("<div style='margin-top:40px;margin-bottom:15px;'>");
-            results_array.push("<button onclick=doaAdd(\"'"+add+"'\",'DOA') style='color:#00303f;font:bold 12px verdana; padding:5px;'>Give DoA</button>");
-            results_array.push("<button disabled onclick=doaAdd(\"'"+cancel+"'\",'DOA') style='color:#919191;font:bold 12px verdana; padding:5px;'>Cancel DoA</button>");
+            results_array.push("<button onclick=doaAdd(\"'"+add+"'\",'DOA','') style='color:#00303f;font:bold 12px verdana; padding:5px;'>Give DoA</button>");
+            results_array.push("<button onclick=doaAdd(\"'"+cancel+"'\",'DOA','') style='color:#00303f;font:bold 12px verdana; padding:5px;'>Cancel DoA</button>");
             results_array.push("</div>");
             results_array.push('</div>');
             $('#doa_content').html(results_array.join(""));
         },
         error: function (request, status, error) {
             results_array.push("<span> No DOA Given </span><br/>");
-            results_array.push("<button onclick=doaAdd(\"'"+add+"'\",'DOA')  style='color:#00303f;font:bold 12px verdana; padding:5px;'>Give DOA</button>");
-            results_array.push("<button disabled onclick=doaAdd(\"'"+cancel+"'\",'DOA') style='color:#919191;font:bold 12px verdana; padding:5px;'>Cancel DoA</button>");
+            results_array.push("<button onclick=doaAdd(\"'"+add+"'\",'DOA','')  style='color:#00303f;font:bold 12px verdana; padding:5px;'>Give DOA</button>");
+            results_array.push("<button onclick=doaAdd(\"'"+cancel+"'\",'DOA','') style='color:#00303f;font:bold 12px verdana; padding:5px;'>Cancel DoA</button>");
             $('#doa_content').html(results_array.join(""));
             hide_spinner();
         }
     });
 }
 
-function doaAdd(status, page) {
+function doaAdd(status, page, content) {
     if(status.indexOf('adddoa')>-1) {
         var doa_array = new Array(); 
         $('#adddoa').show();
@@ -1084,16 +1093,19 @@ function doaAdd(status, page) {
         doa_array.push("<div class = 'hambrgrdetails'>");
         doa_array.push("<form>");
         doa_array.push("<span>Date:</span><br><input class='topcoat-text-input' type='date' value="+new Date()+" id='doadate'>");
-        doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark'></textarea></br>");
+        if(content != null && content != "")
+            doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width:100%'>Reg:"+$(content).children().text()+"</textarea></br>");
+        else
+            doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width:100%'></textarea></br>");
         doa_array.push("<span id='error_doa' style='color:red'></span><br>");
-        doa_array.push("<input disabled type='button' onclick=\"savedoa('"+page+"')\" value='Save DoA' style='color:#919191;font:bold 12px verdana; padding:5px;'>");
-        doa_array.push('<input type="button" onclick="doadetails()" value="back" style="color: #00303f;font: bold 12px verdana;padding: 5px;">');
+        doa_array.push("<input type='button' onclick=\"savedoa('"+page+"')\" value='Save DoA' style='color:#00303f;font:bold 12px verdana; padding:5px;'>");
+        doa_array.push("<input type='button' onclick=\"backdoa('"+page+"')\" value='back' style='color: #00303f;font: bold 12px verdana;padding: 5px;'>");
         doa_array.push('</form>');
         doa_array.push('</div>');
         doa_array.push('</div>');
         $('#doa_content').html(doa_array.join(""));
     } else {
-        canceldoa();
+        canceldoa(page);
     }
 }
 
@@ -1183,6 +1195,13 @@ function canceldoa() {
             }
         });
     }
+}
+
+function backdoa(page) {
+    if(page == "DOA")
+        doadetails();
+    else if(page == "OPEN_POSITION")
+        openpositions();
 }
 
 function documentdetails(){
