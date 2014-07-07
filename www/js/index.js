@@ -957,13 +957,15 @@ function correspondance(content){
     hide_all();
     $("#index_content").show();
     $('#correspondance_content').show(); 
+    var temp_content = $(content).find("span");
+    var disp_content = $(temp_content[2]).text()+", "+$(temp_content[3]).text()+", "+$(temp_content[4]).text()+", "+$(temp_content[5]).text();
     var results_array = new Array(); 
     setheadername(results_array, '<span class="icon-bubbles  pagename-icon"></span>  Correspondance', "name");
     results_array.push('<div class = "hambrgrdetails">');
 
     results_array.push('<form  >');
     if(content != null && content != "")
-        results_array.push("<textarea class='topcoat-text-input--large' id='message' style='width: 100%; height: 250px;line-height: 1.5rem;'>Reg:"+$(content).children().text()+":-</textarea></br>");
+        results_array.push("<textarea class='topcoat-text-input--large' id='message' style='width: 100%; height: 250px;line-height: 1.5rem;'>Reg:"+disp_content+":-</textarea></br>");
     else
         results_array.push('<textarea class="topcoat-text-input--large" id="message" style="width: 100%; height: 250px;line-height: 1.5rem;"></textarea></br>');
     results_array.push('<span id="error_corrspondance" style="color:red"></span><br>');
@@ -1118,12 +1120,12 @@ function doadetails(){
         }
     });
 }
-
 function doaAdd(status, page, content) {
     if(status.indexOf('adddoa')>-1) {
         var doa_array = new Array(); 
         $('#adddoa').show();
-
+        var temp_content = $(content).find("span");
+        var disp_content = $(temp_content[2]).text()+", "+$(temp_content[3]).text()+", "+$(temp_content[4]).text()+", "+$(temp_content[5]).text();
         //doa_array.push('<button onclick="doadetails()" class="back-btn"><img src="img/arrow-back.png"></button>');
         doa_array.push("<div class='adddoa'>");
         setheadername(doa_array, "<span class='icon-calendar4 pagename-icon'></span>  DoA Details", "name");
@@ -1131,7 +1133,7 @@ function doaAdd(status, page, content) {
         doa_array.push("<form>");
         doa_array.push("<span>Date:</span><br><input class='topcoat-text-input' type='date' value="+new Date()+" id='doadate'>");
         if(content != null && content != "")
-            doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width:100%'>Reg:"+$(content).children().text()+":-</textarea></br>");
+            doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width:100%'>Reg:"+disp_content+":-</textarea></br>");
         else
             doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width:100%'></textarea></br>");
         doa_array.push("<span id='error_doa' style='color:red'></span><br>");
