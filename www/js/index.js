@@ -990,6 +990,7 @@ function correspondance(content, page){
 }
 
 function correspondanceback(page) {
+    window.location.hash="";
     hide_all();
     $("#index_content").show();
     if(page == "OPEN_POSITION") {
