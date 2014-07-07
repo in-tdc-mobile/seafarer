@@ -615,11 +615,11 @@ span.header {
 }
 
 body{
-  /*background-color: #E2E2E2;*/
+  background-color: #E2E2E2;
   /*background-image:url('images/paper.png');*/
   /*background-repeat:repeat;*/
-  background: #FFF;
-  font: menu 59px;
+/*  background: #FFF;
+*/  font: menu 59px;
   /*font: "Arial", helvetica, arial, sans-serif;*/
   -webkit-overflow-scrolling: touch;
   text-transform: capitalize;

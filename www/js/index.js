@@ -1341,13 +1341,13 @@ function hide_spinner() {
     $(".spinner_index").hide();
 }
 
-function dateformat(dat, format) {  alert(dat)
+function dateformat(dat, format) {
     if(dat != null && dat != '') {
         var d = new Date(dat);
         //console.log(dat);
         //console.log(d.getDate()+"-"+d.getMonth()+"-"+d.getYear());
         if(format == "dd-mon-yyyy")
-            dat = ("0" + d.getDate()).slice(-2)+"-"+getMonthName(d.getMonth()+1)+"-"+d.getFullYear();
+            dat = ("0" + d.getDate()).slice(-2)+"-"+getMonthName(d.getMonth())+"-"+d.getFullYear();
     } else {
         dat = '';
     }
@@ -1401,7 +1401,7 @@ function getempdetails() {
 
         success : function(data) {
             if(data[0] != null) {
-                emp_det_array.push(nullcheck(toTitleCase(data[0]['first_name']))+" "+nullcheck(toTitleCase(data[0]['sur_name'])));//+nullcheck(toTitleCase(data[0]['last_name']))+" "
+                emp_det_array.push(nullcheck(toTitleCase(data[0]['sur_name']))+" "+nullcheck(toTitleCase(data[0]['first_name'])));//+nullcheck(toTitleCase(data[0]['last_name']))+" "
                 emp_det_array.push("<br>"+toTitleCase(data[0]['nationality']));
                 emp_det_array.push("<br>"+toTitleCase(data[0]['rank_grp_name']));
             } 
@@ -1669,27 +1669,27 @@ function index_page_call() {
 
 function getMonthName(month) {
     var mname = "Jan"
-    if(month == 2)
+    if(month == 1)
         mname = "Feb";
-    if(month == 3)
+    if(month == 2)
         mname = "Mar";
-    if(month == 4)
+    if(month == 3)
         mname = "Apr";
-    if(month == 5)
+    if(month == 4)
         mname = "May";
-    if(month == 6)
+    if(month == 5)
         mname = "Jun";
-    if(month == 7)
+    if(month == 6)
         mname = "July";
-    if(month == 8)
+    if(month == 7)
         mname = "Aug";
-    if(month == 9)
+    if(month == 8)
         mname = "Sep";
-    if(month == 10)
+    if(month == 9)
         mname = "Oct";
-    if(month == 11)
+    if(month == 10)
         mname = "Nov";
-    if(month == 12)
+    if(month == 11)
         mname = "Dec";
     return mname;
 }
