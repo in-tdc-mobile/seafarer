@@ -1310,8 +1310,9 @@ function documentdetails(){
 
                         if(data[i]['document_no']!=null && data[i]['document_no']!='' ) 
                             results_array.push("("+data[i]['document_no']+")");
-
-                        results_array.push(" - "+dateformat(data[i]['expiry_date'], "dd-mon-yyyy"));
+                        
+                        if(data[i]['expiry_date']!=null && data[i]['expiry_date']!='' ) 
+                            results_array.push(" - "+dateformat(data[i]['expiry_date'], "dd-mon-yyyy"));
                         results_array.push("</span><br/>");
                         results_array.push("</li>");
                         results_array.push("</li>");  
