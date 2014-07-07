@@ -474,9 +474,7 @@ a {
 }
 
 html, body {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
+  height:100%;
 }
 
 .full-height {
@@ -506,8 +504,8 @@ html, body {
 }
 
 .scroller {
-    /*overflow: auto;
-    -webkit-overflow-scrolling: touch;*/
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
     position: absolute;
     top: 25px;
     bottom: 0px;
@@ -529,7 +527,7 @@ html, body {
   margin:0;
   padding: 1rem;
   height:100%;
-  /*min-height: 1000px !important;*/
+  min-height: 1000px !important;
 }
 
 .contentlayer-opened{
@@ -622,13 +620,8 @@ body{
   /*background-repeat:repeat;*/
 /*  background: #FFF;
 */  font: menu 59px;
-  height: 100%;
-
   /*font: "Arial", helvetica, arial, sans-serif;*/
-   height: 100%;
-  width: 100%;
-  overflow: auto;;
-  /*-webkit-overflow-scrolling: touch;*/
+  -webkit-overflow-scrolling: touch;
   text-transform: capitalize;
 
 }
