@@ -307,7 +307,7 @@ function route(event) {
         allotment_details();
     } else if (hash === "#correspondance") {
         hide_all();
-        correspondance("");
+        correspondance("","PLAN");
     } else if (hash === "#openpositions") {
         hide_all();
         openpositions();
@@ -761,7 +761,7 @@ function openpositions() {
                 opening_res_array.push("<div class='openpositionchild1'>");
                 opening_res_array.push("<img src="+vessel_type_pic(vessel_type)+" style='width:85px; height:80px;'>");
                 opening_res_array.push("<br><span class='icon-calendar4 pagename-icon' onclick=\"giveDoa('"+corr_content+"')\"></span>");
-                opening_res_array.push("<span class='icon-bubbles' style='margin-left: 8px'  onclick=\"correspondance('"+corr_content+"')\" ></span>");
+                opening_res_array.push("<span class='icon-bubbles' style='margin-left: 8px'  onclick=\"correspondance('"+corr_content+"','OPEN_POSITION')\" ></span>");
                 opening_res_array.push("</div>");
                 opening_res_array.push("<div id='op_content'>");
                 opening_res_array.push("<span id='v_name'>"+v_name+"("+data[i]['flag_name']+")</span>");
@@ -846,7 +846,7 @@ function show_flight_details() {
                     results_array.push("<span> Travel Route : "+nullcheck(data[i]['travel_route'])+"</span><br/>");
                     results_array.push("<span> Remarks : "+nullcheck(data[i]['remarks'])+"</span><br/>");
 
-                    results_array.push("<span class='icon-bubbles' style='margin-left: 8px'  onclick=\"correspondance('"+corr_content+"')\" ></span>");
+                    results_array.push("<span class='icon-bubbles' style='margin-left: 8px'  onclick=\"correspondance('"+corr_content+"','FLIGHT')\" ></span>");
                     hide_spinner();
                 }                
      
@@ -961,7 +961,7 @@ function allotted_details(period, results_array) {
     });
 }
 
-function correspondance(content){
+function correspondance(content, page){
     
     index_page_call();
     hide_all();
@@ -978,12 +978,26 @@ function correspondance(content){
         results_array.push('<textarea class="topcoat-text-input--large" id="message" style="width: 100%; height: 250px;line-height: 1.5rem;"></textarea></br>');
     results_array.push('<span id="error_corrspondance" style="color:red"></span><br>');
     results_array.push('<input type="button" onclick="correspondancesend()" value="Send" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
+    results_array.push("<input type='button' onclick=\"correspondanceback('"+page+"')\" value='Back' style='color:#00303f;font:bold 12px verdana; padding:5px;''></form>");
     results_array.push('<div id="corrdet"></div>')
     //bottm_buttons("C" ,results_array);
     results_array.push('</div>');
     $('#correspondance_content').html(results_array.join(""));
 
     getcorrespondance();
+}
+
+function correspondanceback(page) {
+    hide_all();
+    $("#index_content").show();
+    if(page == "OPEN_POSITION") {
+        $('#openpositions_content').show(); 
+    } else if(page == "FLIGHT") {
+        $('#show_flight_details').show(); 
+    } else {
+        $('#show_plan_details').show(); 
+    }
+
 }
 
 function getcorrespondance() {
@@ -1310,7 +1324,7 @@ function documentdetails(){
 
                         if(data[i]['document_no']!=null && data[i]['document_no']!='' ) 
                             results_array.push("("+data[i]['document_no']+")");
-                        
+
                         if(data[i]['expiry_date']!=null && data[i]['expiry_date']!='' ) 
                             results_array.push(" - "+dateformat(data[i]['expiry_date'], "dd-mon-yyyy"));
                         results_array.push("</span><br/>");
