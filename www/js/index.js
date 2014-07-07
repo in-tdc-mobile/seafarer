@@ -750,24 +750,29 @@ function openpositions() {
                     // opening_res_array.push("<hr class='style-one'>");
                 }
                 var vessel_type = data[i]['vessel_type'];
-                // opening_res_array.push("<li class='topcoat-list__item'>");
+                var v_name = data[i]['vessel_name'];
+                var v_date = dateformat(data[i]['from_date'], "dd-mon-yyyy");
+                var v_rank = data[i]['rank_name'];
+                var v_sdc = data[i]['sdc'];
+                var corr_content = v_name+", "+v_date+", "+v_rank+", "+v_sdc
+
                 opening_res_array.push("<div class='footer' id="+data[i]['vessel_name'].replace(/ +/g, "")+">");
                 opening_res_array.push("<div class='openpositionbox'>");
                 opening_res_array.push("<div class='openpositionchild1'>");
                 opening_res_array.push("<img src="+vessel_type_pic(vessel_type)+" style='width:85px; height:80px;'>");
-                opening_res_array.push('<br><span class="icon-calendar4 pagename-icon" onclick="giveDoa('+data[i]['vessel_name'].replace(/ +/g, "")+')"></span>');
-                opening_res_array.push('<span class="icon-bubbles" style="margin-left: 8px" onclick="correspondance('+data[i]['vessel_name'].replace(/ +/g, "")+')"></span>');
+                opening_res_array.push("<br><span class='icon-calendar4 pagename-icon' onclick=\"giveDoa('"+corr_content+"')\"></span>");
+                opening_res_array.push("<span class='icon-bubbles' style='margin-left: 8px'  onclick=\"correspondance('"+corr_content+"')\" ></span>");
                 opening_res_array.push("</div>");
                 opening_res_array.push("<div id='op_content'>");
-                opening_res_array.push("<span id='v_name'>"+data[i]['vessel_name']+"("+data[i]['flag_name']+")</span>");
+                opening_res_array.push("<span id='v_name'>"+v_name+"("+data[i]['flag_name']+")</span>");
                 if(data[i]['vessel_type']!=null)
                     opening_res_array.push("<br/><span id='v_type'>"+vessel_type+"</span>");
                 if(data[i]['from_date']!=null)
-                    opening_res_array.push("<br/> <span id='v_date'>"+dateformat(data[i]['from_date'], "dd-mon-yyyy")+"</span>");
+                    opening_res_array.push("<br/> <span id='v_date'>"+v_date+"</span>");
                 if(data[i]['rank_name']!=null)
-                    opening_res_array.push("<br/><span id='v_rank'>"+data[i]['rank_name']+"</span>");
+                    opening_res_array.push("<br/><span id='v_rank'>"+v_rank+"</span>");
                 if(data[i]['sdc']!=null)
-                    opening_res_array.push("<br/><span id='v_sdc'>"+data[i]['sdc']+"</span><br/>");
+                    opening_res_array.push("<br/><span id='v_sdc'>"+v_sdc+"</span><br/>");
                 opening_res_array.push("</div>");
                 opening_res_array.push("</div>");
                 opening_res_array.push("</div>");
@@ -831,12 +836,17 @@ function show_flight_details() {
                 var d = new Date();
                 
                 for (var i = 0; i < data.length; i++) {
-                    results_array.push("<span> Departure : "+data[i]['departure']+"</span><br/>");
+                    var departure = data[i]['departure'];
+                    var arrival = data[i]['arrival'];
+                    var corr_content = departure+", "+arrival;
+                    results_array.push("<span> Departure : "+departure+"</span><br/>");
                     results_array.push("<span> Departure Date :  "+dateformat(data[i]['departure_date'], "dd-mon-yyyy")+"</span><br/>");
-                    results_array.push("<span> Arrival : "+data[i]['arrival']+"</span><br/>");
+                    results_array.push("<span> Arrival : "+arrival+"</span><br/>");
                     results_array.push("<span> Arrival Date : "+dateformat(data[i]['arrival_date'], "dd-mon-yyyy")+"</span><br/>");
                     results_array.push("<span> Travel Route : "+nullcheck(data[i]['travel_route'])+"</span><br/>");
                     results_array.push("<span> Remarks : "+nullcheck(data[i]['remarks'])+"</span><br/>");
+
+                    results_array.push("<span class='icon-bubbles' style='margin-left: 8px'  onclick=\"correspondance('"+corr_content+"')\" ></span>");
                     hide_spinner();
                 }                
      
@@ -957,15 +967,13 @@ function correspondance(content){
     hide_all();
     $("#index_content").show();
     $('#correspondance_content').show(); 
-    var temp_content = $(content).find("span");
-    var disp_content = $(temp_content[2]).text()+", "+$(temp_content[3]).text()+", "+$(temp_content[4]).text()+", "+$(temp_content[5]).text();
     var results_array = new Array(); 
     setheadername(results_array, '<span class="icon-bubbles  pagename-icon"></span>  Correspondance', "name");
     results_array.push('<div class = "hambrgrdetails">');
 
     results_array.push('<form  >');
     if(content != null && content != "")
-        results_array.push("<textarea class='topcoat-text-input--large' id='message' style='width: 100%; height: 250px;line-height: 1.5rem;'>Reg:"+disp_content+":-</textarea></br>");
+        results_array.push("<textarea class='topcoat-text-input--large' id='message' style='width: 100%; height: 250px;line-height: 1.5rem;'>Reg:"+content+":-</textarea></br>");
     else
         results_array.push('<textarea class="topcoat-text-input--large" id="message" style="width: 100%; height: 250px;line-height: 1.5rem;"></textarea></br>');
     results_array.push('<span id="error_corrspondance" style="color:red"></span><br>');
@@ -1125,8 +1133,6 @@ function doaAdd(status, page, content) {
     if(status.indexOf('adddoa')>-1) {
         var doa_array = new Array(); 
         $('#adddoa').show();
-        var temp_content = $(content).find("span");
-        var disp_content = $(temp_content[2]).text()+", "+$(temp_content[3]).text()+", "+$(temp_content[4]).text()+", "+$(temp_content[5]).text();
         //doa_array.push('<button onclick="doadetails()" class="back-btn"><img src="img/arrow-back.png"></button>');
         doa_array.push("<div class='adddoa'>");
         setheadername(doa_array, "<span class='icon-calendar4 pagename-icon'></span>  DoA Details", "name");
@@ -1134,7 +1140,7 @@ function doaAdd(status, page, content) {
         doa_array.push("<form>");
         doa_array.push("<span>Date:</span><br><input class='topcoat-text-input' type='date' value="+new Date()+" id='doadate'>");
         if(content != null && content != "")
-            doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width: 100%;height: 250px;line-height: 1.5rem;'>Reg:"+disp_content+":-</textarea></br>");
+            doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width: 100%;height: 250px;line-height: 1.5rem;'>Reg:"+content+":-</textarea></br>");
         else
             doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width: 100%;height: 250px;line-height: 1.5rem;'></textarea></br>");
         doa_array.push("<span id='error_doa' style='color:red'></span><br>");
