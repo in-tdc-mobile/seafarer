@@ -1341,13 +1341,13 @@ function hide_spinner() {
     $(".spinner_index").hide();
 }
 
-function dateformat(dat, format) { 
+function dateformat(dat, format) {  alert(dat)
     if(dat != null && dat != '') {
         var d = new Date(dat);
         //console.log(dat);
         //console.log(d.getDate()+"-"+d.getMonth()+"-"+d.getYear());
         if(format == "dd-mon-yyyy")
-            dat = ("0" + d.getDate()).slice(-2)+"-"+getMonthName(d.getMonth())+"-"+d.getFullYear();
+            dat = ("0" + d.getDate()).slice(-2)+"-"+getMonthName(d.getMonth()+1)+"-"+d.getFullYear();
     } else {
         dat = '';
     }
