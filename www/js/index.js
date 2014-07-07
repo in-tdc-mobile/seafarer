@@ -982,7 +982,7 @@ function getcorrespondance() {
     var empid = $.jStorage.get("empid");
     var results_array = new Array(); 
     var url = prefilurl+"get_sf_correspondance.php?empid="+empid;
-    console.log(url);
+    //console.log(url);
     var req = $.ajax({
         url: url,
         datatype: 'text',
@@ -1133,9 +1133,9 @@ function doaAdd(status, page, content) {
         doa_array.push("<form>");
         doa_array.push("<span>Date:</span><br><input class='topcoat-text-input' type='date' value="+new Date()+" id='doadate'>");
         if(content != null && content != "")
-            doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width:100%'>Reg:"+disp_content+":-</textarea></br>");
+            doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width: 100%;height: 250px;line-height: 1.5rem;'>Reg:"+disp_content+":-</textarea></br>");
         else
-            doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width:100%'></textarea></br>");
+            doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width: 100%;height: 250px;line-height: 1.5rem;'></textarea></br>");
         doa_array.push("<span id='error_doa' style='color:red'></span><br>");
         doa_array.push("<input type='button' onclick=\"savedoa('"+page+"')\" value='Save DoA' style='color:#00303f;font:bold 12px verdana; padding:5px;'>");
         doa_array.push("<input type='button' onclick=\"backdoa('"+page+"')\" value='back' style='color: #00303f;font: bold 12px verdana;padding: 5px;'>");
