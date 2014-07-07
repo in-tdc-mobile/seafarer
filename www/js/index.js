@@ -1037,7 +1037,6 @@ function getcorrespondance() {
 
 function correspondancesend() {
     var message = $("#message").val().trim();
-    alert(message);
     if(message == null || message == '') {
         $('#error_corrspondance').html("Please enter text and continue..");
     } else {
