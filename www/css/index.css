@@ -594,7 +594,7 @@ span.header {
 
 #content {
   top: 0px; 
-  position: absolute;
+  /*position: absolute;*/
   bottom: 0px;
   left:0px;
   right: 0px;
