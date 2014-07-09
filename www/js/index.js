@@ -1154,7 +1154,8 @@ function doaAdd(status, page, content) {
         setheadername(doa_array, "<span class='icon-calendar4 pagename-icon'></span>  DoA Details", "name");
         doa_array.push("<div class = 'hambrgrdetails'>");
         doa_array.push("<form>");
-        doa_array.push("<span>Date:</span><br><input class='topcoat-text-input' type='date' value="+new Date()+" id='doadate'>");
+        /*doa_array.push("<span>Date:</span><br><input class='topcoat-text-input' type='date' value="+new Date()+" id='doadate'>");*/
+        doa_array.push("<span>Date:</span><br><input size='15' id='doadate'>");
         if(content != null && content != "")
             doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width: 100%;height: 250px;line-height: 1.5rem;'>Reg:"+content+":-</textarea></br>");
         else
@@ -1166,6 +1167,9 @@ function doaAdd(status, page, content) {
         doa_array.push('</div>');
         doa_array.push('</div>');
         $('#doa_content').html(doa_array.join(""));
+        new datepickr('doadate', {
+            'dateFormat': 'd-M-Y'
+        });
     } else {
         canceldoa(page);
     }
