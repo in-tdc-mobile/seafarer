@@ -624,9 +624,10 @@ function show_plan_details() {
     //if($.jStorage.get("push_registered") == false)
         pushNoteMsg.findPlatform();
 }
-
+var cc;
 function getCurrCompanyDt(results_array) {
     var curr_cmp_array = new Array(); 
+
     var url = prefilurl+"get_sf_emp_curr_company.php?empid="+$.jStorage.get("empid");
     var req = $.ajax({
         url: url,
@@ -635,20 +636,20 @@ function getCurrCompanyDt(results_array) {
             show_spinner();
         },
 
-        success : function(data) {
+        success : function(data) {cc=data;
              var csc_contact_det;
             if(data != null) {
                 
-                if( data['csc_email']!=null && data['csc_email']!='' )
-                    csc_contact_det = "mailto:"+data['csc_email'];
+                if( data[0]['csc_email']!=null && data[0]['csc_email']!='' )
+                    csc_contact_det = "mailto:"+data[0]['csc_email'];
 
-                if( data['phone1']!=null && data['phone1']!='' )
-                    csc_contact_det = csc_contact_det+"&&"+data['phone1'];
+                if( data[0]['phone1']!=null && data[0]['phone1']!='' )
+                    csc_contact_det = csc_contact_det+"&&"+data[0]['phone1'];
                 
-                if( data['phone2']!=null && data['phone2']!='' )
-                    csc_contact_det = csc_contact_det+"&&"+data['phone2'];
-
-                emp_csc_id = data['csc_id'];
+                if( data[0]['phone2']!=null && data[0]['phone2']!='' )
+                    csc_contact_det = csc_contact_det+"&&"+data[0]['phone2'];
+                
+                emp_csc_id = data[0]['csc_id'];
 
                 $.jStorage.set("csc_contact_det", csc_contact_det);
                 
@@ -1048,7 +1049,6 @@ function correspondancesend() {
         var url = prefilurl+"sf_insert_correspondance.php?";
         //console.log(url);
         var emp_id = $.jStorage.get("empid");
-
         var form_data= {
             'empid': emp_id,
             'managerid': emp_csc_id,
