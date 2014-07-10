@@ -576,7 +576,7 @@ span.header {
   /*background: #E4E4E4;*/
   margin-top: 5px;
   background: #FFF;
-  overflow: overlay;
+  overflow: auto;
   border-radius: 10px;
   border: solid 1px #A7A7A7;
   box-shadow: 1px 4px 14px 0px #A7A7A7;
