@@ -889,7 +889,7 @@ function allotment_details() {
     $('#allotment_details').show();
     var url = prefilurl+"get_sf_allotment_details.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
-    setheadername(results_array, '<span class="icon-banknote pagename-icon"></span>  Allotment Details', "pic");
+    setheadername(results_array, '<span class="icon-banknote pagename-icon"></span>  My Accounts', "pic");
     results_array.push("<div> <img src='img/money.jpg' class='dip_img'> </div>");
     //console.log(url);
     var req = $.ajax({
