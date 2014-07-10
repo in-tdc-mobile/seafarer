@@ -687,12 +687,21 @@ function show_training_details() {
                 if(i>0) {
                     // training_res_array.push("<hr class='style-one'>");
                 }
+                var course = data[i]['course'];
+                var status = data[i]['status'];
+                var from_date = dateformat(data[i]['from_date'], "dd-mon-yyyy");
+                var to_date = dateformat(data[i]['to_date'], "dd-mon-yyyy");
+                var institution = data[i]['institution'];
+
+                var tr_content = course+", "+status+", "+from_date+", "+to_date+", "+institution;
+
                 training_res_array.push("<li class='topcoat-list__item'>");                
-                training_res_array.push("<span><b>Course :</b> "+data[i]['course']+"</span>");
-                training_res_array.push("<br/><span><b>Status :</b> "+data[i]['status']+"</span>");
-                training_res_array.push("<br/><span><b>From :</b> "+dateformat(data[i]['from_date'], "dd-mon-yyyy")+"</span>");
-                training_res_array.push("<br/><span><b>To :</b> "+dateformat(data[i]['to_date'], "dd-mon-yyyy")+"</span>");
-                training_res_array.push("<br/><span><b>Venue :</b> "+data[i]['institution']+"</span>");
+                training_res_array.push("<span><b>Course :</b> "+course+"</span>");
+                training_res_array.push("<br/><span><b>Status :</b> "+status+"</span>");
+                training_res_array.push("<br/><span><b>From :</b> "+from_date+"</span>");
+                training_res_array.push("<br/><span><b>To :</b> "+to_date+"</span>");
+                training_res_array.push("<br/><span><b>Venue :</b> "+institution+"</span>");
+                training_res_array.push("<br/><span class='icon-bubbles' style='margin-left: 8px'  onclick=\"correspondance('"+tr_content+"','TRAINING')\" ></span>");
                 training_res_array.push("</li>");
             } else {
                 training_res_array.push("<span> No training details updated </span><br/>");
@@ -998,6 +1007,8 @@ function correspondanceback(page) {
         $('#openpositions_content').show(); 
     } else if(page == "FLIGHT") {
         $('#show_flight_details').show(); 
+    } else if(page == "TRAINING") {
+        $('#show_training_details').show(); 
     } else {
         $('#show_plan_details').show(); 
     }
