@@ -978,7 +978,7 @@ function correspondance(content, page){
     else
         results_array.push('<textarea class="topcoat-text-input--large" id="message" style="width: 100%; height: 250px;line-height: 1.5rem;"></textarea></br>');
     results_array.push('<span id="error_corrspondance" style="color:red"></span><br>');
-    results_array.push('<div style="width:115px">');
+    results_array.push('<div style="width:104px">');
     results_array.push('<input type="button" onclick="correspondancesend()" value="Send" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
     results_array.push("<input type='button' onclick=\"correspondanceback('"+page+"')\" value='Back' style='float:right;color:#00303f;font:bold 12px verdana; padding:5px;''></form>");
     results_array.push('</div>');
