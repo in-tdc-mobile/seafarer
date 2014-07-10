@@ -651,7 +651,8 @@ body{
   font-size: 20px;
   /*position: relative;
   top: -34px;*/
-  margin-left: 5px;
+  /*margin-left: 5px;*/
+  background-color: white;
   text-align: center;
   padding-top: 5px;
   padding-bottom: 5px;

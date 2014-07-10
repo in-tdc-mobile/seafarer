@@ -1669,24 +1669,25 @@ function logout() {
 }
 
 function setheadername(results_array, name, head_pic_name) { 
+    //$('#sef_hed_txt').html(name);
     /*if(head_pic_name.indexOf("pic")>-1)
         results_array.push('<div id="plan_details_header"  class="head_common_pic">');//head_common_pic
     else*/
     //results_array.push('<div id="header_bar"></div>');//head_common
     //results_array.push('<div id="plan_details_header"  class="head_common_pic">');//head_common
     //results_array.push('<div class="header_white"></div>');
-    results_array.push('<div class="topcoat-navigation-bar on-top header">');
-    results_array.push('<div class="topcoat-navigation-bar__item left quarter">');
+    /*results_array.push('<div class="topcoat-navigation-bar on-top header">');
+    results_array.push('<div class="topcoat-navigation-bar__item left quarter">');*/
       // results_array.push('<a id="btnBack" class="topcoat-icon-button--quiet back-button" href="javascript:step_back()">');
       //   results_array.push('<span class="topcoat-icon topcoat-icon--back"></span>');
       // results_array.push('</a>');
-    results_array.push('</div>');
+   /* results_array.push('</div>');
     results_array.push('<div class="topcoat-navigation-bar__item center half">');
     results_array.push('<h1 class="topcoat-navigation-bar__title">')
     results_array.push('<img src="img/bsm_logo_glow.png" style="height: 19px; padding-top:13px; padding-right: 5px;">MyBSM');
-    results_array.push('</h1></div>');
+    results_array.push('</h1></div>');*/
     // results_array.push('<hr class="style-four" style="margin-top: 10px;">');
-    results_array.push('</div>');
+    /*results_array.push('</div>');*/
     results_array.push('<div class="header_text" class="header"> ' + name + '</div>');
     //results_array.push('<div id="plan_details_header_menu"><span id="hamburger-btn" class="hamburger icon-list"></span></div>')
     //results_array.push('</div>');

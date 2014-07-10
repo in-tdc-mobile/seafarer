@@ -94,7 +94,7 @@
          <!--  <li><a href="#alert"><div>Alert</div></a></li> -->
           <li><a href="#training"><span class="hamb_div">Training</span><div id="h_training"><img src="img/transparent.png" style="opacity:0"></div></a></li>
           <li><a href="#flight"><span class="hamb_div">Flight</span><div id="h_flight"><img src="img/transparent.png" style="opacity:0"></div></a></li>
-          <li><a href="#allotment"><span class="hamb_div">Allotment</span><div id="h_allotment"><img src="img/transparent.png" style="opacity:0"></div></a></li>
+          <li><a href="#allotment"><span class="hamb_div">My Accounts</span><div id="h_allotment"><img src="img/transparent.png" style="opacity:0"></div></a></li>
           <li><a href="#openpositions"><span class="hamb_div">Open Positions</span><div id="h_allotment"><img src="img/transparent.png" style="opacity:0"></div></a></li>
           <li><a href="#doa"><span class="hamb_div">DoA</span><div id="h_allotment"><img src="img/transparent.png" style="opacity:0"></div></a></li>
           <li><a href="#expirydocs"><span class="hamb_div">My Documents</span><div id="h_allotment"><img src="img/transparent.png" style="opacity:0"></div></a></li>
@@ -107,21 +107,22 @@
   </div>
 
   <div id="container" class='smooth full-height'>
-  <!-- <div class="center bsmlogo" >
-    <h1>
-      <img src="img/bsm_logo_glow.png" style="height: 19px; padding-top:13px; padding-right: 5px;">
-      MyBSM</h1>
+    <div id="hamburger-btn">
+      <span class="hamburger icon-menu"></span>
+    </div>
+    <div id="alert-btn"  onclick="alerts_btn_call()">
+      <span class="icon-bell2"></span>
+    </div>
+    <div id="alert_count_btn" class="footer-button">
+        <span id ="alert_count"></span>
+    </div>
+  <div class="topcoat-navigation-bar on-top header">
+    <div class="topcoat-navigation-bar__item left quarter"></div>
+    <div class="topcoat-navigation-bar__item center half">
+    <h1 class="topcoat-navigation-bar__title">
+    <img src="img/bsm_logo_glow.png" style="height: 19px; padding-top:13px; padding-right: 5px;">MyBSM</h1></div>
   </div>
-    <div id="top_icons">
-      <div id="hamburger-btn"><span class="hamburger icon-menu"></span></div>
-      <div id="alert-btn" onclick="alerts_btn_call()">
-        <img src="img/bell.png" style="margin-top: 5px; margin-left: 4px;"/>
-      </div>
-      <hr class="style-four" style="margin-top: 10px;">
-    </div> -->
   
-  <!-- <div id="bg" class="content on-top"></div> -->
-
   
   <div id="contentLayer"></div>
   <div id="content" class='content on-top scroller' style="height:100%;">
@@ -152,15 +153,7 @@
         <button class="topcoat-button" type="submit">Sign In</button>
       </form>
     </div>
-    <div id="hamburger-btn">
-      <span class="hamburger icon-menu"></span>
-    </div>
-    <div id="alert-btn"  onclick="alerts_btn_call()">
-      <span class="icon-bell2"></span>
-    </div>
-    <div id="alert_count_btn" class="footer-button">
-        <span id ="alert_count"></span>
-    </div>
+    
     <div id="index_content" style="height:100%; z-index:2; display:none">
       <div id="show_plan_details"></div>
       <div id="show_training_details"></div>
