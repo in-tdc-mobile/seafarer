@@ -593,7 +593,7 @@ function show_plan_details() {
 
             } else {
                 setheadername(results_array, '<span class="icon-briefcase pagename-icon"></span>  Plan Details', "pic");
-                results_array.push('<div style="margin-top: 100px;font-size: large;">You have not been planned for a vessel yet. <br/> Please swipe left to open the menu.</div>')
+                results_array.push('<div style="margin-top: 100px;font-size: large;">You have not been planned for a vessel yet. <br/> Please click icon on right top to open the menu.</div>')
                 getCurrCompanyDt(results_array);
             }
             $('#show_plan_details').html(results_array.join(""));
@@ -978,7 +978,7 @@ function correspondance(content, page){
     $("#index_content").show();
     $('#correspondance_content').show(); 
     var results_array = new Array(); 
-    setheadername(results_array, '<span class="icon-bubbles  pagename-icon"></span>  Correspondance', "name");
+    setheadername(results_array, '<span class="icon-bubbles  pagename-icon"></span>  Correspondence', "name");
     results_array.push('<div class = "hambrgrdetails">');
 
     results_array.push('<form  >');
@@ -1054,7 +1054,7 @@ function correspondancesend() {
         $('#error_corrspondance').html("Please enter text and continue..");
     } else {
         var results_array = new Array(); 
-        setheadername(results_array, '<span class="icon-bubbles  pagename-icon"></span>  Correspondance', "name");
+        setheadername(results_array, '<span class="icon-bubbles  pagename-icon"></span>  Correspondence', "name");
         results_array.push('<div class = "hambrgrdetails">');
         results_array.push('<img src = "img/email-send.png">');
         var url = prefilurl+"sf_insert_correspondance.php?";
@@ -1079,19 +1079,19 @@ function correspondancesend() {
                     //$('#correspondance_content').hide();
                     //showdashbord();
                     hide_spinner();
-                    results_array.push('</span> Correspondance send...</span>');
+                    results_array.push('</span> Correspondence send...</span>');
                     results_array.push("</div>");
                     $('#correspondance_content').html(results_array.join(""));
                     
                 } else {
                     hide_spinner();
-                    results_array.push("Issue in sending Correspondance, please try again");
+                    results_array.push("Issue in sending Correspondence, please try again");
                     results_array.push("</div>");
                     $('#correspondance_content').html(results_array.join(""));
                 }
             },
             error: function (request, status, error) {
-                results_array.push("Issue in sending Correspondance, please try again:"+error);
+                results_array.push("Issue in sending Correspondence, please try again:"+error);
                 results_array.push("</div>");
                 $('#correspondance_content').html(results_array.join(""));
             }
