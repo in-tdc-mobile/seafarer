@@ -701,7 +701,7 @@ function show_training_details() {
                 training_res_array.push("<br/><span><b>From :</b> "+from_date+"</span>");
                 training_res_array.push("<br/><span><b>To :</b> "+to_date+"</span>");
                 training_res_array.push("<br/><span><b>Venue :</b> "+institution+"</span>");
-                training_res_array.push("<br/><span class='icon-bubbles' style='margin-left: 8px'  onclick=\"correspondance('"+tr_content+"','TRAINING')\" ></span>");
+                training_res_array.push("<br/><a class='footer-button' href='#'   onclick=\"correspondance('"+tr_content+"','TRAINING')\"  style='margin: 3px;'><span class='icon-bubbles button-icon'></span></a>");
                 training_res_array.push("</li>");
             } else {
                 training_res_array.push("<span> No training details updated </span><br/>");
@@ -770,8 +770,8 @@ function openpositions() {
                 opening_res_array.push("<div class='openpositionbox'>");
                 opening_res_array.push("<div class='openpositionchild1'>");
                 opening_res_array.push("<img src="+vessel_type_pic(vessel_type)+" style='width:85px; height:80px;'>");
-                opening_res_array.push("<br><span class='icon-calendar4 pagename-icon' onclick=\"giveDoa('"+corr_content+"')\"></span>");
-                opening_res_array.push("<span class='icon-bubbles' style='margin-left: 8px'  onclick=\"correspondance('"+corr_content+"','OPEN_POSITION')\" ></span>");
+                opening_res_array.push("<br><a class='footer-button' href='#'  onclick=\"giveDoa('"+corr_content+"')\" style='margin: 3px;'><span class='icon-calendar4 button-icon'></span></a>");
+                opening_res_array.push("<a class='footer-button' href='#'   onclick=\"correspondance('"+corr_content+"','OPEN_POSITION')\"  style='margin: 3px;'><span class='icon-bubbles button-icon'></span></a>");
                 opening_res_array.push("</div>");
                 opening_res_array.push("<div id='op_content'>");
                 opening_res_array.push("<span id='v_name'>"+v_name+"("+data[i]['flag_name']+")</span>");
@@ -848,7 +848,7 @@ function show_flight_details() {
                 for (var i = 0; i < data.length; i++) {
                     var departure = data[i]['departure'];
                     var arrival = data[i]['arrival'];
-                    var corr_content = departure+", "+arrival;
+                    var flight_content = departure+", "+arrival;
                     results_array.push("<span> Departure : "+departure+"</span><br/>");
                     results_array.push("<span> Departure Date :  "+dateformat(data[i]['departure_date'], "dd-mon-yyyy")+"</span><br/>");
                     results_array.push("<span> Arrival : "+arrival+"</span><br/>");
@@ -856,7 +856,7 @@ function show_flight_details() {
                     results_array.push("<span> Travel Route : "+nullcheck(data[i]['travel_route'])+"</span><br/>");
                     results_array.push("<span> Remarks : "+nullcheck(data[i]['remarks'])+"</span><br/>");
 
-                    results_array.push("<span class='icon-bubbles' style='margin-left: 8px'  onclick=\"correspondance('"+corr_content+"','FLIGHT')\" ></span>");
+                    results_array.push("<a class='footer-button' href='#'   onclick=\"correspondance('"+flight_content+"','FLIGHT')\"  style='margin: 3px;'><span class='icon-bubbles button-icon'></span></a>");
                     hide_spinner();
                 }                
      
