@@ -681,7 +681,7 @@ function show_training_details() {
         
         var d = new Date();
         training_res_array.push('<div class="footer">');
-        training_res_array.push("<ul class='topcoat-list__container' id='listview'>");
+        //training_res_array.push("<ul class='topcoat-list__container' id='listview'>");
         for (var i = 0; i < data.length; i++) {
             if(data[i] != null) {
                 if(i>0) {
@@ -695,14 +695,14 @@ function show_training_details() {
 
                 var tr_content = course+", "+status+", "+from_date+", "+to_date+", "+institution;
 
-                training_res_array.push("<li class='topcoat-list__item'>");                
+                //training_res_array.push("<li class='topcoat-list__item'>");                
                 training_res_array.push("<span><b>Course :</b> "+course+"</span>");
                 training_res_array.push("<br/><span><b>Status :</b> "+status+"</span>");
                 training_res_array.push("<br/><span><b>From :</b> "+from_date+"</span>");
                 training_res_array.push("<br/><span><b>To :</b> "+to_date+"</span>");
                 training_res_array.push("<br/><span><b>Venue :</b> "+institution+"</span>");
                 training_res_array.push("<br/><a class='footer-button' href='#'   onclick=\"correspondance('"+tr_content+"','TRAINING')\"  style='margin: 3px;'><span class='icon-bubbles button-icon'></span></a>");
-                training_res_array.push("</li>");
+               // training_res_array.push("</li>");
             } else {
                 training_res_array.push("<span> No training details updated </span><br/>");
                 hide_spinner();
@@ -710,7 +710,7 @@ function show_training_details() {
         }
         training_res_array.push(training_res_array);
         hide_spinner();
-        training_res_array.push("</ul>");
+        //training_res_array.push("</ul>");
         training_res_array.push('</div>');
         //$('#foot_training').html(training_res_array.join(""));
         $('#show_training_details').html(training_res_array.join(""));
