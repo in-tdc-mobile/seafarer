@@ -593,7 +593,7 @@ function show_plan_details() {
 
             } else {
                 setheadername(results_array, '<span class="icon-briefcase pagename-icon"></span>  Plan Details', "pic");
-                results_array.push('<div style="margin-top: 100px;font-size: large;">You have not been planned for a vessel yet. <br/> Please click icon on right top to open the menu.</div>')
+                results_array.push('<div style="margin-top: 100px;font-size: large;">YOU HAVE NOT BEEN PLANNED FOR A VESSEL YET. <br/> PLEASE CLICK ICON ON RIGHT TOP TO OPEN THE MENU.</div>')
                 getCurrCompanyDt(results_array);
             }
             $('#show_plan_details').html(results_array.join(""));
