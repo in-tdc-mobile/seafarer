@@ -774,7 +774,7 @@ function openpositions() {
                 opening_res_array.push("<a class='footer-button' href='#'   onclick=\"correspondance('"+corr_content+"','OPEN_POSITION')\"  style='margin: 3px;'><span class='icon-bubbles button-icon'></span></a>");
                 opening_res_array.push("</div>");
                 opening_res_array.push("<div id='op_content'>");
-                opening_res_array.push("<span id='v_name'>"+v_name+"("+data[i]['flag_name']+")</span>");
+                opening_res_array.push("<span id='v_name'>"+v_name+" ("+data[i]['flag_name']+")</span>");
                 if(data[i]['vessel_type']!=null)
                     opening_res_array.push("<br/><span id='v_type'>"+vessel_type+"</span>");
                 if(data[i]['from_date']!=null)
