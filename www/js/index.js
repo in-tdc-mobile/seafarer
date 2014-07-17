@@ -386,13 +386,31 @@ var prefilurl = "https://getVesselTracker.com/seafarer_dev/";
 $('#login_form').submit(function(){
     var username = $('#login_emp').val();
     var password = $('#login_password').val();
+    //$.jStorage.set("empid", username);
+    
+    if(username == '132058' && password == '4521') {
+        $.jStorage.set("empid", '670324');
+        login_success();
+    } else if(username == '132076' && password == '9813') {
+        $.jStorage.set("empid", '672065');
+        login_success();
+    } else if(username == 'M6764' && password == '8542') {
+        $.jStorage.set("empid", '677216');
+        login_success();
+    } else if(username == 'M4936' && password == '6479') {
+        $.jStorage.set("empid", '678744');
+        login_success();
+    } else if(username == 'M9354' && password == '5645') {
+        $.jStorage.set("empid", '677966');
+        login_success();
+    }
 
-    $.jStorage.set("empid", username);
-    var form_data= {
+
+    /*var form_data= {
         'username': username,
         'password': password
     };
-    /*var req = $.ajax({
+    var req = $.ajax({
         url: 'ldap_test_cwa.php?a=1',
         type: "post",
         data: form_data,
@@ -405,7 +423,7 @@ $('#login_form').submit(function(){
         }
     });*/
 
- login_success();
+ 
 
  $('#login_password').blur();
  $('#login_emp').blur();
