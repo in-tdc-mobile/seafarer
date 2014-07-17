@@ -387,9 +387,9 @@ $('#login_form').submit(function(){
     var username = $('#login_emp').val();
     var password = $('#login_password').val();
     
-   /* $.jStorage.set("empid", username);
-    login_success();*/
-    if(username == '132058' && password == '4521') {
+    $.jStorage.set("empid", username);
+    login_success();
+    /*if(username == '132058' && password == '4521') {
         $.jStorage.set("empid", '670324');
         login_success();
     } else if(username == '132076' && password == '9813') {
