@@ -677,7 +677,7 @@ body{
   height: 38px;
   width: 38px;
   position: absolute;
-  top: 3px;
+  top: 13px;
   font-size: 25px;
   right: 10px;
   color: white;
@@ -733,7 +733,7 @@ body{
   top: 6px;
   right: -7px;*/
   position: relative;
-  top: 18px;
+  top: 6px;
   right: -6px;
   z-index: 1000;
 }
