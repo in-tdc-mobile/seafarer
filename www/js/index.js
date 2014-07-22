@@ -369,7 +369,6 @@ $(document).ready(function() {
         } else {
             $('.login').hide();
             login_success();
-            
         }
         
     }
@@ -387,49 +386,46 @@ $('#login_form').submit(function(){
     var username = $('#login_emp').val();
     var password = $('#login_password').val();
     
-    $.jStorage.set("empid", username);
-    login_success();
-    /*if(username == '132058' && password == '4521') {
-        $.jStorage.set("empid", '670324');
-        login_success();
-    } else if(username == '132076' && password == '9813') {
-        $.jStorage.set("empid", '672065');
-        login_success();
-    } else if(username == 'M6764' && password == '8542') {
-        $.jStorage.set("empid", '677216');
-        login_success();
-    } else if(username == 'M4936' && password == '6479') {
-        $.jStorage.set("empid", '678744');
-        login_success();
-    } else if(username == 'M9354' && password == '5645') {
-        $.jStorage.set("empid", '677966');
+    if(username != "" && password != "")
+        login_test(username, password);
+    else{
+        $.jStorage.set("empid", username);
         login_success();
     }
 
+    $('#login_password').blur();
+    $('#login_emp').blur();
+    return false;
+});
 
-    /*var form_data= {
-        'username': username,
+function login_test(user_name, password) {
+
+    var url = prefilurl+"ldap_test.php?";
+
+    var form_data= {
+        'username': user_name,
         'password': password
     };
     var req = $.ajax({
-        url: 'ldap_test_cwa.php?a=1',
+        url: url,
         type: "post",
         data: form_data,
         beforeSend: function() {
             show_spinner();
         },
-
-        success : function(response) {
-            
+        success : function(data) {
+            var spitdata = data.split(":");
+            if(spitdata[0] == 'success') {
+                $.jStorage.set("empid", spitdata[1]);
+                login_success();
+            }
+            hide_spinner();
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            hide_spinner();
         }
-    });*/
-
- 
-
- $('#login_password').blur();
- $('#login_emp').blur();
- return false;
-});
+    });
+}
 
 function login_success() {
     $('#index_content').css('display','block');
