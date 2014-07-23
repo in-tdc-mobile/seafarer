@@ -440,7 +440,6 @@ function login_success() {
     $('#shore').show();
     $('#you').hide();
     alllalerts = "";
-    alert("1");
     alerts();
     show_plan_details();
     getempdetails();
@@ -1475,32 +1474,24 @@ function alerts_btn_call() {
 
 var alllalerts="";
 function alerts() {
-    alert("2");
     var url = prefilurl+"get_sf_alerts.php?empid="+$.jStorage.get("empid");
     var alerts_array = new Array(); 
-    alert("3");
     setheadername(alerts_array, '<span class="icon-bell2 pagename-icon"></span>  Alerts');
-    alert("4");
     var alertcount = 0;
     //console.log(url);
-
     var req = $.ajax({
         url: url,
         datatype: 'text',
         beforeSend: function() {
             show_spinner();
-            alert("5");
         },
 
         success : function(data) {
-            alert("7");
             var d = new Date();
             alerts_array.push('<div class = "hambrgrdetails">');
             alerts_array.push('<ul class="topcoat-list__container">');
             if(data[0] != null) {
-                alert("8");
                 for (var i = 0; i < data.length; i++) {
-                    alert("9");
                     
                         alertcount++;
                         
@@ -1553,7 +1544,6 @@ function alerts() {
                         
                         alerts_array.push("</a>");
                         alerts_array.push("</li>");
-                        alert("10");
                         // alerts_array.push("<hr  class='style-one'>")
                 }
                 hide_spinner();
@@ -1561,7 +1551,6 @@ function alerts() {
                 $('#alert_count').html(alertcount);
                 $('#alert_content').html(alerts_array.join(""));
             } else {
-                alert("11");
                 alerts_array.push('<li class="topcoat-list__item">');
                                     alerts_array.push("<a>");
                                     alerts_array.push("No Alert");   
@@ -1571,7 +1560,6 @@ function alerts() {
             }
         },
         error: function (request, status, error) {
-            alert("12");
             hide_spinner();
         }
     });
