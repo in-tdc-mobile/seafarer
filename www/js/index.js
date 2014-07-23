@@ -535,7 +535,7 @@ function vessel_type_pic(vessel_type) {
 }
 
 var emp_csc_id;
-function show_plan_details() {
+function show_plan_details() { alert("show_plan_details");
     index_page_call();
     hide_all();
 
@@ -544,6 +544,7 @@ function show_plan_details() {
     $('#show_plan_details').show();
     var results_array = new Array(); 
     var url = prefilurl+"get_sf_plan_details.php?empid="+$.jStorage.get("empid");
+    alert("2");
     //console.log(url);
     var req = $.ajax({
         url: url,
@@ -554,8 +555,9 @@ function show_plan_details() {
 
         success : function(data) {
             
-            
+            alert("1");
             if(data != null) {
+                alert("3");
                 var flickerplace="";
                 var port="";
                 var vessel_type = vessel_type_pic(data['vessel_type']);
@@ -605,18 +607,22 @@ function show_plan_details() {
                 //data['phone1'];
                 //data['phone2'];
                 
-
+                alert("4");
             } else {
+                alert("5");
                 setheadername(results_array, '<span class="icon-briefcase pagename-icon"></span>  Plan Details', "pic");
                 results_array.push('<div style="margin-top: 100px;font-size: large;">YOU HAVE NOT BEEN PLANNED FOR A VESSEL YET. <br/> PLEASE CLICK ICON ON RIGHT TOP TO OPEN THE MENU.</div>')
                 getCurrCompanyDt(results_array);
+                alert("6");
             }
+            alert("7");
             $('#show_plan_details').html(results_array.join(""));
            /* if(cscemail != null) {
                 document.getElementById("cscemail").href="mailto:"+cscemail;
             }*/
             hide_spinner();
             if(alllalerts.indexOf("PLAN") > -1){
+                alert("8");
                 update_alert_seen("PLAN");
                 alllalerts.replace('PLAN','');
             }
@@ -630,14 +636,17 @@ function show_plan_details() {
             contentlayer.addEventListener('click', showSidemenu, false);
         },
         error: function (request, status, error) {
-        results_array.push("<span> No plan to display"+error+"</span><br/>");
-        $('#show_plan_details').html(results_array.join(""));
-        hide_spinner();
-    }
-        
+            alert("9");
+            results_array.push("<span> No plan to display"+error+"</span><br/>");
+            $('#show_plan_details').html(results_array.join(""));
+            hide_spinner();
+        }
+        alert("10");
     });
     //if($.jStorage.get("push_registered") == false)
+
         pushNoteMsg.findPlatform();
+        alert("11");
 }
 var cc;
 function getCurrCompanyDt(results_array) {
