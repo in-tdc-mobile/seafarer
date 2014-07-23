@@ -32,7 +32,17 @@
   <!-- jQuery and jQuery Mobile -->
   <!--<script charset="UTF-8" type="text/javascript" src="https://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&s=1"></script>
   <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true&libraries=weather"></script>-->
+  
+
+
   <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+   <script type="text/javascript">
+    $( document ).bind( "mobileinit",  function() {
+      $.support.cors = true;
+      $.mobile.allowCrossDomainPages = true;
+      $.mobile.phonegapNavigationEnabled = true;
+    });
+  </script>
   <!-- <script src="js/jquery.mobile-1.3.1.min.js"></script> -->
   <!-- // <script src="js/jquery-ui-1.10/jquery-ui-1.10.4.custom.js"></script> -->
   <!-- // <script src="js/hamburger.js"></script> -->
