@@ -615,7 +615,7 @@ function show_plan_details() {
                     results_array.push("<span><b> Exp. Join Port :</b> "+port+"</span><br/>");
                     results_array.push('</div>');
                     results_array.push('</div>');
-                
+                    results_array.push('&nbsp;');
                     //data['phone1'];
                     //data['phone2'];
                 
