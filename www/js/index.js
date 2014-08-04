@@ -399,7 +399,7 @@ $('#login_form').submit(function(){
 });
 
 function signup() {
-    /*hide_all();
+   /* hide_all();
     $('#index_content').css('display','block');
     $('#alert_content').css('display','block');
     $(".login").hide();
@@ -529,7 +529,6 @@ function update_profile() {
 
 function vessel_type_pic(vessel_type) {
     var vessel_typ_img = 'img/ships/container.jpg';
-    alert(vessel_type);
     if(vessel_type.toUpperCase().indexOf('OIL') > -1) {
         vessel_typ_img = 'img/ships/oil.jpg';
     } else if(vessel_type.toUpperCase().indexOf('GAS') > -1) {
@@ -556,7 +555,7 @@ function show_plan_details() {
     $('#show_plan_details').show();
     var results_array = new Array(); 
     var url = prefilurl+"get_sf_plan_details.php?empid="+$.jStorage.get("empid");
-    console.log(url);
+    //console.log(url);
     var req = $.ajax({
         url: url,
         datatype: 'text',
