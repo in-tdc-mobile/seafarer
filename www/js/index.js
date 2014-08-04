@@ -398,6 +398,20 @@ $('#login_form').submit(function(){
     return false;
 });
 
+function signup() {
+    /*hide_all();
+    $('#index_content').css('display','block');
+    $('#alert_content').css('display','block');
+    $(".login").hide();
+    $('#signup_content').show(); 
+    var results_array = new Array(); 
+    results_array.push('<form onsubmit="return signin_check()" >');
+    results_array.push('<input type="text" placeholder="Email" id="prof_email" class="biginput topcoat-text-input">');
+    results_array.push('<input type="text" id="prof_phone" placeholder="Phone" class="biginput topcoat-text-input">');
+    results_array.push('<input type="submit" value="Update" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
+    results_array.push('</div>');   */
+}
+
 function login_test(user_name, password) {
 
     var url = prefilurl+"ldap_test.php?";
@@ -436,9 +450,6 @@ function login_success() {
     $('#alert-btn').show(); 
     $('#alert_count_btn').show(); 
     $('#index_content').show();
-    $('#sea').hide();
-    $('#shore').show();
-    $('#you').hide();
     alllalerts = "";
     alerts();
     show_plan_details();
@@ -518,6 +529,7 @@ function update_profile() {
 
 function vessel_type_pic(vessel_type) {
     var vessel_typ_img = 'img/ships/container.jpg';
+    alert(vessel_type);
     if(vessel_type.toUpperCase().indexOf('OIL') > -1) {
         vessel_typ_img = 'img/ships/oil.jpg';
     } else if(vessel_type.toUpperCase().indexOf('GAS') > -1) {
@@ -544,7 +556,7 @@ function show_plan_details() {
     $('#show_plan_details').show();
     var results_array = new Array(); 
     var url = prefilurl+"get_sf_plan_details.php?empid="+$.jStorage.get("empid");
-    //console.log(url);
+    console.log(url);
     var req = $.ajax({
         url: url,
         datatype: 'text',
@@ -552,65 +564,68 @@ function show_plan_details() {
             show_spinner();
         },
 
-        success : function(data) {
-            
-            
-            if(data != null) {
-                var flickerplace="";
-                var port="";
-                var vessel_type = vessel_type_pic(data['vessel_type']);
-                if(data['port'] == null) {
-                    if(data['flag_name'] == null) {
-                        flickerplace = data['vessel_type']+',ship,vessel,sea';
-                        
+        success : function(result) {
+
+            if(result.length != 0) {
+
+                for (var i = 0; i < result.length; i++) {
+                    var data = result[i];
+                    var flickerplace="";
+                    var port="";
+                    var vessel_type = vessel_type_pic(data['vessel_type']);
+                    if(data['port'] == null) {
+                        if(data['flag_name'] == null) {
+                            flickerplace = data['vessel_type']+',ship,vessel,sea';
+                            
+                        } else {
+                            flickerplace = data['flag_name']+',flag';
+                        }
+                        // alert(flickerplace);
+                        port = "Not Yet Allotted";                        
                     } else {
-                        flickerplace = data['flag_name']+',flag';
+                        flickerplace = data['port'];
+                        port = data['port'];
                     }
-                    // alert(flickerplace);
-                    port = "Not Yet Allotted";                        
-                } else {
-                    flickerplace = data['port'];
-                    port = data['port'];
+                    
+                    if( data['csc_email']!=null && data['csc_email']!='' )
+                        csc_contact_det = "mailto:"+data['csc_email'];
+
+                    if( data['phone1']!=null && data['phone1']!='' )
+                        csc_contact_det = csc_contact_det+"&&"+data['phone1'];
+                    
+                    if( data['phone2']!=null && data['phone2']!='' )
+                        csc_contact_det = csc_contact_det+"&&"+data['phone2'];
+
+                    emp_csc_id = data['csc_id'];
+
+                    $.jStorage.set("csc_contact_det", csc_contact_det);
+                    setheadername(results_array, '<span class="icon-briefcase pagename-icon"></span><span class="icon-boat"></span>  '+data['vessel_name'] + '(' + data['flag_name'] + ')', "pic");
+                    
+                    results_array.push('<div class="ship_image">');
+                    results_array.push("<img src="+vessel_type+" class='dip_img'>");
+                    results_array.push('</div>');
+
+                    results_array.push('<div class="footer">');
+                    // results_array.push("<span> Vessel : "+data['vessel_name']+"</span><br/>");
+                    // results_array.push("<span> Flag : "++"</span><br/>");
+                    results_array.push('<div style="margin-left:5px">');
+                    results_array.push("<span><b> Vessel Type :</b> "+data['vessel_type']+"</span><br/>");
+                    results_array.push("<span><b> Manager :</b> "+data['emp_sdc_name']+"</span><br/>");
+                    results_array.push("<span><b> Exp. Join Date :</b> "+dateformat(data['from_date'], "dd-mon-yyyy")+"</span><br/>");
+                    results_array.push("<span><b> Exp. Join Port :</b> "+port+"</span><br/>");
+                    results_array.push('</div>');
+                    results_array.push('</div>');
+                
+                    //data['phone1'];
+                    //data['phone2'];
+                
                 }
-                
-                if( data['csc_email']!=null && data['csc_email']!='' )
-                    csc_contact_det = "mailto:"+data['csc_email'];
-
-                if( data['phone1']!=null && data['phone1']!='' )
-                    csc_contact_det = csc_contact_det+"&&"+data['phone1'];
-                
-                if( data['phone2']!=null && data['phone2']!='' )
-                    csc_contact_det = csc_contact_det+"&&"+data['phone2'];
-
-                emp_csc_id = data['csc_id'];
-
-                $.jStorage.set("csc_contact_det", csc_contact_det);
-                setheadername(results_array, '<span class="icon-briefcase pagename-icon"></span><span class="icon-boat"></span>  '+data['vessel_name'] + '(' + data['flag_name'] + ')', "pic");
-                
-                results_array.push('<div class="ship_image">');
-                results_array.push("<img src="+vessel_type+" class='dip_img'>");
-                results_array.push('</div>');
-
-                results_array.push('<div class="footer">');
-                // results_array.push("<span> Vessel : "+data['vessel_name']+"</span><br/>");
-                // results_array.push("<span> Flag : "++"</span><br/>");
-                results_array.push('<div style="margin-left:5px">');
-                results_array.push("<span><b> Vessel Type :</b> "+data['vessel_type']+"</span><br/>");
-                results_array.push("<span><b> Manager :</b> "+data['emp_sdc_name']+"</span><br/>");
-                results_array.push("<span><b> Exp. Join Date :</b> "+dateformat(data['from_date'], "dd-mon-yyyy")+"</span><br/>");
-                results_array.push("<span><b> Exp. Join Port :</b> "+port+"</span><br/>");
-                results_array.push('</div>');
-                bottm_buttons("P" ,results_array);
-                
-                //data['phone1'];
-                //data['phone2'];
-                
-
             } else {
                 setheadername(results_array, '<span class="icon-briefcase pagename-icon"></span>  Plan Details', "pic");
                 results_array.push('<div style="margin-top: 100px;font-size: large;">YOU HAVE NOT BEEN PLANNED FOR A VESSEL YET. <br/> PLEASE CLICK ICON ON RIGHT TOP TO OPEN THE MENU.</div>')
                 getCurrCompanyDt(results_array);
             }
+            bottm_buttons("P" ,results_array);
             $('#show_plan_details').html(results_array.join(""));
            /* if(cscemail != null) {
                 document.getElementById("cscemail").href="mailto:"+cscemail;
@@ -1648,6 +1663,7 @@ function hide_all() {
     // $('#navbar').hide(); 
     hide_spinner();
     //$('#index_content').hide();
+    $('#signup_content').hide();
     $('#correspondance_content').hide();
     $('#ajax_error').hide();
     $('#view_title').hide();
