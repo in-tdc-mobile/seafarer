@@ -399,17 +399,22 @@ $('#login_form').submit(function(){
 });
 
 function signup() {
-   /* hide_all();
+    hide_all();
     $('#index_content').css('display','block');
     $('#alert_content').css('display','block');
     $(".login").hide();
     $('#signup_content').show(); 
     var results_array = new Array(); 
     results_array.push('<form onsubmit="return signin_check()" >');
-    results_array.push('<input type="text" placeholder="Email" id="prof_email" class="biginput topcoat-text-input">');
-    results_array.push('<input type="text" id="prof_phone" placeholder="Phone" class="biginput topcoat-text-input">');
+    results_array.push('<input type="text" placeholder="Passport Number" id="signup_passport" class="biginput topcoat-text-input">');
+    results_array.push('<input type="text" placeholder="SeamenBook Number" id="signup_seamennum" class="biginput topcoat-text-input">');
+    results_array.push("<span>DOB</span><br><input size='15' id='dobdate'>");
     results_array.push('<input type="submit" value="Update" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
-    results_array.push('</div>');   */
+    results_array.push('</div>');
+    $('#signup_content').html(results_array.join(""));
+    new datepickr('dobdate', {
+        'dateFormat': 'd-M-Y'
+    });
 }
 
 function login_test(user_name, password) {
@@ -555,7 +560,7 @@ function show_plan_details() {
     $('#show_plan_details').show();
     var results_array = new Array(); 
     var url = prefilurl+"get_sf_plan_details.php?empid="+$.jStorage.get("empid");
-    //console.log(url);
+    console.log(url);
     var req = $.ajax({
         url: url,
         datatype: 'text',
@@ -564,9 +569,7 @@ function show_plan_details() {
         },
 
         success : function(result) {
-
-            if(result.length != 0) {
-
+            if(result[0] != null) {
                 for (var i = 0; i < result.length; i++) {
                     var data = result[i];
                     var flickerplace="";
@@ -624,6 +627,7 @@ function show_plan_details() {
                 results_array.push('<div style="margin-top: 100px;font-size: large;">YOU HAVE NOT BEEN PLANNED FOR A VESSEL YET. <br/> PLEASE CLICK ICON ON RIGHT TOP TO OPEN THE MENU.</div>')
                 getCurrCompanyDt(results_array);
             }
+
             bottm_buttons("P" ,results_array);
             $('#show_plan_details').html(results_array.join(""));
            /* if(cscemail != null) {
@@ -685,7 +689,7 @@ function getCurrCompanyDt(results_array) {
             }
         }
     });
-    bottm_buttons("P" ,results_array);
+   //bottm_buttons("P" ,results_array);
 }
 
 
