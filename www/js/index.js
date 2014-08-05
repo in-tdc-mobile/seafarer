@@ -386,30 +386,34 @@ $('#login_form').submit(function(){
     var username = $('#login_emp').val();
     var password = $('#login_password').val();
     
-    if(username != "" && password != "")
-        login_test(username, password);
-    else{
+    if(username != "" && password != "") 
+        //login_test(username, password);
+        getempdetails(username, password);
+        //$('#login_password').blur();
+        //$('#login_emp').blur();
+    
+    /*else{
         $.jStorage.set("empid", username);
         login_success();
-    }
+    }*/
 
-    $('#login_password').blur();
-    $('#login_emp').blur();
-    return false;
+   
+  //  return false;
 });
 
-function signup() {
-    hide_all();
-    $('#index_content').css('display','block');
-    $('#alert_content').css('display','block');
+function signup() { 
+
+    $("#ajax_error").hide();
     $(".login").hide();
     $('#signup_content').show(); 
     var results_array = new Array(); 
+    setheadername(results_array, '<span class="icon-pencil2"></span>  SignUp', "name");
+    results_array.push('<div class = "hambrgrdetails">');
     results_array.push('<form onsubmit="return signin_check()" >');
     results_array.push('<input type="text" placeholder="Passport Number" id="signup_passport" class="biginput topcoat-text-input">');
     results_array.push('<input type="text" placeholder="SeamenBook Number" id="signup_seamennum" class="biginput topcoat-text-input">');
-    results_array.push("<span>DOB</span><br><input size='15' id='dobdate'>");
-    results_array.push('<input type="submit" value="Update" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
+    results_array.push('<input size="15" placeholder="DD-MMM-YYYY" id="dobdate" class="topcoat-text-input">');
+    results_array.push('<input type="submit" value="Update" class="topcoat-button"></form>');
     results_array.push('</div>');
     $('#signup_content').html(results_array.join(""));
     new datepickr('dobdate', {
@@ -417,11 +421,58 @@ function signup() {
     });
 }
 
+function signin_check() {
+    var results_array = new Array(); 
+    setheadername(results_array, '<span class="icon-pencil2"></span>  Update Contact Details', "name");
+    results_array.push('<div class = "hambrgrdetails">');
+    var url = prefilurl+"get_emp_details_pers_mf.php?";
+    //console.log(url);
+    var pass = $("#signup_passport").val();
+    var seamen = $("#signup_seamennum").val();
+    var dob = $("#dobdate").val();
+    var form_data= {
+        'pass': pass,
+        'seamen': seamen,
+        'dob': dob
+    };
+    var req = $.ajax({
+        url: url,
+        type: "post",
+        data: form_data,
+        beforeSend: function() {
+            show_spinner();
+        },
+
+        success : function(data) {
+            if(data[0] != null) {
+                var results_array = new Array(); 
+                setheadername(results_array, '<span class="icon-pencil2"></span>  SignUp', "name");
+                results_array.push('<div class = "hambrgrdetails">');
+                results_array.push("<form onsubmit='return signin_mail(\""+data[0]['id']+"\",\""+data[0]['sur_name']+"\",\""+data[0]['first_name']+"\",\""+data[0]['middle_name']+"\",\""+data[0]['passport_no']+"\")' >");
+                results_array.push('Dear '+nullcheck(toTitleCase(data[0]['sur_name']))+" "+nullcheck(toTitleCase(data[0]['first_name']))+", Please update your email id here");
+                results_array.push('<input type="text" placeholder="Email-id" id="signup_email" class="biginput topcoat-text-input">');
+                results_array.push('<input type="submit" value="Update" class="topcoat-button"></form>');
+                results_array.push('</div>');
+            } else {
+                $("#ajax_error").show();
+                $("#ajax_error").html('Wrong data entered or the user already registered...');
+                $("#ajax_error").attr('style','display:block; text-align:center;');
+                hide_spinner();
+            }
+            $('#signup_content').html(results_array.join(""));
+            hide_spinner();
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            hide_spinner();
+        }
+    });
+}
+
 function login_test(user_name, password) {
 
     var url = prefilurl+"ldap_test.php?";
 
-    var form_data= {
+    var form_data = {
         'username': user_name,
         'password': password
     };
@@ -446,6 +497,58 @@ function login_test(user_name, password) {
     });
 }
 
+function signin_mail(id, sur_name, first_name, middle_name, passport_no) {
+    $("#ajax_error").hide();
+    var results_array = new Array(); 
+    setheadername(results_array, '<span class="icon-pencil2"></span>  Update Contact Details', "name");
+    results_array.push('<div class = "hambrgrdetails">');
+    var url = prefilurl+"insert_emp_profile.php?";
+    console.log(url);
+    var email = $("#signup_email").val();
+
+    var filter=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+    if (filter.test(email)) {
+
+        var form_data= {
+            'id': id,
+            'sur_name': sur_name,
+            'first_name': first_name,
+            'middle_name': middle_name,
+            'passport_no': passport_no,
+            'email': email
+        };
+        var req = $.ajax({
+            url: url,
+            type: "post",
+            data: form_data,
+            beforeSend: function() {
+                show_spinner();
+            },
+
+            success : function(data) {
+                console.log(data);
+                results_array.push('</span> User Name and Password send to your mail id..</span>');  
+                results_array.push('</div>');
+                $('#signup_content').html(results_array.join(""));
+                hide_spinner();
+                $("#ajax_error").hide();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                results_array.push('</span> Issue in Sign Up Process, Please try again...</span>');  
+                results_array.push('</div>');
+                $('#signup_content').html(results_array.join(""));
+                //alert("error in update");
+                hide_spinner();
+                $("#ajax_error").hide();
+            }
+        });
+    }else {
+        $("#ajax_error").show();
+        $("#ajax_error").html('Not a Valid Email Id...');
+        $("#ajax_error").attr('style','display:block; text-align:center;');
+    }
+}
+
 function login_success() {
     $('#index_content').css('display','block');
     $('#alert_content').css('display','block');
@@ -458,7 +561,7 @@ function login_success() {
     alllalerts = "";
     alerts();
     show_plan_details();
-    getempdetails();
+    //getempdetails();
 }
 
 function showSidemenu () {
@@ -1455,24 +1558,45 @@ function flickercall(tagparam, bgshow) {
     });
 
 }
-function getempdetails() {
-    var url = prefilurl+"get_sf_emp_details.php?empid="+$.jStorage.get("empid");
+
+
+function getempdetails(username, password) {
     var emp_det_array = new Array(); 
+    var url = prefilurl+"get_sf_emp_details.php?";
+    //console.log(url);
+    var pass = $("#signup_passport").val();
+    var seamen = $("#signup_seamennum").val();
+    var dob = $("#dobdate").val();
+    var form_data= {
+        'username': username,
+        'password': password
+    };
     var req = $.ajax({
         url: url,
-        datatype: 'text',
+        type: "post",
+        data: form_data,
         beforeSend: function() {
+            show_spinner();
         },
 
         success : function(data) {
             if(data[0] != null) {
+                $.jStorage.set("empid", data[0]['id']);
                 emp_det_array.push(nullcheck(toTitleCase(data[0]['sur_name']))+" "+nullcheck(toTitleCase(data[0]['first_name'])));//+nullcheck(toTitleCase(data[0]['last_name']))+" "
                 emp_det_array.push("<br>"+toTitleCase(data[0]['nationality']));
                 emp_det_array.push("<br>"+toTitleCase(data[0]['rank_grp_name']));
-            } 
+                login_success();
+                $('#login_password').blur();
+                $('#login_emp').blur();
+            } else {
+               // login_failure();
+            }
+            hide_spinner();
             $('#empprof').html(emp_det_array.join(""));
         },
-        
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            hide_spinner();
+        }
     });
 }
 
