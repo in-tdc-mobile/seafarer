@@ -911,8 +911,8 @@ function openpositions() {
                 opening_res_array.push("<div class='openpositionbox'>");
                 opening_res_array.push("<div class='openpositionchild1'>");
                 opening_res_array.push("<img src="+vessel_type_pic(vessel_type)+" style='width:85px; height:80px;'>");
-                opening_res_array.push("<br><a class='footer-button' href='#'  onclick=\"giveDoa('"+corr_content+"')\" style='margin: 3px;'><span class='icon-calendar4 button-icon'></span></a>");
-                opening_res_array.push("<a class='footer-button' href='#'   onclick=\"correspondance('"+corr_content+"','OPEN_POSITION')\"  style='margin: 3px;'><span class='icon-bubbles button-icon'></span></a>");
+                opening_res_array.push("<br><a class='footer-button' onclick=\"giveDoa('"+corr_content+"')\" style='margin: 3px;'><span class='icon-calendar4 button-icon'></span></a>");
+                opening_res_array.push("<a class='footer-button' onclick=\"correspondance('"+corr_content+"','OPEN_POSITION')\"  style='margin: 3px;'><span class='icon-bubbles button-icon'></span></a>");
                 opening_res_array.push("</div>");
                 opening_res_array.push("<div id='op_content'>");
                 opening_res_array.push("<span id='v_name'>"+v_name+" ("+data[i]['flag_name']+")</span>");
