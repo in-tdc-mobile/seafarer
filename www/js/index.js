@@ -329,6 +329,7 @@ function route(event) {
         logout();
     } else {
         if($.jStorage.get("empid") != null){
+            getempdetails($.jStorage.get("empid"), '');
             show_plan_details();
         }
         // page = show_owners();
@@ -1567,7 +1568,7 @@ function flickercall(tagparam, bgshow) {
 function getempdetails(username, password) {
     var emp_det_array = new Array(); 
     var url = prefilurl+"get_sf_emp_details.php?";
-    //console.log(url);
+    // console.log(url);
     var pass = $("#signup_passport").val();
     var seamen = $("#signup_seamennum").val();
     var dob = $("#dobdate").val();
@@ -1587,7 +1588,7 @@ function getempdetails(username, password) {
             if(data[0] != null) {
                 $.jStorage.set("empid", data[0]['id']);
                 emp_det_array.push(nullcheck(toTitleCase(data[0]['sur_name']))+" "+nullcheck(toTitleCase(data[0]['first_name'])));//+nullcheck(toTitleCase(data[0]['last_name']))+" "
-                emp_det_array.push("<br>"+toTitleCase(data[0]['nationality']));
+                // emp_det_array.push("<br>"+toTitleCase(data[0]['nationality']));
                 emp_det_array.push("<br>"+toTitleCase(data[0]['rank_grp_name']));
                 login_success();
                 $('#login_password').blur();
