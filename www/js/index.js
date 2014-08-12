@@ -842,7 +842,7 @@ function show_training_details() {
                 training_res_array.push("<br/><span><b>From :</b> "+from_date+"</span>");
                 training_res_array.push("<br/><span><b>To :</b> "+to_date+"</span>");
                 training_res_array.push("<br/><span><b>Venue :</b> "+institution+"</span>");
-                training_res_array.push("<br/><a class='footer-button' href='#'   onclick=\"correspondance('"+tr_content+"','TRAINING')\"  style='margin: 3px;'><span class='icon-bubbles button-icon'></span></a>");
+                training_res_array.push("<br/><a class='footer-button' onclick=\"correspondance('"+tr_content+"','TRAINING')\"  style='margin: 3px;'><span class='icon-bubbles button-icon'></span></a>");
                // training_res_array.push("</li>");
             } else {
                 training_res_array.push("<span> No training details updated </span><br/>");
@@ -997,7 +997,7 @@ function show_flight_details() {
                     results_array.push("<span> Travel Route : "+nullcheck(data[i]['travel_route'])+"</span><br/>");
                     results_array.push("<span> Remarks : "+nullcheck(data[i]['remarks'])+"</span><br/>");
 
-                    results_array.push("<a class='footer-button' href='#'   onclick=\"correspondance('"+flight_content+"','FLIGHT')\"  style='margin: 3px;'><span class='icon-bubbles button-icon'></span></a>");
+                    results_array.push("<a class='footer-button' onclick=\"correspondance('"+flight_content+"','FLIGHT')\"  style='margin: 3px;'><span class='icon-bubbles button-icon'></span></a>");
                     hide_spinner();
                 }                
      
