@@ -328,6 +328,9 @@ function route(event) {
         hide_all();
         logout();
     } else {
+        if($.jStorage.get("empid") != null){
+            show_plan_details();
+        }
         // page = show_owners();
     }
     // slider.slidePage($(page));
@@ -560,7 +563,8 @@ function login_success() {
     $('#index_content').show();
     alllalerts = "";
     alerts();
-    show_plan_details();
+    window.location.hash="#plan";
+    // show_plan_details();
     //getempdetails();
 }
 
