@@ -426,7 +426,6 @@ function signin () {
 }
 
 function signup() { 
-    alert('1');
     $("#ajax_error").hide();
     $(".login").hide();
     $('#signup_content').show(); 
@@ -439,12 +438,10 @@ function signup() {
     results_array.push('<input size="15" placeholder="DD-MMM-YYYY" id="dobdate" class="topcoat-text-input">');
     results_array.push('<input type="submit" value="Update" class="topcoat-button"></form>');
     results_array.push('</div>');
-    alert('2');    
     $('#signup_content').html(results_array.join(""));
     new datepickr('dobdate', {
         'dateFormat': 'd-M-Y'
     });
-    alert('3');
 }   
 
 function signin_check() {
