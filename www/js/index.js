@@ -292,8 +292,11 @@ function route(event) {
         hash = window.location.hash.split('/')[0];
 
    /* $('#bg').css('background-image', 'none');
-    $('#bg').css('background', 'black');
-*/
+    $('#bg').css('background', 'black');*/
+    if($.jStorage.get("empid") == null){
+        window.location.replace("#");
+        return;
+    }
     if (hash === "#plan") {
         show_plan_details();
     } else if (hash === "#training") {
@@ -1847,7 +1850,9 @@ function hide_all() {
 
 function logout() {
     $.jStorage.flush();
+    window.location.reload(true);
     hide_all();
+    // window.location.replace("#");
     $('.login').show();
     $('#hamburger-btn').hide();
     $('#top_icons').hide(); 
