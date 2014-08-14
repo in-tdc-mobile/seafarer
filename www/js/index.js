@@ -65,7 +65,7 @@ var app = {
             
         }
         catch(err){    
-            alert("Error in document ready:"+err);
+            // alert("Error in document ready:"+err);
         }
         //document.removeEventListener('deviceready', this.deviceready, false);
     },
@@ -175,14 +175,14 @@ var androidPush = {
                     //console.log("Regid " + e.regid);
                     //alert('registration id = '+e.regid);
                     writeRegId(e.regid, 'Android');
-                    alert("writeRegId");
+                    // alert("writeRegId");
                 }
             break;
 
             case 'message':
               // this is the actual push notification. its format depends on the data model from the push server
                //alert('this one message = '+e.message+' msgcnt = '+e.msgcnt);
-               alert('this one message = '+e.message);
+               // alert('this one message = '+e.message);
                 navigateToNitifyPage(e.message);
                 
             break;
@@ -246,7 +246,7 @@ function writeRegId(push_reg_id, platfrm) {
 // Handle the back button
 //
 function onBackKeyDown() {
-    alert('hi');
+    // alert('hi');
     step_back();
 }
 
@@ -380,7 +380,7 @@ $(document).ready(function() {
         
     }
     catch(err){    
-        alert("document ready:"+err);
+        // alert("document ready:"+err);
     }
 });
 
@@ -1390,7 +1390,7 @@ function savedoa(page) {
                         $('#openpositions_content').show(); 
                     }
                 } else {
-                    alert("Issue in adding doa, please try again");
+                    // alert("Issue in adding doa, please try again");
                 }
                 
                 hide_spinner();
@@ -1433,15 +1433,15 @@ function canceldoa() {
                     //showdashbord();
                     doadetails();
                 } else {
-                    alert("Issue in adding doa, please try again");
+                    // alert("Issue in adding doa, please try again");
                 }
                 
                 hide_spinner();
             },
             error: function (request, status, error) {
-                alert("error:"+error);
-                alert("status:"+status);
-                alert("request:"+request);
+                // alert("error:"+error);
+                // alert("status:"+status);
+                // alert("request:"+request);
             }
         });
     }
