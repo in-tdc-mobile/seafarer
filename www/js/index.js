@@ -386,7 +386,27 @@ var prefilurl = "https://getVesselTracker.com/seafarer_dev/";
     options.url = 'https://getVesselTracker.com/seafarer_dev/'+ options.url ;//+ options.url + "&pal_user_email=" + $.jStorage.get("pal_user_name");
 });
  */
-$('#login_form').submit(function(){
+// $('#login_form').submit(function(){
+//     var username = $('#login_emp').val();
+//     var password = $('#login_password').val();
+    
+//     if(username != "" && password != "") 
+//         //login_test(username, password);
+//         getempdetails(username, password);
+//         //$('#login_password').blur();
+//         //$('#login_emp').blur();
+    
+//     /*else{
+//         $.jStorage.set("empid", username);
+//         login_success();
+//     }*/
+
+   
+//   //  return false;
+// });
+
+
+function signin () {
     var username = $('#login_emp').val();
     var password = $('#login_password').val();
     
@@ -403,7 +423,7 @@ $('#login_form').submit(function(){
 
    
   //  return false;
-});
+}
 
 function signup() { 
     alert('1');
@@ -1822,10 +1842,10 @@ function hide_all() {
 
 }
 
-window.onerror = function(msg, url, linenumber) {
-    alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
-    return true;
-}
+// window.onerror = function(msg, url, linenumber) {
+//     alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
+//     return true;
+// }
 
 function logout() {
     $.jStorage.flush();
