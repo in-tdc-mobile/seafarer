@@ -456,6 +456,7 @@ function signin_check() {
                 results_array.push('Dear '+nullcheck(toTitleCase(data[0]['sur_name']))+" "+nullcheck(toTitleCase(data[0]['first_name']))+", Please update your email id here");
                 results_array.push('<input type="text" placeholder="Email-id" id="signup_email" class="biginput topcoat-text-input">');
                 results_array.push('<input type="submit" value="Update" class="topcoat-button"></form>');
+                results_array.push('<span id="update_email_error" style="display:none">Email already registered</span>')
                 results_array.push('</div>');
             } else {
                 $("#ajax_error").show();
@@ -530,7 +531,12 @@ function signin_mail(id, sur_name, first_name, middle_name, passport_no) {
             },
 
             success : function(data) {
-                console.log(data);
+                // console.log(data);
+                if (data=='Already exist') {
+                    $('#update_email_error').show();
+                    hide_spinner();
+                    return;
+                };
                 results_array.push('</span> User Name and Password send to your mail id..</span>');  
                 results_array.push('</div>');
                 $('#signup_content').html(results_array.join(""));
@@ -1814,10 +1820,10 @@ function hide_all() {
 
 }
 
-/*window.onerror = function(msg, url, linenumber) {
+window.onerror = function(msg, url, linenumber) {
     alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
     return true;
-}*/
+}
 
 function logout() {
     $.jStorage.flush();
