@@ -386,24 +386,24 @@ var prefilurl = "https://getVesselTracker.com/seafarer_dev/";
     options.url = 'https://getVesselTracker.com/seafarer_dev/'+ options.url ;//+ options.url + "&pal_user_email=" + $.jStorage.get("pal_user_name");
 });
  */
-// $('#login_form').submit(function(){
-//     var username = $('#login_emp').val();
-//     var password = $('#login_password').val();
+$('#login_form').submit(function(){
+    // var username = $('#login_emp').val();
+    // var password = $('#login_password').val();
     
-//     if(username != "" && password != "") 
-//         //login_test(username, password);
-//         getempdetails(username, password);
-//         //$('#login_password').blur();
-//         //$('#login_emp').blur();
+    // if(username != "" && password != "") 
+    //     //login_test(username, password);
+    //     getempdetails(username, password);
+    //     //$('#login_password').blur();
+    //     //$('#login_emp').blur();
     
-//     /*else{
-//         $.jStorage.set("empid", username);
-//         login_success();
-//     }*/
+    // /*else{
+    //     $.jStorage.set("empid", username);
+    //     login_success();
+    // }*/
 
    
-//   //  return false;
-// });
+   return false;
+});
 
 
 function signin () {
