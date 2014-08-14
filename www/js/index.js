@@ -435,12 +435,12 @@ function signup() {
     var results_array = new Array(); 
     setheadername(results_array, '<span class="icon-pencil2"></span>  SignUp', "name");
     results_array.push('<div class = "hambrgrdetails">');
-    results_array.push('<form onsubmit="return signin_check()" >');
+    results_array.push('<form onsubmit="return false" >');
     results_array.push('<input type="text" placeholder="Passport Number" id="signup_passport" class="biginput topcoat-text-input">');
     results_array.push('<input type="text" placeholder="SeamenBook Number" id="signup_seamennum" class="biginput topcoat-text-input">');
     // results_array.push('<input type="date" size="15" placeholder="DD-MMM-YYYY" id="dobdate" class="topcoat-text-input">');
     results_array.push("<input id='dobdate' type='date' class='topcoat-text-input'/>");
-    results_array.push('<button type="submit" class="topcoat-button">Update</button></form>');
+    results_array.push('<button class="topcoat-button" onclick="signin_check()">Register</button></form>');
     results_array.push('</div>');
     $('#signup_content').html(results_array.join(""));
     // new datepickr('dobdate', {
