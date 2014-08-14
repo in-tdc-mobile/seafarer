@@ -475,10 +475,10 @@ function signin_check() {
                 var results_array = new Array(); 
                 setheadername(results_array, '<span class="icon-pencil2"></span>  SignUp', "name");
                 results_array.push('<div class = "hambrgrdetails">');
-                results_array.push("<form onsubmit='return signin_mail(\""+data[0]['id']+"\",\""+data[0]['sur_name']+"\",\""+data[0]['first_name']+"\",\""+data[0]['middle_name']+"\",\""+data[0]['passport_no']+"\")' >");
+                results_array.push("<form onsubmit='return false' >");
                 results_array.push('Dear '+nullcheck(toTitleCase(data[0]['sur_name']))+" "+nullcheck(toTitleCase(data[0]['first_name']))+", Please update your email id here");
                 results_array.push('<input type="text" placeholder="Email-id" id="signup_email" class="biginput topcoat-text-input">');
-                results_array.push('<input type="submit" value="Update" class="topcoat-button"></form>');
+                results_array.push('<input type="submit" value="Update" onclick=signin_mail(\""+data[0]['id']+"\",\""+data[0]['sur_name']+"\",\""+data[0]['first_name']+"\",\""+data[0]['middle_name']+"\",\""+data[0]['passport_no']+"\") class="topcoat-button"></form>');
                 results_array.push('<span id="update_email_error" style="display:none">Email already registered</span>')
                 results_array.push('</div>');
             } else {
