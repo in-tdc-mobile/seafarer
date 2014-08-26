@@ -250,7 +250,6 @@ function onBackKeyDown() {
     step_back();
 }
 
-
 function toTitleCase(str)
 { if(str)
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
@@ -293,10 +292,24 @@ function route(event) {
 
    /* $('#bg').css('background-image', 'none');
     $('#bg').css('background', 'black');*/
-    if($.jStorage.get("empid") == null){
-        window.location.replace("#");
+    if (hash === "#signup") {
+        hide_all();
+        signup();
         return;
     }
+
+    if (hash === "#signin_check") {
+        // hide_all();
+        signin_check();
+        return;
+    }
+    if($.jStorage.get("empid") == null){
+        window.location.replace("#");
+        hide_all();
+        $('.login').show();
+        return;
+    }
+
     if (hash === "#plan") {
         show_plan_details();
     } else if (hash === "#training") {
@@ -346,7 +359,7 @@ function route(event) {
     // $('#content').css('background', 'lightblue');
 }
 
-var step_back = function() {};
+var step_back = function() {window.history.back();};
 
 
 
@@ -371,7 +384,7 @@ $(document).ready(function() {
         var login_empid = $.jStorage.get("empid");
         // $.jStorage.set("pal_user_email", '');
         if (login_empid == null) {
-          hide_all();
+            hide_all();
             $('.login').show();
         } else {
             $('.login').hide();
@@ -428,9 +441,14 @@ function signin () {
   //  return false;
 }
 
-function signup() { 
+function signup_nav() {
+    window.location.hash = "#signup";
+}
+
+function signup() {
     $("#ajax_error").hide();
     $(".login").hide();
+    $('#btnBack').show();
     $('#signup_content').show(); 
     var results_array = new Array(); 
     setheadername(results_array, '<span class="icon-pencil2"></span>  SignUp', "name");
@@ -439,14 +457,18 @@ function signup() {
     results_array.push('<input type="text" placeholder="Passport Number" id="signup_passport" class="biginput topcoat-text-input">');
     results_array.push('<input type="text" placeholder="SeamenBook Number" id="signup_seamennum" class="biginput topcoat-text-input">');
     // results_array.push('<input type="date" size="15" placeholder="DD-MMM-YYYY" id="dobdate" class="topcoat-text-input">');
-    results_array.push("<input id='dobdate' type='date' class='topcoat-text-input'/>");
-    results_array.push('<button class="topcoat-button" onclick="signin_check()">Register</button></form>');
+    results_array.push("<input id='dobdate' type='date' class='topcoat-text-input' placeholder='DD-MMM-YYYY'/>");
+    results_array.push('<button class="topcoat-button" onclick="signin_check_nav()">Register</button></form>');
     results_array.push('</div>');
     $('#signup_content').html(results_array.join(""));
     // new datepickr('dobdate', {
     //     'dateFormat': 'd-M-Y'
     // });
 }   
+
+function signin_check_nav(){
+    window.location.hash="#signin_check";
+}
 
 function signin_check() {
     var results_array = new Array(); 
@@ -560,7 +582,9 @@ function signin_mail(id, sur_name, first_name, middle_name, passport_no) {
                     hide_spinner();
                     return;
                 };
-                results_array.push('</span> User Name and Password send to your mail id..</span>');  
+                $('#btnBack').hide();
+                results_array.push('</span> User Name and Password send to your mail id..</span></br>'); 
+                results_array.push('<button class="topcoat-button" onclick="backtologin()">Back to Login</button>') 
                 results_array.push('</div>');
                 $('#signup_content').html(results_array.join(""));
                 hide_spinner();
@@ -580,6 +604,10 @@ function signin_mail(id, sur_name, first_name, middle_name, passport_no) {
         $("#ajax_error").html('Not a Valid Email Id...');
         $("#ajax_error").attr('style','display:block; text-align:center;');
     }
+}
+
+function backtologin () {
+    window.location.replace("#");
 }
 
 function login_success() {
@@ -1338,9 +1366,9 @@ function doaAdd(status, page, content) {
         doa_array.push("<div class='adddoa'>");
         setheadername(doa_array, "<span class='icon-calendar4 pagename-icon'></span>  DoA Details", "name");
         doa_array.push("<div class = 'hambrgrdetails'>");
-        doa_array.push("<form>");
+        doa_array.push("<form onsubmit='return false'>");
         /*doa_array.push("<span>Date:</span><br><input class='topcoat-text-input' type='date' value="+new Date()+" id='doadate'>");*/
-        doa_array.push("<span>Date:</span><br><input size='15' id='doadate'>");
+        doa_array.push("<span>Date:</span><br><input size='15' type='date' class='topcoat-text-input' id='doadate'>");
         if(content != null && content != "")
             doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width: 100%;height: 250px;line-height: 1.5rem;'>Reg:"+content+":-</textarea></br>");
         else
@@ -1352,9 +1380,9 @@ function doaAdd(status, page, content) {
         doa_array.push('</div>');
         doa_array.push('</div>');
         $('#doa_content').html(doa_array.join(""));
-        new datepickr('doadate', {
-            'dateFormat': 'd-M-Y'
-        });
+        // new datepickr('doadate', {
+        //     'dateFormat': 'd-M-Y'
+        // });
     } else {
         canceldoa(page);
     }

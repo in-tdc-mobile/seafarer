@@ -188,6 +188,7 @@
     <div id="hamburger-btn">
       <span class="hamburger icon-menu"></span>
     </div>
+    
     <div id="alert-btn"  onclick="alerts_btn_call()">
       <span class="icon-bell2"></span>
     </div>
@@ -195,7 +196,11 @@
         <span id ="alert_count"></span>
     </div>
   <div class="topcoat-navigation-bar on-top header">
-    <div class="topcoat-navigation-bar__item left quarter"></div>
+    <div class="topcoat-navigation-bar__item left quarter">
+      <a id="btnBack" class="topcoat-icon-button--quiet back-button" href="javascript:step_back()">
+        <span class="topcoat-icon topcoat-icon--back"></span>
+      </a>
+    </div>
     <div class="topcoat-navigation-bar__item center half">
     <h1 class="topcoat-navigation-bar__title">
     <img src="img/bsm_logo_glow.png" style="height: 19px; padding-top:13px; padding-right: 5px;">MyBSM</h1></div>
@@ -225,7 +230,7 @@
           </div>
         </div>
         <button class="topcoat-button" onclick="signin()">Sign In</button> 
-        <button class="topcoat-button" onclick="signup()">Create a new Account</button>
+        <button class="topcoat-button" onclick="signup_nav()">Create a new Account</button>
       </form>
     </div>
     <div id="signup_content" style="height:100%; z-index:2; display:none">
