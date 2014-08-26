@@ -599,6 +599,7 @@ function login_success() {
 }
 
 function showSidemenu () {
+    alert("test");
     containr.classList.toggle('opened');
     slidemenu.classList.toggle('sidemenu--opened');
     contentlayer.classList.toggle('contentlayer-opened');
