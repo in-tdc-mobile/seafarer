@@ -601,10 +601,15 @@ function login_success() {
 function showSidemenu () {
     alert("test");
     containr.classList.toggle('opened');
+    alert("1");
     slidemenu.classList.toggle('sidemenu--opened');
+    alert("2");
     contentlayer.classList.toggle('contentlayer-opened');
+    alert("3");
     contnt.style.height = "auto";
+    alert("4");
     $('#container').resize();
+    alert("5");
 }
 
 
