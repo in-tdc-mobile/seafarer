@@ -457,7 +457,7 @@ a {
 
 .sidemenu--opened{
   display: block !important;
-  z-index: 1 !important;
+  z-index: 1000 !important;
 }
 
 .container--sidemenu {
