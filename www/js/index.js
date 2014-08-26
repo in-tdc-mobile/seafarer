@@ -782,6 +782,9 @@ function show_plan_details() {
             slidemenu = $('#sidemenu');
             contnt = $('#content');
             contentlayer = $('#contentLayer');
+            // alert('add event');
+            menuBtn.unbind();
+            contentlayer.unbind();
             menuBtn.click(showSidemenu);
             contentlayer.click(showSidemenu);
         },
