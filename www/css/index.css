@@ -457,7 +457,7 @@ a {
 
 .sidemenu--opened{
   display: block !important;
-  z-index: 2000 !important;
+  z-index: 1 !important;
 }
 
 .container--sidemenu {
@@ -1117,4 +1117,7 @@ hr.style-four {
   border-color: #0C6FC2 transparent;
   display: block;
   width: 0;
+}
+.mobileNav{
+  z-index: 1000 ! important;
 }
