@@ -1655,7 +1655,7 @@ function getempdetails(username, password) {
                 $('#login_password').blur();
                 $('#login_emp').blur();
             } else {
-               // login_failure();
+               login_failure();
             }
             hide_spinner();
             $('#empprof').html(emp_det_array.join(""));
