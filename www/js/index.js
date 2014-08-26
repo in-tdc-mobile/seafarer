@@ -599,17 +599,12 @@ function login_success() {
 }
 
 function showSidemenu () {
-    alert("test");
-    containr.classList.toggle('opened');
-    alert("1");
-    slidemenu.classList.toggle('sidemenu--opened');
-    alert("2");
-    contentlayer.classList.toggle('contentlayer-opened');
-    alert("3");
-    contnt.style.height = "auto";
-    alert("4");
+    // alert("test");
+    containr.toggleClass('opened');
+    slidemenu.toggleClass('sidemenu--opened');
+    contentlayer.toggleClass('contentlayer-opened');
+    // contnt.style.height = "auto";
     $('#container').resize();
-    alert("5");
 }
 
 
@@ -782,13 +777,13 @@ function show_plan_details() {
                 alllalerts.replace('PLAN','');
             }
 
-            menuBtn = document.querySelector('#hamburger-btn');
-            containr = document.querySelector('#container');
-            slidemenu = document.querySelector('#sidemenu');
-            contnt = document.querySelector('#content');
-            contentlayer = document.querySelector('#contentLayer');
-            menuBtn.addEventListener('click', showSidemenu, false);
-            contentlayer.addEventListener('click', showSidemenu, false);
+            menuBtn = $('#hamburger-btn');
+            containr = $('#container');
+            slidemenu = $('#sidemenu');
+            contnt = $('#content');
+            contentlayer = $('#contentLayer');
+            menuBtn.click(showSidemenu);
+            contentlayer.click(showSidemenu);
         },
         error: function (request, status, error) {
         results_array.push("<span> No plan to display"+error+"</span><br/>");
@@ -1815,15 +1810,15 @@ function hide_all() {
     //     $('#contentLayer').trigger('click');
     // }
     if($("#container").hasClass( "opened" )) {
-        var containr = document.querySelector('#container');
-        var slidemenu = document.querySelector('#sidemenu');
-        var contnt = document.querySelector('#content');
-        var contentlayer = document.querySelector('#contentLayer');
+        var containr = $('#container');
+        var slidemenu = $('#sidemenu');
+        var contnt = $('#content');
+        var contentlayer = $('#contentLayer');
 
-        containr.classList.toggle('opened');
-        slidemenu.classList.toggle('sidemenu--opened');
-        contnt.style.height = "auto";
-        contentlayer.classList.toggle('contentlayer-opened');
+        containr.toggleClass('opened');
+        slidemenu.toggleClass('sidemenu--opened');
+        // contnt.style.height = "auto";
+        contentlayer.toggleClass('contentlayer-opened');
     }
 
     $('#btnBack').hide();
@@ -1849,10 +1844,10 @@ function hide_all() {
 
 }
 
-window.onerror = function(msg, url, linenumber) {
-    alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
-    return true;
-}
+// window.onerror = function(msg, url, linenumber) {
+//     alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
+//     return true;
+// }
 
 function logout() {
     $.jStorage.flush();
