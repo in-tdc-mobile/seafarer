@@ -725,6 +725,7 @@ body{
 #alert_count { 
   margin-left: 10px;
   color: #FFF;
+
 }
 
 
@@ -734,7 +735,7 @@ body{
   right: -7px;*/
   position: relative;
   top: 6px;
-  right: -6px;
+  /*right: -6px;*/
   z-index: 1000;
 }
 
@@ -936,6 +937,7 @@ div.scene.active {
 
 .btns {
   list-style-type:circle;
+  display: inline-block;
   /*display: inline-block;
   width: 100%;
   background: #b0b0b0;
