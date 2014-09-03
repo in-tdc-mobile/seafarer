@@ -1061,7 +1061,7 @@ function show_flight_details() {
                     results_array.push("<span> Travel Route : "+nullcheck(data[i]['travel_route'])+"</span><br/>");
                     results_array.push("<span> Remarks : "+nullcheck(data[i]['remarks'])+"</span><br/>");
 
-                    results_array.push("<a class='footer-button' onclick=\"correspondance('"+flight_content+"','FLIGHT')\"  style='margin: 3px;'><span class='icon-bubbles button-icon'></span></a>");
+                    results_array.push("<a class='footer-button' onclick=\"correspondance('"+flight_content+"','FLIGHT')\"  style='margin: 3px;'><div class='png-bubbles button-icon'></div></a>");
                     hide_spinner();
                 }                
      
@@ -1262,7 +1262,7 @@ function correspondancesend() {
         $('#error_corrspondance').html("Please enter text and continue..");
     } else {
         var results_array = new Array(); 
-        setheadername(results_array, '<span class="icon-bubbles  pagename-icon"></span>  Correspondence', "name");
+        setheadername(results_array, '<div class="png-bubbles  pagename-icon"></div>  Correspondence', "name");
         results_array.push('<div class = "hambrgrdetails">');
         results_array.push('<img src = "img/email-send.png">');
         var url = prefilurl+"sf_insert_correspondance.php?";
@@ -1372,7 +1372,7 @@ function doaAdd(status, page, content) {
         $('#adddoa').show();
         //doa_array.push('<button onclick="doadetails()" class="back-btn"><img src="img/arrow-back.png"></button>');
         doa_array.push("<div class='adddoa'>");
-        setheadername(doa_array, "<span class='icon-calendar4 pagename-icon'></span>  DoA Details", "name");
+        setheadername(doa_array, "<div class='png-calendar4 pagename-icon'></div>  DoA Details", "name");
         doa_array.push("<div class = 'hambrgrdetails'>");
         doa_array.push("<form onsubmit='return false'>");
         /*doa_array.push("<span>Date:</span><br><input class='topcoat-text-input' type='date' value="+new Date()+" id='doadate'>");*/
