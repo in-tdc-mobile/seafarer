@@ -903,7 +903,7 @@ function show_training_details() {
                 training_res_array.push("<br/><span><b>From :</b> "+from_date+"</span>");
                 training_res_array.push("<br/><span><b>To :</b> "+to_date+"</span>");
                 training_res_array.push("<br/><span><b>Venue :</b> "+institution+"</span>");
-                training_res_array.push("<br/><a class='footer-button' onclick=\"correspondance('"+tr_content+"','TRAINING')\"  style='margin: 3px;'><span class='icon-bubbles button-icon'></span></a>");
+                training_res_array.push("<br/><a class='footer-button' onclick=\"correspondance('"+tr_content+"','TRAINING')\"  style='margin: 3px;'><div class='png-bubbles button-icon'></div></a>");
                // training_res_array.push("</li>");
             } else {
                 training_res_array.push("<span> No training details updated </span><br/>");
