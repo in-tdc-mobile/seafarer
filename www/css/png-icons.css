@@ -1,0 +1,85 @@
+.png-menu{	
+	background-image: url("png/icon-menu.png");
+	background-size: 100%;
+	height: 100%;
+	background-repeat: no-repeat;
+}
+.png-bell2{
+	background-image: url("png/icon-bell2.png");
+	background-size: 65%;
+	height: 100%;
+	background-repeat: no-repeat;
+}
+.png-bell2-black{
+	background-image: url("png/icon-bell2-black.png");
+	background-size: 65%;
+	height: 100%;
+	background-repeat: no-repeat;
+}
+.png-header{
+	width: 25px !important;
+	height: 25px !important;
+	display: inline-block;
+	margin-bottom: -4px;
+	background-size: 100% !important;	
+}
+.png-briefcase{	
+	background-image: url("png/icon-briefcase.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+.png-airplane2{	
+	background-image: url("png/icon-airplane2.png");
+	background-size: 50%;
+	height: 100%;
+	background-repeat: no-repeat;
+}
+.png-bubbles{	
+	background-image: url("png/icon-bubbles.png");
+	background-size: 50%;
+	height: 100%;
+	background-repeat: no-repeat;
+}
+.png-mail{	
+	background-image: url("png/icon-mail.png");
+	background-size: 50%;
+	height: 100%;
+	background-repeat: no-repeat;
+}
+.png-phone{	
+	background-image: url("png/icon-phone.png");
+	background-size: 50%;
+	height: 100%;
+	background-repeat: no-repeat;
+}
+.png-banknote{	
+	background-image: url("png/icon-banknote.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+.png-megaphone2{	
+	background-image: url("png/icon-megaphone2.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+.png-calendar4{	
+	background-image: url("png/icon-calendar4.png");
+	background-size: 50%;
+	height: 100%;
+	background-repeat: no-repeat;
+}
+.png-file{	
+	background-image: url("png/icon-file.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+.png-users{	
+	background-image: url("png/icon-users.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+.png-alerts{
+	display: inline-block;
+	height: 25px;
+	width: 25px;
+}
