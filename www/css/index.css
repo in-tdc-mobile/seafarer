@@ -389,8 +389,9 @@ a {
 }
 
 .topcoat-text-input{
-    background-color: #FFFFFF;
-    margin: 1px
+  background-color: #FFFFFF;
+  margin: 1px;
+  min-height: 3rem;
 }
 
 .topcoat-text-input:focus{
