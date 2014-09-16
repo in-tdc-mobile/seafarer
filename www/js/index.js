@@ -1567,10 +1567,10 @@ function documentdetails(){
                 for (var i = 0; i < expired_docs.length; i++) {
                     if ( i==0 ) {
                         results_array.push('<div class = "footer">');
-                        doc_type = " Expired Docs";
-                        results_array.push("<b><div class='header_text'>"+toTitleCase(doc_type.slice(1))+"</div></b><br>");                                                
+                        doc_type = " Expired ("+ expired_docs.length +")";
+                        results_array.push("<b><div class='header_text' style='color:red' onclick='visible_expired_docs()'>"+toTitleCase(doc_type.slice(1))+"</div></b><br>");                                                
                         results_array.push("<ul class='topcoat-list__container'>");
-                        // results_array.push('</div>'); 
+                        results_array.push('<div id="exp_docs">'); 
                     }
 
                     results_array.push("<li class='topcoat-list__item'>");
@@ -1584,7 +1584,9 @@ function documentdetails(){
 
                     if ( i == expired_docs.length-1) {
                         results_array.push('</div>'); 
+                        results_array.push('</div>'); 
                         results_array.push("</ul>");
+                        results_array.push('</div>'); 
                     }
                 }
             } else {
@@ -1593,6 +1595,7 @@ function documentdetails(){
             hide_spinner();
             results_array.push('</div>');
             $('#document_details').html(results_array.join(""));
+            $("#exp_docs").hide();        
         },
         error: function (request, status, error) {
             results_array.push("<span>No Expiry Documents Details Available</span><br/>");
@@ -1600,6 +1603,15 @@ function documentdetails(){
             hide_spinner();
         }
     });
+}
+
+function visible_expired_docs() {
+    if ($("#exp_docs").is(':hidden')==true) {
+        $("#exp_docs").show();
+    }
+    else{
+        $("#exp_docs").hide();        
+    }
 }
 
 function show_spinner() {
