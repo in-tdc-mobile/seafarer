@@ -1525,6 +1525,7 @@ function documentdetails(){
             results_array.push('<div class = "hambrgrdetails">');
            // var tep_docname = "new";
             if(data[0] != null) {
+                var expired_docs = new Array();
                 for (var i = 0; i < data.length; i++) {     
 
                     if(data[i]['doc_type'] != doc_type){
@@ -1537,7 +1538,10 @@ function documentdetails(){
                         results_array.push("<b><div class='header_text'>"+toTitleCase(doc_type.slice(1))+"</div></b><br>");                        
                         results_array.push("<ul class='topcoat-list__container'>");
                     }
-
+                    if((Date.parse(data[i]['expiry_date'])) < Date.parse(new Date())) {
+                        expired_docs.push(data[i]);
+                        continue;
+                    }
                     /*if(tep_docname != data[i]['name']) {
                         tep_docname = data[i]['name'];*/
                         results_array.push("<li class='topcoat-list__item'>");
@@ -1560,6 +1564,29 @@ function documentdetails(){
                         results_array.push("</li>");  
                 }
                 results_array.push('</div>'); 
+                for (var i = 0; i < expired_docs.length; i++) {
+                    if ( i==0 ) {
+                        results_array.push('<div class = "footer">');
+                        doc_type = " Expired Docs";
+                        results_array.push("<b><div class='header_text'>"+toTitleCase(doc_type.slice(1))+"</div></b><br>");                                                
+                        results_array.push("<ul class='topcoat-list__container'>");
+                        // results_array.push('</div>'); 
+                    }
+
+                    results_array.push("<li class='topcoat-list__item'>");
+                    results_array.push("<span style='color:red'>"+toTitleCase(expired_docs[i]['name']));
+                    if(expired_docs[i]['document_no']!=null && expired_docs[i]['document_no']!='' ) 
+                            results_array.push("("+expired_docs[i]['document_no']+")");
+                    if(expired_docs[i]['expiry_date']!=null && expired_docs[i]['expiry_date']!='' ) 
+                            results_array.push(" - "+dateformat(expired_docs[i]['expiry_date'], "dd-mon-yyyy"));
+                    results_array.push("</span><br/>");
+                    results_array.push("</li>");
+
+                    if ( i == expired_docs.length-1) {
+                        results_array.push('</div>'); 
+                        results_array.push("</ul>");
+                    }
+                }
             } else {
                 results_array.push('<span>No Expiry Documents Details Available</span><br>');
             }
