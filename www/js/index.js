@@ -150,7 +150,6 @@ var iosPush = {
     }
 }
 
-
 var androidPush = {
     register: function() {
         var pushNotification = window.plugins.pushNotification;
@@ -217,9 +216,7 @@ function navigateToNitifyPage(message) {
     if(message.toUpperCase().indexOf('ALLOTMENT') > -1) {
         allotment_details();
     }
-    
 }
-
 
 function writeRegId(push_reg_id, platfrm) {
     //alert(push_reg_id);
@@ -250,8 +247,8 @@ function onBackKeyDown() {
     step_back();
 }
 
-function toTitleCase(str)
-{ if(str)
+function toTitleCase(str){
+    if(str)
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 
@@ -274,8 +271,6 @@ Number.prototype.formatMoney = function(c, d, t){
     j = (j = i.length) > 3 ? j % 3 : 0;
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 };
-
-
 
 // var slider = new PageSlider($("#container"));
 $(window).on('hashchange', route);
@@ -317,7 +312,7 @@ function route(event) {
         show_training_details();
     } else if (hash === "#flight") {
         hide_all();
-        show_flight_details()
+        show_flight_details();
     } else if (hash === "#allotment") {
         hide_all();
         allotment_details();
@@ -361,8 +356,6 @@ function route(event) {
 
 var step_back = function() {window.history.back();};
 
-
-
 var menuBtn;
 var containr;
 var slidemenu;
@@ -401,7 +394,8 @@ var prefilurl = "https://getVesselTracker.com/seafarer_dev/";
 /*$.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
     options.url = 'https://getVesselTracker.com/seafarer_dev/'+ options.url ;//+ options.url + "&pal_user_email=" + $.jStorage.get("pal_user_name");
 });
- */
+*/
+
 $('#login_form').submit(function(){
     // var username = $('#login_emp').val();
     // var password = $('#login_password').val();
@@ -635,19 +629,21 @@ function showSidemenu () {
     $('#container').resize();
 }
 
-
 function login_failure() {
     $(".spinner").css('visible','none');
     $("#ajax_error").show();
     $("#ajax_error").html('Wrong Email or Password. Please try again.');
     $("#ajax_error").attr('style','display:block; text-align:center;');
 }
+
 var d;
 
 function update_profile_page() {
     index_page_call();
     $('#index_content').show();
+    $('#update_profile').html(""); 
     $('#update_profile').show(); 
+
     var results_array = new Array(); 
     setheadername(results_array, '<span class="icon-pencil2 pagename-icon"></span>  Update Contact Details', "name");
     results_array.push('<div class = "hambrgrdetails">');
@@ -720,10 +716,11 @@ var emp_csc_id;
 function show_plan_details() {
     index_page_call();
     hide_all();
+    $('#index_content').show();
+    $('#show_plan_details').html("");
+    $('#show_plan_details').show();
 
     var csc_contact_det;
-    $('#index_content').show();
-    $('#show_plan_details').show();
     var results_array = new Array(); 
     var url = prefilurl+"get_sf_plan_details.php?empid="+$.jStorage.get("empid");
     console.log(url);
@@ -824,8 +821,9 @@ function show_plan_details() {
         
     });
     //if($.jStorage.get("push_registered") == false)
-        pushNoteMsg.findPlatform();
+    pushNoteMsg.findPlatform();
 }
+
 var cc;
 function getCurrCompanyDt(results_array) {
     var curr_cmp_array = new Array(); 
@@ -861,12 +859,13 @@ function getCurrCompanyDt(results_array) {
    //bottm_buttons("P" ,results_array);
 }
 
-
 function show_training_details() {
     index_page_call();
     hide_all();
     $('#index_content').show();
+    $('#show_training_details').html("");
     $('#show_training_details').show();
+
     var url = prefilurl+"get_sf_training_details.php?empid="+$.jStorage.get("empid");
     var training_res_array = new Array(); 
     setheadername(training_res_array, '   Training', "pic");
@@ -931,12 +930,13 @@ function show_training_details() {
     });
 }
 
-
 function openpositions() {
     index_page_call();
     hide_all();
     $('#index_content').show();
+    $('#openpositions_content').html("");
     $('#openpositions_content').show();
+
     var url = prefilurl+"get_sf_open_positions.php?empid="+$.jStorage.get("empid");
 
     var opening_res_array = new Array(); 
@@ -1015,6 +1015,7 @@ function openpositions() {
 
     });
 }
+
 function giveDoa(paramid) {
     paramid;
     //index_page_call();
@@ -1028,6 +1029,7 @@ function show_flight_details() {
     index_page_call();
     hide_all();
     $("#index_content").show();
+    $('#show_flight_details').html(""); 
     $('#show_flight_details').show(); 
     var url = prefilurl+"get_sf_flight_details.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
@@ -1091,7 +1093,9 @@ function allotment_details() {
     index_page_call();
     hide_all();
     $("#index_content").show();
+    $('#allotment_details').html("");
     $('#allotment_details').show();
+
     var url = prefilurl+"get_sf_allotment_details.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
     
@@ -1183,7 +1187,9 @@ function correspondance(content, page){
     index_page_call();
     hide_all();
     $("#index_content").show();
+    $('#correspondance_content').html(""); 
     $('#correspondance_content').show(); 
+
     var results_array = new Array(); 
 
     setheadername(results_array, '<div><div class="png-bubbles png-header pagename-icon"></div>  Correspondence</div>', "name");
@@ -1220,7 +1226,6 @@ function correspondanceback(page) {
     } else {
         $('#show_plan_details').show(); 
     }
-
 }
 
 function getcorrespondance() {
@@ -1315,7 +1320,9 @@ function doadetails(){
     $('#tile_icons').hide();*/
     $('#adddoa').hide();
     $('#index_content').show(); 
+    $('#doa_content').html(""); 
     $('#doa_content').show(); 
+
     var url = prefilurl+"get_sf_doa_details.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
     //console.log(url);
@@ -1366,6 +1373,7 @@ function doadetails(){
         }
     });
 }
+
 function doaAdd(status, page, content) {
     if(status.indexOf('adddoa')>-1) {
         var doa_array = new Array(); 
@@ -1501,7 +1509,9 @@ function documentdetails(){
     index_page_call();
     hide_all();
     $("#index_content").show();
+    $('#document_details').html(""); 
     $('#document_details').show(); 
+
     var url = prefilurl+"get_sf_expiry_docs.php?empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
     //console.log(url);
@@ -1670,9 +1680,7 @@ function flickercall(tagparam, bgshow) {
 
         // });
     });
-
 }
-
 
 function getempdetails(username, password) {
     var emp_det_array = new Array(); 
@@ -1729,6 +1737,7 @@ function alerts_btn_call() {
 }
 
 var alllalerts="";
+
 function alerts() {
     var url = prefilurl+"get_sf_alerts.php?empid="+$.jStorage.get("empid");
     var alerts_array = new Array(); 
@@ -1798,8 +1807,7 @@ function alerts() {
                         } else {
                             alerts_array.push(toTitleCase(data[i]['message']));
                         }
-                        
-                        
+
                         alerts_array.push("</a>");
                         alerts_array.push("</li>");
                         // alerts_array.push("<hr  class='style-one'>")
@@ -1838,7 +1846,6 @@ function update_alert_seen(page) {
         
     });
 }
-
 
 function bottm_buttons(page, results_array) {
 
@@ -1922,7 +1929,6 @@ function hide_all() {
     $('#document_details').hide(); 
 
     $('body').scrollTop(0);
-
 }
 
 // window.onerror = function(msg, url, linenumber) {
