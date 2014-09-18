@@ -227,7 +227,7 @@ function writeRegId(push_reg_id, platfrm) {
       'platform': platfrm,
     };
     req = $.ajax({
-        url: prefilurl+"sf_register_push_device.php",
+        url: prefilurl+"sf_register_push_device.php?email="+$.jStorage.get("username")+"",
         type: "post",
         data: form_data,
 
@@ -298,6 +298,7 @@ function route(event) {
         signin_check();
         return;
     }
+
     if($.jStorage.get("empid") == null){
         window.location.replace("#");
         hide_all();
@@ -421,11 +422,13 @@ function signin () {
     var password = $('#login_password').val();
     
     if(username != "" && password != "") 
+    {
+        $.jStorage.set("username", username);
         //login_test(username, password);
         getempdetails(username, password);
         //$('#login_password').blur();
         //$('#login_emp').blur();
-    
+    }
     /*else{
         $.jStorage.set("empid", username);
         login_success();
@@ -468,7 +471,7 @@ function signin_check() {
     var results_array = new Array(); 
     setheadername(results_array, '<span class="icon-pencil2"></span>  Update Contact Details', "name");
     results_array.push('<div class = "hambrgrdetails">');
-    var url = prefilurl+"get_emp_details_pers_mf.php?";
+    var url = prefilurl+"get_emp_details_pers_mf.php?email="+$.jStorage.get("username")+"";
     //console.log(url);
     var pass = $("#signup_passport").val();
     var seamen = $("#signup_seamennum").val();
@@ -514,7 +517,7 @@ function signin_check() {
 
 function login_test(user_name, password) {
 
-    var url = prefilurl+"ldap_test.php?";
+    var url = prefilurl+"ldap_test.php?email="+$.jStorage.get("username")+"";
 
     var form_data = {
         'username': user_name,
@@ -546,7 +549,7 @@ function signin_mail(id, sur_name, first_name, middle_name, passport_no) {
     var results_array = new Array(); 
     setheadername(results_array, '<span class="icon-pencil2"></span>  Update Contact Details', "name");
     results_array.push('<div class = "hambrgrdetails">');
-    var url = prefilurl+"insert_emp_profile.php?";
+    var url = prefilurl+"insert_emp_profile.php?email="+$.jStorage.get("username")+"";
     console.log(url);
     var email = $("#signup_email").val();
 
@@ -658,7 +661,7 @@ function update_profile() {
     var results_array = new Array(); 
     setheadername(results_array, '<span class="icon-pencil2"></span>  Update Contact Details', "name");
     results_array.push('<div class = "hambrgrdetails">');
-    var url = prefilurl+"insert_emp_profile.php?";
+    var url = prefilurl+"insert_emp_profile.php?email="+$.jStorage.get("username")+"";
     //console.log(url);
     var email = $("#prof_email").val();
     var phone = $("#prof_phone").val();
@@ -722,7 +725,7 @@ function show_plan_details() {
 
     var csc_contact_det;
     var results_array = new Array(); 
-    var url = prefilurl+"get_sf_plan_details.php?empid="+$.jStorage.get("empid");
+    var url = prefilurl+"get_sf_plan_details.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid");
     console.log(url);
     var req = $.ajax({
         url: url,
@@ -828,7 +831,7 @@ var cc;
 function getCurrCompanyDt(results_array) {
     var curr_cmp_array = new Array(); 
 
-    var url = prefilurl+"get_sf_emp_curr_company.php?empid="+$.jStorage.get("empid");
+    var url = prefilurl+"get_sf_emp_curr_company.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid");
     var req = $.ajax({
         url: url,
         datatype: 'text',
@@ -866,7 +869,7 @@ function show_training_details() {
     $('#show_training_details').html("");
     $('#show_training_details').show();
 
-    var url = prefilurl+"get_sf_training_details.php?empid="+$.jStorage.get("empid");
+    var url = prefilurl+"get_sf_training_details.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid");
     var training_res_array = new Array(); 
     setheadername(training_res_array, '   Training', "pic");
     training_res_array.push("<div class='training_image'> <img src='img/simulator.jpg' class='dip_img'> </div>");
@@ -937,7 +940,7 @@ function openpositions() {
     $('#openpositions_content').html("");
     $('#openpositions_content').show();
 
-    var url = prefilurl+"get_sf_open_positions.php?empid="+$.jStorage.get("empid");
+    var url = prefilurl+"get_sf_open_positions.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid");
 
     var opening_res_array = new Array(); 
     setheadername(opening_res_array, '<div><div class="png-megaphone2 png-header pagename-icon"></div>  Open Positions</div>', "pic");
@@ -1031,7 +1034,7 @@ function show_flight_details() {
     $("#index_content").show();
     $('#show_flight_details').html(""); 
     $('#show_flight_details').show(); 
-    var url = prefilurl+"get_sf_flight_details.php?empid="+$.jStorage.get("empid");
+    var url = prefilurl+"get_sf_flight_details.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
 
     setheadername(results_array, '<div><div class="png-airplane2 png-header pagename-icon"></div>  Flight Details</div>', "pic");
@@ -1096,7 +1099,7 @@ function allotment_details() {
     $('#allotment_details').html("");
     $('#allotment_details').show();
 
-    var url = prefilurl+"get_sf_allotment_details.php?empid="+$.jStorage.get("empid");
+    var url = prefilurl+"get_sf_allotment_details.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
     
     setheadername(results_array, '<div><div class="png-banknote png-header pagename-icon"></div>  My Accounts</div>', "pic");
@@ -1150,7 +1153,7 @@ function allotted_details(period, results_array) {
     var empid = $.jStorage.get("empid");
     /*var empid = 614946;
     period = 201307;*/
-    var url = prefilurl+"get_sf_allotted_details.php?empid="+empid+"&period="+period;
+    var url = prefilurl+"get_sf_allotted_details.php?email="+$.jStorage.get("username")+"&empid="+empid+"&period="+period;
     //console.log(url);
     var req = $.ajax({
         url: url,
@@ -1231,7 +1234,7 @@ function correspondanceback(page) {
 function getcorrespondance() {
     var empid = $.jStorage.get("empid");
     var results_array = new Array(); 
-    var url = prefilurl+"get_sf_correspondance.php?empid="+empid;
+    var url = prefilurl+"get_sf_correspondance.php?email="+$.jStorage.get("username")+"&empid="+empid;
     //console.log(url);
     var req = $.ajax({
         url: url,
@@ -1270,7 +1273,7 @@ function correspondancesend() {
         setheadername(results_array, '<div class="png-bubbles  pagename-icon"></div>  Correspondence', "name");
         results_array.push('<div class = "hambrgrdetails">');
         results_array.push('<img src = "img/email-send.png">');
-        var url = prefilurl+"sf_insert_correspondance.php?";
+        var url = prefilurl+"sf_insert_correspondance.php?email="+$.jStorage.get("username")+"";
         //console.log(url);
         var emp_id = $.jStorage.get("empid");
         var form_data= {
@@ -1323,7 +1326,7 @@ function doadetails(){
     $('#doa_content').html(""); 
     $('#doa_content').show(); 
 
-    var url = prefilurl+"get_sf_doa_details.php?empid="+$.jStorage.get("empid");
+    var url = prefilurl+"get_sf_doa_details.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
     //console.log(url);
     var req = $.ajax({
@@ -1406,7 +1409,7 @@ function doaAdd(status, page, content) {
 
 function savedoa(page) {
     var results_array = new Array(); 
-    var url = prefilurl+"sf_save_doa.php?";
+    var url = prefilurl+"sf_save_doa.php?email="+$.jStorage.get("username")+"";
     var remark = $("#coaremark").val();
     var doadate = $("#doadate").val();
     var emp_id = $.jStorage.get("empid");
@@ -1456,7 +1459,7 @@ function savedoa(page) {
 
 function canceldoa() {
     var results_array = new Array(); 
-    var url = prefilurl+"sf_save_doa.php?";
+    var url = prefilurl+"sf_save_doa.php?email="+$.jStorage.get("username")+"";
     var remark = $("#coaremark").val();
     var doadate = $("#doadate").val();
     var emp_id = $.jStorage.get("empid");
@@ -1512,7 +1515,7 @@ function documentdetails(){
     $('#document_details').html(""); 
     $('#document_details').show(); 
 
-    var url = prefilurl+"get_sf_expiry_docs.php?empid="+$.jStorage.get("empid");
+    var url = prefilurl+"get_sf_expiry_docs.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid");
     var results_array = new Array(); 
     //console.log(url);
     var doc_type='doc_type';
@@ -1684,7 +1687,7 @@ function flickercall(tagparam, bgshow) {
 
 function getempdetails(username, password) {
     var emp_det_array = new Array(); 
-    var url = prefilurl+"get_sf_emp_details.php?";
+    var url = prefilurl+"get_sf_emp_details.php?email="+$.jStorage.get("username")+"&email_id="+username+"";
     // console.log(url);
     var pass = $("#signup_passport").val();
     var seamen = $("#signup_seamennum").val();
@@ -1704,9 +1707,12 @@ function getempdetails(username, password) {
         success : function(data) {
             if(data[0] != null) {
                 $.jStorage.set("empid", data[0]['id']);
+                // alert(username);
+
                 emp_det_array.push(nullcheck(toTitleCase(data[0]['sur_name']))+" "+nullcheck(toTitleCase(data[0]['first_name'])));//+nullcheck(toTitleCase(data[0]['last_name']))+" "
                 // emp_det_array.push("<br>"+toTitleCase(data[0]['nationality']));
                 emp_det_array.push("<br>"+toTitleCase(data[0]['rank_grp_name']));
+
                 login_success();
                 $('#login_password').blur();
                 $('#login_emp').blur();
@@ -1739,7 +1745,7 @@ function alerts_btn_call() {
 var alllalerts="";
 
 function alerts() {
-    var url = prefilurl+"get_sf_alerts.php?empid="+$.jStorage.get("empid");
+    var url = prefilurl+"get_sf_alerts.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid");
     var alerts_array = new Array(); 
 
     setheadername(alerts_array, '<div><div class="png-bell2-black png-header pagename-icon"></div>  Alerts</div>');
@@ -1832,7 +1838,7 @@ function alerts() {
 }
 
 function update_alert_seen(page) {
-    var url = prefilurl+"sf_update_slert_seen.php?empid="+$.jStorage.get("empid")+"&pagename="+page;
+    var url = prefilurl+"sf_update_slert_seen.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid")+"&pagename="+page;
     console.log(url);
     var emp_det_array = new Array(); 
     var req = $.ajax({
