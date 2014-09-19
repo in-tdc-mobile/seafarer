@@ -294,9 +294,9 @@ function route(event) {
    /* $('#bg').css('background-image', 'none');
     $('#bg').css('background', 'black');*/
 
-    if (hash === "#correspondance1") {
-        return;
-    }
+    // if (hash === "#correspondance1") {
+    //     return;
+    // }
     if (hash === "#signup") {
         hide_all();
         signup();
@@ -329,7 +329,7 @@ function route(event) {
         allotment_details();
     } else if (hash === "#correspondance") {
         hide_all();
-        correspondance("","PLAN");
+        show_correspondance(window.location.hash.split('/')[1]);
     } else if (hash === "#openpositions") {
         hide_all();
         openpositions();
@@ -1189,15 +1189,21 @@ function allotted_details(period, results_array) {
     });
 }
 
+var corr_content;
 function correspondance(content, page){
-    window.location.hash="#correspondance1";
-    
+    corr_content = content;
+    window.location.hash="#correspondance/"+page;
+}
+
+function show_correspondance (page) {
+    // alert(page);
+
     index_page_call();
     hide_all();
     $("#index_content").show();
     $('#correspondance_content').html(""); 
     $('#correspondance_content').show(); 
-
+    var content = corr_content;
     var results_array = new Array(); 
 
     setheadername(results_array, '<div><div class="png-bubbles png-header pagename-icon"></div>Correspondence</div>', "name");
@@ -1885,7 +1891,7 @@ function bottm_buttons(page, results_array) {
         results_array.push('</a>');
     }
     if(page == "P") {
-        results_array.push('<a class="footer-button" href="#correspondance">');
+        results_array.push('<a class="footer-button" href="#correspondance/plan">');
         results_array.push('<div class="png-bubbles button-icon"></div>');
         results_array.push('</a>');
     }
