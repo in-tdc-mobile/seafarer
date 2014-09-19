@@ -1196,7 +1196,7 @@ function correspondance(content, page){
 }
 
 function show_correspondance (page) {
-    alert(page);
+    // alert(page);
 
     index_page_call();
     hide_all();
