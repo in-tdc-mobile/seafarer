@@ -392,6 +392,7 @@ a {
   background-color: #FFFFFF;
   margin: 1px;
   min-height: 3rem;
+  margin-bottom: .5rem;
 }
 
 .topcoat-text-input:focus{
@@ -754,8 +755,8 @@ body{
 }
 
 .footer-button{
-  height: 30px;
-  width: 30px;
+  height: 3rem;
+  width: 3rem;
   /*position: absolute;*/
   /* top: 6px; */
   font-size: 15px;
@@ -771,8 +772,8 @@ body{
 
 .button-icon{
   position: relative;
-  top: 7px;
-  right: -7px;
+  top: .7rem;
+  right: -0.7rem;
 }
 
 .pagename-icon{
@@ -1123,4 +1124,8 @@ hr.style-four {
 }
 .mobileNav{
   z-index: 1000 ! important;
+}
+
+.topcoat-button{
+  margin-right: .5rem;
 }

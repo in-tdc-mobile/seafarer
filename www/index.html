@@ -100,80 +100,80 @@
               </tr>
             </table>
           </li>
-          <li>
-            <a href="#plan">
+          <li onclick="location.href = '#plan';">
+            <a>
               <span class="hamb_div">Plan Details</span>
               <div id="h_plan">
                 <img src="img/transparent.png" style="opacity:0">
               </div>
             </a>
           </li>
-          <li>
-            <a href="#training">
+          <li onclick="location.href = '#training';">
+            <a >
               <span class="hamb_div">Training</span>
               <div id="h_training">
                 <img src="img/transparent.png" style="opacity:0">
               </div>
             </a>
           </li>
-          <li>
-            <a href="#flight">
+          <li onclick="location.href = '#flight';">
+            <a >
               <span class="hamb_div">Flight</span>
               <div id="h_flight">
                 <img src="img/transparent.png" style="opacity:0">
               </div>
             </a>
           </li>
-          <li>
-            <a href="#allotment">
+          <li onclick="location.href = '#allotment';">
+            <a >
               <span class="hamb_div">My Accounts</span>
               <div id="h_allotment">
                 <img src="img/transparent.png" style="opacity:0">
               </div>
             </a>
           </li>
-          <li>
-            <a href="#openpositions">
+          <li onclick="location.href = '#openpositions';">
+            <a >
               <span class="hamb_div">Open Positions</span>
               <div id="h_allotment">
                 <img src="img/transparent.png" style="opacity:0">
               </div>
             </a>
           </li>
-          <li>
-            <a href="#doa">
+          <li onclick="location.href = '#doa';">
+            <a >
               <span class="hamb_div">DoA</span>
               <div id="h_allotment">
                 <img src="img/transparent.png" style="opacity:0">
               </div>
             </a>
           </li>
-          <li>
-            <a href="#expirydocs">
+          <li onclick="location.href = '#expirydocs';">
+            <a >
               <span class="hamb_div">My Documents</span>
               <div id="h_allotment">
                 <img src="img/transparent.png" style="opacity:0">
               </div>
             </a>
           </li>
-          <li>
-            <a href="#correspondance">
+          <li onclick="location.href = '#correspondance';">
+            <a >
               <span class="hamb_div">Correspondence</span>
               <div id="h_allotment">
                 <img src="img/transparent.png" style="opacity:0">
               </div>
             </a>
           </li>
-          <li>
-            <a href="mailto:in-tdc-mobile@bs-shipmanagement.com">
+          <li onclick="location.href = 'mailto:in-tdc-mobile@bs-shipmanagement.com'">
+            <a >
             <span class="hamb_div">Feedback</span>
             <div id="h_allotment">
               <img src="img/transparent.png" style="opacity:0">
             </div>
           </a>
         </li>
-        <li>
-          <a href="#" onclick="logout()">
+        <li onclick="location.href = '#'; logout()">
+          <a >
             <span class="hamb_div">Logout</span>
             <div id="h_allotment">  
               <img src="img/transparent.png" style="opacity:0">
@@ -221,7 +221,7 @@
       <form id='login_form'>
         <div class="input-group">
           <div class="input-row">
-            <label>Employee</label>
+            <label>Employee Email</label>
             <input class="topcoat-text-input" type="text" placeholder="user@bs-shipmanagement.com" id='login_emp'>
           </div>
           <div class="input-row">
@@ -232,8 +232,8 @@
         <!-- <object data="home.svg" type="image/svg+xml"> -->
         <!-- <img src="circle.svg"></img> -->
         </object>
-        <button class="topcoat-button" onclick="signin()">Sign In</button> 
-        <button class="topcoat-button" onclick="signup_nav()">Create a new Account</button>
+        <button class="topcoat-button--cta" onclick="signin()">Sign In</button> 
+        <button class="topcoat-button--cta" onclick="signup_nav()">Create a new Account</button>
       </form>
     </div>
     <div id="signup_content" style="height:100%; z-index:2; display:none">

@@ -455,7 +455,7 @@ function signup() {
     results_array.push('<label>SeamenBook Number</label><input type="text" placeholder="SeamenBook Number" id="signup_seamennum" class="biginput topcoat-text-input">');
     // results_array.push('<input type="date" size="15" placeholder="DD-MMM-YYYY" id="dobdate" class="topcoat-text-input">');
     results_array.push("<label>D.O.B</label><input id='dobdate' type='date' class='topcoat-text-input' placeholder='DD-MMM-YYYY'/>");
-    results_array.push('<button class="topcoat-button" onclick="signin_check_nav()">Register</button></form>');
+    results_array.push('<button class="topcoat-button--cta" onclick="signin_check_nav()">Register</button></form>');
     results_array.push('</div>');
     $('#signup_content').html(results_array.join(""));
     // new datepickr('dobdate', {
@@ -496,7 +496,7 @@ function signin_check() {
                 results_array.push('<div class = "hambrgrdetails">');
                 results_array.push("<form onsubmit='return false' >");
                 results_array.push('Dear '+nullcheck(toTitleCase(data[0]['sur_name']))+" "+nullcheck(toTitleCase(data[0]['first_name']))+", Please update your email id here");
-                results_array.push('<input type="text" placeholder="Email-id" id="signup_email" class="biginput topcoat-text-input">');
+                results_array.push('<input type="text" placeholder="Email-id" id="signup_email" class="biginput topcoat-text-input--cta">');
                 results_array.push("<button onclick='signin_mail(\""+data[0]['id']+"\",\""+data[0]['sur_name']+"\",\""+data[0]['first_name']+"\",\""+data[0]['middle_name']+"\",\""+data[0]['passport_no']+"\")' class='topcoat-button'>Update</button></form>");
                 results_array.push('<span id="update_email_error" style="display:none">Email already registered</span>')
                 results_array.push('</div>');
@@ -581,7 +581,7 @@ function signin_mail(id, sur_name, first_name, middle_name, passport_no) {
                 };
                 $('#btnBack').hide();
                 results_array.push('</span> User Name and Password send to your mail id..</span></br>'); 
-                results_array.push('<button class="topcoat-button" onclick="backtologin()">Back to Login</button>') 
+                results_array.push('<button class="topcoat-button--cta" onclick="backtologin()">Back to Login</button>') 
                 results_array.push('</div>');
                 $('#signup_content').html(results_array.join(""));
                 hide_spinner();
@@ -975,7 +975,7 @@ function openpositions() {
                 opening_res_array.push("<div class='footer' id="+data[i]['vessel_name'].replace(/ +/g, "")+">");
                 opening_res_array.push("<div class='openpositionbox'>");
                 opening_res_array.push("<div class='openpositionchild1'>");
-                opening_res_array.push("<img src="+vessel_type_pic(vessel_type)+" style='width:85px; height:80px;'>");
+                opening_res_array.push("<img src="+vessel_type_pic(vessel_type)+" style='width:7rem; height:5rem;'>");
                 opening_res_array.push("<br><a class='footer-button' onclick=\"giveDoa('"+corr_content+"')\" style='margin: 3px;'><div class='png-calendar4 button-icon'></div></a>");
                 opening_res_array.push("<a class='footer-button' onclick=\"correspondance('"+corr_content+"','OPEN_POSITION')\"  style='margin: 3px;'><div class='png-bubbles button-icon'></div></a>");
                 opening_res_array.push("</div>");
@@ -1204,9 +1204,9 @@ function correspondance(content, page){
     else
         results_array.push('<textarea class="topcoat-text-input--large" id="message" style="width: 100%; height: 250px;line-height: 1.5rem;"></textarea></br>');
     results_array.push('<span id="error_corrspondance" style="color:red"></span><br>');
-    results_array.push('<div style="width:104px">');
-    results_array.push('<input type="button" onclick="correspondancesend()" value="Send" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
-    results_array.push("<input type='button' onclick=\"correspondanceback('"+page+"')\" value='Back' style='float:right;color:#00303f;font:bold 12px verdana; padding:5px;''></form>");
+    results_array.push('<div>');
+    results_array.push('<button class="topcoat-button" onclick="correspondancesend()" ">Send</button>');
+    results_array.push("<button class='topcoat-button' onclick=\"correspondanceback('"+page+"')\" >Back</button></form>");
     results_array.push('</div>');
     results_array.push('<div id="corrdet"></div>')
     //bottm_buttons("C" ,results_array);
@@ -1347,7 +1347,8 @@ function doadetails(){
             setheadername(results_array, '<div><div class="png-calendar4 png-header pagename-icon"></div>  DoA Details</div>', "name");
             // setheadername(results_array, '<span class="icon-calendar4 pagename-icon"></span>  DoA Details', "name");
             results_array.push('<div class = "footer">');
-            results_array.push("<div style='margin-top:30px;'>");            
+            results_array.push("<div style='margin-top:30px;'>");
+            var yesDOA = true;
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
                     results_array.push("<span id='showdoa'><b>DoA :</b> "+dateformat(data[i]['doa'], "dd-mon-yyyy")+"</span><br/>");
@@ -1357,12 +1358,15 @@ function doadetails(){
             
             } else {
                 results_array.push('<span>No DoA Available, please Give DoA</span><br>');
+                yesDOA = false;
             }
             results_array.push("</div>");
             hide_spinner();
             results_array.push("<div style='margin-top:40px;margin-bottom:15px;'>");
-            results_array.push("<button onclick=doaAdd(\"'"+add+"'\",'DOA','') style='color:#00303f;font:bold 12px verdana; padding:5px;'>Give DoA</button>");
-            results_array.push("<button onclick=doaAdd(\"'"+cancel+"'\",'DOA','') style='color:#00303f;font:bold 12px verdana; padding:5px;'>Cancel DoA</button>");
+            results_array.push("<button class='topcoat-button' onclick=doaAdd(\"'"+add+"'\",'DOA','') '>Give DoA</button>");
+            if (yesDOA) {
+                results_array.push("<button class='topcoat-button' onclick=doaAdd(\"'"+cancel+"'\",'DOA','') >Cancel DoA</button>");
+            }
             results_array.push("</div>");
             results_array.push('</div>');
             $('#doa_content').html(results_array.join(""));
@@ -1393,8 +1397,8 @@ function doaAdd(status, page, content) {
         else
             doa_array.push("<br><span>Remark:</span><br><textarea class='topcoat-text-input--large' id='coaremark' style='width: 100%;height: 250px;line-height: 1.5rem;'></textarea></br>");
         doa_array.push("<span id='error_doa' style='color:red'></span><br>");
-        doa_array.push("<input type='button' onclick=\"savedoa('"+page+"')\" value='Save DoA' style='color:#00303f;font:bold 12px verdana; padding:5px;'>");
-        doa_array.push("<input type='button' onclick=\"backdoa('"+page+"')\" value='back' style='color: #00303f;font: bold 12px verdana;padding: 5px;'>");
+        doa_array.push("<button class='topcoat-button' onclick=\"savedoa('"+page+"')\" >Save DoA</button>");
+        doa_array.push("<button class='topcoat-button' onclick=\"backdoa('"+page+"')\" >Back</button>");
         doa_array.push('</form>');
         doa_array.push('</div>');
         doa_array.push('</div>');
