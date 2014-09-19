@@ -18,6 +18,12 @@
  */
 "use strict";
 
+var menuBtn;
+var containr;
+var slidemenu;
+var contnt;
+var contentlayer;
+
 var app = {
     // Application Constructor
     myLog: document.getElementById("log"),
@@ -287,6 +293,10 @@ function route(event) {
 
    /* $('#bg').css('background-image', 'none');
     $('#bg').css('background', 'black');*/
+
+    if (hash === "#correspondance1") {
+        return;
+    }
     if (hash === "#signup") {
         hide_all();
         signup();
@@ -356,12 +366,6 @@ function route(event) {
 }
 
 var step_back = function() {window.history.back();};
-
-var menuBtn;
-var containr;
-var slidemenu;
-var contnt;
-var contentlayer;
 
 window.addEventListener('load', function () {
     FastClick.attach(document.body);
@@ -975,9 +979,7 @@ function openpositions() {
                 opening_res_array.push("<div class='footer' id="+data[i]['vessel_name'].replace(/ +/g, "")+">");
                 opening_res_array.push("<div class='openpositionbox'>");
                 opening_res_array.push("<div class='openpositionchild1'>");
-                opening_res_array.push("<img src="+vessel_type_pic(vessel_type)+" style='width:7rem; height:5rem;'>");
-                opening_res_array.push("<br><a class='footer-button' onclick=\"giveDoa('"+corr_content+"')\" style='margin: 3px;'><div class='png-calendar4 button-icon'></div></a>");
-                opening_res_array.push("<a class='footer-button' onclick=\"correspondance('"+corr_content+"','OPEN_POSITION')\"  style='margin: 3px;'><div class='png-bubbles button-icon'></div></a>");
+                opening_res_array.push("<img src="+vessel_type_pic(vessel_type)+" style='width:7rem; height:5.9rem;'>");
                 opening_res_array.push("</div>");
                 opening_res_array.push("<div id='op_content'>");
                 opening_res_array.push("<span id='v_name'>"+v_name+" ("+data[i]['flag_name']+")</span>");
@@ -990,6 +992,8 @@ function openpositions() {
                 if(data[i]['sdc']!=null)
                     opening_res_array.push("<br/><span id='v_sdc'>"+v_sdc+"</span><br/>");
                 opening_res_array.push("</div>");
+                opening_res_array.push("<div style='text-align:center'><a class='footer-button' onclick=\"giveDoa('"+corr_content+"')\" style='margin: 1px;'><div class='png-calendar4 button-icon'></div></a>");
+                opening_res_array.push("<a class='footer-button' onclick=\"correspondance('"+corr_content+"','OPEN_POSITION')\"  style='margin: 1px;'><div class='png-bubbles button-icon'></div></a></div>");
                 opening_res_array.push("</div>");
                 opening_res_array.push("</div>");
                 // opening_res_array.push("</li>"); 
@@ -1186,6 +1190,7 @@ function allotted_details(period, results_array) {
 }
 
 function correspondance(content, page){
+    window.location.hash="#correspondance1";
     
     index_page_call();
     hide_all();
@@ -1195,7 +1200,7 @@ function correspondance(content, page){
 
     var results_array = new Array(); 
 
-    setheadername(results_array, '<div><div class="png-bubbles png-header pagename-icon"></div>  Correspondence</div>', "name");
+    setheadername(results_array, '<div><div class="png-bubbles png-header pagename-icon"></div>Correspondence</div>', "name");
     results_array.push('<div class = "hambrgrdetails">');
 
     results_array.push('<form  >');
@@ -1217,17 +1222,21 @@ function correspondance(content, page){
 }
 
 function correspondanceback(page) {
-    window.location.hash="";
+    // window.location.hash="";
     hide_all();
     $("#index_content").show();
     if(page == "OPEN_POSITION") {
-        $('#openpositions_content').show(); 
+        // $('#openpositions_content').show(); 
+         window.location.hash="#openpositions";
     } else if(page == "FLIGHT") {
-        $('#show_flight_details').show(); 
+        // $('#show_flight_details').show(); 
+        window.location.hash="#flight";
     } else if(page == "TRAINING") {
-        $('#show_training_details').show(); 
+        // $('#show_training_details').show(); 
+         window.location.hash="#training";
     } else {
-        $('#show_plan_details').show(); 
+        // $('#show_plan_details').show(); 
+         window.location.hash="#plan";
     }
 }
 
@@ -1869,7 +1878,7 @@ function bottm_buttons(page, results_array) {
 
     $('#tile_icons').show();
     results_array.push("<hr>");
-    results_array.push('<div id="tile_icons">');
+    results_array.push('<div style="text-align:center" id="tile_icons">');
     if(page == "P") {
         results_array.push('<a class="footer-button" href="#flight">');
         results_array.push('<div class="png-airplane2 button-icon"></div>');
