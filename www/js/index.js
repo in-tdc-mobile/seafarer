@@ -1893,7 +1893,7 @@ function bottm_buttons(page, results_array) {
         results_array.push('</a>');
     }
     if(page == "P") {
-        results_array.push('<a class="footer-button" href="#correspondance/plan">');
+        results_array.push("<a class='footer-button' onClick=\"correspondance(\'\',\'plan\')\">");
         results_array.push('<div class="png-bubbles button-icon"></div>');
         results_array.push('</a>');
     }
