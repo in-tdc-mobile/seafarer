@@ -1554,10 +1554,9 @@ function documentdetails(){
             results_array.push('<div class="header_white"></div>');
             results_array.push('<span class="header_text" class="header">Expiry Documents</span>');
             results_array.push('</div>');*/
+            var expired_array = new Array();
 
-            setheadername(results_array, '<div><div class="png-file png-header pagename-icon"></div>  My Documents</div>');
-            results_array.push('<div class = "hambrgrdetails">');
-           // var tep_docname = "new";
+            // var tep_docname = "new";
             if(data[0] != null) {
                 var expired_docs = new Array();
                 for (var i = 0; i < data.length; i++) {     
@@ -1578,57 +1577,67 @@ function documentdetails(){
                     }
                     /*if(tep_docname != data[i]['name']) {
                         tep_docname = data[i]['name'];*/
-                        results_array.push("<li class='topcoat-list__item'>");
+                    results_array.push("<li class='topcoat-list__item'>");
 
-                        if((Date.parse(data[i]['expiry_date'])) < Date.parse(new Date())) {
-                            results_array.push("<span style='color:red'>"+toTitleCase(data[i]['name']));
-                        } else if((((Date.parse(data[i]['expiry_date']))-20) < Date.parse(new Date())) && (Date.parse(new Date()<(Date.parse(data[i]['expiry_date']))))) {
-                            results_array.push("<span style='color:green'>"+toTitleCase(data[i]['name']));
-                        } else {
-                            results_array.push("<span>"+toTitleCase(data[i]['name']));
-                        }
-
-                        if(data[i]['document_no']!=null && data[i]['document_no']!='' ) 
-                            results_array.push("("+data[i]['document_no']+")");
-
-                        if(data[i]['expiry_date']!=null && data[i]['expiry_date']!='' ) 
-                            results_array.push(" - "+dateformat(data[i]['expiry_date'], "dd-mon-yyyy"));
-                        results_array.push("</span><br/>");
-                        results_array.push("</li>");
-                        results_array.push("</li>");  
-                }
-                results_array.push('</div>'); 
-                for (var i = 0; i < expired_docs.length; i++) {
-                    if ( i==0 ) {
-                        results_array.push('<div class = "footer">');
-                        doc_type = " Expired ("+ expired_docs.length +")";
-                        results_array.push("<b><div class='header_text' style='color:red' onclick='visible_expired_docs()'>"+toTitleCase(doc_type.slice(1))+"</div></b><br>");                                                
-                        results_array.push("<ul class='topcoat-list__container'>");
-                        results_array.push('<div id="exp_docs">'); 
+                    if((Date.parse(data[i]['expiry_date'])) < Date.parse(new Date())) {
+                        results_array.push("<span style='color:red'>"+toTitleCase(data[i]['name']));
+                    } else if((((Date.parse(data[i]['expiry_date']))-20) < Date.parse(new Date())) && (Date.parse(new Date()<(Date.parse(data[i]['expiry_date']))))) {
+                        results_array.push("<span style='color:green'>"+toTitleCase(data[i]['name']));
+                    } else {
+                        results_array.push("<span>"+toTitleCase(data[i]['name']));
                     }
 
-                    results_array.push("<li class='topcoat-list__item'>");
-                    results_array.push("<span style='color:red'>"+toTitleCase(expired_docs[i]['name']));
-                    if(expired_docs[i]['document_no']!=null && expired_docs[i]['document_no']!='' ) 
-                            results_array.push("("+expired_docs[i]['document_no']+")");
-                    if(expired_docs[i]['expiry_date']!=null && expired_docs[i]['expiry_date']!='' ) 
-                            results_array.push(" - "+dateformat(expired_docs[i]['expiry_date'], "dd-mon-yyyy"));
+                    if(data[i]['document_no']!=null && data[i]['document_no']!='' ) 
+                        results_array.push("("+data[i]['document_no']+")");
+
+                    if(data[i]['expiry_date']!=null && data[i]['expiry_date']!='' ) 
+                        results_array.push(" - "+dateformat(data[i]['expiry_date'], "dd-mon-yyyy"));
                     results_array.push("</span><br/>");
                     results_array.push("</li>");
+                    results_array.push("</li>");
+
+                }
+                results_array.push('</div>'); 
+
+                for (var i = 0; i < expired_docs.length; i++) {
+                    if ( i==0 ) {
+                        expired_array.push('<div class = "footer">');
+                        doc_type = " Expired ("+ expired_docs.length +")";
+                        expired_array.push("<b><div class='header_text' style='color:red' onclick='visible_expired_docs()'>"+toTitleCase(doc_type.slice(1))+"</div></b><br>");                                                
+                        expired_array.push("<ul class='topcoat-list__container'>");
+                        expired_array.push('<div id="exp_docs">'); 
+                    }
+
+                    expired_array.push("<li class='topcoat-list__item'>");
+                    expired_array.push("<span style='color:red'>"+toTitleCase(expired_docs[i]['name']));
+                    if(expired_docs[i]['document_no']!=null && expired_docs[i]['document_no']!='' ) 
+                            expired_array.push("("+expired_docs[i]['document_no']+")");
+                    if(expired_docs[i]['expiry_date']!=null && expired_docs[i]['expiry_date']!='' ) 
+                            expired_array.push(" - "+dateformat(expired_docs[i]['expiry_date'], "dd-mon-yyyy"));
+                    expired_array.push("</span><br/>");
+                    expired_array.push("</li>");
 
                     if ( i == expired_docs.length-1) {
-                        results_array.push('</div>'); 
-                        results_array.push('</div>'); 
-                        results_array.push("</ul>");
-                        results_array.push('</div>'); 
+                        expired_array.push('</div>'); 
+                        expired_array.push('</div>'); 
+                        expired_array.push("</ul>");
+                        expired_array.push('</div>'); 
                     }
                 }
             } else {
                 results_array.push('<span>No Expiry Documents Details Available</span><br>');
             }
             hide_spinner();
+
             results_array.push('</div>');
-            $('#document_details').html(results_array.join(""));
+            
+            var results_array_new = new Array();
+            results_array_new.push('<div class = "hambrgrdetails">'); 
+            setheadername(results_array_new, '<div><div class="png-file png-header pagename-icon"></div>  My Documents</div>');            
+            results_array_new.push(expired_array.join(""))
+            results_array_new.push(results_array.join(""));
+
+            $('#document_details').html(results_array_new.join(""));
             $("#exp_docs").hide();        
         },
         error: function (request, status, error) {
