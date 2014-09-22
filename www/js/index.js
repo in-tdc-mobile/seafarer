@@ -1209,7 +1209,7 @@ function show_correspondance (page) {
     setheadername(results_array, '<div><div class="png-bubbles png-header pagename-icon"></div>Correspondence</div>', "name");
     results_array.push('<div class = "hambrgrdetails">');
 
-    results_array.push('<form  >');
+    results_array.push('<form onsubmit="return false" >');
     if(content != null && content != "")
         results_array.push("<textarea class='topcoat-text-input--large' id='message' style='width: 100%; height: 250px;line-height: 1.5rem;'>Reg:"+content+":-</textarea></br>");
     else
@@ -1229,6 +1229,8 @@ function show_correspondance (page) {
 
 function correspondanceback(page) {
     // window.location.hash="";
+    // alert(page);
+
     hide_all();
     $("#index_content").show();
     if(page == "OPEN_POSITION") {
