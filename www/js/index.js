@@ -1621,7 +1621,7 @@ function documentdetails(){
                         expired_array.push('</div>'); 
                         expired_array.push('</div>'); 
                         expired_array.push("</ul>");
-                        expired_array.push('</div>'); 
+                        // expired_array.push('</div>'); 
                     }
                 }
             } else {
@@ -1629,13 +1629,13 @@ function documentdetails(){
             }
             hide_spinner();
 
-            results_array.push('</div>');
             
             var results_array_new = new Array();
             results_array_new.push('<div class = "hambrgrdetails">'); 
             setheadername(results_array_new, '<div><div class="png-file png-header pagename-icon"></div>  My Documents</div>');            
             results_array_new.push(expired_array.join(""))
             results_array_new.push(results_array.join(""));
+            results_array_new.push('</div>');
 
             $('#document_details').html(results_array_new.join(""));
             $("#exp_docs").hide();        
