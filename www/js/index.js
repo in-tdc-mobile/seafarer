@@ -303,6 +303,12 @@ function route(event) {
         return;
     }
 
+    if (hash === "#forgotpass"){
+        hide_all();
+        show_forgotpass();
+        return;
+    }
+
     if (hash === "#signin_check") {
         // hide_all();
         signin_check();
@@ -346,7 +352,10 @@ function route(event) {
         hide_all();
         alllalerts="";
         alerts();
-    } else if (hash === "#logout") {
+    } else if (hash === "#changepwd"){
+        hide_all();
+        show_changepwd();
+    }else if (hash === "#logout") {
         hide_all();
         logout();
     } else {
@@ -444,6 +453,28 @@ function signin () {
 
 function signup_nav() {
     window.location.hash = "#signup";
+}
+
+function forgot_pass_nav () {
+    window.location.hash = "#forgotpass";
+}
+
+function show_forgotpass() {
+    $("#ajax_error").hide();
+    $(".login").hide();
+    $('#btnBack').show();
+    $('#signup_content').show(); 
+    var results_array = new Array(); 
+    setheadername(results_array, '<span class="icon-pencil2"></span>  Forgot Password', "name");
+    results_array.push('<div class = "hambrgrdetails">');
+    results_array.push('<form onsubmit="return false" >');
+    results_array.push('<input type="text" placeholder="Email" id="signup_passport" class="biginput topcoat-text-input">');
+    results_array.push('<button class="topcoat-button--cta" onclick="forgotpass_submit()">Register</button></form>');
+    results_array.push('</div>');
+    $('#signup_content').html(results_array.join(""));
+    // new datepickr('dobdate', {
+    //     'dateFormat': 'd-M-Y'
+    // });
 }
 
 function signup() {
@@ -1396,6 +1427,28 @@ function doadetails(){
             hide_spinner();
         }
     });
+}
+
+function show_changepwd(){
+    index_page_call();
+    hide_all();
+    $('#index_content').show();
+    $('#change_password').html("");
+    $('#change_password').show();
+
+    var change_pwd_array = new Array(); 
+
+    setheadername(change_pwd_array, '   Change Password', "pic");
+    change_pwd_array.push("<div class='training_image'></div>");
+    change_pwd_array.push("<input class='topcoat-text-input' type='password' placeholder='Old Password' id='login_emp'>");
+    change_pwd_array.push("<input class='topcoat-text-input' type='password' placeholder='New Password' id='login_emp'>");
+    change_pwd_array.push("<input class='topcoat-text-input' type='password' placeholder='Confirm Password' id='login_emp'>");
+    change_pwd_array.push("<button class='topcoat-button--cta' onclick='signin()'>Change Password</button> ");
+
+    $('#change_password').html(change_pwd_array.join(""));
+
+
+    
 }
 
 function doaAdd(status, page, content) {
