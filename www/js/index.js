@@ -469,12 +469,16 @@ function show_forgotpass() {
     results_array.push('<div class = "hambrgrdetails">');
     results_array.push('<form onsubmit="return false" >');
     results_array.push('<input type="text" placeholder="Email" id="signup_passport" class="biginput topcoat-text-input">');
-    results_array.push('<button class="topcoat-button--cta" onclick="forgotpass_submit()">Register</button></form>');
+    results_array.push('<button class="topcoat-button--cta" onclick="forgotpass_submit()">Submit</button></form>');
     results_array.push('</div>');
     $('#signup_content').html(results_array.join(""));
     // new datepickr('dobdate', {
     //     'dateFormat': 'd-M-Y'
     // });
+}
+
+function forgotpass_submit(){
+    
 }
 
 function signup() {
@@ -1440,15 +1444,61 @@ function show_changepwd(){
 
     setheadername(change_pwd_array, '   Change Password', "pic");
     change_pwd_array.push("<div class='training_image'></div>");
-    change_pwd_array.push("<input class='topcoat-text-input' type='password' placeholder='Old Password' id='login_emp'>");
-    change_pwd_array.push("<input class='topcoat-text-input' type='password' placeholder='New Password' id='login_emp'>");
-    change_pwd_array.push("<input class='topcoat-text-input' type='password' placeholder='Confirm Password' id='login_emp'>");
-    change_pwd_array.push("<button class='topcoat-button--cta' onclick='signin()'>Change Password</button> ");
+    change_pwd_array.push("<input class='topcoat-text-input' type='password' placeholder='Current Password' id='curPwd'>");
+    change_pwd_array.push("<input class='topcoat-text-input' type='password' placeholder='New Password' id='newPwd'>");
+    change_pwd_array.push("<input class='topcoat-text-input' type='password' placeholder='Confirm Password' id='cnfPwd'>");
+    change_pwd_array.push("<button class='topcoat-button--cta' onclick='changepwd()'>Change Password</button> ");
 
     $('#change_password').html(change_pwd_array.join(""));
-
-
     
+}
+
+function changepwd () {
+
+    if ($('#curPwd').val().trim() == '') {
+        alert("Please enter your current password");
+        $('#curPwd').focus();
+        return;
+    };
+    if ($('#newPwd').val().trim() == '') {
+        alert("Please enter your new password");
+        $('#newPwd').focus();
+        return;
+    };
+    if ($('#cnfPwd').val().trim() != $('#newPwd').val().trim() ) {
+        alert("Password mismatch");
+        $('#cnfPwd').focus();
+        return;
+    };
+
+    var url = prefilurl+"change_password.php?email="+$.jStorage.get("username");
+
+    var form_data= {
+        'oldPwd': $('#curPwd').val().trim(),
+        'newPwd': $('#newPwd').val().trim(),
+        'empId': $.jStorage.get("empid")
+    };
+    //+"&empid="+$.jStorage.get("empid")
+    $.ajax({
+        url: url,
+        type: "post",
+        data: form_data,
+        beforeSend: function() {
+            show_spinner();
+        },
+
+        success : function(data) {
+            hide_spinner();
+            if(data == 'sucess') {
+                alert("Password has been updated");
+            } else {
+                alert("Please verify your password");
+            }
+        },
+        error: function (request, status, error) {
+            hide_spinner();
+        }
+    });
 }
 
 function doaAdd(status, page, content) {
@@ -2009,6 +2059,7 @@ function hide_all() {
     $('#show_plan_details').hide();
     $('#show_training_details').hide();   
     $('#show_flight_details').hide();
+    $('#change_password').hide();
     $('#update_profile').hide();
     //$("#alert_content").hide();
     /*$('#tile_icons').hide();*/
