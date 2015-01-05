@@ -1476,7 +1476,8 @@ function changepwd () {
     var form_data= {
         'oldPwd': $('#curPwd').val().trim(),
         'newPwd': $('#newPwd').val().trim(),
-        'empId': $.jStorage.get("empid")
+        'empId': $.jStorage.get("empid"),
+        'email':$.jStorage.get("username")
     };
     //+"&empid="+$.jStorage.get("empid")
     $.ajax({
@@ -1930,19 +1931,19 @@ function alerts() {
                             // $('#h_plan').html('<img src="img/tick.png">');
 
                             // To Check Open Position Status  
-                            if(data[i]['status'] == 0 ){
+                           // if(data[i]['status'] == 0 ){
                                 alertcount--;
                                 if(alertcount == ''){
                                     alerts_array.push('<li class="topcoat-list__item">');
                                     alerts_array.push("<a>");
                                     alerts_array.push("No Alert");    
                                 }
-                            }else{
+                           /* }else{
                                 alerts_array.push('<li class="topcoat-list__item">');                                
                                 alerts_array.push('<div class="png-megaphone2 png-alerts pagename-icon"></div>  ');
                                 alerts_array.push("<a class='btns' href='#openpositions'>");
                                 alerts_array.push(data[i].status+" "+toTitleCase(data[i]['message']));
-                            }
+                            }*/
                         } else {
                             alerts_array.push(toTitleCase(data[i]['message']));
                         }
