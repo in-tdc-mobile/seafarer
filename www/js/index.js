@@ -1155,10 +1155,12 @@ function allotment_details() {
         success : function(data) {
             var d = new Date();
             var period=0;
+            var period_month;
+            var period_date;
             results_array.push('<div class = "footer" style="margin-top: 0px;">');
             if(data[0] != null) {
                 var pro_date = new Date(data[0]['processed_on']);
-                results_array.push("<span> Amount is Processed on <b>"+getMonthName(pro_date.getMonth()) +", "+pro_date.getFullYear() +"</b></span><br/>");
+                results_array.push("<span> Amount is Processed on <b>"+pro_date.getDate() +", "+getMonthName(pro_date.getMonth()) +", "+pro_date.getFullYear() +"</b></span><br/>");
                 results_array.push("Balance Amount is ");
                 var balamnt=0;
                 if(data[0] != null) {
@@ -1170,7 +1172,11 @@ function allotment_details() {
                         hide_spinner();
                     }
                 }
-                results_array.push('<b>'+prsflt(balamnt)+'</b>');
+                //period value will be string ie.. "201408"
+                //converting string value to number and then to Date .
+                period_date=Number(period);
+                period_month=Convert_toDate(period_date);
+                results_array.push('<b>'+prsflt(balamnt)+'</b>. for the month <b>'+getMonthName(period_month.getMonth()) +', '+period_month.getFullYear()+'</b>');
 
                 if(alllalerts.indexOf("ALLOTMENT") > -1){
                     update_alert_seen("ALLOTMENT");
@@ -2158,4 +2164,14 @@ function nullcheck(data) {
     if(data == null)
         data = '';
     return data;
+}
+
+function Convert_toDate(value)
+{
+    var result=value-1;
+    var text=result.toString();
+    var pro_period=text.substring( 0, 4)+'/'+text.substring( 4, 6);
+    var period_month = pro_period.split("/");
+    var pro_for= new Date(period_month[0],period_month[1]);
+    return pro_for;
 }
