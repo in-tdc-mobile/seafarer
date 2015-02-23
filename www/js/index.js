@@ -309,7 +309,7 @@ function route(event) {
         return;
     }
 
-    if (hash === "#signin_check") {
+    if (hash.indexOf("#signin_check")>=0) {
         // hide_all();
         signin_check();
         return;
@@ -503,10 +503,11 @@ function signup() {
 }   
 
 function signin_check_nav(){
-    window.location.hash="#signin_check";
+    window.location.hash="#signin_check"+ new Date($.now()).getSeconds();
 }
 
 function signin_check() {
+    $("#ajax_error").hide();
     var results_array = new Array(); 
     setheadername(results_array, '<span class="icon-pencil2"></span>  Update Contact Details', "name");
     results_array.push('<div class = "hambrgrdetails">');
