@@ -89,6 +89,49 @@ var app = {
     }   
 };
 
+
+function fixCapitalsText (text)
+{
+  result = "";
+
+  sentenceStart = true;
+  for (i = 0; i < text.length; i++)
+  {
+    ch = text.charAt (i);
+
+    if (sentenceStart && ch.match (/^\S$/))
+    {
+      ch = ch.toUpperCase ();
+      sentenceStart = false;
+    }
+    else
+    {
+      ch = ch.toLowerCase ();
+    }
+
+    if (ch.match (/^[.!?]$/))
+    {
+      sentenceStart = true;
+    }
+
+    result += ch;
+  }
+
+  return result;
+}
+
+function fixCapitalsNode (node)
+{
+  if (node.nodeType == 3 || node.nodeType == 4) // Text or CDATA
+  {
+    node.textContent = fixCapitalsText (node.textContent);
+  }
+
+  if (node.nodeType == 1)
+    for (i = 0; i < node.childNodes.length; i++)
+      fixCapitalsNode (node.childNodes.item (i));
+}
+
 var pushNoteMsg = {
 
     findPlatform: function() {
@@ -818,6 +861,7 @@ function show_plan_details() {
                     // results_array.push("<span> Flag : "++"</span><br/>");
                     results_array.push('<div style="margin-left:5px">');
                     results_array.push("<span><b> Vessel Type :</b> "+data['vessel_type']+"</span><br/>");
+                    results_array.push("<span><b> Rank :</b> "+data['rank_name']+"</span><br/>");
                     results_array.push("<span><b> Manager :</b> "+data['emp_sdc_name']+"</span><br/>");
                     results_array.push("<span><b> Exp. Join Date :</b> "+dateformat(data['from_date'], "dd-mon-yyyy")+"</span><br/>");
                     results_array.push("<span><b> Exp. Join Port :</b> "+port+"</span><br/>");
@@ -2023,7 +2067,7 @@ function bottm_buttons(page, results_array) {
         if( csc_contact_Phone1!=null && csc_contact_Phone1!='' )
             results_array.push('<a class="footer-button" id="cscemail" href=\"'+csc_contact_email_id+'\">');
         else 
-            results_array.push('<a class="footer-button" id="cscemail">');
+            results_array.push('<a class="footer-button grey" id="cscemail">');
         
         results_array.push('<div class="png-mail button-icon"></div>');
         results_array.push('</a>');
@@ -2033,7 +2077,7 @@ function bottm_buttons(page, results_array) {
         if( csc_contact_Phone1!=null && csc_contact_Phone1!='' )
             results_array.push('<a class="footer-button"  href=\"'+csc_contact_Phone1+'\">');
         else 
-            results_array.push('<a class="footer-button">');
+            results_array.push('<a class="footer-button grey">');
         results_array.push('<div class="png-phone button-icon"></div>');
         results_array.push('</a>');
     }
