@@ -92,12 +92,12 @@ var app = {
 
 function fixCapitalsText (text)
 {
-  result = "";
+  var result = "";
 
-  sentenceStart = true;
-  for (i = 0; i < text.length; i++)
+  var sentenceStart = true;
+  for (var i = 0; i < text.length; i++)
   {
-    ch = text.charAt (i);
+    var ch = text.charAt (i);
 
     if (sentenceStart && ch.match (/^\S$/))
     {
@@ -128,7 +128,7 @@ function fixCapitalsNode (node)
   }
 
   if (node.nodeType == 1)
-    for (i = 0; i < node.childNodes.length; i++)
+    for (var i = 0; i < node.childNodes.length; i++)
       fixCapitalsNode (node.childNodes.item (i));
 }
 
@@ -297,6 +297,7 @@ function onBackKeyDown() {
 }
 
 function toTitleCase(str){
+    return str;
     if(str)
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
@@ -515,6 +516,7 @@ function show_forgotpass() {
     results_array.push('<button class="topcoat-button--cta" onclick="forgotpass_submit()">Submit</button></form>');
     results_array.push('</div>');
     $('#signup_content').html(results_array.join(""));
+    fixCapitalsNode ($('#signup_content')[0]);
     // new datepickr('dobdate', {
     //     'dateFormat': 'd-M-Y'
     // });
@@ -540,6 +542,7 @@ function signup() {
     results_array.push('<button class="topcoat-button--cta" onclick="signin_check_nav()">Register</button></form>');
     results_array.push('</div>');
     $('#signup_content').html(results_array.join(""));
+    fixCapitalsNode ($('#signup_content')[0]);
     // new datepickr('dobdate', {
     //     'dateFormat': 'd-M-Y'
     // });
@@ -581,15 +584,16 @@ function signin_check() {
                 results_array.push('Dear '+nullcheck(toTitleCase(data[0]['sur_name']))+" "+nullcheck(toTitleCase(data[0]['first_name']))+", Please update your email id here");
                 results_array.push('<input type="text" placeholder="Email-id" id="signup_email" class="topcoat-text-input">');
                 results_array.push("<button onclick='signin_mail(\""+data[0]['id']+"\",\""+data[0]['sur_name']+"\",\""+data[0]['first_name']+"\",\""+data[0]['middle_name']+"\",\""+data[0]['passport_no']+"\")' class='topcoat-button--cta'>Update</button></form>");
-                results_array.push('<span id="update_email_error" style="display:none">Email already registered</span>')
+                results_array.push('<span id="update_email_error" style="display:none">Email already registered.</span>')
                 results_array.push('</div>');
             } else {
                 $("#ajax_error").show();
-                $("#ajax_error").html('Wrong data entered or the user already registered...');
+                $("#ajax_error").html('Wrong data entered or the user already registered.');
                 $("#ajax_error").attr('style','display:block; text-align:center;');
                 hide_spinner();
             }
             $('#signup_content').html(results_array.join(""));
+            fixCapitalsNode ($('#signup_content')[0]);
             hide_spinner();
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -663,17 +667,19 @@ function signin_mail(id, sur_name, first_name, middle_name, passport_no) {
                     return;
                 };
                 $('#btnBack').hide();
-                results_array.push('</span> User Name and Password send to your mail id..</span></br>'); 
-                results_array.push('<button class="topcoat-button--cta" onclick="backtologin()">Back to Login</button>') 
+                results_array.push('</span> User name and password send to your mail id.</span></br>'); 
+                results_array.push('<button class="topcoat-button--cta" onclick="backtologin()">Back to login</button>') 
                 results_array.push('</div>');
                 $('#signup_content').html(results_array.join(""));
+                fixCapitalsNode ($('#signup_content')[0]);
                 hide_spinner();
                 $("#ajax_error").hide();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                results_array.push('</span> Issue in Sign Up Process, Please try again...</span>');  
+                results_array.push('</span> Sorry, an error occured. Please try again.</span>');  
                 results_array.push('</div>');
                 $('#signup_content').html(results_array.join(""));
+                fixCapitalsNode ($('#signup_content')[0]);
                 //alert("error in update");
                 hide_spinner();
                 $("#ajax_error").hide();
@@ -681,7 +687,7 @@ function signin_mail(id, sur_name, first_name, middle_name, passport_no) {
         });
     }else {
         $("#ajax_error").show();
-        $("#ajax_error").html('Not a Valid Email Id...');
+        $("#ajax_error").html('Not a valid email id.');
         $("#ajax_error").attr('style','display:block; text-align:center;');
     }
 }
@@ -718,7 +724,7 @@ function showSidemenu () {
 function login_failure() {
     $(".spinner").css('visible','none');
     $("#ajax_error").show();
-    $("#ajax_error").html('Wrong Email or Password. Please try again.');
+    $("#ajax_error").html('Wrong email or password. Please try again.');
     $("#ajax_error").attr('style','display:block; text-align:center;');
 }
 
@@ -738,6 +744,7 @@ function update_profile_page() {
     results_array.push('<input type="submit" value="Update" style="color:#00303f;font:bold 12px verdana; padding:5px;"></form>');
     results_array.push('</div>');   
     $('#update_profile').html(results_array.join(""));
+    // fixCapitalsNode ($('#update_profile')[0]);
 }
 
 function update_profile() {
@@ -763,15 +770,17 @@ function update_profile() {
         },
 
         success : function(data) {
-            results_array.push('</span> Profile Updated...</span>');  
+            results_array.push('</span> Profile updated.</span>');  
             results_array.push('</div>');
             $('#update_profile').html(results_array.join(""));
+            // fixCapitalsNode (document.body);
             hide_spinner();
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-            results_array.push('</span> Issue in Profile Updation...</span>');  
+            results_array.push('</span> Sorry, an error occured. Please try again.</span>');  
             results_array.push('</div>');
             $('#update_profile').html(results_array.join(""));
+            //fixCapitalsNode (document.body);
             //alert("error in update");
             hide_spinner();
         }
@@ -832,7 +841,7 @@ function show_plan_details() {
                             flickerplace = data['flag_name']+',flag';
                         }
                         // alert(flickerplace);
-                        port = "Not Yet Allotted";                        
+                        port = "Not yet allotted";                        
                     } else {
                         flickerplace = data['port'];
                         port = data['port'];
@@ -860,11 +869,11 @@ function show_plan_details() {
                     // results_array.push("<span> Vessel : "+data['vessel_name']+"</span><br/>");
                     // results_array.push("<span> Flag : "++"</span><br/>");
                     results_array.push('<div style="margin-left:5px">');
-                    results_array.push("<span><b> Vessel Type :</b> "+data['vessel_type']+"</span><br/>");
+                    results_array.push("<span><b> Vessel type :</b> "+data['vessel_type']+"</span><br/>");
                     results_array.push("<span><b> Rank :</b> "+data['rank_name']+"</span><br/>");
                     results_array.push("<span><b> Manager :</b> "+data['emp_sdc_name']+"</span><br/>");
-                    results_array.push("<span><b> Exp. Join Date :</b> "+dateformat(data['from_date'], "dd-mon-yyyy")+"</span><br/>");
-                    results_array.push("<span><b> Exp. Join Port :</b> "+port+"</span><br/>");
+                    results_array.push("<span><b> Exp. join date :</b> "+dateformat(data['from_date'], "dd-mon-yyyy")+"</span><br/>");
+                    results_array.push("<span><b> Exp. join port :</b> "+port+"</span><br/>");
                     results_array.push('</div>');
                     results_array.push('</div>');
                     results_array.push('&nbsp;');
@@ -874,12 +883,13 @@ function show_plan_details() {
                 }
             } else {
                 setheadername(results_array, '<div><div class="png-briefcase png-header pagename-icon"></div>  Plan Details</div>', "pic");
-                results_array.push('<div style="margin-top: 100px;font-size: large;">YOU HAVE NOT BEEN PLANNED FOR A VESSEL YET. <br/> PLEASE CLICK ICON ON RIGHT TOP TO OPEN THE MENU.</div>')
+                results_array.push('<div style="margin-top: 100px;font-size: large;">You have not been planned for a vessel yet. <br/> Please click icon on right top to open the menu.</div>')
                 getCurrCompanyDt(results_array);
             }
 
             bottm_buttons("P" ,results_array);
             $('#show_plan_details').html(results_array.join(""));
+            fixCapitalsNode ($('#show_plan_details')[0]);
            /* if(cscemail != null) {
                 document.getElementById("cscemail").href="mailto:"+cscemail;
             }*/
@@ -903,6 +913,7 @@ function show_plan_details() {
         error: function (request, status, error) {
         results_array.push("<span> No plan to display"+error+"</span><br/>");
         $('#show_plan_details').html(results_array.join(""));
+        // fixCapitalsNode (document.body);
         hide_spinner();
     }
         
@@ -992,7 +1003,7 @@ function show_training_details() {
                 training_res_array.push("<br/><a class='footer-button' onclick=\"correspondance('"+tr_content+"','TRAINING')\"  style='margin: 3px;'><div class='png-bubbles button-icon'></div></a>");
                // training_res_array.push("</li>");
             } else {
-                training_res_array.push("<span> No training details updated </span><br/>");
+                training_res_array.push("<span> No training details updated</span><br/>");
                 hide_spinner();
             }
         }
@@ -1002,6 +1013,7 @@ function show_training_details() {
         training_res_array.push('</div>');
         //$('#foot_training').html(training_res_array.join(""));
         $('#show_training_details').html(training_res_array.join(""));
+        fixCapitalsNode ($('#show_training_details')[0]);
         if(alllalerts.indexOf("TRAINING") > -1){
             update_alert_seen("TRAINING");
             alllalerts.replace('TRAINING','');
@@ -1011,6 +1023,7 @@ function show_training_details() {
         training_res_array.push("</div>");
         training_res_array.push("<span> No data to display </span><br/>");
         $('#show_training_details').html(training_res_array.join(""));
+        // fixCapitalsNode (document.body);
         hide_spinner();
     }
 
@@ -1092,11 +1105,13 @@ function openpositions() {
         // opening_res_array.push("</ul>");
         // opening_res_array.push("</div>");
         $('#openpositions_content').html(opening_res_array.join(""));
+        fixCapitalsNode ($('#openpositions_content')[0]);
     },
     error: function (request, status, error) {
         opening_res_array.push("<span> No data to display </span><br/>");
         opening_res_array.push("</div>");
         $('#openpositions_content').html(opening_res_array.join(""));
+        // fixCapitalsNode (document.body);
         hide_spinner();
     }
 
@@ -1160,6 +1175,7 @@ function show_flight_details() {
             }
             results_array.push('</div>');
             $('#show_flight_details').html(results_array.join(""));
+            fixCapitalsNode ($('#show_flight_details')[0]);
 
             if(alllalerts.indexOf("FLIGHT") > -1){
                 update_alert_seen("FLIGHT");
@@ -1170,6 +1186,7 @@ function show_flight_details() {
             results_array.push("<span> No data avilable. </span><br/>");
             results_array.push('</div>');
             $('#show_flight_details').html(results_array.join(""));
+            // fixCapitalsNode (document.body);
             hide_spinner();
         }
 
@@ -1205,8 +1222,8 @@ function allotment_details() {
             results_array.push('<div class = "footer" style="margin-top: 0px;">');
             if(data[0] != null) {
                 var pro_date = new Date(data[0]['processed_on']);
-                results_array.push("<span> Amount is Processed on <b>"+pro_date.getDate() +", "+getMonthName(pro_date.getMonth()) +", "+pro_date.getFullYear() +"</b></span><br/>");
-                results_array.push("Balance Amount is ");
+                results_array.push("<span> Amount is processed on <b>"+pro_date.getDate() +", "+getMonthName(pro_date.getMonth()) +", "+pro_date.getFullYear() +"</b></span><br/>");
+                results_array.push("Balance amount is ");
                 var balamnt=0;
                 if(data[0] != null) {
                     for (var i = 0; i < data.length; i++) {
@@ -1233,6 +1250,7 @@ function allotment_details() {
         error: function (request, status, error) {
            results_array.push("<span> No data to display </span><br/>");
            $('#allotment_details').html(results_array.join(""));
+           // fixCapitalsNode (document.body);
            hide_spinner();
        }
 
@@ -1257,7 +1275,7 @@ function allotted_details(period, results_array) {
             if(data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
                     if(i == 0){
-                        results_array.push("<br> Amount Allotted to ");
+                        results_array.push("<br> Amount allotted to ");
                     }
                     results_array.push("<br>&nbsp;&nbsp;"+data[i]['beneficiary_name']+": "+data[i]['amount']+"("+data[i]['currency']+")");
                 }
@@ -1267,10 +1285,12 @@ function allotted_details(period, results_array) {
             hide_spinner();
             $('#allotment_details').html(results_array.join(""));
             results_array.push('</div>');
+            fixCapitalsNode ($('#allotment_details')[0]);
         },
         error: function (request, status, error) {
             $('#allotment_details').html(results_array.join(""));
             results_array.push('</div>');
+            // fixCapitalsNode (document.body);
         }
     });
 }
@@ -1309,6 +1329,7 @@ function show_correspondance (page) {
     //bottm_buttons("C" ,results_array);
     results_array.push('</div>');
     $('#correspondance_content').html(results_array.join(""));
+    fixCapitalsNode ($('#correspondance_content')[0]);
 
     getcorrespondance();
 }
@@ -1363,6 +1384,7 @@ function getcorrespondance() {
             }
             hide_spinner();
             $('#corrdet').html(results_array.join(""));
+            fixCapitalsNode ($('#corrdet')[0]);
         },
     });
 }
@@ -1370,7 +1392,7 @@ function getcorrespondance() {
 function correspondancesend() {
     var message = $("#message").val().trim();
     if(message == null || message == '') {
-        $('#error_corrspondance').html("Please enter text and continue..");
+        $('#error_corrspondance').html("Please enter text and continue.");
     } else {
         var results_array = new Array(); 
         setheadername(results_array, '<div class="png-bubbles  pagename-icon"></div>  Correspondence', "name");
@@ -1398,21 +1420,23 @@ function correspondancesend() {
                     //$('#correspondance_content').hide();
                     //showdashbord();
                     hide_spinner();
-                    results_array.push('</span> Correspondence send...</span>');
+                    results_array.push('</span> Correspondence sent.</span>');
                     results_array.push("</div>");
                     $('#correspondance_content').html(results_array.join(""));
                     
                 } else {
                     hide_spinner();
-                    results_array.push("Issue in sending Correspondence, please try again");
+                    results_array.push("Error in sending correspondence. Please try again");
                     results_array.push("</div>");
                     $('#correspondance_content').html(results_array.join(""));
                 }
+                fixCapitalsNode ($('#correspondance_content')[0]);
             },
             error: function (request, status, error) {
-                results_array.push("Issue in sending Correspondence, please try again:"+error);
+                results_array.push("Error in sending correspondence. Please try again."+error);
                 results_array.push("</div>");
                 $('#correspondance_content').html(results_array.join(""));
+                // fixCapitalsNode (document.body);
             }
          
         });
@@ -1460,7 +1484,7 @@ function doadetails(){
                 }
             
             } else {
-                results_array.push('<span>No DoA Available, please Give DoA</span><br>');
+                results_array.push('<span>No DoA available. Please give DoA.</span><br>');
                 yesDOA = false;
             }
             results_array.push("</div>");
@@ -1473,12 +1497,14 @@ function doadetails(){
             results_array.push("</div>");
             results_array.push('</div>');
             $('#doa_content').html(results_array.join(""));
+            fixCapitalsNode ($('#doa_content')[0]);
         },
         error: function (request, status, error) {
             results_array.push("<span> No DOA Given </span><br/>");
             results_array.push("<button onclick=doaAdd(\"'"+add+"'\",'DOA','')  style='color:#00303f;font:bold 12px verdana; padding:5px;'>Give DOA</button>");
             results_array.push("<button onclick=doaAdd(\"'"+cancel+"'\",'DOA','') style='color:#00303f;font:bold 12px verdana; padding:5px;'>Cancel DoA</button>");
             $('#doa_content').html(results_array.join(""));
+            // fixCapitalsNode (document.body);
             hide_spinner();
         }
     });
@@ -1495,12 +1521,13 @@ function show_changepwd(){
 
     setheadername(change_pwd_array, '   Change Password', "pic");
     change_pwd_array.push("<div class='training_image'></div>");
-    change_pwd_array.push("<input class='topcoat-text-input' type='password' placeholder='Current Password' id='curPwd'>");
-    change_pwd_array.push("<input class='topcoat-text-input' type='password' placeholder='New Password' id='newPwd'>");
-    change_pwd_array.push("<input class='topcoat-text-input' type='password' placeholder='Confirm Password' id='cnfPwd'>");
-    change_pwd_array.push("<button class='topcoat-button--cta' onclick='changepwd()'>Change Password</button> ");
+    change_pwd_array.push("<input class='topcoat-text-input' type='password' placeholder='Current password' id='curPwd'>");
+    change_pwd_array.push("<input class='topcoat-text-input' type='password' placeholder='New password' id='newPwd'>");
+    change_pwd_array.push("<input class='topcoat-text-input' type='password' placeholder='Confirm password' id='cnfPwd'>");
+    change_pwd_array.push("<button class='topcoat-button--cta' onclick='changepwd()'>Change password</button> ");
 
     $('#change_password').html(change_pwd_array.join(""));
+    // fixCapitalsNode (document.body);
     
 }
 
@@ -1575,6 +1602,7 @@ function doaAdd(status, page, content) {
         doa_array.push('</div>');
         doa_array.push('</div>');
         $('#doa_content').html(doa_array.join(""));
+        fixCapitalsNode ($('#doa_content')[0]);
         // new datepickr('doadate', {
         //     'dateFormat': 'd-M-Y'
         // });
@@ -1596,7 +1624,8 @@ function savedoa(page) {
         'operation': 'A'
     };
     if(doadate == null || doadate == '' || (Date.parse(doadate) < Date.parse(new Date()))) {
-        $('#error_doa').html("Please enter a valid future date and continue..");
+        $('#error_doa').html("Please enter a valid future date to continue.");
+        // fixCapitalsNode (document.body);
     } else {
         var req = $.ajax({
             url: url,
@@ -1780,7 +1809,7 @@ function documentdetails(){
                     }
                 }
             } else {
-                results_array.push('<span>No Expiry Documents Details Available</span><br>');
+                results_array.push('<span>No expiry documents details available</span><br>');
             }
             hide_spinner();
 
@@ -1793,11 +1822,13 @@ function documentdetails(){
             results_array_new.push('</div>');
 
             $('#document_details').html(results_array_new.join(""));
+            fixCapitalsNode ($('#document_details')[0]);
             $("#exp_docs").hide();        
         },
         error: function (request, status, error) {
-            results_array.push("<span>No Expiry Documents Details Available</span><br/>");
+            results_array.push("<span>No expiry documents details available</span><br/>");
             $('#document_details').html(results_array.join(""));
+            // fixCapitalsNode (document.body);
             hide_spinner();
         }
     });
@@ -1906,6 +1937,7 @@ function getempdetails(username, password) {
             }
             hide_spinner();
             $('#empprof').html(emp_det_array.join(""));
+            fixCapitalsNode ($('#empprof')[0]);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             hide_spinner();
@@ -2007,6 +2039,7 @@ function alerts() {
                 alerts_array.push('</ul></div>');
                 $('#alert_count').html(alertcount);
                 $('#alert_content').html(alerts_array.join(""));
+                fixCapitalsNode ($('#alert_content')[0]);
             } else {
                 alerts_array.push('<li class="topcoat-list__item">');
                                     alerts_array.push("<a>");
@@ -2014,6 +2047,7 @@ function alerts() {
                 alerts_array.push('</ul></div>');
                 $('#alert_count').html("0");
                 $('#alert_content').html(alerts_array.join(""));
+                // fixCapitalsNode (document.body);
             }
         },
         error: function (request, status, error) {
@@ -2064,21 +2098,29 @@ function bottm_buttons(page, results_array) {
     if(page == "P" || page == "C") {
         if(page == "C")
             results_array.push('<div style="float: left; padding-top: 15px;">Contact CSC </div>');
-        if( csc_contact_Phone1!=null && csc_contact_Phone1!='' )
+        if( csc_contact_Phone1!=null && csc_contact_Phone1!='' ) {
             results_array.push('<a class="footer-button" id="cscemail" href=\"'+csc_contact_email_id+'\">');
-        else 
-            results_array.push('<a class="footer-button grey" id="cscemail">');
+        	results_array.push('<div class="png-mail button-icon"></div>');
+        }
+        // else {
+        //     results_array.push('<a class="footer-button" id="cscemail">');
+        //     results_array.push('<div class="png-mail button-icon grey"></div>');
+        // }
         
         results_array.push('<div class="png-mail button-icon"></div>');
         results_array.push('</a>');
     }
     if(page == "P" || page == "C") {
 
-        if( csc_contact_Phone1!=null && csc_contact_Phone1!='' )
+        if( csc_contact_Phone1!=null && csc_contact_Phone1!='' ) {
             results_array.push('<a class="footer-button"  href=\"'+csc_contact_Phone1+'\">');
-        else 
-            results_array.push('<a class="footer-button grey">');
-        results_array.push('<div class="png-phone button-icon"></div>');
+        	results_array.push('<div class="png-phone button-icon"></div>');
+        }
+        // else {
+        //     results_array.push('<a class="footer-button">');
+        // 	results_array.push('<div class="png-phone button-icon grey"></div>');
+        // }
+        
         results_array.push('</a>');
     }
     results_array.push('</div>');

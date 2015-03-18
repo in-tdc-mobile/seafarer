@@ -88,7 +88,7 @@ h1 {
 }
 
 .bar-title .title {
-    text-transform: capitalize !important;
+    /*text-transform: capitalize !important;*/
     font-size: 18px;
 }
 
@@ -135,7 +135,7 @@ h1 {
 }
 
 .sub_text {
-    text-transform: capitalize;
+    /*text-transform: capitalize;*/
 }
 
 .details_title {
@@ -146,7 +146,7 @@ h1 {
     text-align: center;
     font-weight: bold;
     padding: 10px;
-    text-transform: capitalize;
+    /*text-transform: capitalize;*/
     /*margin-top: 50px;*/
 }
 
@@ -624,7 +624,7 @@ body{
 */  font: menu 59px;
   /*font: "Arial", helvetica, arial, sans-serif;*/
   -webkit-overflow-scrolling: touch;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
 
 }
 
@@ -914,7 +914,7 @@ input::-webkit-calendar-picker-indicator,
   -moz-box-shadow: 0 1px 5px #0061aa, inset 0 10px 20px #b6f9ff;
   box-shadow: 0 1px 5px #4E4E4E, inset 0 10px 20px #D5D5D5;*/
   background: #FFF;
-  text-transform: capitalize !important;
+  /*text-transform: capitalize !important;*/
 }
 
 
