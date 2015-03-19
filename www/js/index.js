@@ -1141,7 +1141,7 @@ function show_flight_details() {
     results_array.push("<div> <img src='img/flight.jpg' class='dip_img'> </div>");
     //results_array.push('<button onclick="shoreback()" class="back-btn"><img src="img/arrow-back.png"></button>');
 
-    results_array.push('<div class = "footer" style="margin-top: 0px;">');
+    
     //console.log(url);
     var req = $.ajax({
         url: url,
@@ -1155,6 +1155,7 @@ function show_flight_details() {
                 var d = new Date();
                 
                 for (var i = 0; i < data.length; i++) {
+                    results_array.push('<div class = "footer" style="margin-top: 0px;">');
                     var departure = data[i]['departure'];
                     var arrival = data[i]['arrival'];
                     var flight_content = departure+", "+arrival;
@@ -1166,6 +1167,7 @@ function show_flight_details() {
                     results_array.push("<span> Remarks : "+nullcheck(data[i]['remarks'])+"</span><br/>");
 
                     results_array.push("<a class='footer-button' onclick=\"correspondance('"+flight_content+"','FLIGHT')\"  style='margin: 3px;'><div class='png-bubbles button-icon'></div></a>");
+                    results_array.push('</div>');
                     hide_spinner();
                 }                
      
@@ -1173,7 +1175,7 @@ function show_flight_details() {
                 results_array.push("<span> No details updated. </span><br/>");
                 hide_spinner();
             }
-            results_array.push('</div>');
+            
             $('#show_flight_details').html(results_array.join(""));
             fixCapitalsNode ($('#show_flight_details')[0]);
 
