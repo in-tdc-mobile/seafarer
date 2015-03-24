@@ -25,10 +25,10 @@ var contnt;
 var contentlayer;
 
 // ALERT JAVASCRIPT ERRORS
-window.onerror = function(msg, url, linenumber) {
-    alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
-    return true;
-}
+// window.onerror = function(msg, url, linenumber) {
+//     alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
+//     return true;
+// }
 
 var app = {
     // Application Constructor
@@ -985,10 +985,10 @@ function show_training_details() {
     success : function(data) { 
         
         var d = new Date();
-        training_res_array.push('<div class="footer">');
         //training_res_array.push("<ul class='topcoat-list__container' id='listview'>");
         for (var i = 0; i < data.length; i++) {
             if(data[i] != null) {
+            	training_res_array.push('<div class="footer">');
                 if(i>0) {
                     // training_res_array.push("<hr class='style-one'>");
                 }
@@ -1008,6 +1008,7 @@ function show_training_details() {
                 training_res_array.push("<br/><span><b>Venue :</b> "+institution+"</span>");
                 training_res_array.push("<br/><a class='footer-button' onclick=\"correspondance('"+tr_content+"','TRAINING')\"  style='margin: 3px;'><div class='png-bubbles button-icon'></div></a>");
                // training_res_array.push("</li>");
+               	training_res_array.push('</div>');
             } else {
                 training_res_array.push("<span> No training details updated</span><br/>");
                 hide_spinner();
@@ -1016,7 +1017,6 @@ function show_training_details() {
         training_res_array.push(training_res_array);
         hide_spinner();
         //training_res_array.push("</ul>");
-        training_res_array.push('</div>');
         //$('#foot_training').html(training_res_array.join(""));
         $('#show_training_details').html(training_res_array.join(""));
         fixCapitalsNode ($('#show_training_details')[0]);
@@ -1793,11 +1793,11 @@ function documentdetails(){
 
                 for (var i = 0; i < expired_docs.length; i++) {
                     if ( i==0 ) {
-                        expired_array.push('<div class = "footer">');
+                        expired_array.push('<a href="javascript:visible_expired_docs()"><div class = "footer">');
                         doc_type = " Expired ("+ expired_docs.length +")";
-                        expired_array.push("<b><a class='header_text' style='color:red' href='javascript:visible_expired_docs()'>"+toTitleCase(doc_type.slice(1))+"</a></b><br>");                                                
+                        expired_array.push("<b><div class='header_text' style='color:red'>"+toTitleCase(doc_type.slice(1))+"</div></b><br>");                                                
                         expired_array.push("<ul class='topcoat-list__container'>");
-                        expired_array.push('<div id="exp_docs">'); 
+                        expired_array.push('</a><div id="exp_docs">'); 
                     }
 
                     expired_array.push("<li class='topcoat-list__item'>");
@@ -1813,7 +1813,7 @@ function documentdetails(){
                         expired_array.push('</div>'); 
                         expired_array.push('</div>'); 
                         expired_array.push("</ul>");
-                        // expired_array.push('</div>'); 
+                        // expired_array.push('</a>'); 
                     }
                 }
             } else {
