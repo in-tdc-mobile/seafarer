@@ -1795,7 +1795,7 @@ function documentdetails(){
                     if ( i==0 ) {
                         expired_array.push('<div class = "footer">');
                         doc_type = " Expired ("+ expired_docs.length +")";
-                        expired_array.push("<b><div class='header_text' style='color:red' onclick='visible_expired_docs()'>"+toTitleCase(doc_type.slice(1))+"</div></b><br>");                                                
+                        expired_array.push("<b><a class='header_text' style='color:red' href='javascript:visible_expired_docs()'>"+toTitleCase(doc_type.slice(1))+"</a></b><br>");                                                
                         expired_array.push("<ul class='topcoat-list__container'>");
                         expired_array.push('<div id="exp_docs">'); 
                     }
