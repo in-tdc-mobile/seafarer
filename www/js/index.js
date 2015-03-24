@@ -925,7 +925,7 @@ function show_plan_details() {
         
     });
     //if($.jStorage.get("push_registered") == false)
-    pushNoteMsg.findPlatform();
+    // pushNoteMsg.findPlatform();
 }
 
 var cc;
