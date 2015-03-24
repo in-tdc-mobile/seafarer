@@ -24,6 +24,12 @@ var slidemenu;
 var contnt;
 var contentlayer;
 
+// ALERT JAVASCRIPT ERRORS
+window.onerror = function(msg, url, linenumber) {
+    alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
+    return true;
+}
+
 var app = {
     // Application Constructor
     myLog: document.getElementById("log"),
