@@ -37,7 +37,7 @@
     <gap:platform name="ios" />
     <gap:platform name="android" />
     <gap:platform name="winphone" />
-    <gap:plugin name="org.apache.cordova.camera" version="0.3.6" />
+    <gap:plugin name="org.apache.cordova.camera" />
 
     <!--
         If you do not want any permissions to be added to your app, add the
