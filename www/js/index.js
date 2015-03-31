@@ -2284,17 +2284,20 @@ function expense_details (argument) {
     results_array.push('<div class = "footer" style="margin-top: 0px;">');
     results_array.push('<button class="topcoat-button" id="btnCamera" onclick="openCamera()" ">Open Camera</button> ');
     results_array.push('<img id="imgCam" height="50" width="50"/>');
+    results_array.push('<button class="topcoat-button" id="btnUploadImg" onclick="uploadImg()" ">Upload Image</button> ');
     results_array.push('</div>');
     $('#expense_details').html(results_array.join(""));
 }
 function openCamera (argument) {
-    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50, correctOrientation: true });
+    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 25, correctOrientation: true });
 }
+var lastImageData
 // Called when a photo is successfully retrieved
 //
 function onPhotoDataSuccess(imageData) {
 
   $('#imgCam').attr('src',imageData).css({'background-size':  '100%', 'background-repeat': 'no-repeat', 'width': '100px'});
+  lastImageData = imageData;
   // Get image handle
   //
   var smallImage = document.getElementById('smallImage');
@@ -2312,4 +2315,12 @@ function onPhotoDataSuccess(imageData) {
 // 
 function onFail(message) {
   alert('Failed because: ' + message);
+}
+function uploadImg (argument) {
+    var url = prefilurl+"upload_image.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid")+"&pagename="+page;
+    alert(url);
+    alert(lastImageData);
+    $.post( url, {data: lastImageData}, function(data) {
+        alert("Image uploaded!");
+    });
 }
