@@ -2317,7 +2317,7 @@ function onFail(message) {
   alert('Failed because: ' + message);
 }
 function uploadImg (argument) {
-    var url = prefilurl+"upload_image.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid")+"&pagename="+page;
+    var url = prefilurl+"upload_image.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid");
     alert(url);
     alert(lastImageData);
     $.post( url, {data: lastImageData}, function(data) {
