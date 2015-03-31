@@ -2283,18 +2283,18 @@ function expense_details (argument) {
     var results_array = new Array();
     results_array.push('<div class = "footer" style="margin-top: 0px;">');
     results_array.push('<button class="topcoat-button" id="btnCamera" onclick="openCamera()" ">Open Camera</button> ');
-    results_array.push('<img height="50" width="50"/>');
+    results_array.push('<img id="imgCam" height="50" width="50"/>');
     results_array.push('</div>');
     $('#expense_details').html(results_array.join(""));
 }
 function openCamera (argument) {
-    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50, saveToPhotoAlbum: true });
+    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50, correctOrientation: true });
 }
 // Called when a photo is successfully retrieved
 //
 function onPhotoDataSuccess(imageData) {
 
-  $('img').attr('src',imageData).css({'background-size':  '100%', 'background-repeat': 'no-repeat', 'width': '100px'});
+  $('#imgCam').attr('src',imageData).css({'background-size':  '100%', 'background-repeat': 'no-repeat', 'width': '100px'});
   // Get image handle
   //
   var smallImage = document.getElementById('smallImage');
