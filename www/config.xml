@@ -23,9 +23,15 @@
     <feature name="http://api.phonegap.com/1.0/device" />
     <feature name="PushPlugin">
         <param name="ios-package" value="PushPlugin" />
-    </feature>        
+    </feature>
     
-    
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    </feature>
+    <feature name="Camera">
+        <param name="ios-package" value="CDVCamera" />
+    </feature>
+
     <!-- PLATFORM SELECTION -->
 
     <gap:platform name="ios" />

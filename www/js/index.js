@@ -383,6 +383,9 @@ function route(event) {
     } else if (hash === "#allotment") {
         hide_all();
         allotment_details();
+    } else if (hash === "#expense") {
+        hide_all();
+        expense_details();
     } else if (hash === "#correspondance") {
         hide_all();
         show_correspondance(window.location.hash.split('/')[1]);
@@ -2261,12 +2264,49 @@ function nullcheck(data) {
     return data;
 }
 
-function Convert_toDate(value)
-{
+function Convert_toDate(value){
     var result=value-1;
     var text=result.toString();
     var pro_period=text.substring( 0, 4)+'/'+text.substring( 4, 6);
     var period_month = pro_period.split("/");
     var pro_for= new Date(period_month[0],period_month[1]);
     return pro_for;
+}
+
+function expense_details (argument) {
+    index_page_call();
+    hide_all();
+    $("#index_content").show();
+    $('#expense_details').html("");
+    $('#expense_details').show();
+
+    var results_array = new Array();
+    results_array.push('<div class = "footer" style="margin-top: 0px;">');
+    results_array.push('<button class="topcoat-button" id="btnCamera" onclick="openCamera()" ">Open Camera</button> ');
+    results_array.push('</div>');
+    $('#expense_details').html(results_array.join(""));
+}
+function openCamera (argument) {
+    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
+}
+// Called when a photo is successfully retrieved
+//
+function onPhotoDataSuccess(imageData) {
+  // Get image handle
+  //
+  var smallImage = document.getElementById('smallImage');
+
+  // Unhide image elements
+  //
+  smallImage.style.display = 'block';
+
+  // Show the captured photo
+  // The inline CSS rules are used to resize the image
+  //
+  smallImage.src = "data:image/jpeg;base64," + imageData;
+}
+// Called if something bad happens.
+// 
+function onFail(message) {
+  alert('Failed because: ' + message);
 }
