@@ -2311,8 +2311,9 @@ function onPhotoDataSuccess(imageData) {
   // The inline CSS rules are used to resize the image
   //
   smallImage.src = "data:image/jpeg;base64," + imageData;
-
+  alert('Outside try');
   try{
+        alert('Inside try');
         var url = prefilurl+"upload_image.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid");
         alert(url);
         alert(imageData);
@@ -2321,7 +2322,7 @@ function onPhotoDataSuccess(imageData) {
         });
     }
     catch(err){
-        alert(err);
+        alert('ERR' + err);
     }
 }
 
