@@ -2296,21 +2296,21 @@ var lastImageData
 // Called when a photo is successfully retrieved
 //
 function onPhotoDataSuccess(imageData) {
-
+  alert("onPhotoDataSuccess start")
   $('#imgCam').attr('src',imageData).css({'background-size':  '100%', 'background-repeat': 'no-repeat', 'width': '100px'});
   lastImageData = imageData;
-  // Get image handle
-  //
-  var smallImage = document.getElementById('smallImage');
+  // // Get image handle
+  // //
+  // var smallImage = document.getElementById('smallImage');
 
-  // Unhide image elements
-  //
-  smallImage.style.display = 'block';
+  // // Unhide image elements
+  // //
+  // smallImage.style.display = 'block';
 
-  // Show the captured photo
-  // The inline CSS rules are used to resize the image
-  //
-  smallImage.src = "data:image/jpeg;base64," + imageData;
+  // // Show the captured photo
+  // // The inline CSS rules are used to resize the image
+  // //
+  // smallImage.src = "data:image/jpeg;base64," + imageData;
   alert('Outside try');
   try{
         alert('Inside try');
