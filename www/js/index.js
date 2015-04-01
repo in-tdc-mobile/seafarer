@@ -2289,7 +2289,7 @@ function expense_details (argument) {
     $('#expense_details').html(results_array.join(""));
 }
 function openCamera (argument) {
-    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 25, correctOrientation: true });
+    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 25, correctOrientation: true, saveToPhotoAlbum: true });
 }
 
 var lastImageData
@@ -2315,11 +2315,11 @@ function onPhotoDataSuccess(imageData) {
   try{
         alert('Inside try');
         var url = prefilurl+"upload_image.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid");
-        alert(url);
-        alert(imageData);
-        $.post( url, {data: imageData}, function(data) {
-            alert("Image uploaded!");
-        });
+        // alert(url);
+        // alert(imageData);
+        // $.post( url, {data: imageData}, function(data) {
+        //     alert("Image uploaded!");
+        // });
     }
     catch(err){
         alert('ERR' + err);
