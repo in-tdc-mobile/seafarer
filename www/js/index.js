@@ -2291,6 +2291,7 @@ function expense_details (argument) {
 function openCamera (argument) {
     navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 25, correctOrientation: true });
 }
+
 var lastImageData
 // Called when a photo is successfully retrieved
 //
@@ -2310,17 +2311,40 @@ function onPhotoDataSuccess(imageData) {
   // The inline CSS rules are used to resize the image
   //
   smallImage.src = "data:image/jpeg;base64," + imageData;
+
+  try{
+        var url = prefilurl+"upload_image.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid");
+        alert(url);
+        alert(imageData);
+        $.post( url, {data: imageData}, function(data) {
+            alert("Image uploaded!");
+        });
+    }
+    catch(err){
+        alert(err);
+    }
 }
+
 // Called if something bad happens.
 // 
 function onFail(message) {
   alert('Failed because: ' + message);
+
 }
+
 function uploadImg (argument) {
-    var url = prefilurl+"upload_image.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid");
-    alert(url);
-    alert(lastImageData);
-    $.post( url, {data: lastImageData}, function(data) {
-        alert("Image uploaded!");
-    });
+    try{
+        var url = prefilurl+"upload_image.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid");
+        alert(url);
+        alert(lastImageData);
+        // $.post( url, {data: lastImageData}, function(data) {
+        //     alert("Image uploaded!");
+        // });
+        var ft = new FileTransfer();
+        ft.upload(uri, serverUrl, successCallback, errorCallback, options);
+    }
+    catch(err){
+        alert(err);
+    }
+    
 }
