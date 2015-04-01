@@ -2289,7 +2289,7 @@ function expense_details (argument) {
     $('#expense_details').html(results_array.join(""));
 }
 function openCamera (argument) {
-    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 25, correctOrientation: true, saveToPhotoAlbum: true, sourceType : 2 });
+    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 25, correctOrientation: true, saveToPhotoAlbum: true, sourceType : 0 });
 }
 
 var lastImageData
