@@ -2299,7 +2299,9 @@ function expense_details (argument) {
     
     results_array.push('<li class="topcoat-list__item">Expense Type<select id="expType" class="topcoat-select" onchange="owner_vessel_selected()">'+
                         '<option value="-1">Food</option>);' +
-                        '<option value="-1">Travel</option>);' +
+                        '<option value="-1">Air fare</option>);' +
+                        '<option value="-1">Transport</option>);' +
+                        '<option value="-1">Other</option>);' +
                         '</select> </li>');
     
     results_array.push('<li class="topcoat-list__item">Description<input size="15" type="text" class="topcoat-text-input" id="expDesc"> </li>');
