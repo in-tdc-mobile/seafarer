@@ -2311,15 +2311,16 @@ function addNewExp (argument) {
 }
 
 function openCamera (sourceType) {
-    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 25, correctOrientation: true, saveToPhotoAlbum: true, sourceType : sourceType });
+    navigator.camera.getPicture(onPhotoDataSuccess, onFail, 
+        { quality: 25, correctOrientation: true, saveToPhotoAlbum: true, sourceType : sourceType });
 }
 
 var lastImageData
 // Called when a photo is successfully retrieved
 //
 function onPhotoDataSuccess(imageData) {
-  alert("onPhotoDataSuccess start")
-  $('#imgCam').attr('src',imageData).css({'background-size':  '100%', 'background-repeat': 'no-repeat', 'width': '100px'});
+  // alert("onPhotoDataSuccess start")
+  $('#imgCam').attr('src',imageData).css({'background-size':  '100%', 'background-repeat': 'no-repeat'});
   lastImageData = imageData;
   // // Get image handle
   // //
@@ -2333,9 +2334,9 @@ function onPhotoDataSuccess(imageData) {
   // // The inline CSS rules are used to resize the image
   // //
   // smallImage.src = "data:image/jpeg;base64," + imageData;
-  alert('Outside try');
+  // alert('Outside try');
   try{
-        alert('Inside try');
+        // alert('Inside try');
         var url = prefilurl+"upload_image.php?email="+$.jStorage.get("username")+"&empid="+$.jStorage.get("empid");
         // alert(url);
         // alert(imageData);
