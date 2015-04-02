@@ -2176,7 +2176,8 @@ function hide_all() {
     $('#openpositions_content').hide();
     $('#doa_content').hide();
     $('#document_details').hide(); 
-
+    $('#expense_details').hide();
+    
     $('body').scrollTop(0);
 }
 
