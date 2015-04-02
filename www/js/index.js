@@ -2288,22 +2288,101 @@ function expense_details (argument) {
     results_array.push('<div class = "footer" style="margin-top: 5px; border:0px; text-align:center">');
     // results_array.push('<button class="topcoat-button" id="btnCamera" onclick="openCamera()" ">Open Camera</button> ');
     // results_array.push('<img id="imgCam" height="50" width="50"/>');
-    // results_array.push('<button class="topcoat-button" id="btnUploadImg" onclick="uploadImg()" ">Upload Image</button> ');
-    results_array.push('<button class="topcoat-button" id="btnAddNew" onclick="addNewExp()" style="display:inline-block" ">' +
-        '<span class="topcoat-icon png-plus png-header pagename-icon"></button> ');
-    results_array.push('<div class = "footer" style="margin-top:5px; display:none" id="divNewExp">');
+    // results_array.push('<button class="topcoat-button" id="btnUploadImg" onclick="uploadImg()" ">Upload Image</button> ');    
+
+    results_array.push('<button class="topcoat-button" id="btnAddNew" onclick="addNewExp()" ">' +
+        '<span class="topcoat-icon png-plus png-header pagename-icon"/>Submit New Bill</button> ');
+    results_array.push('<div class = "footer" style="margin-top:5px; display:none" id="divNewExp" >');
     results_array.push('<ul class="topcoat-list__container" style="text-align:left">');
+    
     results_array.push('<li class="topcoat-list__item">Date<input size="15" type="date" class="topcoat-text-input" id="expDate"> </li>');
+    
+    results_array.push('<li class="topcoat-list__item">Expense Type<select id="expType" class="topcoat-select" onchange="owner_vessel_selected()">'+
+                        '<option value="-1">Food</option>);' +
+                        '<option value="-1">Travel</option>);' +
+                        '</select> </li>');
+    
     results_array.push('<li class="topcoat-list__item">Description<input size="15" type="text" class="topcoat-text-input" id="expDesc"> </li>');
+
     results_array.push('<li class="topcoat-list__item">Reciept</br>');
     results_array.push('<button class="topcoat-button" id="btnCamera" onclick="openCamera(1)" style="display:inline-block" ">' +
         '<span class="topcoat-icon png-camera png-header pagename-icon"></button>')
-    results_array.push('<button class="topcoat-button" id="btnGallery" onclick="openCamera(0)" style="display:inline-block; float:right" ">' +
+    results_array.push('<button class="topcoat-button" id="btnGallery" onclick="openCamera(0)" style="display:inline-block; float:right; margin-right:0" ">' +
         '<span class="topcoat-icon png-gallery png-header pagename-icon"></button>')
-    results_array.push('</br><img id="imgCam" height="300" width="300" style="margin:5px"/>');
+    results_array.push('</br><div style="text-align:center"><img id="imgCam" height="300" width="300" style="margin:5px; display:inline-block"/></div>');
+    results_array.push('</li>');
+
+    results_array.push('<li class="topcoat-list__item">');
+    results_array.push('<button class="topcoat-button" id="btnExpSave" onclick="openCamera(1)" style="display:inline-block" ">' +
+        '<span class="topcoat-icon png-checkmark png-header pagename-icon"/>Save</button>')
+    results_array.push('<button class="topcoat-button" id="btnExpCancel" onclick="expDiscard()" style="display:inline-block; float:right; margin-right:0" ">' +
+        '<span class="topcoat-icon png-cancel png-header pagename-icon"/>Discard</button>')
+    results_array.push('</li>');
+
     results_array.push('</ul></div>');
     results_array.push('</div>');
+
+    results_array.push('<div class = "footer" style="margin-top:5px; border:0px;" id="divExpList" >');
+    
+    results_array.push('<ul class="topcoat-list__container" style="text-align:left">');
+
+    results_array.push('<li class="topcoat-list__item" style="padding:0">');
+    results_array.push('<div style="text-align:right;   background-color: #CBCCCB;">March 31, 2015</div>')
+    
+    results_array.push('<ul class="topcoat-list__container" style="text-align:left">');
+    results_array.push('<li class="topcoat-list__item exp-rejected">');
+    results_array.push('<div style="width: 100%;">'+
+                        '<div class="topcoat-icon png-help png-header pagename-icon" style="margin-right: 10px;"/>' +
+                        '<div style="font-size: x-large; margin-right:5px; display: inline-block">Gift to Office</div>' +
+                        '<div class="topcoat-icon png-cross png-header pagename-icon" style="float: right; margin-left:15px"/>' +
+                        '<div style="display: inline-block;float: right;font-size: x-large;">$25</div>' +
+                        '</div>')
+    results_array.push('</li>');
+    results_array.push('<li class="topcoat-list__item exp-approved">');
+    results_array.push('<div style="width: 100%;">'+
+                        '<div class="topcoat-icon png-automobile png-header pagename-icon" style="margin-right: 10px;"/>' +
+                        '<div style="font-size: x-large; margin-right:5px; display: inline-block">Travel to office</div>' +
+                        '<div class="topcoat-icon png-checkmark png-header pagename-icon" style="float: right; margin-left:15px"/>' +
+                        '<div style="display: inline-block; float: right;font-size: x-large;">$12</div>' +
+                        '</div>')
+    results_array.push('</li>');
+    results_array.push('</ul>');
+
+    results_array.push('</li>');
+
+    results_array.push('<li class="topcoat-list__item" style="padding:0">');
+    results_array.push('<div style="text-align:right;   background-color: #CBCCCB;">March 30, 2015</div>')
+    
+    results_array.push('<ul class="topcoat-list__container" style="text-align:left">');
+    results_array.push('<li class="topcoat-list__item exp-pending">');
+    results_array.push('<div style="width: 100%;">'+
+                        '<div class="topcoat-icon png-spoon-knife png-header pagename-icon" style="margin-right: 10px;"/>' +
+                        '<div style="font-size: x-large; margin-right:5px; display: inline-block">Dinner at airport</div>' +
+                        '<div class="topcoat-icon png-clock png-header pagename-icon" style="float: right; margin-left:15px"/>' +
+                        '<div style="display: inline-block;float: right;font-size: x-large;">$15</div>' +
+                        '</div>')
+    results_array.push('</li>');
+    results_array.push('<li class="topcoat-list__item exp-approved">');
+    results_array.push('<div style="width: 100%;">'+
+                        '<div class="topcoat-icon png-airplane png-header pagename-icon" style="margin-right: 10px;"/>' +
+                        '<div style="font-size: x-large; margin-right:5px; display: inline-block">Flight to India</div>' +
+                        '<div class="topcoat-icon png-checkmark png-header pagename-icon" style="float: right; margin-left:15px"/>' +
+                        '<div style="display: inline-block; float: right;font-size: x-large;">$1200</div>' +
+                        '</div>')
+    results_array.push('</li>');
+    results_array.push('</ul>');
+
+    results_array.push('</li>');
+    results_array.push('</ul>');
+
+    results_array.push('</div>');
+
+
     $('#expense_details').html(results_array.join(""));
+}
+
+function expDiscard (argument) {
+    $('#divNewExp').hide();    
 }
 
 function addNewExp (argument) {
