@@ -372,6 +372,10 @@ function route(event) {
         return;
     }
 
+    // hide_all();
+    // expense_details();
+    // return;
+
     if (hash === "#plan") {
         show_plan_details();
     } else if (hash === "#training") {
@@ -2281,15 +2285,33 @@ function expense_details (argument) {
     $('#expense_details').show();
 
     var results_array = new Array();
-    results_array.push('<div class = "footer" style="margin-top: 0px;">');
-    results_array.push('<button class="topcoat-button" id="btnCamera" onclick="openCamera()" ">Open Camera</button> ');
-    results_array.push('<img id="imgCam" height="50" width="50"/>');
-    results_array.push('<button class="topcoat-button" id="btnUploadImg" onclick="uploadImg()" ">Upload Image</button> ');
+    results_array.push('<div class = "footer" style="margin-top: 5px; border:0px; text-align:center">');
+    // results_array.push('<button class="topcoat-button" id="btnCamera" onclick="openCamera()" ">Open Camera</button> ');
+    // results_array.push('<img id="imgCam" height="50" width="50"/>');
+    // results_array.push('<button class="topcoat-button" id="btnUploadImg" onclick="uploadImg()" ">Upload Image</button> ');
+    results_array.push('<button class="topcoat-button" id="btnAddNew" onclick="addNewExp()" style="display:inline-block" ">' +
+        '<span class="topcoat-icon png-plus png-header pagename-icon"></button> ');
+    results_array.push('<div class = "footer" style="margin-top:5px; display:none" id="divNewExp">');
+    results_array.push('<ul class="topcoat-list__container" style="text-align:left">');
+    results_array.push('<li class="topcoat-list__item">Date<input size="15" type="date" class="topcoat-text-input" id="expDate"> </li>');
+    results_array.push('<li class="topcoat-list__item">Description<input size="15" type="text" class="topcoat-text-input" id="expDesc"> </li>');
+    results_array.push('<li class="topcoat-list__item">Reciept</br>');
+    results_array.push('<button class="topcoat-button" id="btnCamera" onclick="openCamera(1)" style="display:inline-block" ">' +
+        '<span class="topcoat-icon png-camera png-header pagename-icon"></button>')
+    results_array.push('<button class="topcoat-button" id="btnGallery" onclick="openCamera(0)" style="display:inline-block; float:right" ">' +
+        '<span class="topcoat-icon png-gallery png-header pagename-icon"></button>')
+    results_array.push('</br><img id="imgCam" height="300" width="300" style="margin:5px"/>');
+    results_array.push('</ul></div>');
     results_array.push('</div>');
     $('#expense_details').html(results_array.join(""));
 }
-function openCamera (argument) {
-    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 25, correctOrientation: true, saveToPhotoAlbum: true, sourceType : 1 });
+
+function addNewExp (argument) {
+    $('#divNewExp').show();
+}
+
+function openCamera (sourceType) {
+    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 25, correctOrientation: true, saveToPhotoAlbum: true, sourceType : sourceType });
 }
 
 var lastImageData
@@ -2330,7 +2352,6 @@ function onPhotoDataSuccess(imageData) {
 // 
 function onFail(message) {
   alert('Failed because: ' + message);
-
 }
 
 function uploadImg (argument) {
@@ -2347,5 +2368,4 @@ function uploadImg (argument) {
     catch(err){
         alert(err);
     }
-    
 }
