@@ -1133,3 +1133,13 @@ hr.style-four {
 .a .grey {
   color: #999999;
 }
+
+.exp-approved{
+  background-color: rgb(176, 255, 176);
+}
+.exp-pending{
+  background-color: rgb(255, 253, 147);
+}
+.exp-rejected{
+  background-color: rgb(255, 176, 176);
+}

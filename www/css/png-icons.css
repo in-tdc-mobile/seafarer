@@ -101,3 +101,51 @@
 	height: 100%;
 	background-repeat: no-repeat;
 }
+.png-checkmark{	
+	background-image: url("png/checkmark.png");
+	background-size: 50%;
+	height: 100%;
+	background-repeat: no-repeat;
+}
+.png-cancel{	
+	background-image: url("png/cancel.png");
+	background-size: 50%;
+	height: 100%;
+	background-repeat: no-repeat;
+}
+.png-spoon-knife{	
+	background-image: url("png/spoon-knife.png");
+	background-size: 50%;
+	height: 100%;
+	background-repeat: no-repeat;
+}
+.png-clock{	
+	background-image: url("png/clock.png");
+	background-size: 50%;
+	height: 100%;
+	background-repeat: no-repeat;
+}
+.png-airplane{	
+	background-image: url("png/airplane.png");
+	background-size: 50%;
+	height: 100%;
+	background-repeat: no-repeat;
+}
+.png-help{	
+	background-image: url("png/help.png");
+	background-size: 50%;
+	height: 100%;
+	background-repeat: no-repeat;
+}
+.png-cross{	
+	background-image: url("png/cross.png");
+	background-size: 50%;
+	height: 100%;
+	background-repeat: no-repeat;
+}
+.png-automobile{	
+	background-image: url("png/automobile.png");
+	background-size: 50%;
+	height: 100%;
+	background-repeat: no-repeat;
+}
